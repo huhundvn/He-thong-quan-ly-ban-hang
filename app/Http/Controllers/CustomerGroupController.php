@@ -95,6 +95,45 @@ class CustomerGroupController extends Controller
 	}
 
 	/**
+	 * Nhập thông tin khách hàng từ File Excel
+	 */
+	public function importFromFile(Request $request)
+	{
+		// kiểm tra điều kiện nhập
+		$rules = [
+			'ten_nhom' => 'required|unique:customer_group,name',
+		];
+
+		if(Input::hasFile('file')) {
+			$rows =  Excel::load(Input::file('file'), function ($reader){
+			},'UTF-8') -> get();
+			$count = 0;
+			foreach ($rows as $row) {
+				$validation = Validator::make($row->toArray(), $rules);
+				if($validation->fails())
+					continue;
+				else {
+					$newCustomer = new Customer;
+					$newCustomer -> name = $row -> ten_khach_hang;
+					$newCustomer -> address = $row -> dia_chi;
+					$newCustomer -> phone = $row -> so_dien_thoai;
+					$newCustomer -> email = $row -> email;
+					$newCustomer -> bank_account = $row -> tai_khoan_ngan_hang;
+					$newCustomer -> bank_id = Bank::where('name', '=', $row -> ngan_hang)->pluck('id')->first();
+					$newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
+					$newCustomer -> note = $row -> ghi_chu;
+					$saved = $newCustomer -> save();
+					if(!$saved)
+						continue;
+					if($saved)
+						$count++;
+				}
+			}
+			return redirect()->route('list-customer-group') -> with('status', 'Đã thêm '.$count.' mục.');
+		}
+	}
+
+	/**
 	 * Download mẫu nhập
 	 */
 	public function downloadTemplate()

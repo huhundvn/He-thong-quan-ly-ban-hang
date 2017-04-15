@@ -111,7 +111,7 @@ class ManufacturerController extends Controller
 		if(Input::hasFile('file')) {
 			$rows =  Excel::load(Input::file('file'), function ($reader){
 			},'UTF-8') -> get();
-
+			$count = 0;
 			foreach ($rows as $row) {
 				$validation = Validator::make($row->toArray(), $rules);
 				if($validation->fails())
@@ -124,9 +124,11 @@ class ManufacturerController extends Controller
 					$saved = $new -> save();
 					if(!$saved)
 						continue;
+					else
+						$count++;
 				}
 			}
-			return redirect()->route('list-manufacturer');
+			return redirect()->route('list-manufacturer') -> with('status', 'Đã thêm '.$count.' mục.');;
 		}
 	}
 

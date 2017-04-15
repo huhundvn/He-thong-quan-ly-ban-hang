@@ -12,6 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/angucomplete.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -60,6 +61,7 @@
     <script src="{{ asset('angularJS/dirPagination.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-phone.vn.js') }}"></script>
+    <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
     <script src="{{ asset('angularJS/Config.js') }}"></script>
 
     @yield('script')

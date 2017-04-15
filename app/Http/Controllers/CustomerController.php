@@ -136,7 +136,7 @@ class CustomerController extends Controller
     	if(Input::hasFile('file')) {
 		    $rows =  Excel::load(Input::file('file'), function ($reader){
 		    },'UTF-8') -> get();
-
+			$count = 0;
 		    foreach ($rows as $row) {
 			    $validation = Validator::make($row->toArray(), $rules);
 			    if($validation->fails())
@@ -152,11 +152,13 @@ class CustomerController extends Controller
 			        $newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
 			        $newCustomer -> note = $row -> ghi_chu;
 			        $saved = $newCustomer -> save();
-			    if(!$saved)
-			    	continue;
+			        if(!$saved)
+			    	    continue;
+			        if($saved)
+			        	$count++;
 			    }
  		    }
- 		    return redirect()->route('list-customer');
+ 		    return redirect()->route('list-customer') -> with('status', 'Đã thêm '.$count.' mục.');
     	}
     }
 

@@ -151,6 +151,7 @@ class ProductController extends Controller
 		if(Input::hasFile('file')) {
 			$rows =  Excel::load(Input::file('file'), function ($reader){
 			},'UTF-8') -> get();
+			$count = 0;
 			foreach ($rows as $row) {
 				$validation = Validator::make($row->toArray(), $rules);
 				if($validation->fails())
@@ -172,10 +173,12 @@ class ProductController extends Controller
 					$saved = $product -> save();
 					if(!$saved)
 						continue;
+					else
+						$count++;
 				}
 			}
 		}
-		return redirect()->route('list-product');
+		return redirect()->route('list-product') -> with('status', 'Đã thêm '.$count.' mục.');
 	}
 
 	/**

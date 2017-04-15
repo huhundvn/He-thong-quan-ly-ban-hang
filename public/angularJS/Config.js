@@ -9,5 +9,5 @@ $(document).ready(function () {
     });
 });
 
-var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js'])
-    .constant('API', '/backup/public/');
+var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt'])
+    .constant('API', '/larose/public/');

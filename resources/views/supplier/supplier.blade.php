@@ -31,6 +31,13 @@
 
         <hr/>
 
+        @if (session('status'))
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
+
         {{--!DANH SÁCH NHÀ CUNG CẤP!--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">

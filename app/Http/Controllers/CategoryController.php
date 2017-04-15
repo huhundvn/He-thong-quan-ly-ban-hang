@@ -118,6 +118,7 @@ class CategoryController extends Controller
 		];
 
 		if(Input::hasFile('file')) {
+			$count = 0;
 			$rows =  Excel::load(Input::file('file'), function ($reader){
 			},'UTF-8') -> get();
 			foreach ($rows as $row) {
@@ -132,10 +133,12 @@ class CategoryController extends Controller
 					$saved = $new -> save();
 					if(!$saved)
 						continue;
+					else
+						$count++;
 				}
 			}
 		}
-		return redirect()->route('list-category') -> with('status', 'Thành công');
+		return redirect()->route('list-category') -> with('status', 'Đã thêm '.$count.' mục.');
 	}
 
 	/**

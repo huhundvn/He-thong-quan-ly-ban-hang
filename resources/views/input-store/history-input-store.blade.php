@@ -15,13 +15,11 @@
         <div class="row">
             <div class="col-lg-6 col-xs-6">
                 <a href="{{route('createInputStore')}}" class="btn btn-sm btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
+                    <span class="glyphicon glyphicon-plus"></span> Nhập hàng </a>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
-                <button class="btn btn-sm btn-default">
-                    <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-change="searchProduct()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
