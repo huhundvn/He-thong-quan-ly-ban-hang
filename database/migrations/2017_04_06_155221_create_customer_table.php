@@ -19,7 +19,7 @@ class CreateCustomerTable extends Migration
 		    $table->string('email', 100) -> unique();
 		    $table->string('address') -> nullable();
 		    $table->string('phone') -> nullable();
-		    $table->integer('bank') -> nullable();
+		    $table->string('bank') -> nullable();
 		    $table->string('bank_account') -> nullable();
 		    $table->integer('customer_group_id') -> nullable();
 		    $table->string('note') -> nullable();

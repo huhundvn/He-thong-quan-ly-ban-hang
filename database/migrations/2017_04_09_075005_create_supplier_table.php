@@ -21,7 +21,7 @@ class CreateSupplierTable extends Migration
 		    $table->string('address') -> nullable();
 			$table->string('person_contact') -> nullable();
 		    $table->string('bank_account') -> nullable();
-		    $table->integer('bank') -> nullable();
+		    $table->string('bank') -> nullable();
 		    $table->string('note') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
