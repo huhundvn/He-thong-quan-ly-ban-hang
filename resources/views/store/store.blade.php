@@ -20,8 +20,6 @@
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadStoreTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
-                <button class="btn btn-sm btn-default">
-                    <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-change="searchStore()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên kho...">
@@ -95,38 +93,38 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newStore.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                    <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Email </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newStore.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
+                                    <input ng-model="new.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Số điện thoại </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newStore.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
+                                    <input ng-model="new.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newStore.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Quản lý bởi </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newStore.managed_by" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
+                                    <input ng-model="new.managed_by" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Loại </label>
                                 <div class="col-sm-9">
-                                    <select ng-model="newStore.type" class="form-control input-sm">
+                                    <select ng-model="new.type" class="form-control input-sm">
                                         <option value=""> --Không chọn-- </option>
                                         <option value="0"> Nhà kho </option>
                                         <option value="1"> Cửa hàng </option>
@@ -136,7 +134,7 @@
                             <div class="form-group" ng-show="1 == newStore.type">
                                 <label class="col-sm-3"> Kho hàng </label>
                                 <div class="col-sm-9">
-                                    <select ng-model="newStore.store_id" class="form-control input-sm">
+                                    <select ng-model="new.store_id" class="form-control input-sm">
                                         <option ng-repeat="storage in storages" value="@{{storage.id}}"> @{{storage.name}} </option>
                                     </select>
                                 </div>
@@ -191,19 +189,19 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Email </label>
                                 <div class="col-sm-9">
-                                    <input id="email" ng-model="selectedStore.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
+                                    <input id="email" ng-model="selected.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Số điện thoại </label>
                                 <div class="col-sm-9">
-                                    <input id="phone" ng-model="selected.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
+                                    <input id="phone" ng-model="selected.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
                                 <div class="col-sm-9">
-                                    <input id="address" ng-model="selected.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
+                                    <input id="address" ng-model="selected.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ...">
                                 </div>
                             </div>
                             <hr/>
