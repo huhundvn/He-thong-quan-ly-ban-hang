@@ -29,7 +29,7 @@ class AccountController extends Controller
 		$rules = [
 			'name' => 'required|unique:account,name',
 			'total' => 'required',
-			'bank' => 'required_with:bank_account',
+			'bank_account' => 'required_with:bank',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
