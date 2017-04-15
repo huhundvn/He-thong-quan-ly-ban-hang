@@ -37,8 +37,8 @@ class UnitController extends Controller
 			$unit -> name = Input::get('name');
 			$unit -> description = Input::get('description');
 			$unit -> save();
-			return response()->json(['success' => trans('message.create_success')]);
 		}
+		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -66,8 +66,8 @@ class UnitController extends Controller
 			$unit -> name = Input::get('name');
 			$unit -> description = Input::get('description');
 			$unit -> save();
-			return response()->json(['success' => trans('message.create_success')]);
 		}
+		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
