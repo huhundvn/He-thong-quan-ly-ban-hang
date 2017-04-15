@@ -39,8 +39,8 @@ class ManufacturerController extends Controller
 			$new -> country = Input::get('country');
 			$new -> description = Input::get('description');
 			$new -> save();
+			return response()->json(['success' => trans('message.create_success')]);
 		}
-		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -70,8 +70,8 @@ class ManufacturerController extends Controller
 			$manufacturer -> country = Input::get('country');
 			$manufacturer -> description = Input::get('description');
 			$manufacturer -> save();
+			return response()->json(['success' => trans('message.create_success')]);
 		}
-		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**

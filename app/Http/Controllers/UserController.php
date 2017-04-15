@@ -52,8 +52,8 @@ class UserController extends Controller
             $user -> position_id = Input::get('position_id');
             $user -> status = 1;
             $user -> save();
+	        return response()->json(['success' => trans('message.create_success')]);
         }
-	    return response()->json(['success' => trans('message.create_success')]);
     }
 
     /**
@@ -61,6 +61,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        //
         return User::find($id);
     }
 
@@ -91,8 +92,8 @@ class UserController extends Controller
             $user -> position_id = Input::get('position_id');
             $user -> status = Input::get('status');
             $user -> save();
+	        return response()->json(['success' => trans('message.update_success')]);
         }
-	    return response()->json(['success' => trans('message.update_success')]);
     }
 
     /**

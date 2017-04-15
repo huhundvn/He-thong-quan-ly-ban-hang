@@ -43,8 +43,8 @@ class CategoryController extends Controller
 			}
 			$category -> description = Input::get('description');
 			$category -> save();
+			return response()->json(['success' => trans('message.create_success')]);
 		}
-		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -77,8 +77,8 @@ class CategoryController extends Controller
 			}
 			$category -> description = Input::get('description');
 			$category -> save();
+			return response()->json(['success' => trans('message.update_success')]);
 		}
-		return response()->json(['success' => trans('message.update_success')]);
 	}
 
 	/**

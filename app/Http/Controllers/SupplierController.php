@@ -50,8 +50,8 @@ class SupplierController extends Controller
 			$supplier -> email = Input::get('email');
 			$supplier -> note = Input::get('note');
 			$supplier -> save();
+			return response()->json(['success' => trans('message.create_success')]);
 		}
-		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -91,8 +91,8 @@ class SupplierController extends Controller
 			$supplier -> email = Input::get('email');
 			$supplier -> note = Input::get('note');
 			$supplier -> save();
+			return response()->json(['success' => trans('message.update_success')]);
 		}
-		return response()->json(['success' => trans('message.update_success')]);
 	}
 
 	/**
@@ -100,6 +100,7 @@ class SupplierController extends Controller
 	 */
 	public function destroy($id)
 	{
+		//
 		$store = Supplier::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
