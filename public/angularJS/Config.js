@@ -9,6 +9,9 @@ $(document).ready(function () {
     });
 });
 
+var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt'])
+    .constant('API', 'http://larose-admin.herokuapp.com/');
+
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 
@@ -26,6 +29,3 @@ function w3_open() {
 function w3_close() {
     mySidebar.style.display = "none";
 }
-
-var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt'])
-    .constant('API', 'http://larose-admin.herokuapp.com/');
