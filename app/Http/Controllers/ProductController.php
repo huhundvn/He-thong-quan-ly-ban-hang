@@ -60,8 +60,8 @@ class ProductController extends Controller
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
 			$product -> save();
+			return response()->json(['success' => trans('message.create_success')]);
 		}
-		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -108,8 +108,8 @@ class ProductController extends Controller
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
 			$product -> save();
+			return response()->json(['success' => trans('message.update_success')]);
 		}
-		return response()->json(['success' => trans('message.update_success')]);
 	}
 
 	/**

@@ -22,13 +22,11 @@ class CreateProductTable extends Migration
 		    $table->integer('manufacturer_id') -> nullable();
 		    $table->integer('unit_id') -> nullable();
 		    $table->string('weight') -> nullable();
-		    $table->string('size') -> nullable();
+		    $table->string('length') -> nullable();
 		    $table->string('volume') -> nullable();
 		    $table->integer('viewed') -> nullable();
 		    $table->integer('max_inventory') -> nullable();
 		    $table->integer('min_inventory') -> nullable();
-		    $table->integer('warranty_period') -> nullable();
-		    $table->integer('return_period') -> nullable();
 
 		    $table->decimal('web_price') -> nullable();
 		    $table->string('default_image') -> nullable();
