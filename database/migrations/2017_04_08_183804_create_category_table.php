@@ -17,7 +17,7 @@ class CreateCategoryTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> unique();
 		    $table->string('description') -> nullable();
-		    $table->integer('parent_id');
+		    $table->integer('parent_id') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

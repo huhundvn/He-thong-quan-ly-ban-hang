@@ -15,8 +15,8 @@ class CreateProductImageTable extends Migration
     {
 	    Schema::create('product_image', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('product_id');
-		    $table->string('image');
+		    $table->integer('product_id') -> nullable();
+		    $table->string('image') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

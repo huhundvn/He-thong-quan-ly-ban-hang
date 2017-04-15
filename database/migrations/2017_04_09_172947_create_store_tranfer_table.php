@@ -15,11 +15,11 @@ class CreateStoreTranferTable extends Migration
     {
 	    Schema::create('store_tranfer', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('from_store_id');
-		    $table->integer('to_store_id');
-		    $table->string('reason');
-		    $table->tinyInteger('status');
-		    $table->integer('approved_by');
+		    $table->integer('from_store_id') -> nullable();
+		    $table->integer('to_store_id') -> nullable();
+		    $table->string('reason') -> nullable();
+		    $table->tinyInteger('status') -> nullable();
+		    $table->integer('approved_by') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

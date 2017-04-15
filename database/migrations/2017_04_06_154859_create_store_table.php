@@ -17,11 +17,11 @@ class CreateStoreTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> unique();
 		    $table->string('email', 100) -> unique();
-		    $table->string('address');
-		    $table->string('phone');
-		    $table->integer('managed_by');
-		    $table->tinyInteger('type');
-		    $table->tinyInteger('status');
+		    $table->string('address') -> nullable();
+		    $table->string('phone') -> nullable();
+		    $table->integer('managed_by') -> nullable();
+		    $table->tinyInteger('type') -> nullable();
+		    $table->tinyInteger('status') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

@@ -17,11 +17,11 @@ class CreateSupplierTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> unique();
 		    $table->string('email', 100) -> unique();
-		    $table->string('phone');
-		    $table->string('address');
-			$table->string('person_contact');
-		    $table->string('bank_account');
-		    $table->integer('bank');
+		    $table->string('phone') -> nullable();
+		    $table->string('address') -> nullable();
+			$table->string('person_contact') -> nullable();
+		    $table->string('bank_account') -> nullable();
+		    $table->integer('bank') -> nullable();
 		    $table->string('note') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();

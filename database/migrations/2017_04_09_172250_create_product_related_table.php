@@ -15,8 +15,8 @@ class CreateProductRelatedTable extends Migration
     {
 	    Schema::create('product_related', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('product_id');
-		    $table->integer('related_id');
+		    $table->integer('product_id') -> nullable();
+		    $table->integer('related_id') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

@@ -15,10 +15,10 @@ class CreateDetailStoreTranferTable extends Migration
     {
 	    Schema::create('detail_store_tranfer', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('store_tranfer_id');
-		    $table->integer('product_id');
-		    $table->dateTime('expried_date');
-		    $table->integer('quantity');
+		    $table->integer('store_tranfer_id') -> nullable();
+		    $table->integer('product_id') -> nullable();
+		    $table->dateTime('expried_date') -> nullable();
+		    $table->integer('quantity') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

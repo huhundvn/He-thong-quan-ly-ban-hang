@@ -19,8 +19,8 @@ class CreateProductTable extends Migration
 		    $table->string('code') -> unique();
 		    $table->string('description') -> nullable();
 		    $table->string('user_guide') -> nullable();
-		    $table->integer('manufacturer_id');
-		    $table->integer('unit_id');
+		    $table->integer('manufacturer_id') -> nullable();
+		    $table->integer('unit_id') -> nullable();
 		    $table->string('weight') -> nullable();
 		    $table->string('length') -> nullable();
 		    $table->string('volume') -> nullable();
@@ -28,9 +28,9 @@ class CreateProductTable extends Migration
 		    $table->integer('max_inventory') -> nullable();
 		    $table->integer('min_inventory') -> nullable();
 
-		    $table->decimal('web_price');
-		    $table->string('default_image');
-		    $table->integer('total_quantity');
+		    $table->decimal('web_price') -> nullable();
+		    $table->string('default_image') -> nullable();
+		    $table->integer('total_quantity') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
