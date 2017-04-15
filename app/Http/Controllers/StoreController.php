@@ -26,8 +26,8 @@ class StoreController extends Controller
     public function store(Request $request)
     {
 	    $rules = [
-		    'name' => 'required|unique:store,name',
-		    'email' => 'required|unique:store,email',
+		    'name' => 'required|distinct',
+		    'email' => 'required|email|distinct',
 		    'phone' => 'required|min:10',
 		    'address' => 'required',
 		    'type' => 'required',
@@ -65,7 +65,7 @@ class StoreController extends Controller
     public function update(Request $request, $id)
     {
 	    $rules = [
-		    'name' => 'required',
+		    'name' => 'required|distinct',
 		    'email' => 'required|distinct',
 		    'phone' => 'required',
 		    'address' => 'required',
