@@ -205,5 +205,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/AccountController.js') }}"></script>
+    <script src="{{ asset('angularJS/AccountController.js') }}" async></script>
 @endsection

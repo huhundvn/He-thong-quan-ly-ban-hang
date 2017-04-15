@@ -275,5 +275,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/StoreController.js') }}"></script>
+    <script src="{{ asset('angularJS/StoreController.js') }}" async></script>
 @endsection
