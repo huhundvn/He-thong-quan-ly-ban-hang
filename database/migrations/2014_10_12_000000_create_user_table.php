@@ -18,10 +18,10 @@ class CreateUserTable extends Migration
             $table->string('name');
             $table->string('email') -> unique();
             $table->string('password');
-	        $table->string('phone');
-	        $table->integer('position_id');
-	        $table->integer('work_place_id');
-	        $table->tinyInteger('status');
+	        $table->string('phone') -> nullable();
+	        $table->integer('position_id') -> nullable();
+	        $table->integer('work_place_id') -> nullable();
+	        $table->tinyInteger('status') -> nullable();
             $table->rememberToken();
             $table->timestamps();
 	        $table->softDeletes();
