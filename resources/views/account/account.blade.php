@@ -20,8 +20,6 @@
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadAccountTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
-                <button class="btn btn-sm btn-default">
-                    <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-change="searchAccount()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">

@@ -39,7 +39,7 @@ class AccountController extends Controller
 			$new = new Account();
 			$new -> name = Input::get('name');
 			$new -> bank_account = Input::get('bank_account');
-			$new -> bank = Input::get('bank_id');
+			$new -> bank = Input::get('bank');
 			$new -> total = Input::get('total');
 			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);
@@ -71,6 +71,8 @@ class AccountController extends Controller
 		else {
 			$new = Account::find($id);
 			$new -> name = Input::get('name');
+			$new -> bank_account = Input::get('bank_account');
+			$new -> bank = Input::get('bank');
 			$new -> total = Input::get('total');
 			$new -> save();
 			return response()->json(['success' => trans('message.update_success')]);
