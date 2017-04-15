@@ -28,7 +28,7 @@ class StoreController extends Controller
 	    $rules = [
 		    'name' => 'required|distinct',
 		    'email' => 'required|email|distinct',
-		    'phone' => 'required|min:10',
+		    'phone' => 'required',
 		    'address' => 'required',
 		    'type' => 'required',
 	    ];
@@ -47,8 +47,8 @@ class StoreController extends Controller
 		    $store -> store_id = Input::get('store_id');
 		    $store -> status = 1;
 		    $store -> save();
-		    return response()->json(['success' => trans('message.create_success')]);
 	    }
+	    return response()->json(['success' => trans('message.create_success')]);
     }
 
     /**
@@ -87,8 +87,8 @@ class StoreController extends Controller
 		    $update -> store_id = Input::get('store_id');
 		    $update -> status = Input::get('status');
 		    $update -> save();
-		    return response()->json(['success' => trans('message.update_success')]);
 	    }
+	    return response()->json(['success' => trans('message.update_success')]);
     }
 
     /**
