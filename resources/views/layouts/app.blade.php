@@ -46,7 +46,7 @@
     <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-phone.vn.js') }}"></script>
     <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
-    <script src="{{ asset('angularJS/config.js') }}"> </script>
+    <script src="{{ asset('angularJS/Config.js') }}"> </script>
     @yield('script')
 </body>
 </html>
