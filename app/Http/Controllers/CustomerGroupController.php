@@ -36,8 +36,8 @@ class CustomerGroupController extends Controller
 		    $groupCustomer -> name = Input::get('name');
 		    $groupCustomer -> description = Input::get('description');
 		    $groupCustomer -> save();
-		    return response()->json(['success' => trans('message.create_success')]);
 	    }
+	    return response()->json(['success' => trans('message.create_success')]);
     }
 
     /**
@@ -65,8 +65,8 @@ class CustomerGroupController extends Controller
 		    $customerGroup -> name = Input::get('name');
 		    $customerGroup -> description = Input::get('description');
 		    $customerGroup -> save();
-		    return response()->json(['success' => trans('message.update_success')]);
 	    }
+	    return response()->json(['success' => trans('message.update_success')]);
     }
 
     /**

@@ -42,8 +42,8 @@ class AccountController extends Controller
 			$new -> bank = Input::get('bank');
 			$new -> total = Input::get('total');
 			$new -> save();
-			return response()->json(['success' => trans('message.create_success')]);
 		}
+		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -75,8 +75,8 @@ class AccountController extends Controller
 			$new -> bank = Input::get('bank');
 			$new -> total = Input::get('total');
 			$new -> save();
-			return response()->json(['success' => trans('message.update_success')]);
 		}
+		return response()->json(['success' => trans('message.update_success')]);
 	}
 
 	/**

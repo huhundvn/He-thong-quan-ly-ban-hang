@@ -37,8 +37,8 @@ class PositionController extends Controller
 			$new -> name = Input::get('name');
 			$new -> description = Input::get('description');
 			$new -> save();
-			return response()->json(['success' => trans('message.create_success')]);
 		}
+		return response()->json(['success' => trans('message.create_success')]);
 	}
 
 	/**
@@ -66,8 +66,8 @@ class PositionController extends Controller
 			$unit -> name = Input::get('name');
 			$unit -> description = Input::get('description');
 			$unit -> save();
-			return response()->json(['success' => trans('message.update_success')]);
 		}
+		return response()->json(['success' => trans('message.update_success')]);
 	}
 
 	/**

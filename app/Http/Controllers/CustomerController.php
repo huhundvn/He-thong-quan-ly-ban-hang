@@ -49,9 +49,8 @@ class CustomerController extends Controller
 		    $customer -> customer_group_id = Input::get('customer_group_id');
 		    $customer -> note = Input::get('note');
 		    $saved = $customer -> save();
-		    return response()->json(['success' => trans('message.create_success')]);
-
 	    }
+	    return response()->json(['success' => trans('message.create_success')]);
     }
 
     /**
@@ -90,8 +89,8 @@ class CustomerController extends Controller
 		    $customer -> customer_group_id = Input::get('customer_group_id');
 		    $customer -> note = Input::get('note');
 		    $customer -> save();
-		    return response()->json(['success' => trans('message.update_success')]);
 	    }
+	    return response()->json(['success' => trans('message.update_success')]);
     }
 
     /**
