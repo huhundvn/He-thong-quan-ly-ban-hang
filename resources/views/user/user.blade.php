@@ -51,7 +51,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="users.length > 0" class="item" dir-paginate="user in users | itemsPerPage: 7" ng-click="readUser(user)">
+            <tr ng-show="users.length > 0" class="item" dir-paginate="user in users | filter:term | itemsPerPage: 7" ng-click="readUser(user)">
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.name}} </td>
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.email}}</td>
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.phone}} </td>

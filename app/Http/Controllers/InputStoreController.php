@@ -15,6 +15,8 @@ use App\Manufacturer;
 use App\Unit;
 use App\InputStore;
 
+use Carbon\Carbon;
+
 class InputStoreController extends Controller
 {
 	/**
@@ -30,37 +32,22 @@ class InputStoreController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		// kiểm tra điều kiện
 		$rules = [
-			'name' => 'required|unique:product,name',
-			'code' => 'required|unique:product,code',
-			'category_id' => 'required',
-			'manufacturer_id' => 'required',
-			'unit_id' => 'required',
-			'min_inventory' => 'required',
-			'max_inventory' => 'required',
-			'warranty_period' => 'required',
-			'return_period' => 'required',
+			'store_id' => 'required',
+			'account_id' => 'required',
+			'supplier_id' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
 		if($validation->fails())
 			return $validation -> errors() -> all();
 		else {
-			$product = new Product();
-			$product -> name = Input::get('name');
-			$product -> code = Input::get('code');
-			$product -> category_id = Input::get('category_id');
-			$product -> manufacturer_id = Input::get('manufacturer_id');
-			$product -> unit_id = Input::get('unit_id');
-			$product -> min_inventory = Input::get('min_inventory');
-			$product -> max_inventory = Input::get('max_inventory');
-			$product -> warranty_period = Input::get('warranty_period');
-			$product -> return_period = Input::get('return_period');
-			$product -> weight = Input::get('weight');
-			$product -> size = Input::get('size');
-			$product -> volume = Input::get('volume');
-			$product -> save();
+			$new = new InputStore();
+			$new -> store_id = Input::get('store_id');
+			$new -> account_id = Input::get('account_id');
+			$new -> input_date = Input::get('input_date');
+			$new -> supplier_id = Input::get('supplier_id');
+			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);
 		}
 	}
@@ -78,39 +65,7 @@ class InputStoreController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		// kiểm tra điều kiện
-		$rules = [
-			'name' => 'required|distinct',
-			'code' => 'required|distinct',
-			'category_id' => 'required',
-			'manufacturer_id' => 'required',
-			'unit_id' => 'required',
-			'min_inventory' => 'required',
-			'max_inventory' => 'required',
-			'warranty_period' => 'required',
-			'return_period' => 'required',
-		];
-		$validation = Validator::make(Input::all(), $rules);
 
-		if($validation->fails())
-			return $validation -> errors() -> all();
-		else {
-			$product = Product::find($id);
-			$product -> name = Input::get('name');
-			$product -> code = Input::get('code');
-			$product -> category_id = Input::get('category_id');
-			$product -> manufacturer_id = Input::get('manufacturer_id');
-			$product -> unit_id = Input::get('unit_id');
-			$product -> min_inventory = Input::get('min_inventory');
-			$product -> max_inventory = Input::get('max_inventory');
-			$product -> warranty_period = Input::get('warranty_period');
-			$product -> return_period = Input::get('return_period');
-			$product -> weight = Input::get('weight');
-			$product -> size = Input::get('size');
-			$product -> volume = Input::get('volume');
-			$product -> save();
-			return response()->json(['success' => trans('message.update_success')]);
-		}
 	}
 
 	/**
@@ -136,14 +91,6 @@ class InputStoreController extends Controller
 	public function createInputStore()
 	{
 		return view('input-store.new-input-store');
-	}
-
-	/**
-	 * Tìm kiếm đơn hàng
-	 */
-	public function searchInputStore($term)
-	{
-		return InputStore::where('name', 'LIKE', '%'. $term . '%') -> get();
 	}
 
 	/**

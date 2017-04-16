@@ -89,14 +89,6 @@ class UnitController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm đơn vị tính
-	 */
-	public function searchUnit($term)
-	{
-		return Unit::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Nhập từ file Excel
 	 */
 	public function importFromFile(Request $request)

@@ -38,45 +38,104 @@ app.controller('CreateInputStoreController', function($scope, $http, API) {
         $scope.units = response.data;
     });
 
+    // Lấy danh sách nhóm sản phẩm
+    $http.get(API + 'category').then(function (response) {
+        $scope.categorys = response.data;
+    });
+
+    // Lấy danh sách nhà cung cấp
+    $http.get(API + 'manufacturer').then(function (response) {
+        $scope.manufacturers = response.data;
+    });
+
     $scope.data = [];
-    $scope.total = 0;
 
-    /**
-     * Tìm kiếm sản phẩm
-     */
-    $scope.searchProduct = function(str) {
-        var matches = [];
-        $scope.products.forEach(function(product) {
-            if ((product.name.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
-                (product.code.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
-                matches.push(product);
+    // Tạo sản phẩm mới
+    $scope.createProduct = function () {
+        if( CKEDITOR.instances.newDescription.getData() )
+            $scope.newProduct.description = CKEDITOR.instances.newDescription.getData();
+        if ( CKEDITOR.instances.newUserGuide.getData() )
+            $scope.newProduct.user_guide = CKEDITOR.instances.newUserGuide.getData();
+        $http({
+            method : 'POST',
+            url : API + 'product',
+            data : $scope.newProduct,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
             }
+            else
+                toastr.error(response.data[0]);
         });
-        return matches;
     };
 
+    // Thêm sản phẩm vào danh sách
     $scope.add = function(selected) {
-        if (selected == null)
-            toastr.warning('Vui lòng chọn 1 sản phẩm');
-        else if($scope.data.indexOf(selected) !== -1)
-            toastr.warning('Đã thêm');
-        else
-            $scope.data.push(selected);
+        $scope.data.push(selected);
+        $("[data-dismiss=modal]").trigger({ type: "click" });
+        toastr.info('Đã thêm một sản phẩm vào danh sách.');
     };
 
+    // Xóa sản phẩm khỏi danh sách
     $scope.delete = function(selected) {
-        $scope.data.splice($scope.datas.indexOf(selected), 1);
-        toastr.success('Đã xóa 1 sản phẩm');
+        $scope.data.splice($scope.data.indexOf(selected), 1);
+        toastr.info('Đã xóa 1 sản phẩm khỏi danh sách.');
     };
 
+    // Thêm mới chi tiết đơn hàng
+    $scope.createDetailInputStore = function (item) {
+        $http({
+            method : 'POST',
+            url : API + 'detail-input-store',
+            data : item,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    // Tạo mới đơn đặt hàng
     $scope.createInputStore = function () {
-        console.log($scope.datas);
+        console.log($scope.info);
+        $http({
+            method : 'POST',
+            url : API + 'input-store',
+            data : $scope.info,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+            }
+            else
+                toastr.error(response.data[0]);
+        });
     };
 
+    $scope.getTotal = function () {
+        var total = 0;
+        for(var item in $scope.data)
+            total += item.quantity * item.price;
+        return total;
+    };
+
+    $scope.total = $scope.getTotal();
 
     $scope.options = {
         numeral: {
             numeral: true
         },
+        code: {
+            blocks: [1, 3, 3, 3, 3],
+            delimiters: ['-']
+        }
     };
 });

@@ -97,14 +97,6 @@ class AccountController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm tài khoản
-	 */
-	public function searchAccount($term)
-	{
-		return Account::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Download mẫu nhập
 	 */
 	public function downloadTemplate()

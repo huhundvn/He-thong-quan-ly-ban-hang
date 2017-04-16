@@ -14,19 +14,6 @@ app.controller('SupplierController', function($scope, $http, API) {
     $scope.loadSupplier();
 
     /**
-     * Tìm thông tin nhà cung cấp
-     */
-    $scope.searchSupplier = function () {
-        if ($scope.term == '') {
-            $scope.loadSupplier();
-        } else {
-            $http.get(API + 'supplier/search/' + $scope.term).then(function (response) {
-                $scope.suppliers = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhà cung cấp
      */
     $scope.createSupplier = function () {

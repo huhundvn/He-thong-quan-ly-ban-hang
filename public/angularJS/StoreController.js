@@ -21,19 +21,6 @@ app.controller('StoreController', function($scope, $http, API) {
     $scope.loadStore();
 
     /**
-     * Tìm thông tin kho, cửa hàng
-     */
-    $scope.searchStore = function () {
-        if ($scope.term == '') {
-            $scope.loadStore();
-        } else {
-            $http.get(API + 'store/search/' + $scope.term).then(function (response) {
-                $scope.stores = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhóm sản phẩm
      */
     $scope.createStore = function () {

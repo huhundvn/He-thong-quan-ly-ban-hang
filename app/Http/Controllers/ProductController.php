@@ -33,7 +33,6 @@ class ProductController extends Controller
 		$rules = [
 			'name' => 'required|unique:product,name',
 			'code' => 'required|unique:product,code',
-			'category_id' => 'required',
 			'manufacturer_id' => 'required',
 			'unit_id' => 'required',
 			'min_inventory' => 'required',
@@ -49,6 +48,8 @@ class ProductController extends Controller
 			$product = new Product();
 			$product -> name = Input::get('name');
 			$product -> code = Input::get('code');
+			$product -> description = Input::get('description');
+			$product -> user_guide = Input::get('user_guide');
 			$product -> category_id = Input::get('category_id');
 			$product -> manufacturer_id = Input::get('manufacturer_id');
 			$product -> unit_id = Input::get('unit_id');
@@ -59,6 +60,7 @@ class ProductController extends Controller
 			$product -> weight = Input::get('weight');
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
+			$product -> total_quantity = 0;
 			$product -> save();
 			return response()->json(['success' => trans('message.create_success')]);
 		}
@@ -97,6 +99,8 @@ class ProductController extends Controller
 			$product = Product::find($id);
 			$product -> name = Input::get('name');
 			$product -> code = Input::get('code');
+			$product -> description = Input::get('description');
+			$product -> user_guide = Input::get('user_guide');
 			$product -> category_id = Input::get('category_id');
 			$product -> manufacturer_id = Input::get('manufacturer_id');
 			$product -> unit_id = Input::get('unit_id');
@@ -144,14 +148,19 @@ class ProductController extends Controller
 	{
 		// kiểm tra điều kiện nhập
 		$rules = [
-			'ten_san_pham' => 'required',
-			'ma_vach' => 'required',
+			'ten_san_pham' => 'required|unique:product,name',
+			'ma_vach' => 'required|unique:product,code',
+			'nha_san_xuat' => 'required',
+			'don_vi_tinh' => 'required',
+			'thoi_han_bao_hanh' => 'required',
+			'thoi_han_doi_tra' => 'required',
 		];
 
+		$count = 0;
 		if(Input::hasFile('file')) {
 			$rows =  Excel::load(Input::file('file'), function ($reader){
 			},'UTF-8') -> get();
-			$count = 0;
+			
 			foreach ($rows as $row) {
 				$validation = Validator::make($row->toArray(), $rules);
 				if($validation->fails())
@@ -160,9 +169,35 @@ class ProductController extends Controller
 					$product = new Product();
 					$product -> name = $row -> ten_san_pham;
 					$product -> code = $row -> ma_vach;
-					$product -> category_id = Category::where('name', '=', $row -> nhom_san_pham)->pluck('id')->first();
-					$product -> manufacturer_id = Manufacturer::where('name', '=', $row -> nha_san_xuat)->pluck('id')->first();
-					$product -> unit_id = Unit::where('name', '=', $row -> nhom_san_pham) -> pluck('id')->first();
+					$product -> description = $row -> mo_ta_san_pham;
+					$product -> user_guide = $row -> huong_dan_su_dung;
+					$category = Category::where('name', '=', $row -> nhom_san_pham) ->get();
+					if (count($category) > 0) {
+						$product -> category_id = Category::where('name', '=', $row -> nhom_san_pham)->pluck('id')->first();
+					} else {
+						$newCategory = new Category();
+						$newCategory -> name = $row -> nhom_san_pham;
+						$newCategory -> save();
+						$product -> category_id = Category::where('name', '=', $row -> nhom_san_pham)->pluck('id')->first();
+					}
+					$manufacturer = Manufacturer::where('name', '=', $row -> nha_cung_cap) ->get();
+					if (count($manufacturer) > 0) {
+						$product -> manufacturer_id = Manufacturer::where('name', '=', $row -> nha_cung_cap)->pluck('id')->first();
+					} else {
+						$newManufacturer = new Manufacturer();
+						$newManufacturer -> name = $row -> nha_cung_cap;
+						$newManufacturer -> save();
+						$product -> manufacturer_id = Manufacturer::where('name', '=', $row -> nha_cung_cap)->pluck('id')->first();
+					}
+					$unit = Unit::where('name', '=', $row -> don_vi_tinh) ->get();
+					if (count($unit) > 0) {
+						$product -> unit_id = Unit::where('name', '=', $row -> don_vi_tinh)->pluck('id')->first();
+					} else {
+						$newUnit = new Unit();
+						$newUnit -> name = $row -> don_vi_tinh;
+						$newUnit -> save();
+						$product -> unit_id = Unit::where('name', '=', $row -> don_vi_tinh)->pluck('id')->first();
+					}
 					$product -> min_inventory = $row -> ton_kho_toi_thieu;
 					$product -> max_inventory = $row -> ton_kho_toi_da;
 					$product -> warranty_period = $row -> thoi_han_bao_hanh;

@@ -11,29 +11,23 @@
 @section('content')
     <div ng-controller="ManufacturerController">
 
-        {{-- !TÌM KIẾM NGUỒN GỐC XUẤT SỨ!--}}
+        {{-- TÌM KIẾM NHÀ SẢN XUẤT--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-4">
-                <div class="btn-group btn-group-sm">
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createManufacturer"> Thêm mới
-                    </button>
-                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li> <a href="#" data-toggle="modal" data-target="#inputFromFile">
-                                <span class="glyphicon glyphicon-file"></span> Nhập từ file </a> </li>
-                        <li class="divider"></li>
-                        <li> <a href="">
-                                <span class="glyphicon glyphicon-download-alt"></span> Tải mẫu nhập </a> </li>
-                    </ul>
-                </div>
+            <div class="col-lg-6 col-xs-6">
+                <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createManufacturer">
+                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
+                    <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
+                <a href="{{route('downloadManufacturerTemplate')}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
+                <button class="btn btn-sm btn-default">
+                    <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
-            <div class="col-lg-2 col-xs-6">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{manufacturers.length}} mục </button>
+            <div class="col-lg-4 col-xs-4">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên nhà sản xuất...">
             </div>
-            <div class="col-lg-4 col-xs-6">
-                <input ng-change="searchManufacturer()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên nguồn gốc...">
+            <div class="col-lg-2 col-xs-2">
+                <button class="btn btn-sm btn-info"> Tổng số: @{{products.length}} mục </button>
             </div>
         </div>
 
@@ -55,7 +49,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="manufacturers.length > 0" class="item" dir-paginate="manufacturer in manufacturers | itemsPerPage: 7" ng-click="readManufacturer(manufacturer)">
+            <tr ng-show="manufacturers.length > 0" class="item" dir-paginate="manufacturer in manufacturers | filter:term | itemsPerPage: 7" ng-click="readManufacturer(manufacturer)">
                 <td data-toggle="modal" data-target="#readManufacturer"> @{{ $index+1 }}</td>
                 <td data-toggle="modal" data-target="#readManufacturer"> @{{ manufacturer.name }} </td>
                 <td data-toggle="modal" data-target="#readManufacturer"> @{{ manufacturer.country }}</td>

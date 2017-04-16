@@ -22,7 +22,7 @@
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchStore()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên kho...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên kho...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{stores.length}} mục </button>
@@ -50,7 +50,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="stores.length > 0" dir-paginate="store in stores | itemsPerPage: 7" ng-click="readStore(store)">
+            <tr class="item" ng-show="stores.length > 0" dir-paginate="store in stores | filter:term | itemsPerPage: 7" ng-click="readStore(store)">
                 <td data-toggle="modal" data-target="#readStore"> @{{ $index+1 }} </td>
                 <td data-toggle="modal" data-target="#readStore"> @{{ store.name }} </td>
                 <td data-toggle="modal" data-target="#readStore"> @{{ store.address }}</td>

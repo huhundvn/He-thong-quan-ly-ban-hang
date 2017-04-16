@@ -22,7 +22,7 @@
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchAccount()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{accounts.length}} mục </button>
@@ -40,7 +40,7 @@
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="accounts.length > 0" class="item" dir-paginate="account in accounts | itemsPerPage: 7" ng-click="readAccount(account)">
+            <tr class="item" ng-show="accounts.length > 0" class="item" dir-paginate="account in accounts | filter:term | itemsPerPage: 7" ng-click="readAccount(account)">
                 <td data-toggle="modal" data-target="#readAccount"> @{{$index + 1}} </td>
                 <td data-toggle="modal" data-target="#readAccount"> @{{ account.name }} </td>
                 <td data-toggle="modal" data-target="#readAccount"> @{{ account.total | number:0 }} VNĐ </td>
@@ -55,6 +55,11 @@
             </tr>
             </tbody>
         </table>
+
+        {{-- PHÂN TRANG --}}
+        <div style="margin-left: 35%; bottom:0; position: fixed;">
+            <dir-pagination-controls></dir-pagination-controls>
+        </div>
 
         {{-- !TẠO TÀI KHOẢN MỚI! --}}
         <div class="modal fade" id="createAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -181,7 +186,7 @@
             </div>
         </div>
 
-        {{-- !XÓA NHÀ CUNG CẤP!--}}
+        {{-- XÓA TÀI KHOẢN --}}
         <div class="modal fade" id="deleteAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -205,5 +210,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/AccountController.js') }}" async></script>
+    <script src="{{ asset('angularJS/AccountController.js') }}"></script>
 @endsection

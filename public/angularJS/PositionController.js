@@ -13,19 +13,6 @@ app.controller('PositionController', function($scope, $http, API) {
     $scope.loadPosition();
 
     /**
-     * Tìm thông tin chức vụ
-     */
-    $scope.searchPosition = function () {
-        if ($scope.term == '') {
-            $scope.loadPosition();
-        } else {
-            $http.get(API + 'position/search/' + $scope.term).then(function (response) {
-                $scope.positions = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD chức vụ
      */
     $scope.createPosition = function () {

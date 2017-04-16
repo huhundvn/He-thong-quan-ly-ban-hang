@@ -14,19 +14,6 @@ app.controller('CategoryController', function($scope, $http, API) {
     $scope.loadCategory();
 
     /**
-     * Tìm thông tin nhóm sản phẩm
-     */
-    $scope.searchCategory = function () {
-        if ($scope.term == '') {
-            $scope.loadCategory();
-        } else {
-            $http.get(API + 'category/search/' + $scope.term).then(function (response) {
-                $scope.categorys = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhóm sản phẩm
      */
     $scope.createCategory = function () {

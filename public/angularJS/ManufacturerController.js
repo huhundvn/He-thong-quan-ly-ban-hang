@@ -13,19 +13,6 @@ app.controller('ManufacturerController', function($scope, $http, API) {
     $scope.loadManufacturer();
 
     /**
-     * Tìm thông tin nhà sản xuất
-     */
-    $scope.searchManufacturer = function () {
-        if ($scope.term == '') {
-            $scope.loadManufacturer();
-        } else {
-            $http.get(API + 'manufacturer/search/' + $scope.term).then(function (response) {
-                $scope.manufacturers = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhà sản xuất
      */
     $scope.createManufacturer = function () {

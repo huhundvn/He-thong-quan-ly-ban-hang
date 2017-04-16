@@ -114,14 +114,6 @@ class UserController extends Controller
     }
 
     /**
-     * Tìm kiếm nhân viên
-     */
-    public function searchUser($term)
-    {
-        return User::where('name', 'LIKE', '%'. $term . '%') -> get();
-    }
-
-    /**
      * Nhập thông tin nhân viên từ File Excel
      */
     public function importUserFromFile(Request $request)

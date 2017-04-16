@@ -100,14 +100,6 @@ class CategoryController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm thuộc tính
-	 */
-	public function searchCategory($term)
-	{
-		return Category::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Nhập thông tin từ File Excel
 	 */
 	public function importFromFile(Request $request)

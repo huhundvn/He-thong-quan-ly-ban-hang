@@ -86,7 +86,7 @@ class CustomerController extends Controller
 		    $customer -> phone = Input::get('phone');
 		    $customer -> address = Input::get('address');
 		    $customer -> bank_account = Input::get('bank_account');
-		    $customer -> bank = Input::get('bank_id');
+		    $customer -> bank = Input::get('bank');
 		    $customer -> customer_group_id = Input::get('customer_group_id');
 		    $customer -> note = Input::get('note');
 		    $customer -> save();
@@ -109,14 +109,6 @@ class CustomerController extends Controller
     public function listCustomer()
     {
         return view('customer.customer');
-    }
-
-    /**
-     * Tìm kiếm nhân viên
-     */
-    public function searchCustomer($term)
-    {
-        return Customer::where('name', 'LIKE', '%'. $term . '%') -> get();
     }
 
     /**
@@ -148,8 +140,16 @@ class CustomerController extends Controller
 			        $newCustomer -> phone = $row -> so_dien_thoai;
 			        $newCustomer -> email = $row -> email;
 			        $newCustomer -> bank_account = $row -> tai_khoan_ngan_hang;
-			        $newCustomer -> bank_id = Bank::where('name', '=', $row -> ngan_hang)->pluck('id')->first();
-			        $newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
+			        $newCustomer -> bank= $row -> ngan_hang;
+				    $customerGroup = CustomerGroup::where('name', '=', $row -> nhom_khach_hang) -> get();
+				    if (count($customerGroup) > 0) {
+					    $newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
+				    } else {
+				        $newCustomerGroup = new CustomerGroup();
+				        $newCustomerGroup -> name = $row -> nhom_khach_hang;
+					    $newCustomerGroup -> save();
+					    $newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
+				    }
 			        $newCustomer -> note = $row -> ghi_chu;
 			        $saved = $newCustomer -> save();
 			        if(!$saved)

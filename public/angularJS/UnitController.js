@@ -14,19 +14,6 @@ app.controller('UnitController', function($scope, $http, API) {
     $scope.loadUnit();
 
     /**
-     * Tìm thông tin đơn vị tính
-     */
-    $scope.searchUnit = function () {
-        if ($scope.term == '') {
-            $scope.loadUnit();
-        } else {
-            $http.get(API + 'unit/search/' + $scope.term).then(function (response) {
-                $scope.units = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD đơn vị tính
      */
     $scope.createUnit = function () {

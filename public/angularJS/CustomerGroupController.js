@@ -14,19 +14,6 @@ app.controller('CustomerGroupController', function($scope, $http, API) {
     $scope.loadCustomerGroup();
 
     /**
-     * Tìm thông tin nhóm khách hàng
-     */
-    $scope.searchCustomerGroup = function () {
-        if ($scope.term == '') {
-            $scope.loadCustomerGroup();
-        } else {
-            $http.get(API + 'customerGroup/search/' + $scope.term).then(function (response) {
-                $scope.customerGroups = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhóm khách hàng
      */
     $scope.createCustomerGroup = function () {

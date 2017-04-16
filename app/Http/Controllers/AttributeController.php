@@ -106,16 +106,4 @@ class AttributeController extends Controller
 	{
 		return view('attribute.attribute');
 	}
-
-	/**
-	 * Tìm kiếm thuộc tính
-	 *
-	 * @param $term
-	 * @return mixed
-	 */
-	public function searchAttribute($term)
-	{
-		return Attribute::where('name', 'LIKE', '%'. $term . '%')
-			-> get();
-	}
 }

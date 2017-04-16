@@ -29,7 +29,7 @@ class SupplierController extends Controller
 		// validate
 		$rules = [
 			'name' => 'required|unique:supplier,name',
-			'phone' => 'required|min:10',
+			'phone' => 'required',
 			'address' => 'required',
 			'person_contact' => 'required',
 			'email' => 'required|email|unique:supplier,email',
@@ -45,7 +45,7 @@ class SupplierController extends Controller
 			$supplier -> phone = Input::get('phone');
 			$supplier -> address = Input::get('address');
 			$supplier -> bank_account = Input::get('bank_account');
-			$supplier -> bank_id = Input::get('bank_id');
+			$supplier -> bank = Input::get('bank');
 			$supplier -> person_contact = Input::get('person_contact');
 			$supplier -> email = Input::get('email');
 			$supplier -> note = Input::get('note');
@@ -71,7 +71,7 @@ class SupplierController extends Controller
 		// validate
 		$rules = [
 			'name' => 'required|distinct',
-			'phone' => 'required|min:10',
+			'phone' => 'required',
 			'address' => 'required',
 			'person_contact' => 'required',
 			'email' => 'required|email|distinct',
@@ -86,7 +86,7 @@ class SupplierController extends Controller
 			$supplier -> phone = Input::get('phone');
 			$supplier -> address = Input::get('address');
 			$supplier -> bank_account = Input::get('bank_account');
-			$supplier -> bank_id = Input::get('bank_id');
+			$supplier -> bank = Input::get('bank');
 			$supplier -> person_contact = Input::get('person_contact');
 			$supplier -> email = Input::get('email');
 			$supplier -> note = Input::get('note');
@@ -111,14 +111,6 @@ class SupplierController extends Controller
 	public function listSupplier()
 	{
 		return view('supplier.supplier');
-	}
-
-	/**
-	 * Tìm kiếm nhà cung cấp
-	 */
-	public function searchSupplier($term)
-	{
-		return Supplier::where('name', 'LIKE', '%'. $term . '%') -> get();
 	}
 
 	/**

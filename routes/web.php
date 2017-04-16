@@ -26,123 +26,106 @@ Route::get('/lang/{locale}', array(
     'uses' => 'LanguageController@change'
 ));
 
+//API ROUTES
+Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
+    
+    Route::resource('user', 'UserController'); //CRUD nhân viên
+
+    Route::resource('position', 'PositionController'); //CRUD chức vụ
+
+    Route::resource('customer', 'CustomerController'); //CRUD khách hàng
+
+    Route::resource('customerGroup', 'CustomerGroupController'); //CRUD nhóm khách hàng
+
+	Route::resource('store', 'StoreController'); //CRUD cửa hàng, kho hàng
+	Route::get('/storage', 'StoreController@getStorage');
+
+	Route::resource('unit', 'UnitController'); //CRUD đơn vị tính
+
+	Route::resource('manufacturer', 'ManufacturerController'); //CRUD nhà sản xuất
+
+	Route::resource('supplier', 'SupplierController'); //CRUD nhà cung cấp
+
+	Route::resource('attribute', 'AttributeController'); //CRUD thuộc tính
+
+	Route::resource('product', 'ProductController'); //CRUD sản phẩm
+
+	Route::resource('category', 'CategoryController'); //CRUD nhóm sản phẩm
+
+	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
+
+	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
+
+	Route::get('/detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail'); //CRUD chi tiết nhập kho
+});
+
+// FRONT-END
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/home-report', 'HomeController@report') -> name('home-report');
 
-    /**
-     * CRUD nhân viên
-     */
-    Route::resource('user', 'UserController');
+   	// NHÂN VIÊN
     Route::get('/list-user', 'UserController@listUser') -> name('list-user');
-    Route::get('/user/search/{term}', 'UserController@searchUser') -> name('search-user');
     Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile');
 	Route::get('/download-user-template', 'UserController@downloadTemplate') -> name('downloadUserTemplate');
 
-    /**
-     * CRUD chức vụ
-     */
-    Route::resource('position', 'PositionController');
+    //CHỨC VỤ
     Route::get('/list-position', 'PositionController@listPosition') -> name('list-position');
-    Route::get('/position/search/{term}', 'PositionController@searchPosition') -> name('search-position');
+    
 
-    /**
-     * CRUD khách hàng
-     */
-    Route::resource('customer', 'CustomerController');
+    //KHÁCH HÀNG
     Route::get('/list-customer', 'CustomerController@listCustomer') -> name('list-customer');
-    Route::get('/customer/search/{term}', 'CustomerController@searchCustomer') -> name('search-customer');
     Route::post('/customer/importFromFile', 'CustomerController@importFromFile') -> name('importCustomerFromFile');
 	Route::get('/download-customer-template', 'CustomerController@downloadTemplate') -> name('downloadCustomerTemplate');
 
-    /**
-     * CRUD nhóm khách hàng
-     */
-    Route::resource('customerGroup', 'CustomerGroupController');
+    //NHÓM KHÁCH HÀNG
     Route::get('/list-customer-group', 'CustomerGroupController@listGroupCustomer') -> name('list-customer-group');
-	Route::get('/customerGroup/search/{term}', 'CustomerGroupController@searchCustomerGroup');
+    Route::post('/customer-group/importFromFile', 'CustomerGroupController@importFromFile') -> name('importCustomerGroupFromFile');
 	Route::get('/download-customergroup-template', 'CustomerGroupController@downloadTemplate') -> name('downloadCustomerGroupTemplate');
 
-	/**
-	 * CRUD cửa hàng, kho hàng
-	 */
-	Route::resource('store', 'StoreController');
+	//CỬA HÀNG, KHO HÀNG
 	Route::get('/list-store', 'StoreController@listStore') -> name('list-store');
-	Route::get('/store/search/{term}', 'StoreController@searchStore') -> name('search-store');
-	Route::get('/storage', 'StoreController@getStorage');
 	Route::post('/store/importFromFile', 'StoreController@importFromFile') -> name('importStoreFromFile');
 	Route::get('/download-store-template', 'StoreController@downloadTemplate') -> name('downloadStoreTemplate');
 
-	/**
-	 * CRUD đơn vị tính
-	 */
-	Route::resource('unit', 'UnitController');
+	//ĐƠN VỊ TÍNH
 	Route::get('/list-unit', 'UnitController@listUnit') -> name('list-unit');
-	Route::get('/unit/search/{term}', 'UnitController@searchUnit') -> name('search-unit');
+	
 	Route::post('/unit/importFromFile', 'UnitController@importFromFile') -> name('importUnitFromFile');
 	Route::get('/download-unit-template', 'UnitController@downloadTemplate') -> name('downloadUnitTemplate');
 
-	/**
-	 * CRUD nhà sản xuất
-	 */
-	Route::resource('manufacturer', 'ManufacturerController');
+	//NHÀ SẢN XUẤT
 	Route::get('/list-manufacturer', 'ManufacturerController@listManufacturer') -> name('list-manufacturer');
-	Route::get('/manufacturer/search/{term}', 'ManufacturerController@searchManufacturer') -> name('search-manufacturer');
 	Route::post('/manufacturer/importFromFile', 'ManufacturerController@importFromFile') -> name('importManufacturerFromFile');
 	Route::get('/download-manufacturer-template', 'ManufacturerController@downloadTemplate') -> name('downloadManufacturerTemplate');
 
-	/**
-	 * CRUD nhà cung cấp
-	 */
-	Route::resource('supplier', 'SupplierController');
+	//NHÀ CUNG CẤP
 	Route::get('/list-supplier', 'SupplierController@listSupplier') -> name('list-supplier');
-	Route::get('/supplier/search/{term}', 'SupplierController@searchSupplier') -> name('search-supplier');
 	Route::post('/supplier/importFromFile', 'SupplierController@importFromFile') -> name('importSupplierFromFile');
 	Route::get('/download-supplier-template', 'SupplierController@downloadTemplate') -> name('downloadSupplierTemplate');
 
-	/**
-	 * CRUD thuộc tính
-	 */
-	Route::resource('attribute', 'AttributeController');
+	//THUỘC TÍNH SẢN PHẨM
 	Route::get('/list-attribute', 'AttributeController@listAttribute') -> name('list-attribute');
-	Route::get('/attribute/search/{term}', 'AttributeController@searchAttribute') -> name('search-attribute');
 
-	/**
-	 * CRUD sản phẩm
-	 */
-	Route::resource('product', 'ProductController');
+	//SẢN PHẨM
 	Route::get('/list-product', 'ProductController@listProduct') -> name('list-product');
-	Route::get('/product/search/{term}', 'ProductController@searchProduct') -> name('search-product');
 	Route::post('/product/importFromFile', 'ProductController@importFromFile') -> name('importProductFromFile');
 	Route::post('/product/upload-image', 'ProductController@uploadImage') -> name('uploadImage');
 	Route::get('/download-product-template', 'ProductController@downloadTemplate') -> name('downloadProductTemplate');
 
-	/**
-	 * CRUD nhóm sản phẩm
-	 */
-	Route::resource('category', 'CategoryController');
-	Route::get('/category/search/{term}', 'CategoryController@searchCategory');
+	//NHÓM SẢN PHẨM
 	Route::post('/category/importFromFile', 'CategoryController@importFromFile') -> name('importCategoryFromFile');
 	Route::get('/list-category', 'CategoryController@listCategory') -> name('list-category');
 	Route::get('/download-category-template', 'CategoryController@downloadTemplate') -> name('downloadCategoryTemplate');
 
 
-	/**
-	 * CRUD tài khoản thanh toán
-	 */
-	Route::resource('account', 'AccountController');
+	//TÀI KHOẢN THANH TOÁN
 	Route::get('/list-account', 'AccountController@listAccount') -> name('list-account');
-	Route::get('/account/search/{term}', 'AccountController@searchAccount') -> name('search-account');
 	Route::get('/download-account-template', 'AccountController@downloadTemplate') -> name('downloadAccountTemplate');
 
-	/**
-	 * CRUD nhập kho
-	 */
-	Route::resource('input-store', 'InputStoreController');
-	Route::get('/input-store/search/{term}', 'InputStoreController@searchInputStore');
+	//NHẬP KHO
 	Route::post('/input-store/importFromFile', 'InputStoreController@importFromFile') -> name('importInputStoreFromFile');
 	Route::get('/list-input-store', 'InputStoreController@listInputStore') -> name('list-input-store');
 	Route::get('/create-input-store', 'InputStoreController@createInputStore') -> name('createInputStore');
 	Route::get('/download-input-template', 'InputController@downloadTemplate') -> name('downloadInputStoreTemplate');
-
 
 });

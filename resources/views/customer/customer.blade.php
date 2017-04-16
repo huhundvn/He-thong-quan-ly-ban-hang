@@ -24,7 +24,7 @@
                     <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchCustomer()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên khách hàng...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên khách hàng...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{customers.length}} mục </button>
@@ -51,7 +51,7 @@
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="customers.length > 0" dir-paginate="customer in customers | itemsPerPage: 7" ng-click="readCustomer(customer)">
+            <tr class="item" ng-show="customers.length > 0" dir-paginate="customer in customers | filter:term | itemsPerPage: 7" ng-click="readCustomer(customer)">
                 <td data-toggle="modal" data-target="#readCustomer"> KH-@{{ customer.id}} </td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.name}} </td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.email}}</td>
@@ -87,45 +87,45 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên đầy đủ </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                    <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Email </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
+                                    <input ng-model="new.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Số điện thoại </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
+                                    <input ng-model="new.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Tài khoản ngân hàng </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
+                                    <input ng-model="new.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Ngân hàng </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="newCustomer.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
+                                    <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Nhóm khách hàng </label>
                                 <div class="col-sm-9">
-                                    <select ng-model="newCustomer.customer_group_id" class="form-control input-sm">
+                                    <select ng-model="new.customer_group_id" class="form-control input-sm">
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"> @{{x.name}} </option>
                                     </select>
                                 </div>
@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Ghi chú </label>
                                 <div class="col-sm-9">
-                                    <textarea ng-model="newCustomer.note" class="form-control"> </textarea>
+                                    <textarea ng-model="new.note" class="form-control"> </textarea>
                                 </div>
                             </div>
                         </div>
@@ -180,54 +180,54 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên đầy đủ </label>
                                 <div class="col-sm-9">
-                                    <input id="name" ng-model="selectedCustomer.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                    <input id="name" ng-model="selected.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Email </label>
                                 <div class="col-sm-9">
-                                    <input id="email" ng-model="selectedCustomer.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
+                                    <input id="email" ng-model="selected.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Số điện thoại </label>
                                 <div class="col-sm-9">
-                                    <input id="phone" ng-model="selectedCustomer.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại...">
+                                    <input id="phone" ng-model="selected.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
                                 <div class="col-sm-9">
-                                    <input id="address" ng-model="selectedCustomer.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ...">
+                                    <input id="address" ng-model="selected.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Tài khoản ngân hàng </label>
                                 <div class="col-sm-9">
-                                    <input id="bank_account" ng-model="selectedCustomer.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
+                                    <input id="bank_account" ng-model="selected.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Ngân hàng </label>
                                 <div class="col-sm-9">
-                                    <input id="bank" ng-model="selectedCustomer.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
+                                    <input id="bank" ng-model="selected.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Nhóm khách hàng </label>
                                 <div class="col-sm-9">
-                                    <select id="customer_group" ng-model="selectedCustomer.customer_group_id" class="form-control">
+                                    <select id="customer_group" ng-model="selected.customer_group_id" class="form-control">
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"
-                                                ng-selected="x.id === selectedCustomer.customer_group_id"> @{{x.name}} </option>
+                                                ng-selected="x.id === selected.customer_group_id"> @{{x.name}} </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Ghi chú </label>
                                 <div class="col-sm-9">
-                                    <textarea id="note" ng-model="selectedCustomer.note" class="form-control"> </textarea>
+                                    <textarea id="note" ng-model="selected.note" class="form-control"> </textarea>
                                 </div>
                             </div>
                         </div>

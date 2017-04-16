@@ -21,19 +21,6 @@ app.controller('CustomerController', function($scope, $http, API) {
     });
 
     /**
-     * Tìm thông tin khách hàng
-     */
-    $scope.searchCustomer = function () {
-        if ($scope.term == '') {
-            $scope.loadCustomer();
-        } else {
-            $http.get(API + 'customer/search/' + $scope.term).then(function (response) {
-                $scope.customers = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD khách hàng
      */
     $scope.createCustomer = function () {

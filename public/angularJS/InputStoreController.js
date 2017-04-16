@@ -1,30 +1,38 @@
 /**
- * Created by Good on 4/12/2017.
+ * Created by Good on 4/16/2017.
  */
-app.controller('AccountController', function($scope, $http, API) {
-    
-    //Load danh sách danh mục tài khoản 
-    $scope.loadAccount = function () {
-        $http.get(API + 'account').then(function (response) {
-            $scope.accounts = response.data;
+app.controller('InputStoreController', function($scope, $http, API) {
+
+    $http.get(API + 'store').then(function (response) {
+        $scope.stores = response.data;
+    });
+
+    $http.get(API + 'supplier').then(function (response) {
+        $scope.suppliers = response.data;
+    });
+
+    $http.get(API + 'account').then(function (response) {
+        $scope.accounts = response.data;
+    });
+
+    $http.get(API + 'product').then(function (response) {
+        $scope.products = response.data;
+    });
+
+    $http.get(API + 'input-store').then(function (response) {
+        $scope.inputStores = response.data;
+    });
+
+    //Load danh sách danh mục tài khoản
+    $scope.loadInputStore = function () {
+        $http.get(API + 'input-store').then(function (response) {
+            $scope.inputStores = response.data;
         });
     };
-    $scope.loadAccount();
-
-    //Tìm thông tin tài khoản
-     
-    $scope.searchAccount = function () {
-        if ($scope.term == '') {
-            $scope.loadAccount();
-        } else {
-            $http.get(API + 'account/search/' + $scope.term).then(function (response) {
-                $scope.accounts = response.data;
-            });
-        }
-    };
+    $scope.loadInputStore();
 
     /**
-     * CRUD tài khoản
+     * CRUD nhập kho
      */
     $scope.createAccount = function () {
         $http({
@@ -44,9 +52,12 @@ app.controller('AccountController', function($scope, $http, API) {
         });
     };
 
-    $scope.readAccount = function (account) {
-        $http.get(API + 'account/' + account.id).then(function (response) {
+    $scope.readInputStore = function (inputStore) {
+        $http.get(API + 'input-store/' + inputStore.id).then(function (response) {
             $scope.selected = response.data;
+        });
+        $http.get(API + 'detail-input-store/' + inputStore.id).then(function (response) {
+            $scope.data = response.data;
         });
     };
 

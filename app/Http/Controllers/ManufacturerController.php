@@ -92,14 +92,6 @@ class ManufacturerController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm nhà sản xuất
-	 */
-	public function searchManufacturer($term)
-	{
-		return Manufacturer::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Nhập từ file Excel
 	 */
 	public function importFromFile(Request $request)

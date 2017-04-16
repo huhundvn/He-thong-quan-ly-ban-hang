@@ -28,19 +28,6 @@ app.controller('UserController', function($scope, $http, API) {
     $scope.loadUser();
 
     /**
-     * Tìm thông tin nhân viên
-     */
-    $scope.searchUser = function () {
-        if ($scope.term == '') {
-            $scope.loadUser();
-        } else {
-            $http.get(API + 'user/search/' + $scope.term).then(function (response) {
-                $scope.users = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhân viên
      */
     $scope.createUser = function () {

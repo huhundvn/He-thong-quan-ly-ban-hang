@@ -86,12 +86,4 @@ class PositionController extends Controller
 	{
 		return view('position.position');
 	}
-
-	/**
-	 * Tìm kiếm chức vụ
-	 */
-	public function searchPosition($term)
-	{
-		return Position::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
 }

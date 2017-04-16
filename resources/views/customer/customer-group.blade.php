@@ -22,7 +22,7 @@
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchCustomerGroup()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên nhóm...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên nhóm...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{customerGroups.length}} mục </button>
@@ -47,7 +47,7 @@
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="customerGroups.length > 0" dir-paginate="customerGroup in customerGroups | itemsPerPage: 7" ng-click="readCustomerGroup(customerGroup)">
+            <tr class="item" ng-show="customerGroups.length > 0" dir-paginate="customerGroup in customerGroups | filter:term | itemsPerPage: 7" ng-click="readCustomerGroup(customerGroup)">
                 <td data-toggle="modal" data-target="#readCustomerGroup"> GR-@{{ customerGroup.id}} </td>
                 <td data-toggle="modal" data-target="#readCustomerGroup"> @{{ customerGroup.name}} </td>
                 <td data-toggle="modal" data-target="#readCustomerGroup"> @{{ customerGroup.description}}</td>
@@ -104,7 +104,7 @@
         <div class="modal fade" id="inputFromFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action="{{route('importCustomerFromFile')}}" method="post"> {{csrf_field()}}
+                    <form enctype="multipart/form-data" action="{{route('importCustomerGroupFromFile')}}" method="post"> {{csrf_field()}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Nhập từ File </h4>

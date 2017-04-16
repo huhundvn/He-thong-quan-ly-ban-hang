@@ -27,22 +27,13 @@ app.controller('ProductController', function($scope, $http, API) {
     $scope.loadProduct();
 
     /**
-     * Tìm thông tin sản phẩm
-     */
-    $scope.searchProduct = function () {
-        if ($scope.term == '') {
-            $scope.loadProduct();
-        } else {
-            $http.get(API + 'product/search/' + $scope.term).then(function (response) {
-                $scope.products = response.data;
-            });
-        }
-    };
-
-    /**
      * CRUD nhóm sản phẩm
      */
     $scope.createProduct = function () {
+        if( CKEDITOR.instances.newDescription.getData() )
+            $scope.new.description = CKEDITOR.instances.newDescription.getData();
+        if ( CKEDITOR.instances.newUserGuide.getData() )
+            $scope.new.user_guide = CKEDITOR.instances.newUserGuide.getData();
         $http({
             method : 'POST',
             url : API + 'product',
@@ -63,10 +54,16 @@ app.controller('ProductController', function($scope, $http, API) {
     $scope.readProduct = function (product) {
         $http.get(API + 'product/' + product.id).then(function (response) {
             $scope.selected = response.data;
+            CKEDITOR.instances.description.setData($scope.selected.description);
+            CKEDITOR.instances.user_guide.setData($scope.selected.user_guide);
         });
     };
 
     $scope.updateProduct = function () {
+        if( CKEDITOR.instances.description.getData() )
+            $scope.selected.description = CKEDITOR.instances.description.getData();
+        if ( CKEDITOR.instances.user_guide.getData() )
+            $scope.selected.user_guide = CKEDITOR.instances.user_guide.getData();
         $http({
             method : 'PUT',
             url : API + 'product/' + $scope.selected.id,
@@ -122,8 +119,8 @@ $('#readProduct').on('show.bs.modal', function (event) {
     modal.find('.modal-title').addClass('w3-text-blue');
     modal.find('#name').attr('readOnly', true);
     modal.find('#code').attr('readOnly', true);
-    modal.find('#description').attr('readOnly', true);
-    modal.find('#user_guide').attr('readOnly', true);
+    CKEDITOR.instances.description.setReadOnly(true);
+    CKEDITOR.instances.user_guide.setReadOnly(true);
     modal.find('#category').attr('disabled', true);
     modal.find('#manufacturer').attr('disabled', true);
     modal.find('#unit').attr('disabled', true);
@@ -142,8 +139,9 @@ $('#readProduct').on('show.bs.modal', function (event) {
         modal.find('.modal-title').addClass('w3-text-green');
         modal.find('#name').removeAttr('readOnly');
         modal.find('#code').removeAttr('readOnly');
-        modal.find('#description').removeAttr('readOnly');
-        modal.find('#user_guide').removeAttr('readOnly');
+        CKEDITOR.instances.description.setReadOnly(false);
+        CKEDITOR.instances.user_guide.setReadOnly(false);
+        modal.find('#user_guide').removeAttr('disabled');
         modal.find('#category').removeAttr('disabled');
         modal.find('#manufacturer').removeAttr('disabled');
         modal.find('#unit').removeAttr('disabled');
@@ -163,5 +161,4 @@ $("#my-dropzone").dropzone({
     maxFileSize: 2,
     addRemoveLinks: true,
     paramName: 'upload[image]',
-    url: '/admin/public/product',
 });

@@ -22,7 +22,7 @@
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchUnit()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{units.length}} mục </button>
@@ -47,7 +47,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="units.length > 0" class="item" dir-paginate="unit in units | itemsPerPage: 7" ng-click="readUnit(unit)">
+            <tr ng-show="units.length > 0" class="item" dir-paginate="unit in units | filter:term | itemsPerPage: 7" ng-click="readUnit(unit)">
                 <td> @{{$index + 1}} </td>
                 <td data-toggle="modal" data-target="#readUnit"> @{{ unit.name }} </td>
                 <td data-toggle="modal" data-target="#readUnit"> @{{ unit.description }}</td>

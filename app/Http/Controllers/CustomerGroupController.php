@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 //MODEL CSDL
 use App\CustomerGroup;
@@ -101,7 +102,7 @@ class CustomerGroupController extends Controller
 	{
 		// kiểm tra điều kiện nhập
 		$rules = [
-			'ten_nhom' => 'required|unique:customer_group,name',
+			'ten_nhom_khach_hang' => 'required|unique:customer_group,name',
 		];
 
 		if(Input::hasFile('file')) {
@@ -113,16 +114,10 @@ class CustomerGroupController extends Controller
 				if($validation->fails())
 					continue;
 				else {
-					$newCustomer = new Customer;
-					$newCustomer -> name = $row -> ten_khach_hang;
-					$newCustomer -> address = $row -> dia_chi;
-					$newCustomer -> phone = $row -> so_dien_thoai;
-					$newCustomer -> email = $row -> email;
-					$newCustomer -> bank_account = $row -> tai_khoan_ngan_hang;
-					$newCustomer -> bank_id = Bank::where('name', '=', $row -> ngan_hang)->pluck('id')->first();
-					$newCustomer -> customer_group_id = CustomerGroup::where('name', '=', $row -> nhom_khach_hang)->pluck('id')->first();
-					$newCustomer -> note = $row -> ghi_chu;
-					$saved = $newCustomer -> save();
+					$new = new CustomerGroup;
+					$new -> name = $row -> ten_nhom_khach_hang;			
+					$new -> description = $row -> mo_ta;
+					$saved = $new -> save();
 					if(!$saved)
 						continue;
 					if($saved)

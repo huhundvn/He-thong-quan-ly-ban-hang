@@ -9,4 +9,5 @@ $(document).ready(function () {
     });
 });
 
-var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt']).constant('API', 'http://larose-admin.herokuapp.com/');
+var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt'])
+	.constant('API', '/larose/public/api/');

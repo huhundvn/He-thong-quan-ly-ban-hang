@@ -109,14 +109,6 @@ class StoreController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm cửa hàng
-	 */
-	public function searchStore($term)
-	{
-		return Store::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Lấy danh sách các kho hàng
 	 */
 	public function getStorage()
