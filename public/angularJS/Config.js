@@ -10,4 +10,4 @@ $(document).ready(function () {
 });
 
 var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js', 'angucomplete-alt'])
-	.constant('API', '../public/api/');
+	.constant('API', '/api/');
