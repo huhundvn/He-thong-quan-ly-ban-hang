@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <div ng-controller="CreateInputStoreController">
+    <div ng-controller="InputStoreController">
 
         {{-- Thông tin nhập--}}
         <div class="row">
@@ -46,11 +46,12 @@
         <div class="row">
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
-                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createProduct"> Thêm SP mới </button>
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#createProduct"> Thêm SP mới </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
             </div>
             <div class="col-lg-3 col-xs-3">
-
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createInputStore()"> Gửi yêu cầu </button>
+                <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
             </div>
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Tổng tiền: @{{ total }} VNĐ </button>
@@ -91,7 +92,7 @@
                     <input cleave="options.numeral" type="text" ng-model="item.price" class="form-control input-sm input-numeral">
                 </td>
                 <td>
-                    <input type="date" ng-model="item.period_date" class="form-control input-sm">
+                    <input type="date" ng-model="item.expried_date" class="form-control input-sm">
                 </td>
                 <td>
                     @{{ item.quantity * item.price | number:0 }}
@@ -109,9 +110,10 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%; bottom:0; position: fixed;">
-            <dir-pagination-controls max-size="5"></dir-pagination-controls>
+        <div style="margin-left: 35%;">
+            <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
+
         <hr/>
 
         {{-- Xem biểu mẫu --}}
@@ -180,10 +182,10 @@
                                             <td> @{{ $index+1 }}</td>
                                             <td> @{{ item.code }} </td>
                                             <td> @{{ item.name }} </td>
-                                            <td ng-repeat="unit in units" ng-show="unit.id==data.unit_id">@{{ unit.name }}</td>
+                                            <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">@{{ unit.name }}</td>
                                             <td> @{{ item.quantity }} </td>
                                             <td> @{{ item.price | number:0 }} </td>
-                                            <td> @{{ item.period_date | date: "dd/MM/yyyy"}} </td>
+                                            <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
                                             <td> @{{ item.quantity * item.price | number: 0 }} </td>
                                         </tr>
                                         <tr class="item" ng-show="data.length==0">
@@ -212,14 +214,6 @@
                     </div>
                 </div>
             </div>
-
-        {{-- Xác nhận --}}
-        <div class="row" align="center">
-            <div class="col-lg-12 col-xs-2">
-                <button type="submit" class="btn btn-success" ng-click="createInputStore()"> Gửi yêu cầu </button>
-                <a href="{{route('list-input-store')}}" class="btn btn-danger"> Hủy yêu cầu </a>
-            </div>
-        </div>
 
         {{-- CHỌN SẢN PHẨM --}}
         <div class="modal fade" id="chooseProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -264,9 +258,9 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="modal-footer">
-                        <dir-pagination-controls pagination-id="product" max-size="5"> </dir-pagination-controls>
+                        <div style="margin-left: 35%;">
+                            <dir-pagination-controls pagination-id="product" max-size="4"> </dir-pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,10 +431,11 @@
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/CreateInputStoreController.js') }}"></script>
+    <script src="{{ asset('angularJS/InputStoreController.js') }}"></script>
 @endsection

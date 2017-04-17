@@ -1,29 +1,27 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Lịch sử nhập kho
+    Larose | Danh sách bảng giá
 @endsection
 
 @section('location')
-    <li> Danh sách nhập kho </li>
+    <li> Danh sách bảng giá </li>
 @endsection
 
 @section('content')
-    <div ng-controller="InputStoreController">
+    <div ng-controller="PriceOutputController">
 
-        {{-- !TÌM KIẾM SẢN PHẨM!--}}
+        {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
             <div class="col-lg-6 col-xs-6">
-                <a href="{{route('createInputStore')}}" class="btn btn-sm btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Nhập hàng </a>
-                <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
-                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
+                <a href="{{route('createPriceOutput')}}" class="btn btn-sm btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-model="term" class="form-control input-sm" placeholder="Nhập mã đơn hàng...">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
             <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{inputStores.length}} mục </button>
+                <button class="btn btn-sm btn-info"> Tổng số: @{{priceOutputs.length}} mục </button>
             </div>
         </div>
 
@@ -36,51 +34,47 @@
             </div>
         @endif
 
-        {{--!DANH SÁCH NHÀ CUNG CẤP!--}}
+        {{-- DANH SÁCH BẢNG GIÁ --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> STT </th>
-            <th> Mã đơn  </th>
-            <th> Nhà cung cấp </th>
-            <th> Ngày tạo </th>
-            <th> Tổng tiền </th>
+            <th> Tên bảng giá </th>
+            <th> Ngày bắt đầu </th>
+            <th> Ngày kết thúc </th>
             <th> Trạng thái </th>
-            <th> Duyệt </th>
+            <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="inputStores.length > 0" class="item"
-                dir-paginate="inputStore in inputStores | filter:term | itemsPerPage: 7" ng-click="readInputStore(inputStore)">
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ $index+1 }} </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.id }} </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="supplier in suppliers" ng-show="supplier.id==inputStore.supplier_id"> @{{ supplier.name }}
-                    </p>
+            <tr ng-show="priceOutputs.length > 0" class="item"
+                dir-paginate="priceOutput in priceOutputs | filter:term | itemsPerPage: 7" ng-click="readPriceOutput(priceOutput)">
+                <td> @{{$index + 1}} </td>
+                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.name }} </td>
+                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.start_date | date: "dd/MM/yyyy"}} </td>
+                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.end_date | date: "dd/MM/yyyy"}} </td>
+                <td data-toggle="modal" data-target="#readPriceOutput">
+                    <p ng-show="0==priceOutput.status"> Không áp dụng </p>
+                    <p ng-show="1==priceOutput.status"> Chờ duyệt </p>
+                    <p ng-show="2==priceOutput.status"> Áp dụng </p>
                 </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.created_at | date: "dd/MM/yyyy" }} </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.total | number:0 }} VNĐ </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-show="0==inputStore.status"> Yêu cầu đã bị hủy </p>
-                    <p ng-show="1==inputStore.status"> Chờ duyệt </p>
-                    <p ng-show="2==inputStore.status"> Đã duyệt </p>
-                    <p ng-show="2==inputStore.status"> Đã nhập kho </p>
-                </td>
-                <td data-toggle="modal" data-target="#changeInputStore">
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#deleteSupplier">
+                <td>
+                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changePriceOutput">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
             </tr>
-            <tr class="item" ng-show="inputStores.length==0">
-                <td colspan="8"> Không có dữ liệu </td>
+            <tr class="item" ng-show="priceOutputs.length==0">
+                <td colspan="6"> Không có dữ liệu </td>
             </tr>
             </tbody>
         </table>
 
         {{-- PHÂN TRANG --}}
-        <dir-pagination-controls max-size="4"></dir-pagination-controls>
+        <div style="margin-left: 35%; bottom:0; position: fixed;">
+            <dir-pagination-controls max-size="4"> </dir-pagination-controls>
+        </div>
 
         {{-- Xem biểu mẫu --}}
-        <div class="modal fade" id="readInputStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="readPriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form enctype="multipart/form-data" action="" method="post"> {{csrf_field()}}
@@ -101,34 +95,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h2 align="center"> <b> Phiếu mua hàng </b> </h2>
+                                <h2 align="center"> <b> Bảng giá bán </b> </h2>
                                 <hr/>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
-                                        Nhà cung cấp: @{{ supplier.name }} <br/>
-                                        Địa chỉ: @{{ supplier.address }} <br/>
-                                        Số điện thoại: @{{ supplier.phone }}
+                                    Ngày bắt đầu: @{{ selected.start_date | date: "dd/MM/yyyy"}} <br/>
+                                    Ngày kết thúc : @{{ selected.end_date | date: "dd/MM/yyyy" }} <br/>
+                                    <div ng-repeat="customerGroup in customerGroups" ng-show="customerGroup.id==selected.customer_group_id">
+                                        Áp dụng cho: @{{customerGroup.name}}
                                     </div>
-                                    <div ng-repeat="account in accounts" ng-show="account.id==selected.account_id">
-                                        Hình thức thanh toán: @{{account.name}}
-                                    </div>
-                                    Tổng tiền: @{{ selected.total | number:0 }} <br/>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div ng-repeat="store in stores" ng-show="store.id==selected.store_id">
-                                        Nhập về kho: @{{ store.name }} <br/>
-                                        Địa chỉ: @{{ store.address }} <br/>
-                                        Số điện thoại: @{{ store.phone }}
-                                    </div>
-                                    Ngày giao hàng: @{{selected.input_date | date: "dd/MM/yyyy"}}<br/>
+                                    Tên bảng giá: @{{ selected.name }}<br/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12"> Ghi chú: @{{ selected.note }}</div>
+                                <div class="col-sm-12"> Ghi chú: </div>
                             </div>
-                            <h1></h1>
                             <div class="row">
                                 <table class="w3-table table-bordered w3-centered">
                                     <thead>
@@ -136,25 +120,15 @@
                                     <th> Mã vạch </th>
                                     <th> Tên </th>
                                     <th> Đơn vị tính </th>
-                                    <th> Số lượng </th>
-                                    <th> Giá nhập (VNĐ) </th>
-                                    <th> Hạn sử dụng </th>
-                                    <th> Thành tiền (VNĐ) </th>
+                                    <th> Giá bán (VNĐ) </th>
                                     </thead>
                                     <tbody>
                                     <tr ng-show="detail.length > 0" class="item" ng-repeat="item in detail">
                                         <td> @{{ $index+1 }}</td>
-                                        <td>
-                                            <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.code }} </p>
-                                        </td>
-                                        <td>
-                                            <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.name }} </p>
-                                        </td>
-                                        <td> <p ng-repeat="unit in units" ng-show="unit.id==item.unit_id"> @{{ unit.name }} </p> </td>
-                                        <td> @{{ item.quantity }} </td>
-                                        <td> @{{ item.price | number:0 }} </td>
-                                        <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
-                                        <td> @{{ item.quantity * item.price | number: 0 }} </td>
+                                        <td> @{{ item.code }} </td>
+                                        <td> @{{ item.name }} </td>
+                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">@{{ unit.name }}</td>
+                                        <td> @{{ item.price_output | number:0 }} </td>
                                     </tr>
                                     <tr class="item" ng-show="detail.length==0">
                                         <td colspan="9"> Không có dữ liệu </td>
@@ -165,7 +139,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4" align="center">
-                                    <b> Giám đốc </b><br/> (Ký tên)
+                                    <b> Chủ cửa hàng </b><br/> (Ký tên)
                                 </div>
                                 <div class="col-sm-4" align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
@@ -183,8 +157,8 @@
             </div>
         </div>
 
-        {{-- THAY ĐỔI TRẠNG THÁI NHẬP HÀNG --}}
-        <div class="modal fade" id="changeInputStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        {{-- THAY ĐỔI TRẠNG THÁI BẢNG GIÁ --}}
+        <div class="modal fade" id="changePriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <form class="form-horizontal">
                     <div class="modal-content">
@@ -198,9 +172,8 @@
                                 <div class="col-sm-9">
                                     <select ng-model="changeStatus" class="form-control">
                                         <option value=""> -- Trạng thái -- </option>
-                                        <option value="1"> Duyệt đơn hàng </option>
-                                        <option value="2"> Hủy đơn hàng </option>
-                                        <option value="3"> Đã nhập vào kho </option>
+                                        <option value="1"> Không duyệt </option>
+                                        <option value="2"> Áp dụng </option>
                                     </select>
                                 </div>
                             </div>
@@ -219,5 +192,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/InputStoreController.js') }}"></script>
+    <script src="{{ asset('angularJS/PriceOutputController.js') }}"></script>
 @endsection

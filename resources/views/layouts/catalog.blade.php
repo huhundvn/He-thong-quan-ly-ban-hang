@@ -21,7 +21,7 @@
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="list-group">
                     <a href="#" class="list-group-item"> Đơn hàng </a>
-                    <a href="#" class="list-group-item"> Bảng giá bán </a>
+                    <a href="{{route('list-price-output')}}" class="list-group-item"> Bảng giá bán </a>
                     <a href="#" class="list-group-item"> Trả về </a>
                 </div>
             </div>
@@ -39,6 +39,7 @@
                 <div class="list-group">
                     <a href="{{route('list-product')}}" class="list-group-item"> Sản phẩm </a>
                     <a href="{{route('list-category')}}" class="list-group-item"> Nhóm sản phẩm </a>
+                    <a href="{{route('list-attribute')}}" class="list-group-item"> Thuộc tính sản phẩm </a>
                     <a href="{{route('list-unit')}}" class="list-group-item"> Đơn vị tính </a>
                     <a href="{{route('list-manufacturer')}}" class="list-group-item"> Nhà sản xuất </a>
                     <a href="{{route('list-supplier')}}" class="list-group-item"> Nhà cung cấp </a>

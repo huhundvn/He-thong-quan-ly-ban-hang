@@ -5,70 +5,71 @@
 @endsection
 
 @section('location')
-    <li> Thuộc tính sản phẩm </li>
+    <li> Danh sách thuộc tính </li>
 @endsection
 
 @section('content')
     <div ng-controller="AttributeController">
 
-        {{-- !TÌM KIẾM THUỘC TÍNH!--}}
+        {{-- TÌM KIẾM THUỘC TÍNH --}}
         <div class="row">
-            <div class="col-lg-2 col-xs-4">
-                <div class="btn-group btn-group-sm">
-                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#createAttribute"> Thêm mới
-                    </button>
-                    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li> <a href="#" data-toggle="modal" data-target="#inputFromFile">
-                                <span class="glyphicon glyphicon-file"></span> Nhập từ file </a> </li>
-                        <li class="divider"></li>
-                        <li> <a href="">
-                                <span class="glyphicon glyphicon-download-alt"></span> Tải mẫu nhập </a> </li>
-                    </ul>
-                </div>
+            <div class="col-lg-6 col-xs-6">
+                <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createAttribute">
+                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
+                    <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
+                <a href="{{route('downloadAttributeTemplate')}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-2 col-xs-6">
-                <button class="btn btn-sm btn-info"> @{{from}}-@{{to}} trong tổng số @{{total}} </button>
+            <div class="col-lg-4 col-xs-4">
+                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
-            <div class="col-lg-4 col-xs-6">
-                <input ng-change="searchAttribute" ng-model="term" class="form-control input-sm" placeholder="Nhập tên thuộc tính...">
+            <div class="col-lg-2 col-xs-2">
+                <button class="btn btn-sm btn-info"> Tổng số: @{{attributes.length}} mục </button>
             </div>
         </div>
 
         <hr/>
 
-        {{--!DANH SÁCH THUỘc TÍNH!--}}
+        @if (session('status'))
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session('status') }}
+            </div>
+        @endif
+
+        {{--DANH SÁCH THUỘC TÍNH--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-                <th> Tên </th>
-                <th> Mô tả </th>
-                <th> Xóa </th>
+            <th> STT </th>
+            <th> Tên </th>
+            <th> Mô tả </th>
+            <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-repeat="attribute in attributes" ng-click="readAttribute(attribute)">
-                <td data-toggle="modal" data-target="#readAttribute"> @{{ unit.name }} </td>
-                <td data-toggle="modal" data-target="#readAttribute"> @{{ unit.description }}</td>
+            <tr ng-show="attributes.length > 0" class="item"
+                dir-paginate="attribute in attributes | filter:term | itemsPerPage: 7" ng-click="readAttribute(attribute)">
+                <td> @{{ attribute.id }} </td>
+                <td data-toggle="modal" data-target="#readAttribute"> @{{ attribute.name }} </td>
+                <td data-toggle="modal" data-target="#readAttribute"> @{{ attribute.description }} </td>
                 <td>
                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteAttribute">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>
+            <tr class="item" ng-show="attributes.length==0">
+                <td colspan="4"> Không có dữ liệu </td>
+            </tr>
             </tbody>
         </table>
 
-        {{-- !PHÂN TRANG! --}}
-        <div align="center">
-            <ul class="pagination">
-                <li> <span ng-click="change(prev_page_url)"> &laquo; </span>  </li>
-                <li> <span> @{{current_page}}/@{{last_page}} </span> </li>
-                <li> <span ng-click="change(next_page_url)"> &raquo; </span> </li>
-            </ul>
+        {{-- PHÂN TRANG --}}
+        <div style="margin-left: 35%; bottom:0; position: fixed;">
+            <dir-pagination-controls></dir-pagination-controls>
         </div>
 
-        {{-- !TẠO THUỘC TÍNH MỚI! --}}
+        {{-- !TẠO ĐƠN VỊ TÍNH MỚI! --}}
         <div class="modal fade" id="createAttribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <form class="form-horizontal">
@@ -81,7 +82,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên </label>
                                 <div class="col-sm-9">
-                                    <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                    <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên..." required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -92,7 +93,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button ng-click="createAttribute()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button ng-click="createAttribute()" type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>
                     </div>
@@ -104,7 +105,7 @@
         <div class="modal fade" id="inputFromFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action="" method="post"> {{csrf_field()}}
+                    <form action="{{route('importAttributeFromFile')}}" enctype="multipart/form-data"  method="post"> {{csrf_field()}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Nhập từ File </h4>
@@ -121,7 +122,7 @@
             </div>
         </div>
 
-        {{-- !XEM, SỬA THÔNG TIN THUỘC TÍNH! --}}
+        {{-- XEM, SỬA THÔNG TIN THUỘC TÍNH --}}
         <div class="modal fade" id="readAttribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <form class="form-horizontal">
@@ -154,7 +155,7 @@
             </div>
         </div>
 
-        {{-- !XÓA NHÀ CUNG CẤP!--}}
+        {{-- XÓA THUỘC TÍNH--}}
         <div class="modal fade" id="deleteAttribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -163,10 +164,10 @@
                         <h4 class="modal-title w3-text-red" id="myModalLabel"> Xóa thuộc tính </h4>
                     </div>
                     <div class="modal-body">
-                        Bạn thực sự muốn xóa thuộc tính này?
+                        Bạn thực sự muốn xóa thuộc tính tính này?
                     </div>
                     <div class="modal-footer">
-                        <button ng-click="deleteUnit()" type="submit" class="btn btn-danger"> Xác nhận </button>
+                        <button ng-click="deleteAttribute()" type="submit" class="btn btn-danger"> Xác nhận </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal"> Hủy </button>
                     </div>
                 </div>

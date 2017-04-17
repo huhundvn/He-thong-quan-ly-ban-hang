@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class PriceOutput extends Model
 {
-	protected $table = 'product';
+	protected $table = 'price_output';
 }

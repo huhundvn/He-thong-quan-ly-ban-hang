@@ -125,8 +125,7 @@
                             <input type="file" name="file" accept=".xlsx">
                         </div>
                         <div class="modal-footer">
-                            <button id="updateAccount" type="button" class="btn btn-sm btn-info"> Chỉnh sửa </button>
-                            <button id="submit" ng-click="updateAccount()" type="submit" class="btn btn-sm btn-success" hidden> Xác nhận </button>
+                            <button type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>
                     </form>

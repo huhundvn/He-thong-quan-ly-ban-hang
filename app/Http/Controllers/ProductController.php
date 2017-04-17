@@ -61,8 +61,9 @@ class ProductController extends Controller
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
 			$product -> total_quantity = 0;
+			$product -> status = 0;
 			$product -> save();
-			return response()->json(['success' => trans('message.create_success')]);
+			return response()->json(['success' => ($product->id)]);
 		}
 	}
 
@@ -134,14 +135,6 @@ class ProductController extends Controller
 	}
 
 	/**
-	 * Tìm kiếm sản phẩm
-	 */
-	public function searchProduct($term)
-	{
-		return Product::where('name', 'LIKE', '%'. $term . '%') -> get();
-	}
-
-	/**
 	 * Nhập thông tin sản phẩm từ File Excel
 	 */
 	public function importFromFile(Request $request)
@@ -149,11 +142,9 @@ class ProductController extends Controller
 		// kiểm tra điều kiện nhập
 		$rules = [
 			'ten_san_pham' => 'required|unique:product,name',
-			'ma_vach' => 'required|unique:product,code',
+			'ma_vach' => 'unique:product,code',
 			'nha_san_xuat' => 'required',
 			'don_vi_tinh' => 'required',
-			'thoi_han_bao_hanh' => 'required',
-			'thoi_han_doi_tra' => 'required',
 		];
 
 		$count = 0;
@@ -205,6 +196,8 @@ class ProductController extends Controller
 					$product -> weight = $row -> khoi_luong;
 					$product -> size = $row -> kich_thuoc;;
 					$product -> volume = $row -> the_tich;
+					$product -> total_quantity = 0;
+					$product -> status = 0;
 					$saved = $product -> save();
 					if(!$saved)
 						continue;

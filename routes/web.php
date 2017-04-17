@@ -50,13 +50,23 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
 	Route::resource('product', 'ProductController'); //CRUD sản phẩm
 
+	Route::resource('product-attribute', 'ProductAttributeController'); //CRUD chi tiết thuộc tính
+	Route::get('/get-detail-product-attribute/{product_id}', 'ProductAttributeController@getDetail');
+
 	Route::resource('category', 'CategoryController'); //CRUD nhóm sản phẩm
 
 	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
 
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
 
-	Route::get('/detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail'); //CRUD chi tiết nhập kho
+	Route::resource('detail-input-store', 'DetailInputStoreController'); //CRUD chi tiết nhập kho
+	Route::get('/get-detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail');
+
+	Route::resource('price-output', 'PriceOutputController'); //CRUD bảng giá bán
+
+	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
+	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
+
 });
 
 // FRONT-END
@@ -105,6 +115,8 @@ Route::group(['middleware' => 'auth'], function (){
 
 	//THUỘC TÍNH SẢN PHẨM
 	Route::get('/list-attribute', 'AttributeController@listAttribute') -> name('list-attribute');
+	Route::post('/attribute/importFromFile', 'AttributeController@importFromFile') -> name('importAttributeFromFile');
+	Route::get('/download-attribute-template', 'AttributeController@downloadTemplate') -> name('downloadAttributeTemplate');
 
 	//SẢN PHẨM
 	Route::get('/list-product', 'ProductController@listProduct') -> name('list-product');
@@ -127,5 +139,9 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('/list-input-store', 'InputStoreController@listInputStore') -> name('list-input-store');
 	Route::get('/create-input-store', 'InputStoreController@createInputStore') -> name('createInputStore');
 	Route::get('/download-input-template', 'InputController@downloadTemplate') -> name('downloadInputStoreTemplate');
+
+	//BẢNG GIÁ BÁN
+	Route::get('/list-price-output', 'PriceOutputController@listPriceOutput') -> name('list-price-output');
+	Route::get('/create-price-output', 'PriceOutputController@createPriceOutput') -> name('createPriceOutput');
 
 });

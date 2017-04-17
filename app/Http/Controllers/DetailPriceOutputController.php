@@ -2,42 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailPriceOutput;
 use Illuminate\Http\Request;
-
-use App\DetailInputStore;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
-class DetailInputStoreController extends Controller
+class DetailPriceOutputController extends Controller
 {
-	// API lấy chi tiết đơn hàng
+	// API lấy chi tiết giá bán
 	public function index()
 	{
-		return DetailInputStore::all();
+		return DetailPriceOutput::all();
 	}
 
 	// API tạo chi tiết đơn hàng
 	public function store(Request $request)
 	{
 		$rules = [
+			'price_output_id' => 'required',
 			'id' => 'required',
-			'input_store_id' => 'required',
-			'expried_date' => 'required',
-			'quantity' => 'required',
-			'price' => 'required',
+			'price_output' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
 		if($validation->fails())
 			return $validation -> errors() -> all();
 		else {
-			$new = new DetailInputStore();
-			$new -> input_store_id = Input::get('input_store_id');
+			$new = new DetailPriceOutput();
+			$new -> price_output_id = Input::get('price_output_id');
 			$new -> product_id = Input::get('id');
-			$new -> expried_date = Input::get('expried_date');
-			$new -> quantity = Input::get('quantity');
-			$new -> price = Input::get('price');
+			$new -> price_output = Input::get('price_output');
 			$new -> save();
 		}
 		return response()->json(['success' => trans('message.create_success')]);
@@ -63,9 +58,9 @@ class DetailInputStoreController extends Controller
 	}
 
 	// Xem chi tiết đơn hàng
-	public function getDetail($inputStoreID)
+	public function getDetail($priceOutputID)
 	{
-		return DetailInputStore::join('product', 'detail_input_store.product_id', '=', 'product.id')
-			-> where('detail_input_store.input_store_id', '=', $inputStoreID) -> get();
+		return DetailPriceOutput::join('product', 'detail_price_output.product_id', '=', 'product.id')
+			-> where('detail_price_output.price_output_id', '=', $priceOutputID) -> get();
 	}
 }

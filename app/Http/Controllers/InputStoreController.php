@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\In;
 use Maatwebsite\Excel\Facades\Excel;
 
 //MODEL CSDL
@@ -47,8 +46,9 @@ class InputStoreController extends Controller
 			$new -> account_id = Input::get('account_id');
 			$new -> input_date = Input::get('input_date');
 			$new -> supplier_id = Input::get('supplier_id');
+			$new -> status = 1;
 			$new -> save();
-			return response()->json(['success' => trans('message.create_success')]);
+			return response()->json(['success' => ($new->id)]);
 		}
 	}
 

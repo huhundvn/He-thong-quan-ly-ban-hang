@@ -16,6 +16,10 @@ app.controller('ProductController', function($scope, $http, API) {
         $scope.manufacturers = response.data;
     });
 
+    $http.get(API + 'attribute').then(function (response) {
+        $scope.attributes = response.data;
+    });
+
     /**
      * Load danh sách sản phẩm
      */
@@ -27,8 +31,38 @@ app.controller('ProductController', function($scope, $http, API) {
     $scope.loadProduct();
 
     /**
-     * CRUD nhóm sản phẩm
+     * CRUD sản phẩm
      */
+    $scope.data = [];
+    // Thêm thuộc tính vào danh sách
+    $scope.addAttribute = function(selected) {
+        if($scope.data.indexOf(selected) == -1) {
+            $scope.data.push(selected);
+            toastr.info('Đã thêm một thuộc tính vào danh sách.');
+        } else
+            toastr.info('Thuộc tính đã có trong danh sách.');
+    };
+    // Xóa thuộc tính khỏi danh sách
+    $scope.deleteAttribute = function(selected) {
+        $scope.data.splice($scope.data.indexOf(selected), 1);
+        toastr.info('Đã xóa 1 thuộc tính khỏi danh sách.');
+    };
+
+    // Thêm thuộc tính cho sản phẩm
+    $scope.createAttributeForProduct = function (item) {
+        $http({
+            method : 'POST',
+            url : API + 'product-attribute',
+            data : item,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                console.log('1');
+            }
+        });
+    };
+
     $scope.createProduct = function () {
         if( CKEDITOR.instances.newDescription.getData() )
             $scope.new.description = CKEDITOR.instances.newDescription.getData();
@@ -42,7 +76,11 @@ app.controller('ProductController', function($scope, $http, API) {
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
-                toastr.success(response.data.success);
+                for (var i=0; i<$scope.data.length; i++) {
+                    $scope.data[i].product_id = response.data.success;
+                    $scope.createAttributeForProduct($scope.data[i]);
+                }
+                toastr.success('Đã thêm thành công.');
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadProduct();
             }
@@ -56,6 +94,9 @@ app.controller('ProductController', function($scope, $http, API) {
             $scope.selected = response.data;
             CKEDITOR.instances.description.setData($scope.selected.description);
             CKEDITOR.instances.user_guide.setData($scope.selected.user_guide);
+        });
+        $http.get(API + 'get-detail-product-attribute/' + product.id).then(function (response) {
+            $scope.detail = response.data;
         });
     };
 
@@ -98,6 +139,7 @@ app.controller('ProductController', function($scope, $http, API) {
     };
 
     $('#createProduct').on('hidden.bs.modal', function(){
+        $scope.data = [];
         $(this).find('form')[0].reset();
     });
 

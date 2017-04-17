@@ -19,11 +19,21 @@ app.controller('InputStoreController', function($scope, $http, API) {
         $scope.products = response.data;
     });
 
-    $http.get(API + 'input-store').then(function (response) {
-        $scope.inputStores = response.data;
+    $http.get(API + 'unit').then(function (response) {
+        $scope.units = response.data;
     });
 
-    //Load danh sách danh mục tài khoản
+    // Lấy danh sách nhóm sản phẩm
+    $http.get(API + 'category').then(function (response) {
+        $scope.categorys = response.data;
+    });
+
+    // Lấy danh sách nhà cung cấp
+    $http.get(API + 'manufacturer').then(function (response) {
+        $scope.manufacturers = response.data;
+    });
+
+    //Load danh sách nhập kho
     $scope.loadInputStore = function () {
         $http.get(API + 'input-store').then(function (response) {
             $scope.inputStores = response.data;
@@ -31,101 +41,118 @@ app.controller('InputStoreController', function($scope, $http, API) {
     };
     $scope.loadInputStore();
 
+
     /**
      * CRUD nhập kho
      */
-    $scope.createAccount = function () {
+
+    // Tạo nhập kho mới
+    $scope.data = [];
+    // Tạo sản phẩm mới
+    $scope.createProduct = function () {
+        if( CKEDITOR.instances.newDescription.getData() )
+            $scope.newProduct.description = CKEDITOR.instances.newDescription.getData();
+        if ( CKEDITOR.instances.newUserGuide.getData() )
+            $scope.newProduct.user_guide = CKEDITOR.instances.newUserGuide.getData();
         $http({
             method : 'POST',
-            url : API + 'account',
-            data : $scope.new,
+            url : API + 'product',
+            data : $scope.newProduct,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadAccount();
             }
             else
                 toastr.error(response.data[0]);
         });
     };
 
+    // Thêm sản phẩm vào danh sách
+    $scope.add = function(selected) {
+        if($scope.data.indexOf(selected) == -1) {
+            $scope.data.push(selected);
+            $("[data-dismiss=modal]").trigger({ type: "click" });
+            toastr.info('Đã thêm một sản phẩm vào danh sách.');
+        } else
+            toastr.info('Sản phẩm đã có trong danh sách.');
+    };
+
+    // Xóa sản phẩm khỏi danh sách
+    $scope.delete = function(selected) {
+        $scope.data.splice($scope.data.indexOf(selected), 1);
+        toastr.info('Đã xóa 1 sản phẩm khỏi danh sách.');
+    };
+
+    // Thêm chi tiết đơn hàng
+    $scope.createDetailInputStore = function (item) {
+        $http({
+            method : 'POST',
+            url : API + 'detail-input-store',
+            data : item,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                console.log('1');
+            }
+        });
+    };
+
+    // Tạo mới đơn đặt hàng
+    $scope.createInputStore = function () {
+        if($scope.data.length <= 0)
+            toastr.info('Vui lòng thêm sản phẩm');
+        else {
+            var check = true;
+            for (var i=0; i<$scope.data.length; i++) {
+                if($scope.data[i].price == null || $scope.data[i].expried_date == null) {
+                    check = false; break;
+                }
+            };
+            if (!check)
+                toastr.info('Vui lòng điền đủ giá nhập hoặc hạn sử dụng');
+            else {
+                $http({
+                    method : 'POST',
+                    url : API + 'input-store',
+                    data : $scope.info,
+                    cache : false,
+                    header : {'Content-Type':'application/x-www-form-urlencoded'}
+                }).then(function (response) {
+                    if(response.data.success) {
+                        for (var i=0; i<$scope.data.length; i++) {
+                            $scope.data[i].input_store_id = response.data.success;
+                            $scope.createDetailInputStore($scope.data[i]);
+                        }
+                        toastr.success('Đã thêm thành công.');
+                    } else
+                        toastr.error(response.data[0]);
+                });
+            }
+        }
+    };
+
+
+    // Xem danh sách nhập kho
     $scope.readInputStore = function (inputStore) {
         $http.get(API + 'input-store/' + inputStore.id).then(function (response) {
             $scope.selected = response.data;
         });
-        $http.get(API + 'detail-input-store/' + inputStore.id).then(function (response) {
-            $scope.data = response.data;
-        });
-    };
-
-    $scope.updateAccount = function () {
-        $http({
-            method : 'PUT',
-            url : API + 'account/' + $scope.selected.id,
-            data : $scope.selected,
-            cache : false,
-            header : {'Content-Type':'application/x-www-form-urlencoded'}
-        }).then(function (response) {
-            if(response.data.success) {
-                toastr.success(response.data.success);
-                $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadAccount();
-            }
-            else
-                toastr.error(response.data[0]);
-        });
-    };
-
-    $scope.deleteAccount = function () {
-        $http({
-            method : 'DELETE',
-            url : API + 'account/' + $scope.selected.id,
-            cache : false,
-            header : {'Content-Type':'application/x-www-form-urlencoded'}
-        }).then(function (response) {
-            if(response.data.success) {
-                toastr.success(response.data.success);
-                $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadAccount();
-            } else
-                toastr.error(response.data[0]);
+        $http.get(API + 'get-detail-input-store/' + inputStore.id).then(function (response) {
+            $scope.detail = response.data;
         });
     };
 
     $scope.options = {
         numeral: {
             numeral: true
+        },
+        code: {
+            blocks: [1, 3, 3, 3, 3],
+            delimiters: ['-']
         }
     };
-
-    $('#createAccount').on('hidden.bs.modal', function(){
-        $(this).find('form')[0].reset();
-    });
-
-    $('#readAccount').on('show.bs.modal', function (event) {
-        var modal = $(this);
-        modal.find('.modal-title').text('Xem thông tin tài khoản');
-        modal.find('.modal-title').removeClass('w3-text-green');
-        modal.find('.modal-title').addClass('w3-text-blue');
-        modal.find('#name').attr('readOnly', true);
-        modal.find('#bank_account').attr('readOnly', true);
-        modal.find('#bank').attr('readOnly', true);
-        modal.find('#total').attr('readOnly', true);
-        modal.find('#submit').hide();
-        modal.find('#updateAccount').show();
-        modal.find('#updateAccount').click(function () {
-            modal.find('.modal-title').text('Sửa thông tin tài khoản');
-            modal.find('.modal-title').removeClass('w3-text-blue');
-            modal.find('.modal-title').addClass('w3-text-green');
-            modal.find('#name').removeAttr('readOnly');
-            modal.find('#bank_account').removeAttr('readOnly');
-            modal.find('#bank').removeAttr('readOnly');
-            modal.find('#total').removeAttr('readOnly');
-            modal.find('#updateAccount').hide();
-            modal.find('#submit').show();
-        });
-    });
 });
