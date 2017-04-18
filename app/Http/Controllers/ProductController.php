@@ -216,4 +216,10 @@ class ProductController extends Controller
 	{
 		return response() -> download(public_path().'/template/san pham.xlsx');
 	}
+
+	// Upload Image
+	public function uploadImage(Request $request)
+	{
+
+	}
 }

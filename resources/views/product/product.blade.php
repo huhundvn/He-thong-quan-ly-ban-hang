@@ -13,25 +13,25 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-4 col-md-6">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
-                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
+                     Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-2 col-xs-4">
+            <div class="col-lg-2 col-md-2">
                 <input ng-model="term1.name" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
             </div>
-            <div class="col-lg-2 col-xs-4">
+            <div class="col-lg-2 col-md-2">
                 <select ng-model="term2.status" class="form-control input-sm">
                     <option value="" selected> -- Tất cả -- </option>
                     <option value="1"> Còn hàng </option>
                     <option value="0"> Hết hàng </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 col-md-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{products.length}} mục </button>
             </div>
         </div>
@@ -256,11 +256,14 @@
                                     <div class="form-group">
                                         <label class="col-sm-3"> Hình ảnh</label>
                                         <div class="col-sm-9">
-                                            <form id="my-dropzone" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
+                                            <form id="my-dropzone" method="post" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
                                                     <strong> nhấn vào đây </strong>
                                                 </div>
+                                                {{--<div class="fallback">--}}
+                                                    <input name="file" type="file">
+                                                {{--</div>--}}
                                             </form>
                                         </div>
                                     </div>
@@ -456,14 +459,9 @@
                                     <div class="form-group" ng-show="detail.length > 0"
                                          dir-paginate="item in detail | itemsPerPage: 2" pagination-id="attribute">
                                         <label class="col-sm-3"> @{{item.name}} </label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-9">
                                             <input ng-model="item.description" type="text" class="form-control input-sm"
                                                    placeholder="Nhập mô tả...">
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <button class="btn btn-sm btn-danger" ng-click="deleteAttribute(item)">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -492,7 +490,6 @@
                 </div>
             </div>
         </div>
-
 
         {{-- !NHẬP TỪ FILE! --}}
         <div class="modal fade" id="inputFromFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

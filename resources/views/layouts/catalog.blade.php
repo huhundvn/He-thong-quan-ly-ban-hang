@@ -73,7 +73,6 @@
                     <a href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
                     <a href="{{route('list-input-store')}}" class="list-group-item"> Nhập hàng </a>
                     <a href="#" class="list-group-item"> Xuất kho </a>
-                    <a href="#" class="list-group-item"> Điều chỉnh kho </a>
                     <a href="#" class="list-group-item"> Chuyển kho </a>
                 </div>
             </div>
@@ -90,8 +89,7 @@
             <div id="collapse5" class="panel-collapse collapse">
                 <div class="list-group">
                     <a href="{{route('list-account')}}" class="list-group-item"> Danh sách tài khoản </a>
-                    <a href="#" class="list-group-item"> Khoản thu </a>
-                    <a href="#" class="list-group-item"> Khoản chi </a>
+                    <a href="{{route('list-voucher')}}" class="list-group-item"> Khoản thu/chi </a>
                 </div>
             </div>
         </div>

@@ -125,7 +125,7 @@ Route::group(['middleware' => 'auth'], function (){
 	//SẢN PHẨM
 	Route::get('/list-product', 'ProductController@listProduct') -> name('list-product');
 	Route::post('/product/importFromFile', 'ProductController@importFromFile') -> name('importProductFromFile');
-	Route::post('/product/upload-image', 'ProductController@uploadImage') -> name('uploadImage');
+	Route::post('/upload-image', 'ProductController@uploadImage') -> name('uploadImage');
 	Route::get('/download-product-template', 'ProductController@downloadTemplate') -> name('downloadProductTemplate');
 
 	//SẢN PHẨM TRONG KHO
@@ -150,5 +150,8 @@ Route::group(['middleware' => 'auth'], function (){
 	//BẢNG GIÁ BÁN
 	Route::get('/list-price-output', 'PriceOutputController@listPriceOutput') -> name('list-price-output');
 	Route::get('/create-price-output', 'PriceOutputController@createPriceOutput') -> name('createPriceOutput');
+
+	//PHIẾU THU, CHI
+	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher');
 
 });

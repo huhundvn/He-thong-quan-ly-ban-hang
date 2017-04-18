@@ -88,6 +88,11 @@
         function w3_close() {
             mySidebar.style.display = "none";
         }
+
+        toastr.options = {
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+        }
     </script>
 
 </body>

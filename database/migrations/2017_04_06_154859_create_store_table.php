@@ -20,6 +20,7 @@ class CreateStoreTable extends Migration
 		    $table->string('address') -> nullable();
 		    $table->string('phone') -> nullable();
 		    $table->integer('managed_by') -> nullable();
+		    $table->integer('store_id') -> nullable();
 		    $table->tinyInteger('type') -> nullable();
 		    $table->tinyInteger('status') -> nullable();
 		    $table->timestamps();
