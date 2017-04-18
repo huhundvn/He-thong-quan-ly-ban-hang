@@ -3,7 +3,7 @@
     <!-- hiển thị thông tin người dùng đăng nhập -->
     <div class="w3-container w3-row" align="center">
         <a href="{{route('home')}}">
-            <img src="{{asset('icon_logo.png')}}" class="w3-circle w3-margin-right" height="50px">
+            <img src="{{asset('icon_logo.png')}}" class="w3-circle w3-margin-right" height="100px">
         </a>
     </div>
     <br/>
@@ -70,6 +70,7 @@
             <div id="collapse4" class="panel-collapse collapse">
                 <div class="list-group">
                     <a href="{{route('list-store')}}" class="list-group-item"> Danh sách kho </a>
+                    <a href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
                     <a href="{{route('list-input-store')}}" class="list-group-item"> Nhập hàng </a>
                     <a href="#" class="list-group-item"> Xuất kho </a>
                     <a href="#" class="list-group-item"> Điều chỉnh kho </a>

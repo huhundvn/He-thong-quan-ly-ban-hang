@@ -2,7 +2,7 @@
     <button class="w3-bar-item w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open()">
         <span class="glyphicon glyphicon-align-justify"></span>
     </button>
-    <a class="w3-button w3-hover-none w3-hover-text-light-grey"> Larose </a>
+    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-hide-large"> Larose </a>
 
     {{-- Nếu là nhân viên hiện chức năng --}}
     @if(!Auth::guest())

@@ -13,12 +13,20 @@
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-2 col-xs-2">
                 <a href="{{route('createPriceOutput')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
+                <input type="text" ng-model="term" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.status" class="form-control input-sm">
+                    <option value="" selected> -- Trạng thái -- </option>
+                    <option value="1"> Chờ duyệt </option>
+                    <option value="0"> Đã từ chối </option>
+                    <option value="2"> Áp dụng </option>
+                </select>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{priceOutputs.length}} mục </button>
@@ -37,28 +45,35 @@
         {{-- DANH SÁCH BẢNG GIÁ --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-            <th> STT </th>
+            <th> Mã </th>
             <th> Tên bảng giá </th>
             <th> Ngày bắt đầu </th>
             <th> Ngày kết thúc </th>
             <th> Trạng thái </th>
+            <th> Duyệt </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="priceOutputs.length > 0" class="item"
-                dir-paginate="priceOutput in priceOutputs | filter:term | itemsPerPage: 7" ng-click="readPriceOutput(priceOutput)">
-                <td> @{{$index + 1}} </td>
+                dir-paginate="priceOutput in priceOutputs | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readPriceOutput(priceOutput)">
+                <td data-toggle="modal" data-target="#readPriceOutput"> BGBH-@{{ priceOutput.id }} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.name }} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.start_date | date: "dd/MM/yyyy"}} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.end_date | date: "dd/MM/yyyy"}} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput">
-                    <p ng-show="0==priceOutput.status"> Không áp dụng </p>
+                    <p ng-show="0==priceOutput.status"> Đã từ chối </p>
                     <p ng-show="1==priceOutput.status"> Chờ duyệt </p>
                     <p ng-show="2==priceOutput.status"> Áp dụng </p>
                 </td>
                 <td>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changePriceOutput">
                         <span class="glyphicon glyphicon-hand-up"></span>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger btn-sm" ng-show="0==priceOutput.status"
+                            data-toggle="modal" data-target="#deletePriceOutput">
+                        <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>
@@ -69,12 +84,12 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%; bottom:0; position: fixed;">
+        <div style="margin-left: 45%">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 
         {{-- Xem biểu mẫu --}}
-        <div class="modal fade" id="readPriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="readPriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form enctype="multipart/form-data" action="" method="post"> {{csrf_field()}}
@@ -82,6 +97,24 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Biểu mẫu </h4>
                         </div>
+                        <div id="print-content">
+                            <style>
+                                @media print {
+                                    body * {
+                                        visibility: hidden;
+                                    }
+                                    #print-content * {
+                                        visibility: visible;
+                                    }
+                                    .modal{
+                                        position: absolute;
+                                        left: 0;
+                                        top: 0;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
+                                }
+                            </style>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-sm-8">
@@ -95,24 +128,25 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h2 align="center"> <b> Bảng giá bán </b> </h2>
+                                <h1 align="center"> <b> Bảng giá bán </b> </h1>
                                 <hr/>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     Ngày bắt đầu: @{{ selected.start_date | date: "dd/MM/yyyy"}} <br/>
                                     Ngày kết thúc : @{{ selected.end_date | date: "dd/MM/yyyy" }} <br/>
-                                    <div ng-repeat="customerGroup in customerGroups" ng-show="customerGroup.id==selected.customer_group_id">
-                                        Áp dụng cho: @{{customerGroup.name}}
-                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     Tên bảng giá: @{{ selected.name }}<br/>
+                                    <div ng-repeat="customerGroup in customerGroups" ng-show="customerGroup.id==selected.customer_group_id">
+                                        Áp dụng cho: @{{customerGroup.name}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12"> Ghi chú: </div>
                             </div>
+                            <h1></h1>
                             <div class="row">
                                 <table class="w3-table table-bordered w3-centered">
                                     <thead>
@@ -149,12 +183,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal"> Đóng </button>
+                        <div class="modal-footer hidden-print">
+                            <button type="button" class="btn btn-success btn-sm" ng-click="print()">
+                                <span class="glyphicon glyphicon-print"></span> In
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"> Đóng </button>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
         </div>
 
         {{-- THAY ĐỔI TRẠNG THÁI BẢNG GIÁ --}}
@@ -164,28 +202,47 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Xác nhận đơn hàng </h4>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Duyệt bảng giá </h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label class="col-sm-3"> Trạng thái </label>
                                 <div class="col-sm-9">
-                                    <select ng-model="changeStatus" class="form-control">
-                                        <option value=""> -- Trạng thái -- </option>
-                                        <option value="1"> Không duyệt </option>
-                                        <option value="2"> Áp dụng </option>
+                                    <select ng-model="newStatus" class="form-control input-sm" required>
+                                        <option value="" selected> -- Trạng thái -- </option>
+                                        <option value="0"> Không duyệt bảng giá </option>
+                                        <option value="2"> Áp dụng bảng giá </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button ng-click="" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button ng-click="changeStatus()" type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+
+    {{-- XÓA BẢNG GIÁ--}}
+    <div class="modal fade" id="deletePriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title w3-text-red" id="myModalLabel"> Xóa bảng giá </h4>
+                </div>
+                <div class="modal-body">
+                    Bạn thực sự muốn xóa bảng giá này?
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="deletePriceOutput()" type="submit" class="btn btn-danger"> Xác nhận </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Hủy </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </div>
 @endsection

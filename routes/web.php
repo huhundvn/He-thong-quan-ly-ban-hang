@@ -50,6 +50,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
 	Route::resource('product', 'ProductController'); //CRUD sản phẩm
 
+	Route::resource('product-in-store', 'ProductInStoreController'); //CRUD sản phẩm trong kho
+
 	Route::resource('product-attribute', 'ProductAttributeController'); //CRUD chi tiết thuộc tính
 	Route::get('/get-detail-product-attribute/{product_id}', 'ProductAttributeController@getDetail');
 
@@ -58,11 +60,13 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
 
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
+	Route::get('/confirm-input-store/{input_store_id}/{status}', 'InputStoreController@confirm');
 
 	Route::resource('detail-input-store', 'DetailInputStoreController'); //CRUD chi tiết nhập kho
 	Route::get('/get-detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail');
 
 	Route::resource('price-output', 'PriceOutputController'); //CRUD bảng giá bán
+	Route::get('/confirm-price-output/{price_output_id}/{status}', 'PriceOutputController@confirm');
 
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
@@ -123,6 +127,9 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::post('/product/importFromFile', 'ProductController@importFromFile') -> name('importProductFromFile');
 	Route::post('/product/upload-image', 'ProductController@uploadImage') -> name('uploadImage');
 	Route::get('/download-product-template', 'ProductController@downloadTemplate') -> name('downloadProductTemplate');
+
+	//SẢN PHẨM TRONG KHO
+	Route::get('/list-product-in-store', 'ProductInStoreController@listProductInStore') -> name('list-product-in-store');
 
 	//NHÓM SẢN PHẨM
 	Route::post('/category/importFromFile', 'CategoryController@importFromFile') -> name('importCategoryFromFile');

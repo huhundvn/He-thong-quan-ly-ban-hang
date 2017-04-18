@@ -108,6 +108,43 @@ app.controller('PriceOutputController', function($scope, $http, API) {
         });
     };
 
+    // Duyệt bảng giá
+    $scope.changeStatus = function () {
+        console.log($scope.newStatus, $scope.selected.id);
+        $http.get(API + 'confirm-price-output/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadPriceOutput();
+            } else
+                toastr.error(response.data[0]);
+        });
+    }
+
+    // Xóa bảng giá
+    $scope.deletePriceOutput = function () {
+        $http({
+            method : 'DELETE',
+            url : API + 'price-output/' + $scope.selected.id,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadPriceOutput();
+            } else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    // In biểu mẫu
+    $scope.print = function () {
+        window.print();
+    }
+
+
+
     $scope.options = {
         numeral: {
             numeral: true

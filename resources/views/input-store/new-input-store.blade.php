@@ -14,7 +14,7 @@
         {{-- Thông tin nhập--}}
         <div class="row">
             <div class="col-sm-3">
-                <label> Mgày nhập dự kiến </label>
+                <label> Ngày nhập dự kiến </label>
                 <input ng-model="info.input_date" type="date" class="form-control input-sm">
             </div>
             <div class="col-sm-3">

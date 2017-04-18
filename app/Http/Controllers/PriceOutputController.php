@@ -81,6 +81,15 @@ class PriceOutputController extends Controller
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 
+	// API xác nhận bảng giá
+	public function confirm($id, $status)
+	{
+		$selected = PriceOutput::find($id);
+		$selected -> status = $status;
+		$selected -> save();
+		return response()->json(['success' => trans('message.update_success')]);
+	}
+
 	// Xem danh sách bảng giá
 	public function listPriceOutput()
 	{

@@ -13,7 +13,7 @@
 
         {{-- !TÌM KIẾM KHO / CỬA HÀNG!--}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-4 col-xs-4">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createStore">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -21,8 +21,22 @@
                 <a href="{{route('downloadStoreTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên kho...">
+            <div class="col-lg-2 col-xs-2">
+                <input ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên kho...">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.type" class="form-control input-sm">
+                    <option value="" selected> -- Loại -- </option>
+                    <option value="1"> Cửa hàng </option>
+                    <option value="0"> Kho </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term3.status" class="form-control input-sm">
+                    <option value="" selected> -- Trạng thái -- </option>
+                    <option value="1"> Hoạt động </option>
+                    <option value="0"> Dừng hoạt động </option>
+                </select>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{stores.length}} mục </button>
@@ -50,7 +64,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="stores.length > 0" dir-paginate="store in stores | filter:term | itemsPerPage: 7" ng-click="readStore(store)">
+            <tr class="item" ng-show="stores.length > 0" dir-paginate="store in stores | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readStore(store)">
                 <td data-toggle="modal" data-target="#readStore"> @{{ $index+1 }} </td>
                 <td data-toggle="modal" data-target="#readStore"> @{{ store.name }} </td>
                 <td data-toggle="modal" data-target="#readStore"> @{{ store.address }}</td>
@@ -64,7 +78,7 @@
                     <p ng-show="store.status==0"> Dừng hoạt động </p>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteStore">
+                    <button  ng-show="0==store.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteStore">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
@@ -76,7 +90,7 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%; bottom:0; position: fixed;">
+        <div style="margin-left: 40%">
             <dir-pagination-controls></dir-pagination-controls>
         </div>
 
@@ -131,7 +145,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group" ng-show="1 == newStore.type">
+                            <div class="form-group" ng-show="1 == new.type">
                                 <label class="col-sm-3"> Kho hàng </label>
                                 <div class="col-sm-9">
                                     <select ng-model="new.store_id" class="form-control input-sm">
@@ -226,7 +240,7 @@
                                 <div class="col-sm-9">
                                     <select id="storage" ng-model="selected.store_id" class="form-control input-sm">
                                         <option value=""> --Không chọn-- </option>
-                                        <option ng-repeat="storage in storages" ng-selected="storage.id === selectedStore.store_id" value="@{{storage.id}}"> @{{storage.name}} </option>
+                                        <option ng-repeat="storage in storages" ng-selected="storage.id === selected.store_id" value="@{{storage.id}}"> @{{storage.name}} </option>
                                     </select>
                                 </div>
                             </div>

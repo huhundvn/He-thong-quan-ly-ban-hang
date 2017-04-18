@@ -28,7 +28,7 @@ class StoreController extends Controller
 	    $rules = [
 		    'name' => 'required|distinct',
 		    'email' => 'required|email|distinct',
-		    'phone' => 'required|min:10',
+		    'phone' => 'required',
 		    'address' => 'required',
 		    'type' => 'required',
 	    ];

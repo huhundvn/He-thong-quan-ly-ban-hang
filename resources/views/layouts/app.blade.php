@@ -11,10 +11,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/angucomplete.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
-
     <style>
         a {
             color: black;
@@ -24,9 +22,10 @@
             color: white;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 
-<body>
+<body ng-cloak>
     @include('layouts/header')
     <!-- if guest then display login -->
     @if(Auth::guest())
@@ -38,7 +37,7 @@
         <!-- !NỘI DUNG CHÍNH! -->
         <div id="main" class="w3-main" style="margin-left:200px; padding: 10px">
             <ol class="breadcrumb w3-animate-zoom w3-blue-grey ">
-                <li class="breadcrumb-item"><a href="{{route('home')}}"> Trang chủ </a></li>
+                <li class="breadcrumb-item"><a href="{{route('home')}}" style="color: white"> Trang chủ </a></li>
                 @yield('location')
             </ol>
             @yield('content')
@@ -52,14 +51,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
     <!-- Scripts -->
     <script src="{{ asset('angularJS/dirPagination.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-phone.vn.js') }}"></script>
-    <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
     <script src="{{ asset('angularJS/Config.js') }}"> </script>
     @yield('script')
     <script>

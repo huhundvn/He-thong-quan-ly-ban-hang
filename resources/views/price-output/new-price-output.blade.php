@@ -45,7 +45,7 @@
             </div>
             <div class="col-lg-3 col-xs-3">
                 <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
-                <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
+                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
             </div>
             <div class="col-lg-3 col-xs-3">
 

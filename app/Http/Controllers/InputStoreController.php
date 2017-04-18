@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,8 +14,7 @@ use App\Category;
 use App\Manufacturer;
 use App\Unit;
 use App\InputStore;
-
-use Carbon\Carbon;
+use App\ProductInStore;
 
 class InputStoreController extends Controller
 {
@@ -42,6 +42,7 @@ class InputStoreController extends Controller
 			return $validation -> errors() -> all();
 		else {
 			$new = new InputStore();
+			$new -> created_by = Auth::user() -> id;
 			$new -> store_id = Input::get('store_id');
 			$new -> account_id = Input::get('account_id');
 			$new -> input_date = Input::get('input_date');
@@ -77,12 +78,43 @@ class InputStoreController extends Controller
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 
+	// API xác nhận đơn hàng
+	public function confirm($id, $status)
+	{
+		$selected = InputStore::find($id);
+		$selected -> status = $status;
+		$selected -> save();
+		// Nhập hàng vao kho, cập nhật số lượng
+		if($status==3) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
+			$rows = InputStore::join('detail_input_store', 'detail_input_store.input_store_id', '=', 'input_store.id')
+				-> where('input_store.id', '=', $id)
+				-> get(); //Lây chi tiết danh sách các mặt hàng cần nhập
+			foreach ($rows as $row) {
+				// Cập nhật tổng số lượng sản phẩm cả hệ thống
+				$update = Product::find($row->product_id);
+				$update -> total_quantity += $row -> quantity;
+				$update -> status = 1;
+				$update -> save();
+				// Cập nhật hàng trong kho tương ứng
+				$update2 = new ProductInStore();
+				$update2 -> product_id = $row -> product_id;
+				$update2 -> store_id = $row -> store_id;
+				$update2 -> supplier_id = $row -> supplier_id;
+				$update2 -> quantity = $row -> quantity;
+				$update2 -> price = $row -> price;
+				$update2 -> expried_date = $row -> expried_date;
+				$update2 -> save();
+			}
+		}
+		return response()->json(['success' => trans('message.update_success')]);
+	}
+
 	/**
 	 * Xem danh sách đơn đặt hàng
 	 */
 	public function listInputStore()
 	{
-		return view('input-store.history-input-store');
+		return view('input-store.input-store');
 	}
 
 	/**
@@ -91,54 +123,5 @@ class InputStoreController extends Controller
 	public function createInputStore()
 	{
 		return view('input-store.new-input-store');
-	}
-
-	/**
-	 * Nhập thông tin sản phẩm từ File Excel
-	 */
-	public function importFromFile(Request $request)
-	{
-		// kiểm tra điều kiện nhập
-		$rules = [
-			'ten_san_pham' => 'required',
-			'ma_vach' => 'required',
-		];
-
-		if(Input::hasFile('file')) {
-			$rows =  Excel::load(Input::file('file'), function ($reader){
-			},'UTF-8') -> get();
-			foreach ($rows as $row) {
-				$validation = Validator::make($row->toArray(), $rules);
-				if($validation->fails())
-					continue;
-				else {
-					$product = new Product();
-					$product -> name = $row -> ten_san_pham;
-					$product -> code = $row -> ma_vach;
-					$product -> category_id = Category::where('name', '=', $row -> nhom_san_pham)->pluck('id')->first();
-					$product -> manufacturer_id = Manufacturer::where('name', '=', $row -> nha_san_xuat)->pluck('id')->first();
-					$product -> unit_id = Unit::where('name', '=', $row -> nhom_san_pham) -> pluck('id')->first();
-					$product -> min_inventory = $row -> ton_kho_toi_thieu;
-					$product -> max_inventory = $row -> ton_kho_toi_da;
-					$product -> warranty_period = $row -> thoi_han_bao_hanh;
-					$product -> return_period = $row -> thoi_han_doi_tra;
-					$product -> weight = $row -> khoi_luong;
-					$product -> size = $row -> kich_thuoc;;
-					$product -> volume = $row -> the_tich;
-					$saved = $product -> save();
-					if(!$saved)
-						continue;
-				}
-			}
-		}
-		return redirect()->route('list-product');
-	}
-
-	/**
-	 * Download mẫu nhập
-	 */
-	public function downloadTemplate()
-	{
-		return response() -> download(public_path().'/template/san pham.xlsx');
 	}
 }

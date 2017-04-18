@@ -71,7 +71,7 @@
                     <p ng-show="product.status == 0"> Hết hàng </p>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct">
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct" ng-show="0==product.status">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>

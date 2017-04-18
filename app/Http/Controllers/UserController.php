@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::where('name', '<>', 'admin') -> get();
+        return User::all();
     }
 
     /**

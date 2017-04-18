@@ -3,6 +3,10 @@
  */
 app.controller('InputStoreController', function($scope, $http, API) {
 
+    $http.get(API + 'user').then(function (response) {
+        $scope.users = response.data;
+    });
+
     $http.get(API + 'store').then(function (response) {
         $scope.stores = response.data;
     });
@@ -143,6 +147,40 @@ app.controller('InputStoreController', function($scope, $http, API) {
         });
         $http.get(API + 'get-detail-input-store/' + inputStore.id).then(function (response) {
             $scope.detail = response.data;
+        });
+    };
+
+    // In biểu mẫu
+    $scope.print = function () {
+        window.print();
+    }
+
+    // Duyệt yêu cầu nhập hàng
+    $scope.changeStatus = function () {
+        $http.get(API + 'confirm-input-store/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadInputStore();
+            } else
+                toastr.error(response.data[0]);
+        });
+    }
+
+    // Xóa bảng giá
+    $scope.deleteInputStore = function () {
+        $http({
+            method : 'DELETE',
+            url : API + 'input-store/' + $scope.selected.id,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadInputStore();
+            } else
+                toastr.error(response.data[0]);
         });
     };
 
