@@ -1,11 +1,6 @@
 <!-- Danh sách các chức năng hệ thống -->
 <div class="w3-sidebar w3-collapse w3-animate-left w3-border-right" id="mySidebar" style="padding: 5px;"><br>
     <!-- hiển thị thông tin người dùng đăng nhập -->
-    <div class="w3-container w3-row" align="center">
-        <a href="{{route('home')}}">
-            <img src="{{asset('icon_logo.png')}}" class="w3-circle w3-margin-right" height="100px">
-        </a>
-    </div>
     <br/>
 
     <div class="panel-group" id="accordion">

@@ -12,7 +12,7 @@ use App\Voucher;
 
 class VoucherController extends Controller
 {
-	// API lấy danh sách đơn vị tính
+	// API lấy danh sách phiếu thu, chi
 	public function index()
 	{
 		return Voucher::all();
@@ -29,10 +29,15 @@ class VoucherController extends Controller
 		if($validation->fails())
 			return $validation -> errors() -> all();
 		else {
-			$unit = new Unit();
-			$unit -> name = Input::get('name');
-			$unit -> description = Input::get('description');
-			$unit -> save();
+			$new = new Voucher();
+			$new -> account_id = Input::get('account_id');
+			$new -> store_id = Input::get('store_id');
+			$new -> receiver_name = Input::get('receiver_name');
+			$new -> description = Input::get('description');
+			$new -> total = Input::get('total');
+			$new -> total_in_words = Input::get('total_in_words');
+			$new -> type = Input::get('type');
+			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);
 		}
 	}
@@ -54,18 +59,23 @@ class VoucherController extends Controller
 		if($validation->fails())
 			return $validation -> errors() -> all();
 		else {
-			$unit = Unit::find($id);
-			$unit -> name = Input::get('name');
-			$unit -> description = Input::get('description');
-			$unit -> save();
-			return response()->json(['success' => trans('message.create_success')]);
+			$new = Voucher::find($id);
+			$new -> account_id = Input::get('account_id');
+			$new -> store_id = Input::get('store_id');
+			$new -> receiver_name = Input::get('receiver_name');
+			$new -> description = Input::get('description');
+			$new -> total = Input::get('total');
+			$new -> total_in_words = Input::get('total_in_words');
+			$new -> type = Input::get('type');
+			$new -> save();
+			return response()->json(['success' => trans('message.update_success')]);
 		}
 	}
 
 	// API xóa thông tin phiếu
 	public function destroy($id)
 	{
-		$unit = Unit::find($id) -> delete();
+		$unit = Voucher::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 

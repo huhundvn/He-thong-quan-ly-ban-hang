@@ -26,6 +26,33 @@ Route::get('/lang/{locale}', array(
     'uses' => 'LanguageController@change'
 ));
 
+/**
+ * CRUD order
+ */
+//Route::resource('orders', 'OrderController');
+//Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
+//Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
+///**
+// * CRUD order details
+// */
+//Route::resource('order-details', 'OrderDetailController');
+//Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
+//Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
+///**
+// * CRUD cart
+// */
+//Route::resource('carts', 'CartController');
+//Route::get('/carts/{customer_id}/customers', 'CartController@listCartByCustomerId')->name('listCartByCustomerId');
+//Route::put('/carts/{customer_id}/{product_id}', 'CartController@updateCartByCustomerId');
+//Route::delete('/carts/{customer_id}/customer', 'CartController@deleteCartByCustomerId');
+//
+///**
+// * CRUD review
+// */
+//Route::resource('reviews', 'ReviewController');
+//Route::get('/reviews/{product_id}/product', 'ReviewController@listReviewByProductId');
+
+
 //API ROUTES
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
@@ -70,6 +97,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
+
+	Route::resource('voucher', 'VoucherController'); //CRUD phiếu nhập, phiếu thu
+	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
 });
 

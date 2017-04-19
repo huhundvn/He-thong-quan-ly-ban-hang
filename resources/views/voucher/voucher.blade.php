@@ -1,24 +1,27 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Danh sách bảng giá
+    Larose | Danh sách phiếu
 @endsection
 
 @section('location')
-    <li> Danh sách bảng giá </li>
+    <li> Kế toán </li>
+    <li> Danh sách phiếu </li>
 @endsection
 
 @section('content')
-    <div ng-controller="PriceOutputController">
+    <div ng-controller="VoucherController">
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
-                <a href="{{route('createPriceOutput')}}" class="btn btn-sm btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
+            <div class="col-lg-4 col-xs-2">
+                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createVoucher">
+                    Phiếu thu mới </button>
+                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createPaymentVoucher">
+                    Phiếu chi mới </button>
             </div>
             <div class="col-lg-4 col-xs-4">
-                <input type="text" ng-model="term" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
+                <input type="text" ng-model="term" class="form-control input-sm" placeholder="Nhập mã phiếu ...">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term2.status" class="form-control input-sm">
@@ -42,7 +45,7 @@
             </div>
         @endif
 
-        {{-- DANH SÁCH BẢNG GIÁ --}}
+        {{-- DANH SÁCH PHIẾU THU/CHI--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> Mã </th>
@@ -55,12 +58,12 @@
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="priceOutputs.length > 0" class="item"
-                dir-paginate="priceOutput in priceOutputs | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readPriceOutput(priceOutput)">
-                <td data-toggle="modal" data-target="#readPriceOutput"> BGBH-@{{ priceOutput.id }} </td>
-                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.name }} </td>
-                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.start_date | date: "dd/MM/yyyy"}} </td>
-                <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.end_date | date: "dd/MM/yyyy"}} </td>
+            <tr ng-show="vouchers.length > 0" class="item"
+                dir-paginate="voucher in vouchers | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readVoucher(voucher)">
+                <td data-toggle="modal" data-target="#readVoucher"> BGBH-@{{ voucher.id }} </td>
+                <td data-toggle="modal" data-target="#readVoucher"> @{{ voucher.name }} </td>
+                <td data-toggle="modal" data-target="#readVoucher"> @{{ voucher.start_date | date: "dd/MM/yyyy"}} </td>
+                <td data-toggle="modal" data-target="#readVoucher"> @{{ voucher.end_date | date: "dd/MM/yyyy"}} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput">
                     <p ng-show="0==priceOutput.status"> Đã từ chối </p>
                     <p ng-show="1==priceOutput.status"> Chờ duyệt </p>
@@ -78,8 +81,8 @@
                     </button>
                 </td>
             </tr>
-            <tr class="item" ng-show="priceOutputs.length==0">
-                <td colspan="6"> Không có dữ liệu </td>
+            <tr class="item" ng-show="vouchers.length==0">
+                <td colspan="8"> Không có dữ liệu </td>
             </tr>
             </tbody>
         </table>
@@ -89,8 +92,126 @@
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 
-    {{-- Xem biểu mẫu --}}
-    <div class="modal fade" id="readPriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        {{-- THÊM PHIẾU THU, PHIẾU CHI MỚI! --}}
+        <div class="modal fade" id="createVoucher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form id="createUserForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm phiếu thu </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3"> Người nhận </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.created_by" type="text" class="form-control input-sm"
+                                           placeholder="{{Auth::user()->name}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Người nộp tiền </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.receiver" type="text" class="form-control input-sm"
+                                           placeholder="Nhập tên người nộp tiền...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3">Địa chỉ </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm"
+                                           placeholder="Nhập địa chỉ...">
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Số tiền </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm"
+                                           placeholder="Nhập địa chỉ...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Lý do thu </label>
+                                <div class="col-sm-9">
+                                    <textarea ng-model="new.address" class="form-control input-sm"> </textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="createUser()" type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal fade" id="createPaymentVoucher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form id="createUserForm" class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm phiếu chi </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3"> Người chi </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.created_by" type="text" class="form-control input-sm"
+                                           placeholder="{{Auth::user()->name}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Tài khoản </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.receiver" type="text" class="form-control input-sm"
+                                           placeholder="Nhập tên người nộp tiền...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Người nhận </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.receiver" type="text" class="form-control input-sm"
+                                           placeholder="Nhập tên người nộp tiền...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Địa chỉ </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm"
+                                           placeholder="Nhập địa chỉ...">
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Số tiền </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="new.address" type="text" class="form-control input-sm"
+                                           placeholder="Nhập địa chỉ...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Lý do thu </label>
+                                <div class="col-sm-9">
+                                    <textarea ng-model="new.address" class="form-control input-sm"> </textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="createUser()" type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    {{-- XEM BIỂU MẪU --}}
+    <div class="modal fade" id="readVoucher" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                         <div class="modal-header">
@@ -128,7 +249,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h1 align="center"> <b> Bảng giá bán </b> </h1>
+                                    <h1 align="center"> <b> Phiếu thu </b> </h1>
                                     <hr/>
                                 </div>
                                 <div class="row">
@@ -194,7 +315,7 @@
         </div>
     </div>
 
-    {{-- XÓA BẢNG GIÁ--}}
+    {{-- XÓA PHIẾU CHI NHẬP --}}
     <div class="modal fade" id="deletePriceOutput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -218,5 +339,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/PriceOutputController.js') }}"></script>
+    <script src="{{ asset('angularJS/VoucherController.js') }}"></script>
 @endsection
