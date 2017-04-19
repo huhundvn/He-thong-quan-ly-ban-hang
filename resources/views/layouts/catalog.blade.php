@@ -97,7 +97,7 @@
             </div>
             <div id="collapse7" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="{{route('list-customer')}}" class="list-group-item"> Danh sách khách hàng </a>
+                    <a href="{{route('list-customer')}}" class="list-group-item active"> Danh sách khách hàng </a>
                     <a href="{{route('list-customer-group')}}" class="list-group-item"> Nhóm khách hàng </a>
                     <a href="#" class="list-group-item"> Lịch sử mua hàng </a>
                 </div>
