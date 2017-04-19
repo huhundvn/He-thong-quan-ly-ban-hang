@@ -154,6 +154,10 @@ app.controller('ProductController', function($scope, $http, API) {
     };
 });
 
+$('#createProduct').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+});
+
 $('#readProduct').on('show.bs.modal', function (event) {
     var modal = $(this);
     modal.find('.modal-title').text('Xem thông tin sản phẩm');
@@ -201,6 +205,11 @@ $('#readProduct').on('show.bs.modal', function (event) {
 
 $("#my-dropzone").dropzone({
     maxFileSize: 2,
+    autoProcessQueue: false,
     addRemoveLinks: true,
     paramName: 'upload[image]',
+});
+
+$("#my-dropzone").on("complete", function() {
+    $("#my-dropzone").removeAllFiles();
 });
