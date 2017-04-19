@@ -17,21 +17,29 @@ class CreateProductTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> nullable();
 		    $table->string('code') -> nullable();
-		    $table->string('description') -> nullable();
-		    $table->string('user_guide') -> nullable();
+		    $table->text('description') -> nullable();
+		    $table->text('user_guide') -> nullable();
 		    $table->integer('manufacturer_id') -> nullable();
 		    $table->integer('unit_id') -> nullable();
 		    $table->integer('category_id') -> nullable();
+
+		    $table->integer('warranty_period') -> nullable();
+		    $table->integer('return_period') -> nullable();
+
 		    $table->string('weight') -> nullable();
 		    $table->string('length') -> nullable();
 		    $table->string('volume') -> nullable();
 		    $table->integer('viewed') -> nullable();
+		    $table->integer('rate') -> nullable();
 		    $table->integer('max_inventory') -> nullable();
 		    $table->integer('min_inventory') -> nullable();
 
 		    $table->decimal('web_price') -> nullable();
 		    $table->string('default_image') -> nullable();
 		    $table->integer('total_quantity') -> nullable();
+
+		    $table->tinyInteger('status') -> nullable();
+
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
