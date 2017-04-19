@@ -42,18 +42,6 @@
             </div>
         </div>
 
-        {{-- Danh mục khuyến mãi --}}
-        <div class="panel w3-blue-grey">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                        <span class="glyphicon glyphicon-star-empty"></span> &nbsp; @lang('catalog.promotion') </a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-            </div>
-        </div>
-
         {{-- Danh mục kho --}}
         <div class="panel w3-blue-grey">
             <div class="panel-heading">
@@ -113,6 +101,18 @@
                     <a href="{{route('list-customer-group')}}" class="list-group-item"> Nhóm khách hàng </a>
                     <a href="#" class="list-group-item"> Lịch sử mua hàng </a>
                 </div>
+            </div>
+        </div>
+
+        {{-- Danh mục khuyến mãi --}}
+        <div class="panel w3-blue-grey">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        <span class="glyphicon glyphicon-star-empty"></span> &nbsp; @lang('catalog.promotion') </a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
             </div>
         </div>
 
