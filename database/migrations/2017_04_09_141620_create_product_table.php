@@ -27,7 +27,7 @@ class CreateProductTable extends Migration
 		    $table->integer('return_period') -> nullable();
 
 		    $table->string('weight') -> nullable();
-		    $table->string('length') -> nullable();
+		    $table->string('size') -> nullable();
 		    $table->string('volume') -> nullable();
 		    $table->integer('viewed') -> nullable();
 		    $table->integer('rate') -> nullable();
