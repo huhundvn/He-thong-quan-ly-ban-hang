@@ -21,6 +21,7 @@ class CreateProductTable extends Migration
 		    $table->string('user_guide') -> nullable();
 		    $table->integer('manufacturer_id') -> nullable();
 		    $table->integer('unit_id') -> nullable();
+		    $table->integer('category_id') -> nullable();
 		    $table->string('weight') -> nullable();
 		    $table->string('length') -> nullable();
 		    $table->string('volume') -> nullable();
