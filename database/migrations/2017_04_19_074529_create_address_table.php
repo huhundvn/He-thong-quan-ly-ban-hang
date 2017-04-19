@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetailStoreTranferTable extends Migration
+class CreateAddressTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDetailStoreTranferTable extends Migration
      */
     public function up()
     {
-	    Schema::create('detail_store_tranfer', function (Blueprint $table) {
+	    Schema::create('address', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('store_tranfer_id') -> nullable();
-		    $table->integer('product_id') -> nullable();
-		    $table->string('expried_date') -> nullable();
-		    $table->integer('quantity') -> nullable();
-		    $table->integer('price') -> nullable();
+		    $table->integer('customer_id') -> nullable();
+		    $table->string('homenumber') -> nullable();
+		    $table->string('province') -> nullable();
+		    $table->string('district') -> nullable();
+		    $table->string('ward') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
@@ -32,6 +32,6 @@ class CreateDetailStoreTranferTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('detail_store_tranfer');
+	    Schema::dropIfExists('address');
     }
 }
