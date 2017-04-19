@@ -261,9 +261,9 @@
                                                     <h3> Kéo thả ở đây </h3> hoặc
                                                     <strong> nhấn vào đây </strong>
                                                 </div>
-                                                {{--<div class="fallback">--}}
+                                                <div class="fallback">
                                                     <input name="file" type="file">
-                                                {{--</div>--}}
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
