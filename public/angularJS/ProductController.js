@@ -156,6 +156,7 @@ app.controller('ProductController', function($scope, $http, API) {
 
 $('#createProduct').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
+    $("#my-dropzone").removeAllFiles();
 });
 
 $('#readProduct').on('show.bs.modal', function (event) {
