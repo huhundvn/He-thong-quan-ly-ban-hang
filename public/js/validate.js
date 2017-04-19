@@ -25,6 +25,22 @@ $('input[type="number"]')
         return this.setCustomValidity('');
     });
 
+$('.panel-collapse a').click(function() {
+    $('.panel-collapse').removeClass('collapse in');
+    $(this).parents('.panel-collapse').addClass('collapse in');
+});
+
+$.fn.modal.Constructor.prototype.enforceFocus = function() {
+    modal_this = this
+    $(document).on('focusin.modal', function (e) {
+        if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
+            && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
+            && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
+            modal_this.$element.focus()
+        }
+    })
+};
+
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
 
@@ -41,4 +57,9 @@ function w3_open() {
 // Close the sidebar with the close button
 function w3_close() {
     mySidebar.style.display = "none";
+}
+
+toastr.options = {
+    "positionClass": "toast-bottom-right",
+    "preventDuplicates": true,
 }
