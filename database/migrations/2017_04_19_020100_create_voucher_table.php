@@ -23,7 +23,7 @@ class CreateVoucherTable extends Migration
 		    $table->string('total_in_words') -> nullable();
 		    $table->string('description') -> nullable();
 		    $table->tinyInteger('type') -> nullable();
-//		    $table->tinyInteger('status') -> nullable();
+		    $table->tinyInteger('status') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

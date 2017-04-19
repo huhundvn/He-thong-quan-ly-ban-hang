@@ -18,7 +18,7 @@ class CreatePriceOutputTable extends Migration
 		    $table->string('name') -> nullable();
 		    $table->string('start_date') -> nullable();
 		    $table->string('end_date') -> nullable();
-//		    $table->integer('created_by') -> nullable();
+		    $table->integer('created_by') -> nullable();
 		    $table->integer('customer_group_id') -> nullable();
 		    $table->tinyInteger('status') -> nullable();
 		    $table->timestamps();
