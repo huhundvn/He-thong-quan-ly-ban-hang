@@ -157,6 +157,8 @@ app.controller('ProductController', function($scope, $http, API) {
 $('#createProduct').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
     $("#my-dropzone").removeAllFiles();
+    CKEDITOR.instances.newDescription.setData('');
+    CKEDITOR.instances.newUserGuide.setData('');
 });
 
 $('#readProduct').on('show.bs.modal', function (event) {
@@ -207,8 +209,7 @@ $('#readProduct').on('show.bs.modal', function (event) {
 $("#my-dropzone").dropzone({
     maxFileSize: 2,
     autoProcessQueue: false,
-    addRemoveLinks: true,
-    paramName: 'upload[image]',
+    addRemoveLinks: true
 });
 
 $("#my-dropzone").on("complete", function() {
