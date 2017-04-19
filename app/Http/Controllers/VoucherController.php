@@ -22,7 +22,7 @@ class VoucherController extends Controller
 	public function store(Request $request)
 	{
 		$rules = [
-			'name' => 'required|unique:unit,name',
+			'total' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -30,12 +30,12 @@ class VoucherController extends Controller
 			return $validation -> errors() -> all();
 		else {
 			$new = new Voucher();
+			$new -> created_by = Input::get('created_by');
 			$new -> account_id = Input::get('account_id');
-			$new -> store_id = Input::get('store_id');
-			$new -> receiver_name = Input::get('receiver_name');
-			$new -> description = Input::get('description');
+			$new -> name = Input::get('name');
+			$new -> address = Input::get('address');
 			$new -> total = Input::get('total');
-			$new -> total_in_words = Input::get('total_in_words');
+			$new -> description = Input::get('description');
 			$new -> type = Input::get('type');
 			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);

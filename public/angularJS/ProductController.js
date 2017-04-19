@@ -208,7 +208,7 @@ $('#readProduct').on('show.bs.modal', function (event) {
 
 $("#my-dropzone").dropzone({
     maxFileSize: 2,
-    autoProcessQueue: false,
+    // autoProcessQueue: false,
     addRemoveLinks: true
 });
 

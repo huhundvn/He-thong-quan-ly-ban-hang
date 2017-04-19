@@ -3,6 +3,14 @@
  */
 app.controller('VoucherController', function($scope, $http, API) {
 
+    $http.get(API + 'account').then(function (response) {
+        $scope.accounts = response.data;
+    });
+
+    $http.get(API + 'user').then(function (response) {
+        $scope.users = response.data;
+    });
+
     //Load danh sách phiếu thu/chi
     $scope.loadVoucher = function () {
         $http.get(API + 'voucher').then(function (response) {
@@ -12,13 +20,36 @@ app.controller('VoucherController', function($scope, $http, API) {
     $scope.loadVoucher();
 
     /**
-     * CRUD phiếu thu/chi
+     * CRUD phiếu thu, chi
      */
+    //Tạo phiếu thu
     $scope.createVoucher = function () {
+        $scope.new.type = 0;
+        console.log($scope.new);
         $http({
             method : 'POST',
             url : API + 'voucher',
             data : $scope.new,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadVoucher();
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    // Tạo phiếu chi
+    $scope.createPaymentVoucher = function () {
+        $scope.newPayment.type = 1;
+        $http({
+            method : 'POST',
+            url : API + 'voucher',
+            data : $scope.newPayment,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
@@ -38,24 +69,6 @@ app.controller('VoucherController', function($scope, $http, API) {
         });
     };
 
-    $scope.updateVoucher = function () {
-        $http({
-            method : 'PUT',
-            url : API + 'voucher/' + $scope.selected.id,
-            data : $scope.selected,
-            cache : false,
-            header : {'Content-Type':'application/x-www-form-urlencoded'}
-        }).then(function (response) {
-            if(response.data.success) {
-                toastr.success(response.data.success);
-                $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadVoucher();
-            }
-            else
-                toastr.error(response.data[0]);
-        });
-    };
-
     $scope.deleteVoucher = function () {
         $http({
             method : 'DELETE',
@@ -72,13 +85,22 @@ app.controller('VoucherController', function($scope, $http, API) {
         });
     };
 
+    // In biểu mẫu
+    $scope.print = function () {
+        window.print();
+    }
+
     $scope.options = {
         numeral: {
             numeral: true
         }
     };
 
-    $('#createAccount').on('hidden.bs.modal', function(){
+    $('#createVoucher').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+    });
+
+    $('#createPaymentVoucher').on('hidden.bs.modal', function(){
         $(this).find('form')[0].reset();
     });
 

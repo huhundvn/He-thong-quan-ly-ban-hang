@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Factory;
 
 //MODEL CSDL
 use App\Product;
@@ -220,6 +221,6 @@ class ProductController extends Controller
 	// Upload Image
 	public function uploadImage(Request $request)
 	{
-
+		$result = $request->file('file')->store('abc');
 	}
 }
