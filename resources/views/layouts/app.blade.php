@@ -46,6 +46,7 @@
 
     <!-- Libary JavaScript -->
     <script src="{{asset('js/toastr.js')}}"></script>
+    <script src="{{asset('js/validate.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -59,41 +60,6 @@
     <script src="{{ asset('angularJS/cleave-phone.vn.js') }}"></script>
     <script src="{{ asset('angularJS/Config.js') }}"> </script>
     @yield('script')
-    <script>
-        $.fn.modal.Constructor.prototype.enforceFocus = function() {
-            modal_this = this
-            $(document).on('focusin.modal', function (e) {
-                if (modal_this.$element[0] !== e.target && !modal_this.$element.has(e.target).length
-                    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_select')
-                    && !$(e.target.parentNode).hasClass('cke_dialog_ui_input_text')) {
-                    modal_this.$element.focus()
-                }
-            })
-        };
-
-        // Get the Sidebar
-        var mySidebar = document.getElementById("mySidebar");
-
-
-        // Toggle between showing and hiding the sidebar, and add overlay effect
-        function w3_open() {
-            if (mySidebar.style.display === 'block') {
-                mySidebar.style.display = 'none';
-            } else {
-                mySidebar.style.display = 'block';
-            }
-        }
-
-        // Close the sidebar with the close button
-        function w3_close() {
-            mySidebar.style.display = "none";
-        }
-
-        toastr.options = {
-            "positionClass": "toast-bottom-right",
-            "preventDuplicates": true,
-        }
-    </script>
 
 </body>
 </html>
