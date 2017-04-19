@@ -10,4 +10,4 @@ $(document).ready(function () {
 });
 
 var app = angular.module('LaRose', ['angularUtils.directives.dirPagination', 'cleave.js'])
-	.constant('API', '/larose/public/api/');
+	.constant('API', 'http://larose-admin.herokuapp.com/api/');

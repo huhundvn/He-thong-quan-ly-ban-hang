@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductAttributeTable extends Migration
+class CreateDetailPriceOutputTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductAttributeTable extends Migration
      */
     public function up()
     {
-	    Schema::create('product_attribute', function (Blueprint $table) {
+	    Schema::create('detail_price_output', function (Blueprint $table) {
 		    $table->increments('id');
+		    $table->integer('price_output_id') -> nullable();
 		    $table->integer('product_id') -> nullable();
-		    $table->integer('attribute_id') -> nullable();
-		    $table->string('description') -> nullable();
+		    $table->integer('price_output') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
@@ -30,6 +30,6 @@ class CreateProductAttributeTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('product_attribute');
+	    Schema::dropIfExists('detail_price_output');
     }
 }
