@@ -25,7 +25,7 @@
             opacity: 1;
             display: block;
             width: 50%;
-            height: 200px;
+            height: auto;
             transition: .5s ease;
             backface-visibility: hidden;
         }
