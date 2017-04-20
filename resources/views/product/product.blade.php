@@ -36,10 +36,10 @@
             </div>
             <div class="col-lg-2">
                 <div class="btn-group">
-                    <button id="viewList" type="button" class="btn btn-sm w3-blue-grey">
+                    <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
                     </button>
-                    <button id="viewGrid" type="button" class="btn btn-sm">
+                    <button id="viewGrid" type="button" class="btn btn-sm btn-default">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
                 </div>
