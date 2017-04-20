@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Validation\Factory;
+use RemoteImageUploader\Factory;
 
 //MODEL CSDL
 use App\Product;
@@ -22,7 +22,9 @@ class ProductController extends Controller
 	 */
 	public function index()
 	{
-		return Product::all();
+		return Product::with('images')
+			-> with('attributes')
+			-> get();
 	}
 
 	/**
@@ -63,6 +65,7 @@ class ProductController extends Controller
 			$product -> volume = Input::get('volume');
 			$product -> total_quantity = 0;
 			$product -> status = 0;
+			$product -> default_image = Input::get('default_image');
 			$product -> save();
 			return response()->json(['success' => ($product->id)]);
 		}
@@ -73,7 +76,8 @@ class ProductController extends Controller
 	 */
 	public function show($id)
 	{
-		return Product::find($id);
+		return Product::with('images')
+			-> with('attributes') -> find($id);
 	}
 
 	/**
@@ -113,6 +117,7 @@ class ProductController extends Controller
 			$product -> weight = Input::get('weight');
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
+			$product -> default_image = Input::get('default_image');
 			$product -> save();
 			return response()->json(['success' => trans('message.update_success')]);
 		}
@@ -221,6 +226,8 @@ class ProductController extends Controller
 	// Upload Image
 	public function uploadImage(Request $request)
 	{
-		$result = $request->file('file')->store('abc');
+		$result = Factory::create(config('uploadphoto.host'), config('uploadphoto.auth'))
+			-> upload($request -> file('file') -> path());
+		return $result;
 	}
 }

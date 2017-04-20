@@ -29,15 +29,15 @@ Route::get('/lang/{locale}', array(
 /**
  * CRUD order
  */
-//Route::resource('orders', 'OrderController');
-//Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
-//Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
-///**
-// * CRUD order details
-// */
-//Route::resource('order-details', 'OrderDetailController');
-//Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
-//Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
+Route::resource('orders', 'OrderController');
+Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
+Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
+/**
+ * CRUD order details
+ */
+Route::resource('order-details', 'OrderDetailController');
+Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
+Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
 ///**
 // * CRUD cart
 // */
@@ -53,7 +53,7 @@ Route::get('/lang/{locale}', array(
 //Route::get('/reviews/{product_id}/product', 'ReviewController@listReviewByProductId');
 
 
-//API ROUTES
+// API SERVER TRẢ DỮ LIỆU JSON
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
     Route::resource('user', 'UserController'); //CRUD nhân viên
@@ -98,12 +98,16 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
 
-	Route::resource('voucher', 'VoucherController'); //CRUD phiếu nhập, phiếu thu
+	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
+	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho
+
+	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
 });
 
-// FRONT-END
+
+// FRONT-END GIAO ĐIỆN WEB
 Route::group(['middleware' => 'auth'], function (){
     Route::get('/home-report', 'HomeController@report') -> name('home-report');
 
@@ -184,4 +188,7 @@ Route::group(['middleware' => 'auth'], function (){
 	//PHIẾU THU, CHI
 	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher');
 
+	//CHUYỂN KHO
+	Route::get('/list-store-tranfer', 'StoreTranferController@listStoreTranfer') -> name('list-store-tranfer');
+	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer');
 });

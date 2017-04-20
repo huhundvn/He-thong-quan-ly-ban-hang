@@ -1,23 +1,23 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Lịch sử nhập kho
+    Larose | Lịch sử chuyển kho
 @endsection
 
 @section('location')
     <li> Quản lý kho </li>
-    <li> Lịch sử nhập kho </li>
+    <li> Lịch sử chuyển kho </li>
 @endsection
 
 @section('content')
 
-    <div ng-controller="InputStoreController">
+    <div ng-controller="StoreTranferController">
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
             <div class="col-lg-2 col-xs-2">
-                <a href="{{route('createInputStore')}}" class="btn btn-sm btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Nhập hàng </a>
+                <a href="{{route('createStoreTranfer')}}" class="btn btn-sm btn-success">
+                    <span class="glyphicon glyphicon-plus"></span> Chuyển kho </a>
             </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
@@ -38,37 +38,31 @@
 
         <hr/>
 
-        {{--!DANH SÁCH NHÀ CUNG CẤP!--}}
+        {{-- DANH SÁCH CHUYỂN KHO --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> Mã đơn  </th>
-            <th> Nhà cung cấp </th>
             <th> Ngày tạo </th>
             <th> Tạo bởi </th>
-            <th> Tổng tiền </th>
+            <th> Kho chuyển </th>
+            <th> Kho nhận </th>
             <th> Trạng thái </th>
             <th> Duyệt </th>
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="inputStores.length > 0" class="item"
-                dir-paginate="inputStore in inputStores | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readInputStore(inputStore)">
-                <td data-toggle="modal" data-target="#readInputStore"> YCNH-@{{ inputStore.id }} </td>
+            <tr ng-show="storeTranfers.length > 0" class="item"
+                dir-paginate="storeTranfer in storeTranfers | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readStoreTranfer(storeTranfer)">
+                <td data-toggle="modal" data-target="#readInputStore"> CK-@{{ storeTranfer.id }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ storeTranfer.created_at }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ storeTranfer.approved_id }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ storeTranfer.from_store_id }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ storeTranfer.to_store_id }}  </td>
                 <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="supplier in suppliers" ng-show="supplier.id==inputStore.supplier_id"> @{{ supplier.name }}
-                    </p>
-                </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.created_at | date: "dd/MM/yyyy" }} </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="user in users" ng-show="user.id==inputStore.created_by"> @{{ user.name }}
-                    </p>
-                </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.total | number:0 }} VNĐ </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-show="0==inputStore.status"> Đã từ chối </p>
-                    <p ng-show="1==inputStore.status"> Chờ duyệt </p>
-                    <p ng-show="2==inputStore.status"> Đã duyệt, đang ship hàng </p>
-                    <p ng-show="3==inputStore.status"> Đã nhập kho </p>
+                    <p ng-show="0==storeTranfer.status"> Đã từ chối </p>
+                    <p ng-show="1==storeTranfer.status"> Chờ duyệt </p>
+                    <p ng-show="2==storeTranfer.status"> Đã duyệt </p>
+                    <p ng-show="3==storeTranfer.status"> Đã chuyển kho </p>
                 </td>
                 <td>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
@@ -76,12 +70,12 @@
                     </button>
                 </td>
                 <td>
-                    <button ng-show="0==inputStore.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore"">
-                        <span class="glyphicon glyphicon-trash"></span>
+                    <button ng-show="0==storeTranfer.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
+                    <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>
-            <tr class="item" ng-show="inputStores.length==0">
+            <tr class="item" ng-show="storeTranfers.length==0">
                 <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
@@ -117,93 +111,93 @@
                                     }
                                 }
                             </style>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    Công ty TNHH Larose <br/>
-                                    142 Võ Văn Tân, TP.HCM <br/>
-                                    ĐT: 0979369407
-                                </div>
-                                <div class="col-sm-4">
-                                    Số: <br/>
-                                    Ngày...tháng...năm...
-                                </div>
-                            </div>
-                            <div class="row">
-                                <h2 align="center"> <b> Phiếu mua hàng </b> </h2>
-                                <hr/>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
-                                        Nhà cung cấp: @{{ supplier.name }} <br/>
-                                        Địa chỉ: @{{ supplier.address }} <br/>
-                                        Số điện thoại: @{{ supplier.phone }}
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        Công ty TNHH Larose <br/>
+                                        142 Võ Văn Tân, TP.HCM <br/>
+                                        ĐT: 0979369407
                                     </div>
-                                    <div ng-repeat="account in accounts" ng-show="account.id==selected.account_id">
-                                        Hình thức thanh toán: @{{account.name}}
+                                    <div class="col-sm-4">
+                                        Số: <br/>
+                                        Ngày...tháng...năm...
                                     </div>
-                                    Tổng tiền: @{{ selected.total | number:0 }} <br/>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div ng-repeat="store in stores" ng-show="store.id==selected.store_id">
-                                        Nhập về kho: @{{ store.name }} <br/>
-                                        Địa chỉ: @{{ store.address }} <br/>
-                                        Số điện thoại: @{{ store.phone }}
+                                <div class="row">
+                                    <h2 align="center"> <b> Phiếu mua hàng </b> </h2>
+                                    <hr/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
+                                            Nhà cung cấp: @{{ supplier.name }} <br/>
+                                            Địa chỉ: @{{ supplier.address }} <br/>
+                                            Số điện thoại: @{{ supplier.phone }}
+                                        </div>
+                                        <div ng-repeat="account in accounts" ng-show="account.id==selected.account_id">
+                                            Hình thức thanh toán: @{{account.name}}
+                                        </div>
+                                        Tổng tiền: @{{ selected.total | number:0 }} <br/>
                                     </div>
-                                    Ngày giao hàng: @{{selected.input_date | date: "dd/MM/yyyy"}}<br/>
+                                    <div class="col-sm-6">
+                                        <div ng-repeat="store in stores" ng-show="store.id==selected.store_id">
+                                            Nhập về kho: @{{ store.name }} <br/>
+                                            Địa chỉ: @{{ store.address }} <br/>
+                                            Số điện thoại: @{{ store.phone }}
+                                        </div>
+                                        Ngày giao hàng: @{{selected.input_date | date: "dd/MM/yyyy"}}<br/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12"> Ghi chú: @{{ selected.note }}</div>
-                            </div>
-                            <h1></h1>
-                            <div class="row">
-                                <table class="w3-table table-bordered w3-centered">
-                                    <thead>
-                                    <th> STT </th>
-                                    <th> Mã vạch </th>
-                                    <th> Tên </th>
-                                    <th> Đơn vị tính </th>
-                                    <th> Số lượng </th>
-                                    <th> Giá nhập (VNĐ) </th>
-                                    <th> Hạn sử dụng </th>
-                                    <th> Thành tiền (VNĐ) </th>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-show="detail.length > 0" class="item" ng-repeat="item in detail">
-                                        <td> @{{ $index+1 }}</td>
-                                        <td>
-                                            <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.code }} </p>
-                                        </td>
-                                        <td>
-                                            <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.name }} </p>
-                                        </td>
-                                        <td> <p ng-repeat="unit in units" ng-show="unit.id==item.unit_id"> @{{ unit.name }} </p> </td>
-                                        <td> @{{ item.quantity }} </td>
-                                        <td> @{{ item.price | number:0 }} </td>
-                                        <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
-                                        <td> @{{ item.quantity * item.price | number: 0 }} </td>
-                                    </tr>
-                                    <tr class="item" ng-show="detail.length==0">
-                                        <td colspan="9"> Không có dữ liệu </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="row">
+                                    <div class="col-sm-12"> Ghi chú: @{{ selected.note }}</div>
+                                </div>
                                 <h1></h1>
+                                <div class="row">
+                                    <table class="w3-table table-bordered w3-centered">
+                                        <thead>
+                                        <th> STT </th>
+                                        <th> Mã vạch </th>
+                                        <th> Tên </th>
+                                        <th> Đơn vị tính </th>
+                                        <th> Số lượng </th>
+                                        <th> Giá nhập (VNĐ) </th>
+                                        <th> Hạn sử dụng </th>
+                                        <th> Thành tiền (VNĐ) </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-show="detail.length > 0" class="item" ng-repeat="item in detail">
+                                            <td> @{{ $index+1 }}</td>
+                                            <td>
+                                                <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.code }} </p>
+                                            </td>
+                                            <td>
+                                                <p ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.name }} </p>
+                                            </td>
+                                            <td> <p ng-repeat="unit in units" ng-show="unit.id==item.unit_id"> @{{ unit.name }} </p> </td>
+                                            <td> @{{ item.quantity }} </td>
+                                            <td> @{{ item.price | number:0 }} </td>
+                                            <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
+                                            <td> @{{ item.quantity * item.price | number: 0 }} </td>
+                                        </tr>
+                                        <tr class="item" ng-show="detail.length==0">
+                                            <td colspan="9"> Không có dữ liệu </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <h1></h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4" align="center">
+                                        <b> Giám đốc </b><br/> (Ký tên)
+                                    </div>
+                                    <div class="col-sm-4" align="center">
+                                        <b> Kế toán </b> <br/> (Ký tên)
+                                    </div>
+                                    <div class="col-sm-4" align="center">
+                                        <b> Người lập phiếu </b> <br/> (Ký tên)
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-4" align="center">
-                                    <b> Giám đốc </b><br/> (Ký tên)
-                                </div>
-                                <div class="col-sm-4" align="center">
-                                    <b> Kế toán </b> <br/> (Ký tên)
-                                </div>
-                                <div class="col-sm-4" align="center">
-                                    <b> Người lập phiếu </b> <br/> (Ký tên)
-                                </div>
-                            </div>
-                        </div>
                         </div>
                         <div class="modal-footer hidden-print">
                             <button type="button" class="btn btn-success btn-sm" ng-click="print()">
@@ -271,5 +265,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/InputStoreController.js') }}"></script>
+    <script src="{{ asset('angularJS/StoreTranferController.js') }}"></script>
 @endsection

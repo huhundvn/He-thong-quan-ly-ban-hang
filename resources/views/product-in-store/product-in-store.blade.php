@@ -5,6 +5,7 @@
 @endsection
 
 @section('location')
+    <li> Kho hàng </li>
     <li> Quản lý sản phẩm trong kho </li>
 @endsection
 
@@ -23,7 +24,8 @@
             <div class="col-lg-4 col-xs-4">
                 <select ng-model="term2.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho -- </option>
-                    <option ng-repeat="store in stores" value="store.id"> @{{ store.name }} </option>
+                    <option ng-repeat="store in stores" value="@{{store.id}}"> @{{ store.name }} </option>
+
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
@@ -42,10 +44,10 @@
                 <th> Mã vạch </th>
                 <th> Đơn vị tính </th>
                 <th> Nhà sản xuất </th>
+                <th> Nhà cung cấp </th>
+                <th> Hạn sử dụng </th>
                 <th> Số lượng </th>
                 <th> Giá mua </th>
-                <th> Hạn sử dụng </th>
-                <th> Nhà cung cấp </th>
             </thead>
             <tbody>
             <tr class="item" ng-show="products.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | itemsPerPage: 7" ng-click="readProduct(product)">
@@ -58,15 +60,15 @@
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="manufacturer in manufacturers" ng-show="manufacturer.id==productInStore.manufacturer_id">
                     @{{ manufacturer.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.quantity | number: 0 }} </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} VNĐ </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="supplier in suppliers" ng-show="supplier.id==productInStore.supplier_id">
                     @{{ supplier.name }}
                 </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.quantity | number: 0 }} </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} VNĐ </td>
             </tr>
             <tr class="item" ng-show="productInStores.length==0">
-                <td colspan="7"> Không có dữ liệu </td>
+                <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
         </table>

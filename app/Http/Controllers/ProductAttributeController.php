@@ -16,7 +16,7 @@ class ProductAttributeController extends Controller
 		return ProductAttribute::all();
 	}
 
-	// API tạo thuộc tính sản phâ,r
+	// API tạo thuộc tính sản phẩm
 	public function store(Request $request)
 	{
 		$rules = [
@@ -52,7 +52,7 @@ class ProductAttributeController extends Controller
 	// API xóa thông tin đơn hàng
 	public function destroy($id)
 	{
-		$deleted = DetailInputStore::find($id) -> delete();
+		$deleted = ProductAttribute::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 

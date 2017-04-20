@@ -6,29 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
 
 //MODEL CSDL
 use App\Product;
-use App\Category;
-use App\Manufacturer;
-use App\Unit;
 use App\InputStore;
 use App\ProductInStore;
 
 class InputStoreController extends Controller
 {
-	/**
-	 * API lấy danh sách đơn đặt hàng
-	 */
+	// API lấy lịch sử nhập hàng
 	public function index()
 	{
 		return InputStore::all();
 	}
 
-	/**
-	 * API tạo đơn đặt hàng mới
-	 */
+	// API lưu đợt nhập hàng mới
 	public function store(Request $request)
 	{
 		$rules = [
@@ -53,25 +45,19 @@ class InputStoreController extends Controller
 		}
 	}
 
-	/**
-	 * API lấy thông tin đơn đặt hàng
-	 */
+	// API xem thông tin đợt nhập hàng
 	public function show($id)
 	{
 		return InputStore::find($id);
 	}
 
-	/**
-	 * API chỉnh sửa thông tin đơn đặt hàng
-	 */
+	// API chỉnh sửa thông tin đợt nhập hàng
 	public function update(Request $request, $id)
 	{
 
 	}
 
-	/**
-	 * API xóa thông tin đơn hàng
-	 */
+	// API xóa đợt nhập hàng
 	public function destroy($id)
 	{
 		$deleted = InputStore::find($id) -> delete();
@@ -82,10 +68,8 @@ class InputStoreController extends Controller
 	public function confirm($id, $status)
 	{
 		$selected = InputStore::find($id);
-		$selected -> status = $status;
-		$selected -> save();
 		// Nhập hàng vao kho, cập nhật số lượng
-		if($status==3) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
+		if($status==3 && ($selected -> status) !=3) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
 			$rows = InputStore::join('detail_input_store', 'detail_input_store.input_store_id', '=', 'input_store.id')
 				-> where('input_store.id', '=', $id)
 				-> get(); //Lây chi tiết danh sách các mặt hàng cần nhập
@@ -106,20 +90,18 @@ class InputStoreController extends Controller
 				$update2 -> save();
 			}
 		}
+		$selected -> status = $status;
+		$selected -> save();
 		return response()->json(['success' => trans('message.update_success')]);
 	}
 
-	/**
-	 * Xem danh sách đơn đặt hàng
-	 */
+	// Xem lịch sử nhập hàng
 	public function listInputStore()
 	{
 		return view('input-store.input-store');
 	}
 
-	/**
-	 * Xem danh sách đơn đặt hàng
-	 */
+	// Tạo đơn nhập hàng mới
 	public function createInputStore()
 	{
 		return view('input-store.new-input-store');

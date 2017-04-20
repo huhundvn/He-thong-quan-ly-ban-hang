@@ -6,23 +6,21 @@ app.controller('ProductController', function($scope, $http, API) {
 
     $http.get(API + 'category').then(function (response) {
         $scope.categorys = response.data;
-    });
+    }); // Load nhóm sản phẩm
 
     $http.get(API + 'unit').then(function (response) {
         $scope.units = response.data;
-    });
+    }); // Load đơn vị tính
 
     $http.get(API + 'manufacturer').then(function (response) {
         $scope.manufacturers = response.data;
-    });
+    }); // Load nhà sản xuất
 
     $http.get(API + 'attribute').then(function (response) {
         $scope.attributes = response.data;
-    });
+    }); // Load thuộc tính sản phẩm
 
-    /**
-     * Load danh sách sản phẩm
-     */
+    // Load danh sách sản phẩm
     $scope.loadProduct = function () {
         $http.get(API + 'product').then(function (response) {
             $scope.products = response.data;
@@ -33,20 +31,8 @@ app.controller('ProductController', function($scope, $http, API) {
     /**
      * CRUD sản phẩm
      */
-    $scope.data = [];
-    // Thêm thuộc tính vào danh sách
-    $scope.addAttribute = function(selected) {
-        if($scope.data.indexOf(selected) == -1) {
-            $scope.data.push(selected);
-            toastr.info('Đã thêm một thuộc tính vào danh sách.');
-        } else
-            toastr.info('Thuộc tính đã có trong danh sách.');
-    };
-    // Xóa thuộc tính khỏi danh sách
-    $scope.deleteAttribute = function(selected) {
-        $scope.data.splice($scope.data.indexOf(selected), 1);
-        toastr.info('Đã xóa 1 thuộc tính khỏi danh sách.');
-    };
+    $scope.data = []; // Lưu danh sách thuộc tính tạm thời
+    $scope.image = []; // Lưu danh sách hình ảnh tạm thời
 
     // Thêm thuộc tính cho sản phẩm
     $scope.createAttributeForProduct = function (item) {
@@ -63,6 +49,38 @@ app.controller('ProductController', function($scope, $http, API) {
         });
     };
 
+    // Thêm hình ảnh cho sản phẩm
+    $scope.createImageForProduct = function (item) {
+        $http({
+            method : 'POST',
+            url : API + 'product-image',
+            data : item,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                console.log('1');
+            }
+        });
+    };
+
+    // Up ảnh lên server Flickr
+    $scope.uploadImage = function () {
+        var myDropzone = Dropzone.forElement("#my_dropzone");
+        var myDropzone02 = Dropzone.forElement("#my_dropzone02");
+        myDropzone.processQueue();
+        myDropzone02.processQueue();
+        myDropzone.on("success", function(file, response) {
+            $scope.new.default_image = response;
+            $scope.image.push(response);
+        });
+        myDropzone02.on("success", function(file, response) {
+            $scope.selected.default_image = response;
+            $scope.image.push(response);
+        });
+    };
+
+    // Tạo sản phẩm mới
     $scope.createProduct = function () {
         if( CKEDITOR.instances.newDescription.getData() )
             $scope.new.description = CKEDITOR.instances.newDescription.getData();
@@ -76,31 +94,72 @@ app.controller('ProductController', function($scope, $http, API) {
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
+                // thêm thuộc tính
                 for (var i=0; i<$scope.data.length; i++) {
                     $scope.data[i].product_id = response.data.success;
                     $scope.createAttributeForProduct($scope.data[i]);
                 }
-                toastr.success('Đã thêm thành công.');
+                //thêm hình ảnh
+                for (var i=0; i<$scope.image.length; i++) {
+                    $scope.image[i].product_id = response.data.success;
+                    $scope.createImageForProduct($scope.image[i]);
+                }
+                toastr.success('Đã thêm sản phẩm thành công.');
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadProduct();
+                $scope.data = [];
+                $scope.image = [];
             }
             else
                 toastr.error(response.data[0]);
         });
     };
 
+    // Xem thông tin sản phẩm
     $scope.readProduct = function (product) {
         $http.get(API + 'product/' + product.id).then(function (response) {
             $scope.selected = response.data;
             CKEDITOR.instances.description.setData($scope.selected.description);
             CKEDITOR.instances.user_guide.setData($scope.selected.user_guide);
         });
-        $http.get(API + 'get-detail-product-attribute/' + product.id).then(function (response) {
-            $scope.detail = response.data;
+    };
+
+    // Thêm thuộc tính vào danh sách
+    $scope.addAttribute = function(selected) {
+        if($scope.data.indexOf(selected) == -1) {
+            $scope.data.push(selected);
+            toastr.info('Đã thêm một thuộc tính vào danh sách.');
+        } else
+            toastr.info('Thuộc tính đã có trong danh sách.');
+    };
+
+    // Xóa thuộc tính khỏi danh sách
+    $scope.deleteAttribute = function(selected) {
+        $scope.data.splice($scope.data.indexOf(selected), 1);
+        toastr.info('Đã xóa 1 thuộc tính khỏi danh sách.');
+    };
+
+    // Xóa thuộc tính hiện có của sản phẩm
+    $scope.deleteProductAttribute = function(selected) {
+        $http({
+            method : 'DELETE',
+            url : API + 'product-attribute/' + selected.id,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success('Đã xóa 1 thuộc tính sản phẩm.');
+            } else
+                toastr.error(response.data[0]);
         });
     };
 
+    // Chỉnh sửa thông tin sản phẩm
     $scope.updateProduct = function () {
+        for (var i=0; i<$scope.data.length; i++) {
+            $scope.data[i].product_id = $scope.selected.id;
+            $scope.createAttributeForProduct($scope.data[i]);
+        }
         if( CKEDITOR.instances.description.getData() )
             $scope.selected.description = CKEDITOR.instances.description.getData();
         if ( CKEDITOR.instances.user_guide.getData() )
@@ -116,12 +175,15 @@ app.controller('ProductController', function($scope, $http, API) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadProduct();
+                $scope.data = [];
+                $scope.image = [];
             }
             else
                 toastr.error(response.data[0]);
         });
     };
 
+    // Xóa sản phẩm
     $scope.deleteProduct = function () {
         $http({
             method : 'DELETE',
@@ -138,11 +200,6 @@ app.controller('ProductController', function($scope, $http, API) {
         });
     };
 
-    $('#createProduct').on('hidden.bs.modal', function(){
-        $scope.data = [];
-        $(this).find('form')[0].reset();
-    });
-
     $scope.options = {
         numeral: {
             numeral: true
@@ -156,7 +213,8 @@ app.controller('ProductController', function($scope, $http, API) {
 
 $('#createProduct').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
-    $("#my-dropzone").removeAllFiles();
+    var myDropzone = Dropzone.forElement(".dropzone");
+    myDropzone.removeAllFiles();
     CKEDITOR.instances.newDescription.setData('');
     CKEDITOR.instances.newUserGuide.setData('');
 });
@@ -206,12 +264,26 @@ $('#readProduct').on('show.bs.modal', function (event) {
     });
 });
 
-$("#my-dropzone").dropzone({
-    maxFileSize: 2,
-    // autoProcessQueue: false,
+$("#my_dropzone").dropzone({
+    autoProcessQueue: false,
     addRemoveLinks: true
 });
 
-$("#my-dropzone").on("complete", function() {
-    $("#my-dropzone").removeAllFiles();
+$("#my_dropzone02").dropzone({
+    autoProcessQueue: false,
+    addRemoveLinks: true,
+});
+
+$("#viewList").click(function () {
+    $("#viewList").addClass('w3-blue-grey');
+    $("#viewGrid").removeClass('w3-blue-grey');
+    $("#grid").attr('hidden', true);
+    $("#list").removeAttr('hidden');
+});
+
+$("#viewGrid").click(function () {
+    $("#viewList").removeClass('w3-blue-grey');
+    $("#viewGrid").addClass('w3-blue-grey');
+    $("#list").attr('hidden', true);
+    $("#grid").removeAttr('hidden');
 });

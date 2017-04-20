@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
-                     Thêm mới </button>
+                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
@@ -34,6 +34,16 @@
             <div class="col-lg-2 col-md-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{products.length}} mục </button>
             </div>
+            <div class="col-lg-2">
+                <div class="btn-group">
+                    <button id="viewList" type="button" class="btn btn-sm w3-blue-grey">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>
+                    <button id="viewGrid" type="button" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <hr/>
@@ -46,7 +56,7 @@
         @endif
 
         {{-- !DANH SÁCH SẢN PHẨM! --}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
@@ -82,9 +92,21 @@
             </tbody>
         </table>
 
+        <div id="grid" class="row" align="center" hidden>
+            <div class="col-lg-3" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 7" ng-click="readProduct(product)">
+                <img src="@{{product.default_image}}" class="image">
+                <h5 class="w3-text-blue-gray"> <b> @{{product.name}} </b> </h5>
+                Hiện có: @{{product.total_quantity}} sản phẩm
+                <div class="middle">
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#readProduct"> Xem SP </button>
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct" ng-show="0==product.status"> Xóa SP </button>
+                </div>
+            </div>
+        </div hidden>
+
         {{-- !PHÂN TRANG! --}}
-        <div style="margin-left: 35%; bottom:0; position: fixed;">
-            <dir-pagination-controls max-size="5"> </dir-pagination-controls>
+        <div style="margin-left: 35%;">
+            <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 
 
@@ -95,7 +117,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm sản phẩm mới </h4>
+                            <h4 class="modal-title w3-text-green" id="myModalLabel"> Thêm sản phẩm mới </h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
@@ -230,15 +252,11 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseAttribute"> Thêm thuộc tính </button>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <dir-pagination-controls pagination-id="attribute" max-size="4"> </dir-pagination-controls>
+                                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#chooseAttribute"> Thêm thuộc tính </button>
                                         </div>
                                     </div>
                                     {{-- THÊM THUỘC TÍNH SẢN PHẨM --}}
-                                    <div class="form-group" ng-show="data.length > 0"
-                                         dir-paginate="item in data | itemsPerPage: 2" pagination-id="attribute">
+                                    <div class="form-group" ng-show="data.length > 0" ng-repeat="item in data">
                                         <label class="col-sm-3"> @{{item.name}} </label>
                                         <div class="col-sm-8">
                                             <input ng-model="item.description" type="text" class="form-control input-sm"
@@ -254,9 +272,8 @@
                                 <div id="menu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Hình ảnh</label>
-                                        <div class="col-sm-9">
-                                            <form id="my-dropzone" method="post" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
+                                        <div class="col-sm-10">
+                                            <form id="my_dropzone" method="post" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
                                                     <strong> nhấn vào đây </strong>
@@ -266,50 +283,16 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button ng-click="uploadImage()" class="btn btn-sm btn-success"> Upload ảnh </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button ng-click="createProduct()" type="submit" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button ng-click="createProduct()" type="submit" class="btn btn-sm btn-success"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {{-- CHỌN THUỘC TÍNH --}}
-        <div class="modal fade" id="chooseAttribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title w3-text-blue" id="myModalLabel"> Chọn thuộc tính </h4>
-                    </div>
-                    <div class="modal-body">
-                        <input ng-model="termAttribute" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
-                        <h1></h1>
-                        {{--DANH SÁCH THUỘC TÍNH--}}
-                        <table class="w3-table table-hover table-bordered w3-centered">
-                            <thead class="w3-blue-grey">
-                            <th> Tên </th>
-                            <th> Mô tả </th>
-                            </thead>
-                            <tbody>
-                            <tr ng-show="attributes.length > 0" class="item"
-                                dir-paginate="attribute in attributes | filter:termAttribute | itemsPerPage: 4"
-                                ng-click="addAttribute(attribute)" pagination-id="chooseAttribute">
-                                <td> @{{ attribute.name }} </td>
-                                <td> @{{ attribute.description }} </td>
-                            </tr>
-                            <tr class="item" ng-show="attributes.length==0">
-                                <td colspan="4"> Không có dữ liệu </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div style="margin-left: 35%;">
-                            <dir-pagination-controls pagination-id="chooseAttribute" max-size="4"> </dir-pagination-controls>
                         </div>
                     </div>
                 </div>
@@ -438,44 +421,77 @@
                                     <div class="form-group">
                                         <label class="col-sm-3"> Khối lượng </label>
                                         <div class="col-sm-9">
-                                            <input id="weight" cleave="options.numeral" ng-model="selected.weight" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập khối lượng...">
+                                            <input id="weight" cleave="options.numeral" ng-model="selected.weight" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Kích thước </label>
                                         <div class="col-sm-9">
-                                            <input id="size" ng-model="selected.size" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập kích thước...">
+                                            <input id="size" ng-model="selected.size" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Thể tích </label>
                                         <div class="col-sm-9">
-                                            <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập thể tích...">
+                                            <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
-                                    <div class="form-group" ng-show="detail.length > 0"
-                                         dir-paginate="item in detail | itemsPerPage: 2" pagination-id="attribute">
+
+                                    {{-- Danh sách thuộc tính hiện có sản phẩm --}}
+                                    <div class="form-group" ng-show="selected.attributes.length > 0" ng-repeat="item in selected.attributes">
+                                        <label class="col-sm-3" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
+                                            @{{attribute.name}}
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <input id="volume" ng-model="item.description" type="text" class="form-control input-sm">
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-sm btn-danger" ng-click="deleteProductAttribute(item)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#chooseAttribute"> Thêm thuộc tính </button>
+                                        </div>
+                                    </div>
+
+                                    {{-- THÊM THUỘC TÍNH SẢN PHẨM --}}
+                                    <div class="form-group" ng-show="data.length > 0" ng-repeat="item in data">
                                         <label class="col-sm-3"> @{{item.name}} </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-8">
                                             <input ng-model="item.description" type="text" class="form-control input-sm"
                                                    placeholder="Nhập mô tả...">
                                         </div>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-sm btn-danger" ng-click="deleteAttribute(item)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+
+                                {{-- Hình ảnh sản phẩm --}}
                                 <div id="selectMenu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Hình ảnh</label>
-                                        <div class="col-sm-9">
-                                            <div id="my-dropzone" action="{{route('uploadImage')}}" class="dropzone">  {{csrf_field()}}
+                                        <div class="col-sm-5" align="center">
+                                            <img src="@{{selected.default_image}}" class="image w3-round">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <form id="my_dropzone02" method="post" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
                                                     <strong> nhấn vào đây </strong>
                                                 </div>
-                                            </div>
+                                                <div class="fallback">
+                                                    <input name="file" type="file">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button ng-click="uploadImage()" class="btn btn-success"> Upload ảnh </button>
                                         </div>
                                     </div>
                                 </div>
@@ -485,6 +501,43 @@
                             <button id="updateProduct" type="button" class="btn btn-sm btn-info"> Chỉnh sửa </button>
                             <button id="submit" ng-click="updateProduct()" type="submit" class="btn btn-sm btn-success" hidden> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- CHỌN THUỘC TÍNH --}}
+        <div class="modal fade" id="chooseAttribute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title w3-text-blue" id="myModalLabel"> Chọn thuộc tính </h4>
+                    </div>
+                    <div class="modal-body">
+                        <input ng-model="termAttribute" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
+                        <h1></h1>
+                        {{--DANH SÁCH THUỘC TÍNH--}}
+                        <table class="w3-table table-hover table-bordered w3-centered">
+                            <thead class="w3-blue-grey">
+                            <th> Tên </th>
+                            <th> Mô tả </th>
+                            </thead>
+                            <tbody>
+                            <tr ng-show="attributes.length > 0" class="item"
+                                dir-paginate="attribute in attributes | filter:termAttribute | itemsPerPage: 4"
+                                ng-click="addAttribute(attribute)" pagination-id="chooseAttribute">
+                                <td> @{{ attribute.name }} </td>
+                                <td> @{{ attribute.description }} </td>
+                            </tr>
+                            <tr class="item" ng-show="attributes.length==0">
+                                <td colspan="4"> Không có dữ liệu </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div style="margin-left: 35%;">
+                            <dir-pagination-controls pagination-id="chooseAttribute" max-size="4"> </dir-pagination-controls>
                         </div>
                     </div>
                 </div>

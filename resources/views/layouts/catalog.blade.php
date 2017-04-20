@@ -56,7 +56,7 @@
                     <a href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
                     <a href="{{route('list-input-store')}}" class="list-group-item"> Nhập hàng </a>
                     <a href="#" class="list-group-item"> Xuất kho </a>
-                    <a href="#" class="list-group-item"> Chuyển kho </a>
+                    <a href="{{route('list-store-tranfer')}}" class="list-group-item"> Chuyển kho </a>
                 </div>
             </div>
         </div>

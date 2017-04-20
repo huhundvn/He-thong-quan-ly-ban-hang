@@ -7,10 +7,10 @@
  */
 return [
 	'auth' => [
-		'api_key' => '72157679322436994-af4fd42106f68b6b',
-		'api_secret' => '4c13b1e91661a7e1',
-		'oauth_token' => null,
-		'oauth_token_secret' => null,
+		'api_key' => '756ea403119dcd30213a49ce06f53025',
+		'api_secret' => 'fe6ffc4de27671e5',
+		'oauth_token' => '72157679322436994-af4fd42106f68b6b',
+		'oauth_token_secret' => '4c13b1e91661a7e1',
 	],
 	'host' => 'flickr',
 ];
