@@ -39,7 +39,7 @@
                     <button id="viewList" type="button" class="btn btn-sm w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
                     </button>
-                    <button id="viewGrid" type="button" class="btn btn-sm btn-default">
+                    <button id="viewGrid" type="button" class="btn btn-sm">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
                 </div>
@@ -102,7 +102,7 @@
                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct" ng-show="0==product.status"> Xóa SP </button>
                 </div>
             </div>
-        </div hidden>
+        </div>
 
         {{-- !PHÂN TRANG! --}}
         <div style="margin-left: 35%;">
