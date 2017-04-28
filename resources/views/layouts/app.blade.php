@@ -11,6 +11,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/angucomplete.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
     <style>
@@ -70,7 +71,6 @@
 
     <!-- Libary JavaScript -->
     <script src="{{asset('js/toastr.js')}}"></script>
-    <script src="{{asset('js/validate.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -82,6 +82,7 @@
     <script src="{{ asset('angularJS/dirPagination.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
     <script src="{{ asset('angularJS/cleave-phone.vn.js') }}"></script>
+    <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
     <script src="{{ asset('angularJS/Config.js') }}"> </script>
     @yield('script')
     <script>
@@ -142,7 +143,6 @@
             .on('input', function(){
                 return this.setCustomValidity('');
             });
-
     </script>
 
 </body>

@@ -15,7 +15,7 @@
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="#" class="list-group-item"> Đơn hàng </a>
+                    <a href="{{route('list-order')}}" class="list-group-item"> Đơn hàng </a>
                     <a href="{{route('list-price-output')}}" class="list-group-item"> Bảng giá bán </a>
                     <a href="#" class="list-group-item"> Trả về </a>
                 </div>
@@ -71,8 +71,10 @@
             </div>
             <div id="collapse5" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="{{route('list-account')}}" class="list-group-item"> Danh sách tài khoản </a>
-                    <a href="{{route('list-voucher')}}" class="list-group-item"> Khoản thu/chi </a>
+                    <a href="{{ route('list-account') }}" class="list-group-item"> Danh sách tài khoản </a>
+                    <a href="{{ route('list-voucher') }}" class="list-group-item"> Khoản thu/chi </a>
+                    <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Khách hàng thanh toán </a>
+                    <a href="{{ route('list-voucher') }}" class="list-group-item"> Thanh toán nhà cung cấp </a>
                 </div>
             </div>
         </div>

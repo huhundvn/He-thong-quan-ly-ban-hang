@@ -64,6 +64,7 @@ app.controller('ProductController', function($scope, $http, API) {
         });
     };
 
+
     // Up ảnh lên server Flickr
     $scope.uploadImage = function () {
         var myDropzone = Dropzone.forElement("#my_dropzone");
@@ -71,12 +72,17 @@ app.controller('ProductController', function($scope, $http, API) {
         myDropzone.processQueue();
         myDropzone02.processQueue();
         myDropzone.on("success", function(file, response) {
+            $scope.tmp = {};
             $scope.new.default_image = response;
-            $scope.image.push(response);
+            $scope.tmp.image = response;
+            $scope.image.push($scope.tmp);
+
         });
         myDropzone02.on("success", function(file, response) {
+            $scope.tmp = {};
             $scope.selected.default_image = response;
-            $scope.image.push(response);
+            $scope.tmp.image = response;
+            $scope.image.push($scope.tmp);
         });
     };
 
@@ -137,6 +143,7 @@ app.controller('ProductController', function($scope, $http, API) {
     $scope.deleteAttribute = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa 1 thuộc tính khỏi danh sách.');
+
     };
 
     // Xóa thuộc tính hiện có của sản phẩm
@@ -148,7 +155,24 @@ app.controller('ProductController', function($scope, $http, API) {
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
-                toastr.success('Đã xóa 1 thuộc tính sản phẩm.');
+                toastr.info('Đã xóa 1 thuộc tính sản phẩm.');
+                $scope.readProduct($scope.selected);
+            } else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    // Xóa hình ảnh của sản phẩm
+    $scope.deleteProductImage = function(selected) {
+        $http({
+            method : 'DELETE',
+            url : API + 'product-image/' + selected.id,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.info('Đã xóa 1 hình ảnh sản phẩm.');
+                $scope.readProduct($scope.selected);
             } else
                 toastr.error(response.data[0]);
         });
@@ -159,6 +183,11 @@ app.controller('ProductController', function($scope, $http, API) {
         for (var i=0; i<$scope.data.length; i++) {
             $scope.data[i].product_id = $scope.selected.id;
             $scope.createAttributeForProduct($scope.data[i]);
+        }
+        for (var j=0; j<$scope.image.length; j++) {
+            $scope.image[j].product_id = $scope.selected.id;
+            console.log($scope.image[j]);
+            $scope.createImageForProduct($scope.image[j]);
         }
         if( CKEDITOR.instances.description.getData() )
             $scope.selected.description = CKEDITOR.instances.description.getData();
@@ -228,9 +257,12 @@ $('#readProduct').on('show.bs.modal', function (event) {
     modal.find('#code').attr('readOnly', true);
     CKEDITOR.instances.description.setReadOnly(true);
     CKEDITOR.instances.user_guide.setReadOnly(true);
+    var myDropzone = Dropzone.forElement(".dropzone");
+    myDropzone.removeAllFiles();
     modal.find('#category').attr('disabled', true);
     modal.find('#manufacturer').attr('disabled', true);
     modal.find('#unit').attr('disabled', true);
+    modal.find('#web_price').attr('readOnly', true);
     modal.find('#min_inventory').attr('readOnly', true);
     modal.find('#max_inventory').attr('readOnly', true);
     modal.find('#warranty_period').attr('readOnly', true);
@@ -238,6 +270,8 @@ $('#readProduct').on('show.bs.modal', function (event) {
     modal.find('#weight').attr('readOnly', true);
     modal.find('#size').attr('readOnly', true);
     modal.find('#volume').attr('readOnly', true);
+    modal.find('#addAttribute').attr('disabled', true);
+    modal.find('#addImage').attr('disabled', true);
     modal.find('#submit').hide();
     modal.find('#updateProduct').show();
     modal.find('#updateProduct').click(function () {
@@ -252,6 +286,7 @@ $('#readProduct').on('show.bs.modal', function (event) {
         modal.find('#category').removeAttr('disabled');
         modal.find('#manufacturer').removeAttr('disabled');
         modal.find('#unit').removeAttr('disabled');
+        modal.find('#web_price').removeAttr('readOnly');
         modal.find('#min_inventory').removeAttr('readOnly');
         modal.find('#max_inventory').removeAttr('readOnly');
         modal.find('#warranty_period').removeAttr('readOnly');
@@ -259,17 +294,21 @@ $('#readProduct').on('show.bs.modal', function (event) {
         modal.find('#weight').removeAttr('readOnly');
         modal.find('#size').removeAttr('readOnly', true);
         modal.find('#volume').removeAttr('readOnly', true);
+        modal.find('#addAttribute').removeAttr('disabled');
+        modal.find('#addImage').removeAttr('disabled');
         modal.find('#updateProduct').hide();
         modal.find('#submit').show();
     });
 });
 
 $("#my_dropzone").dropzone({
+    maxFilesize: 2,
     autoProcessQueue: false,
     addRemoveLinks: true
 });
 
 $("#my_dropzone02").dropzone({
+    maxFilesize: 2,
     autoProcessQueue: false,
     addRemoveLinks: true,
 });

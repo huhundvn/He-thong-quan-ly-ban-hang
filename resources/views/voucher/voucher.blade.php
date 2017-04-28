@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-4 col-xs-2">
+            <div class="col-lg-6 col-xs-6">
                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createVoucher">
                     Phiếu thu mới </button>
                 <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createPaymentVoucher">

@@ -5,7 +5,8 @@
 @endsection
 
 @section('location')
-    <li> Quản lý khách hàng </li>
+    <li> Khách hàng </li>
+    <li> Danh sách khách hàng </li>
 @endsection
 
 @section('content')
@@ -20,11 +21,17 @@
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
                 <a href="{{route('downloadCustomerTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
-                <button class="btn btn-sm btn-default">
-                    <span class="glyphicon glyphicon-print"></span> In </button>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên khách hàng...">
+            <div class="col-lg-2 col-xs-2">
+                <input ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên khách hàng...">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.customer_group_id" class="form-control input-sm">
+                    <option value=""> -- Nhóm khách hàng -- </option>
+                    <option ng-repeat="customerGroup in customerGroups" value="@{{customerGroup.id}}">
+                        @{{customerGroup.name}}
+                    </option>
+                </select>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{customers.length}} mục </button>
@@ -51,7 +58,7 @@
             <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="customers.length > 0" dir-paginate="customer in customers | filter:term | itemsPerPage: 7" ng-click="readCustomer(customer)">
+            <tr class="item" ng-show="customers.length > 0" dir-paginate="customer in customers | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readCustomer(customer)">
                 <td data-toggle="modal" data-target="#readCustomer"> KH-@{{ customer.id}} </td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.name}} </td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.email}}</td>

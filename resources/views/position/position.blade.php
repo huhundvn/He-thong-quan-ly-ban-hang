@@ -58,7 +58,7 @@
 
         {{-- !TẠO CHỨC VỤ MỚI! --}}
         <div class="modal fade" id="createPosition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <form class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -78,8 +78,56 @@
                                     <textarea ng-model="new.description" class="form-control"> </textarea>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label> Bán hàng </label> <br/>
+                                    <input ng-model="role.num1" type="checkbox"> Quản lý đơn hàng <br/>
+                                    <input ng-model="role.num2" type="checkbox"> Quản lý bảng giá <br/>
+                                    <input ng-model="role.num3" type="checkbox"> Quản lý trả về <br/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Sản phẩm </label> <br/>
+                                    <input ng-model="role.num4" type="checkbox"> Quản lý sản phẩm <br/>
+                                    <input ng-model="role.num5" type="checkbox"> Quản lý nhà cung cấp <br/>
+                                    <input ng-model="role.num6" type="checkbox"> Quản lý nhà sản xuất <br/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Kho </label> <br/>
+                                    <input ng-model="role.num7" type="checkbox"> Quản lý danh sách kho <br/>
+                                    <input ng-model="role.num8" type="checkbox"> Quản lý sản phẩm ở kho <br/>
+                                    <input ng-model="role.num9" type="checkbox"> Quản lý nhập hàng <br/>
+                                    <input ng-model="role.num10" type="checkbox"> Quản lý xuất kho <br/>
+                                    <input ng-model="role.num11" type="checkbox"> Quản lý chuyển kho <br/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Kế toán </label> <br/>
+                                    <input ng-model="role.num12" type="checkbox"> Quản lý tài khoản <br/>
+                                    <input ng-model="role.num13" type="checkbox"> Quản lý thu/chi <br/>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label> Báo cáo </label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Khách hàng </label> <br/>
+                                    <input ng-model="role.num13" type="checkbox"> Quản lý khách hàng <br/>
+                                    <input ng-model="role.num14" type="checkbox"> Quản lý nhóm khách hàng <br/>
+                                    <input ng-model="role.num15" type="checkbox"> Xem lịch sử mua hàng <br/>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Khuyến mãi </label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label> Nhân viên </label> <br/>
+                                    <input ng-model="role.num16" type="checkbox"> Quản lý nhân viên <br/>
+                                    <input ng-model="role.num17" type="checkbox"> Quản lý chức vụ <br/>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
+                            @{{role}}
                             <button ng-click="createPosition()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>

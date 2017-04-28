@@ -61,6 +61,32 @@ class StoreTranferController extends Controller
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 
+	// API xác nhận chuyển kho
+	public function confirm($id, $status)
+	{
+		$selected = StoreTranfer::find($id);
+		// Nhập hàng vao kho, cập nhật số lượng
+		if($status==3 && ($selected -> status) !=3) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
+			$rows = StoreTranfer::join('detail_store_tranfer', 'detail_store_tranfer.store_tranfer_id', '=', 'store_tranfer.id')
+				-> where('store_tranfer.id', '=', $id)
+				-> get(); //Lây chi tiết danh sách các mặt hàng cần nhập
+			foreach ($rows as $row) {
+				// Cập nhật hàng trong kho tương ứng
+				$update = new ProductInStore();
+				$update -> product_id = $row -> product_id;
+				$update -> store_id = $row -> store_id;
+				$update -> supplier_id = $row -> supplier_id;
+				$update -> quantity = $row -> quantity;
+				$update -> price = $row -> price;
+				$update -> expried_date = $row -> expried_date;
+				$update -> save();
+			}
+		}
+		$selected -> status = $status;
+		$selected -> save();
+		return response()->json(['success' => trans('message.update_success')]);
+	}
+
 	// Xem lịch sử chuyển kho
 	public function listStoreTranfer()
 	{

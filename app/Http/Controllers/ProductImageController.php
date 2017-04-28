@@ -42,7 +42,7 @@ class ProductImageController extends Controller
 	 */
 	public function show($id)
 	{
-		return Attribute::find($id);
+		return ProductImage::find($id);
 	}
 
 	/**
@@ -71,7 +71,7 @@ class ProductImageController extends Controller
 	 */
 	public function destroy($id)
 	{
-		$delete = Attribute::find($id) -> delete();
+		$delete = ProductImage::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 }

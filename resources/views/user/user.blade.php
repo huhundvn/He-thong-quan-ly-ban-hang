@@ -5,7 +5,8 @@
 @endsection
 
 @section('location')
-    <li> Quản lý nhân viên </li>
+    <li> Nhân viên </li>
+    <li> Danh sách nhân viên </li>
 @endsection
 
 @section('content')
@@ -21,8 +22,15 @@
                 <button class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </button>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input ng-change="searchUser()" ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
+            <div class="col-lg-2 col-xs-2">
+                <input ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên...">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.status" class="form-control input-sm">
+                    <option value=""> --Trạng thái--</option>
+                    <option value="1"> Hoạt động </option>
+                    <option value="0"> Dừng hoạt động </option>
+                </select>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{users.length}} mục </button>
@@ -42,6 +50,7 @@
         <table id="listUser" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
+                <th> Mã </th>
                 <th> @lang('user.name') </th>
                 <th> @lang('user.email') </th>
                 <th> @lang('user.phone') </th>
@@ -51,7 +60,8 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr ng-show="users.length > 0" class="item" dir-paginate="user in users | filter:term | itemsPerPage: 7" ng-click="readUser(user)">
+            <tr ng-show="users.length > 0" class="item" dir-paginate="user in users | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readUser(user)">
+                <td data-toggle="modal" data-target="#readUser"> NV-@{{ user.id}} </td>
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.name}} </td>
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.email}}</td>
                 <td data-toggle="modal" data-target="#readUser"> @{{ user.phone}} </td>

@@ -1,22 +1,30 @@
 /**
- * Created by Good on 4/16/2017.
+ * Created by Good on 4/22/2017.
  */
-app.controller('InputStoreController', function($scope, $http, API) {
+app.controller('OrderController', function($scope, $http, API) {
+
+    $http.get(API + 'customer').then(function (response) {
+        $scope.customers = response.data;
+    });
+
+    $http.get(API + 'customerGroup').then(function (response) {
+        $scope.customerGroups = response.data;
+    });
 
     $http.get(API + 'user').then(function (response) {
         $scope.users = response.data;
     });
 
-    $http.get(API + 'store').then(function (response) {
+    $http.get(API + 'price-output').then(function (response) {
+        $scope.priceOutputs = response.data;
+    });
+
+    $http.get(API + 'storage').then(function (response) {
         $scope.stores = response.data;
     });
 
     $http.get(API + 'supplier').then(function (response) {
         $scope.suppliers = response.data;
-    });
-
-    $http.get(API + 'account').then(function (response) {
-        $scope.accounts = response.data;
     });
 
     $http.get(API + 'product').then(function (response) {
@@ -27,60 +35,47 @@ app.controller('InputStoreController', function($scope, $http, API) {
         $scope.units = response.data;
     });
 
-    // Lấy danh sách nhóm sản phẩm
-    $http.get(API + 'category').then(function (response) {
-        $scope.categorys = response.data;
-    });
-
-    // Lấy danh sách nhà cung cấp
-    $http.get(API + 'manufacturer').then(function (response) {
-        $scope.manufacturers = response.data;
-    });
-
-    //Load danh sách nhập kho
-    $scope.loadInputStore = function () {
-        $http.get(API + 'input-store').then(function (response) {
-            $scope.inputStores = response.data;
-        });
-    };
-    $scope.loadInputStore();
-
-
-    /**
-     * CRUD nhập kho
-     */
-
-    // Tạo nhập kho mới
-    $scope.data = [];
-    $scope.info = {};
-
-    // Tạo sản phẩm mới
-    $scope.createProduct = function () {
-        if( CKEDITOR.instances.newDescription.getData() )
-            $scope.newProduct.description = CKEDITOR.instances.newDescription.getData();
-        if ( CKEDITOR.instances.newUserGuide.getData() )
-            $scope.newProduct.user_guide = CKEDITOR.instances.newUserGuide.getData();
+    // Tạo khách hàng mới
+    $scope.createCustomer = function () {
         $http({
             method : 'POST',
-            url : API + 'product',
-            data : $scope.newProduct,
+            url : API + 'customer',
+            data : $scope.newCustomer,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
+                $http.get(API + 'customer').then(function (response) {
+                    $scope.customers = response.data;
+                });
             }
             else
                 toastr.error(response.data[0]);
         });
     };
 
+    //Load danh sách đơn hàng
+    $scope.loadOrder = function () {
+        $http.get(API + 'order').then(function (response) {
+            $scope.orders = response.data;
+        });
+    };
+    $scope.loadOrder();
+
+
+    /**
+     * CRUD đơn hàng
+     */
+    // Tạo đơn hàng mới
+    $scope.data = [];
+    $scope.new = {};
+
     // Thêm sản phẩm vào danh sách
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             $scope.data.push(selected);
-            $("[data-dismiss=modal]").trigger({ type: "click" });
             toastr.info('Đã thêm một sản phẩm vào danh sách.');
         } else
             toastr.info('Sản phẩm đã có trong danh sách.');
@@ -94,18 +89,18 @@ app.controller('InputStoreController', function($scope, $http, API) {
 
     // Tính tổng tiền
     $scope.getTotal = function () {
-        $scope.info.total = 0;
+        $scope.total = 0;
         for (var i=0; i<$scope.data.length; i++) {
-            $scope.info.total = $scope.info.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].price);
+            $scope.total = $scope.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].web_price);
         }
-        return $scope.info.total;
+        return $scope.total;
     };
 
     // Thêm chi tiết đơn hàng
-    $scope.createDetailInputStore = function (item) {
+    $scope.createOrderDetail = function (item) {
         $http({
             method : 'POST',
-            url : API + 'detail-input-store',
+            url : API + 'order-detail',
             data : item,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
@@ -117,32 +112,37 @@ app.controller('InputStoreController', function($scope, $http, API) {
     };
 
     // Tạo mới đơn đặt hàng
-    $scope.createInputStore = function () {
+    $scope.createOrder = function () {
         if($scope.data.length <= 0)
             toastr.info('Vui lòng thêm sản phẩm');
         else {
             var check = true;
             for (var i=0; i<$scope.data.length; i++) {
-                if($scope.data[i].price == null || $scope.data[i].expried_date == null) {
+                if($scope.data[i].quantity == null) {
                     check = false; break;
                 }
             };
             if (!check)
-                toastr.info('Vui lòng điền đủ giá nhập hoặc hạn sử dụng');
+                toastr.info('Vui lòng điền số lượng cần mua');
             else {
+                $scope.new.customer_id = $scope.selectedCustomer.originalObject.id;
+                $scope.new.total = $scope.getTotal() + parseInt($scope.getTotal() * 0.1);
+                console.log($scope.new);
                 $http({
                     method : 'POST',
-                    url : API + 'input-store',
-                    data : $scope.info,
+                    url : API + 'order',
+                    data : $scope.new,
                     cache : false,
                     header : {'Content-Type':'application/x-www-form-urlencoded'}
                 }).then(function (response) {
                     if(response.data.success) {
                         for (var i=0; i<$scope.data.length; i++) {
-                            $scope.data[i].input_store_id = response.data.success;
-                            $scope.createDetailInputStore($scope.data[i]);
+                            $scope.data[i].order_id = response.data.success;
+                            console.log($scope.data[i]);
+                            $scope.createOrderDetail($scope.data[i]);
                         }
-                        toastr.success('Đã thêm thành công.');
+                        toastr.success('Đã thêm đơn hàng thành công.');
+                        $scope.data = [];
                     } else
                         toastr.error(response.data[0]);
                 });
@@ -150,14 +150,10 @@ app.controller('InputStoreController', function($scope, $http, API) {
         }
     };
 
-
-    // Xem danh sách nhập kho
-    $scope.readInputStore = function (inputStore) {
-        $http.get(API + 'input-store/' + inputStore.id).then(function (response) {
+    // Xem danh sách đơn hàng
+    $scope.readOrder = function (order) {
+        $http.get(API + 'order/' + order.id).then(function (response) {
             $scope.selected = response.data;
-        });
-        $http.get(API + 'get-detail-input-store/' + inputStore.id).then(function (response) {
-            $scope.detail = response.data;
         });
     };
 
@@ -168,28 +164,29 @@ app.controller('InputStoreController', function($scope, $http, API) {
 
     // Duyệt yêu cầu nhập hàng
     $scope.changeStatus = function () {
-        $http.get(API + 'confirm-input-store/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
+        $http.get(API + 'confirm-order/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadInputStore();
+                $scope.loadOrder();
             } else
                 toastr.error(response.data[0]);
         });
     }
 
     // Xóa bảng giá
-    $scope.deleteInputStore = function () {
+    $scope.deleteOrder = function () {
+        console.log($scope.selected);
         $http({
             method : 'DELETE',
-            url : API + 'input-store/' + $scope.selected.id,
+            url : API + 'order/' + $scope.selected.id,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadInputStore();
+                $scope.loadOrder();
             } else
                 toastr.error(response.data[0]);
         });
@@ -204,4 +201,9 @@ app.controller('InputStoreController', function($scope, $http, API) {
             delimiters: ['-']
         }
     };
+
+});
+
+$('#createCustomer').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
 });

@@ -1,58 +1,53 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Yêu cầu chuyển kho
+    Larose | Tạo hóa đơn thanh toán
 @endsection
 
 @section('location')
-    <li> Chuyển kho </li>
-    <li> Yêu cầu chuyển kho </li>
+    <li> Kế Toán </li>
+    <li> Khách hàng thanh toán </li>
 @endsection
 
 @section('content')
-    <div ng-controller="StoreTranferController">
+    <div ng-controller="PriceOutputController">
 
         {{-- Thông tin nhập--}}
         <div class="row">
-            <div class="col-sm-4">
-                <label> Ngày chuyển dự kiến </label>
-                <input ng-model="info.tranfer_date" type="date" class="form-control input-sm">
+            <div class="col-xs-6">
+                <label class="col-xs-4"> Tên khách hàng </label>
+                <div class="col-xs-8">
+                    <input ng-model="info.name" type="text" class="form-control input-sm">
+                </div>
+                <label class="col-xs-4"> Tên khách hàng </label>
+                <div class="col-xs-8">
+                    <input ng-model="info.name" type="text" class="form-control input-sm">
+                </div>
             </div>
-            <div class="col-sm-4">
-                <label> Kho chuyển </label>
-                <select ng-model="info.store_id" class="form-control input-sm">
-                    <option value="" selected> -- Kho chuyển -- </option>
-                    <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
-                </select>
-            </div>
-            <div class="col-sm-4">
-                <label> Kho nhận </label>
-                <select ng-model="info.to_store_id" class="form-control input-sm">
-                    <option value="" selected> -- Kho nhận -- </option>
-                    <option ng-repeat="store in stores" ng-show="store.id != info.store_id" value="@{{store.id}}"> @{{store.name}} </option>
-                </select>
+            <div class="col-xs-6">
+                <label> Ngày bắt đầu </label>
+                <input ng-model="info.start_date" type="date" class="form-control input-sm">
             </div>
         </div>
-        <h1></h1>
-        <label> Lý do chuyển </label>
-        <textarea ng-model="info.reason" class="form-control"> </textarea>
 
         <hr/>
 
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <button type="submit" class="btn btn-success btn-sm" ng-click="createStoreTranfer()"> Gửi yêu cầu </button>
-                <a href="{{route('list-store-tranfer')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
+            <div class="col-lg-3 col-xs-3">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
+                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
             </div>
-
         </div>
 
         <hr/>
@@ -61,31 +56,23 @@
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> STT </th>
-            <th> Tên </th>
             <th> Mã vạch </th>
+            <th> Tên </th>
             <th> Đơn vị tính </th>
-            <th> Số lượng chuyển </th>
-            <th> Còn lại </th>
-            <th> Giá nhập (VNĐ) </th>
-            <th> Hạn sử dụng </th>
+            <th> Giá bán (VNĐ) </th>
             <th> Xóa </th>
             </thead>
             <tbody ng-init="total = 0">
             <tr ng-show="data.length > 0" class="item" dir-paginate="item in data | itemsPerPage: 4">
                 <td> @{{ $index+1 }}</td>
-                <td> @{{ item.name }} </td>
                 <td> @{{ item.code }} </td>
+                <td> @{{ item.name }} </td>
                 <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
                     @{{ unit.name }}
                 </td>
                 <td>
-                    <input cleave="options.numeral" type="text"
-                           ng-model="item.quantity_tranfer" ng-change="checkQuantity(item.quantity_tranfer, item.quantity)"
-                           class="form-control input-sm input-numeral">
+                    <input cleave="options.numeral" type="text" ng-model="item.price_output" class="form-control input-sm input-numeral">
                 </td>
-                <td> @{{ item.quantity - item.quantity_tranfer }} </td>
-                <td> @{{ item.price | number: 0 }} </td>
-                <td> @{{ item.expried_date | date: "dd/MM/yyyy" }} </td>
                 <td>
                     <button class="btn btn-sm btn-danger btn-sm" ng-click="delete(item)">
                         <span class="glyphicon glyphicon-trash"></span>
@@ -99,9 +86,7 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%;">
-            <dir-pagination-controls max-size="4"> </dir-pagination-controls>
-        </div>
+        <dir-pagination-controls max-size="4"></dir-pagination-controls>
 
         {{-- Xem biểu mẫu --}}
         <div class="modal fade" id="readReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -125,55 +110,38 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h2 align="center"> <b> Phiếu chuyển kho </b> </h2>
+                                <h2 align="center"> <b> Bảng giá bán </b> </h2>
                                 <hr/>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div ng-repeat="store in stores" ng-show="store.id==info.store_id">
-                                        Kho chuyển: @{{ store.name }} <br/>
-                                        Địa chỉ: @{{ store.address }} <br/>
-                                        Số điện thoại: @{{ store.phone }}
-                                    </div>
+                                    Ngày bắt đầu: @{{ info.start_date | date: "dd/MM/yyyy"}} <br/>
+                                    Ngày kết thúc : @{{ info.end_date | date: "dd/MM/yyyy" }} <br/>
+                                    Áp dụng cho: @{{ info.phone }}
                                 </div>
                                 <div class="col-sm-6">
-                                    <div ng-repeat="store in stores" ng-show="store.id==info.to_store_id">
-                                        Kho nhận: @{{ store.name }} <br/>
-                                        Địa chỉ: @{{ store.address }} <br/>
-                                        Số điện thoại: @{{ store.phone }}
-                                    </div>
+                                    Tên bảng giá: @{{ info.name }}<br/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <h1></h1>
-                                    Ngày chuyển dự kiến: @{{info.tranfer_date | date: "dd/MM/yyyy"}}<br/>
-                                    Lý do chuyển: @{{ info.reason }}
-                                    <h1></h1>
-                                </div>
+                                <div class="col-sm-12"> Ghi chú: </div>
                             </div>
                             <div class="row">
                                 <table class="w3-table table-bordered w3-centered">
                                     <thead>
-                                    <th> Mã SP </th>
-                                    <th> Tên </th>
+                                    <th> STT </th>
                                     <th> Mã vạch </th>
+                                    <th> Tên </th>
                                     <th> Đơn vị tính </th>
-                                    <th> Số lượng chuyển </th>
-                                    <th> Hạn sử dụng </th>
-                                    <th> Giá nhập (VNĐ) </th>
+                                    <th> Giá bán (VNĐ) </th>
                                     </thead>
-                                    <tbody ng-init="total = 0">
-                                    <tr ng-show="data.length > 0" class="item" dir-paginate="item in data | itemsPerPage: 4">
+                                    <tbody>
+                                    <tr ng-show="data.length > 0" class="item" ng-repeat="item in data">
                                         <td> @{{ $index+1 }}</td>
-                                        <td> @{{ item.name }} </td>
                                         <td> @{{ item.code }} </td>
-                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                                            @{{ unit.name }}
-                                        </td>
-                                        <td> @{{item.quantity_tranfer}} </td>
-                                        <td> @{{ item.expried_date | date: "dd/MM/yyyy" }} </td>
-                                        <td> @{{ item.price | number: 0 }} </td>
+                                        <td> @{{ item.name }} </td>
+                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">@{{ unit.name }}</td>
+                                        <td> @{{ item.price_output | number:0 }} </td>
                                     </tr>
                                     <tr class="item" ng-show="data.length==0">
                                         <td colspan="9"> Không có dữ liệu </td>
@@ -183,16 +151,13 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3" align="center">
-                                    <b> Quản lý kho chuyển </b><br/> (Ký tên)
+                                <div class="col-sm-4" align="center">
+                                    <b> Chủ cửa hàng </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-3" align="center">
-                                    <b> Quản lý kho nhận </b><br/> (Ký tên)
-                                </div>
-                                <div class="col-sm-3" align="center">
+                                <div class="col-sm-4" align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-3" align="center">
+                                <div class="col-sm-4" align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>
@@ -214,32 +179,22 @@
                         <h4 class="modal-title w3-text-blue" id="myModalLabel"> Chọn sản phẩm </h4>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                        <div class="col-sm-8">
-                            <input ng-model="term.name" type="text" class="form-control input-sm">
-                        </div>
-                        <div class="col-sm-4">
-                            <select ng-model="info.store_id" class="form-control input-sm" disabled>
-                                <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
-                            </select>
-                        </div>
-                        </div>
+                        <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
                         <h1></h1>
                         {{-- !DANH SÁCH SẢN PHẨM! --}}
                         <table class="w3-table table-hover table-bordered w3-centered">
                             <thead>
                             <tr class="w3-blue-grey">
-                                <th> Mã SP </th>
+                                <th> STT </th>
                                 <th> Tên </th>
                                 <th> Mã vạch </th>
                                 <th> Đơn vị tính </th>
-                                <th> Số lượng hiện có </th>
-                                <th> Giá mua </th>
-                                <th> Hạn sử dụng </th>
+                                <th> Số lượng </th>
+                                <th> Tình trạng </th>
                             </thead>
                             <tbody>
                             <tr class="item"
-                                ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | itemsPerPage: 5"
+                                ng-show="products.length > 0" dir-paginate="product in products | filter:term | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
                                 <td> @{{$index+1}} </td>
                                 <td> @{{ product.name}} </td>
@@ -247,9 +202,11 @@
                                 <td ng-repeat="unit in units" ng-show="unit.id==product.unit_id">
                                     @{{ unit.name }}
                                 </td>
-                                <td> @{{ product.quantity | number: 0 }} </td>
-                                <td> @{{ product.price | number: 0 }} </td>
-                                <td> @{{ product.expried_date | date: "dd/MM/yyyy" }} </td>
+                                <td> @{{ product.total_quantity | number: 0 }}</td>
+                                <td>
+                                    <p ng-show="product.total_quantity != 0"> Còn hàng </p>
+                                    <p ng-show="product.total_quantity == 0"> Hết hàng </p>
+                                </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">
                                 <td colspan="7"> Không có dữ liệu </td>
@@ -269,5 +226,5 @@
 
 {{-- !ANGULARJS! --}}
 @section('script')
-    <script src="{{ asset('angularJS/StoreTranferController.js') }}"></script>
+    <script src="{{ asset('angularJS/PriceOutputController.js') }}"></script>
 @endsection

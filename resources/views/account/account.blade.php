@@ -5,6 +5,7 @@
 @endsection
 
 @section('location')
+    <li> Kế toán </li>
     <li> Danh sách tài khoản </li>
 @endsection
 
@@ -34,14 +35,14 @@
         {{-- DANH SÁCH TÀI KHOẢN --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-            <th> STT </th>
+            <th> Mã </th>
             <th> Tên tài khoản </th>
             <th> Số tiền hiện còn </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr class="item" ng-show="accounts.length > 0" class="item" dir-paginate="account in accounts | filter:term | itemsPerPage: 7" ng-click="readAccount(account)">
-                <td data-toggle="modal" data-target="#readAccount"> @{{$index + 1}} </td>
+                <td data-toggle="modal" data-target="#readAccount"> TK-@{{ account.id }} </td>
                 <td data-toggle="modal" data-target="#readAccount"> @{{ account.name }} </td>
                 <td data-toggle="modal" data-target="#readAccount"> @{{ account.total | number:0 }} VNĐ </td>
                 <td>

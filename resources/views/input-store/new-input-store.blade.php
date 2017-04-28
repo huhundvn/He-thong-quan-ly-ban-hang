@@ -54,7 +54,7 @@
                 <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
             </div>
             <div class="col-lg-3 col-xs-3">
-                <button class="btn btn-sm w3-blue-grey"> Tổng tiền: @{{ total }} VNĐ </button>
+                <button class="btn btn-sm w3-blue-grey"> Tổng tiền: @{{ getTotal() | number:0 }} VNĐ </button>
             </div>
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
@@ -77,7 +77,7 @@
             <th> Thành tiền (VNĐ) </th>
             <th> Xóa </th>
             </thead>
-            <tbody ng-init="total = 0">
+            <tbody>
             <tr ng-show="data.length > 0" class="item" dir-paginate="item in data | itemsPerPage: 4">
                 <td> @{{ $index+1 }}</td>
                 <td> @{{ item.code }} </td>
@@ -113,8 +113,6 @@
         <div style="margin-left: 35%;">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
-
-        <hr/>
 
         {{-- Xem biểu mẫu --}}
         <div class="modal fade" id="readReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

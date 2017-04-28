@@ -5,7 +5,8 @@
 @endsection
 
 @section('location')
-    <li> Danh sách kho cửa hàng </li>
+    <li> Kho </li>
+    <li> Danh sách kho, cửa hàng </li>
 @endsection
 
 @section('content')

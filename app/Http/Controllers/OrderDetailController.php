@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+
+use App\OrderDetail;
 
 class OrderDetailController extends Controller
 {
@@ -14,12 +19,12 @@ class OrderDetailController extends Controller
 	public function store(Request $request)
 	{
 		$orderDetail = new OrderDetail();
-
-		$orderDetail->order_id = Input::get('order_id');
-		$orderDetail->product_id = Input::get('product_id');
-		$orderDetail->quantity = Input::get('quantity');
-		$orderDetail->total = Input::get('total');
-		$orderDetail->save();
+		$orderDetail -> order_id = Input::get('order_id');
+		$orderDetail -> product_id = Input::get('id');
+		$orderDetail -> unit_id = Input::get('unit_id');
+		$orderDetail -> price = Input::get('web_price');
+		$orderDetail -> quantity = Input::get('quantity');
+		$orderDetail -> save();
 
 		return OrderDetail::find($orderDetail->id);
 	}

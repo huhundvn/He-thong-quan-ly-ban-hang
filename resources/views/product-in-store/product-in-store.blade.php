@@ -6,7 +6,7 @@
 
 @section('location')
     <li> Kho hàng </li>
-    <li> Quản lý sản phẩm trong kho </li>
+    <li> Danh sách sản phẩm trong kho </li>
 @endsection
 
 @section('content')
@@ -16,62 +16,86 @@
         <div class="row">
             <div class="col-lg-2 col-xs-2">
                 <a class="btn btn-sm btn-success" href="{{route('createInputStore')}}">
-                    <span class="glyphicon glyphicon-plus"></span> Yêu cầu nhập hàng </a>
+                    <span class="glyphicon glyphicon-plus"></span> Nhập hàng </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-2 col-xs-2">
                 <input ng-model="term1.name" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <select ng-model="term2.store_id" class="form-control input-sm">
-                    <option value="" selected> -- Kho -- </option>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.supplier_id" class="form-control input-sm">
+                    <option value="" selected> -- Nhà cung cấp -- </option>
+                    <option ng-repeat="supplier in suppliers" value="@{{supplier.id}}"> @{{ supplier.name }} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term3.store_id" class="form-control input-sm">
+                    <option value="" selected> -- Tất cả các kho -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{ store.name }} </option>
-
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{productInStores.length}} mục </button>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <div class="btn-group">
+                    <button id="viewList" type="button" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-align-justify"></span>
+                    </button>
+                    <button id="viewGrid" type="button" class="btn btn-sm btn-default w3-blue-grey">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </button>
+                </div>
             </div>
         </div>
 
         <hr/>
 
         {{-- !DANH SÁCH SẢN PHẨM! --}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <table id="list" class="w3-table table-hover table-bordered w3-centered" hidden>
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
                 <th> Tên </th>
                 <th> Mã vạch </th>
                 <th> Đơn vị tính </th>
-                <th> Nhà sản xuất </th>
                 <th> Nhà cung cấp </th>
-                <th> Hạn sử dụng </th>
                 <th> Số lượng </th>
                 <th> Giá mua </th>
+                <th> Hạn sử dụng </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="products.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | itemsPerPage: 7" ng-click="readProduct(product)">
+            <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
                 <td data-toggle="modal" data-target="#readProduct"> SP-@{{ productInStore.product_id }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.name }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.code }}</td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="unit in units" ng-show="unit.id==productInStore.unit_id">
                     @{{ unit.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readProduct" ng-repeat="manufacturer in manufacturers" ng-show="manufacturer.id==productInStore.manufacturer_id">
-                    @{{ manufacturer.name }}
-                </td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="supplier in suppliers" ng-show="supplier.id==productInStore.supplier_id">
                     @{{ supplier.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.quantity | number: 0 }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} VNĐ </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
             </tr>
             <tr class="item" ng-show="productInStores.length==0">
                 <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
         </table>
+
+        <div id="grid" class="row" align="center">
+            <div class="col-lg-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
+                <img src="@{{productInStore.default_image}}" class="image">
+                <b> <h5 class="w3-text-blue-gray"> <b> @{{productInStore.name}} </b> </h5>
+                Giá nhập: @{{productInStore.price | number: 0}} VNĐ <br/>
+                Đang có: @{{productInStore.quantity | number: 0}} sản phẩm <br/>
+                Hạn dùng: @{{productInStore.expried_date | date: "dd/MM/yyyy" }}  </b> <br/>
+                <div class="middle">
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#readProduct"> Xem SP </button>
+                </div>
+            </div>
+        </div>
 
         {{-- !PHÂN TRANG! --}}
         <div style="margin-left: 40%;">
@@ -98,8 +122,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Mã vạch </label>
                                 <div class="col-sm-9">
-                                    <input id="code" cleave="options.code" ng-model="selected.code" type="text" class="form-control input-sm"
-                                           placeholder="Nhập mã vạch..." required>
+                                    <input id="code" cleave="options.code" ng-model="selected.code" type="text" class="form-control input-sm">
                                 </div>
                             </div>
 
@@ -200,58 +223,47 @@
                                     <div class="form-group">
                                         <label class="col-sm-3"> Khối lượng </label>
                                         <div class="col-sm-9">
-                                            <input id="weight" cleave="options.numeral" ng-model="selected.weight" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập khối lượng...">
+                                            <input id="weight" cleave="options.numeral" ng-model="selected.weight" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Kích thước </label>
                                         <div class="col-sm-9">
-                                            <input id="size" ng-model="selected.size" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập kích thước...">
+                                            <input id="size" ng-model="selected.size" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Thể tích </label>
                                         <div class="col-sm-9">
-                                            <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập thể tích...">
+                                            <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
-                                    <div class="form-group" ng-show="detail.length > 0"
-                                         dir-paginate="item in detail | itemsPerPage: 2" pagination-id="attribute">
-                                        <label class="col-sm-3"> @{{item.name}} </label>
-                                        <div class="col-sm-8">
-                                            <input ng-model="item.description" type="text" class="form-control input-sm"
-                                                   placeholder="Nhập mô tả...">
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <button class="btn btn-sm btn-danger" ng-click="deleteAttribute(item)">
-                                                <span class="glyphicon glyphicon-trash"></span>
-                                            </button>
+
+                                    {{-- Danh sách thuộc tính hiện có sản phẩm --}}
+                                    <div class="form-group" ng-show="selected.attributes.length > 0" ng-repeat="item in selected.attributes">
+                                        <label class="col-sm-3" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
+                                            @{{attribute.name}}
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <input id="volume" ng-model="item.description" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- Hình ảnh sản phẩm --}}
                                 <div id="selectMenu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Hình ảnh</label>
-                                        <div class="col-sm-9">
-                                            <div id="my-dropzone" action="{{route('uploadImage')}}" class="dropzone">  {{csrf_field()}}
-                                                <div class="dz-message needsclick">
-                                                    <h3> Kéo thả ở đây </h3> hoặc
-                                                    <strong> nhấn vào đây </strong>
-                                                </div>
-                                            </div>
+                                        <div class="col-sm-5" align="center">
+                                            <img src="@{{selected.default_image}}" class="image w3-round">
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="updateProduct" type="button" class="btn btn-sm btn-info"> Chỉnh sửa </button>
-                            <button id="submit" ng-click="updateProduct()" type="submit" class="btn btn-sm btn-success" hidden> Xác nhận </button>
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Đóng </button>
                         </div>
                     </div>
                 </div>
@@ -263,5 +275,4 @@
 
 @section('script')
     <script src="{{ asset('angularJS/ProductInStoreController.js') }}"></script>
-
 @endsection

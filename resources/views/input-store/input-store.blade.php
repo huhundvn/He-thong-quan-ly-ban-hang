@@ -119,22 +119,22 @@
                             </style>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-xs-8">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-xs-4">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
                             </div>
                             <div class="row">
-                                <h2 align="center"> <b> Phiếu mua hàng </b> </h2>
+                                <h2 align="center"> <b> Phiếu nhập kho </b> </h2>
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-xs-6">
                                     <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
                                         Nhà cung cấp: @{{ supplier.name }} <br/>
                                         Địa chỉ: @{{ supplier.address }} <br/>
@@ -143,9 +143,9 @@
                                     <div ng-repeat="account in accounts" ng-show="account.id==selected.account_id">
                                         Hình thức thanh toán: @{{account.name}}
                                     </div>
-                                    Tổng tiền: @{{ selected.total | number:0 }} <br/>
+                                    Tổng tiền: @{{ selected.total | number:0 }} VNĐ <br/>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-xs-6">
                                     <div ng-repeat="store in stores" ng-show="store.id==selected.store_id">
                                         Nhập về kho: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
@@ -155,7 +155,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12"> Ghi chú: @{{ selected.note }}</div>
+                                <div class="col-xs-12"> Ghi chú: @{{ selected.note }}</div>
                             </div>
                             <h1></h1>
                             <div class="row">
@@ -193,13 +193,13 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4" align="center">
+                                <div class="col-xs-4" align="center">
                                     <b> Giám đốc </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-4" align="center">
+                                <div class="col-xs-4" align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-4" align="center">
+                                <div class="col-xs-4" align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>

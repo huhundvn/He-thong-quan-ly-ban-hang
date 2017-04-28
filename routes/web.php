@@ -26,12 +26,7 @@ Route::get('/lang/{locale}', array(
     'uses' => 'LanguageController@change'
 ));
 
-/**
- * CRUD order
- */
-Route::resource('orders', 'OrderController');
-Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
-Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
+
 /**
  * CRUD order details
  */
@@ -82,6 +77,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('product-attribute', 'ProductAttributeController'); //CRUD chi tiết thuộc tính
 	Route::get('/get-detail-product-attribute/{product_id}', 'ProductAttributeController@getDetail');
 
+	Route::resource('product-image', 'ProductImageController'); //CRUD hình ảnh sản phẩm
+
+
 	Route::resource('category', 'CategoryController'); //CRUD nhóm sản phẩm
 
 	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
@@ -102,8 +100,15 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
 	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho
-
+	Route::get('/confirm-store-tranfer/{store_tranfer_id}/{status}', 'StoreTranferController@confirm');
 	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
+
+	Route::resource('order', 'OrderController'); //CRUD đơn đặt hàng
+	Route::get('/confirm-order/{order_id}/{status}', 'OrderController@confirm');
+
+	Route::resource('order-detail', 'OrderDetailController'); //CRUD chi tiết đơn hàng
+
+	Route::resource('customer-invoice', 'CustomerInvoiceController'); //CRUD hóa đơn khách hàng
 });
 
 
@@ -191,4 +196,12 @@ Route::group(['middleware' => 'auth'], function (){
 	//CHUYỂN KHO
 	Route::get('/list-store-tranfer', 'StoreTranferController@listStoreTranfer') -> name('list-store-tranfer');
 	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer');
+
+	//ĐƠN HÀNG
+	Route::get('/list-order', 'OrderController@listOrder') -> name('list-order');
+	Route::get('/create-order', 'OrderController@createOrder') -> name('createOrder');
+
+	//HÓA ĐƠN KHÁCH HÀNG
+	Route::get('/list-customer-invoice', 'CustomerInvoiceController@listCustomerInvoice') -> name('list-customer-invoice');
+	Route::get('/create-customer-invoice', 'CustomerInvoiceController@createCustomerInvoice') -> name('createCustomerInvoice');
 });

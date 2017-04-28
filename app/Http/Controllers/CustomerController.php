@@ -9,7 +9,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 //Model CSDL
 use App\Customer;
-use App\Bank;
 use App\CustomerGroup;
 
 class CustomerController extends Controller
@@ -29,7 +28,7 @@ class CustomerController extends Controller
     {
 	    $rules = [
 		    'name' => 'required',
-		    'email' => 'email|unique:customer,email|required',
+		    'email' => 'email|unique:customer,email',
 		    'phone' => 'required',
 		    'address' => 'required',
 		    'bank' => 'required_with:bank_account',
@@ -49,8 +48,7 @@ class CustomerController extends Controller
 		    $customer -> customer_group_id = Input::get('customer_group_id');
 		    $customer -> note = Input::get('note');
 		    $saved = $customer -> save();
-		    return response()->json(['success' => trans('message.create_success')]);
-
+		    return response()->json(['success' => 'Đã tạo khách hàng thành công']);
 	    }
     }
 

@@ -39,6 +39,7 @@ class InputStoreController extends Controller
 			$new -> account_id = Input::get('account_id');
 			$new -> input_date = Input::get('input_date');
 			$new -> supplier_id = Input::get('supplier_id');
+			$new -> total = Input::get('total');
 			$new -> status = 1;
 			$new -> save();
 			return response()->json(['success' => ($new->id)]);

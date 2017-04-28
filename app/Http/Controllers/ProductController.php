@@ -35,13 +35,12 @@ class ProductController extends Controller
 		// kiểm tra điều kiện
 		$rules = [
 			'name' => 'required|unique:product,name',
-			'code' => 'required|unique:product,code',
+			'code' => 'unique:product,code',
 			'manufacturer_id' => 'required',
 			'unit_id' => 'required',
+			'web_price' => 'required',
 			'min_inventory' => 'required',
 			'max_inventory' => 'required',
-			'warranty_period' => 'required',
-			'return_period' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -56,6 +55,7 @@ class ProductController extends Controller
 			$product -> category_id = Input::get('category_id');
 			$product -> manufacturer_id = Input::get('manufacturer_id');
 			$product -> unit_id = Input::get('unit_id');
+			$product -> web_price = Input::get('web_price');
 			$product -> min_inventory = Input::get('min_inventory');
 			$product -> max_inventory = Input::get('max_inventory');
 			$product -> warranty_period = Input::get('warranty_period');
@@ -94,8 +94,6 @@ class ProductController extends Controller
 			'unit_id' => 'required',
 			'min_inventory' => 'required',
 			'max_inventory' => 'required',
-			'warranty_period' => 'required',
-			'return_period' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -112,6 +110,7 @@ class ProductController extends Controller
 			$product -> unit_id = Input::get('unit_id');
 			$product -> min_inventory = Input::get('min_inventory');
 			$product -> max_inventory = Input::get('max_inventory');
+			$product -> web_price = Input::get('web_price');
 			$product -> warranty_period = Input::get('warranty_period');
 			$product -> return_period = Input::get('return_period');
 			$product -> weight = Input::get('weight');

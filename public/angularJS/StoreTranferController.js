@@ -15,8 +15,12 @@ app.controller('StoreTranferController', function($scope, $http, API) {
         $scope.stores = response.data;
     });
 
-    $http.get(API + 'product-in-store').then(function (response) {
+    $http.get(API + 'product').then(function (response) {
         $scope.products = response.data;
+    });
+
+    $http.get(API + 'product-in-store').then(function (response) {
+        $scope.productInStores = response.data;
     });
 
     $http.get(API + 'unit').then(function (response) {
@@ -45,6 +49,7 @@ app.controller('StoreTranferController', function($scope, $http, API) {
             $scope.data.push(selected);
             $("[data-dismiss=modal]").trigger({ type: "click" });
             toastr.info('Đã thêm một sản phẩm vào danh sách.');
+            console.log($scope.data);
         } else
             toastr.info('Sản phẩm đã có trong danh sách.');
     };
@@ -96,7 +101,8 @@ app.controller('StoreTranferController', function($scope, $http, API) {
                             $scope.data[i].store_tranfer_id = response.data.success;
                             $scope.createDetailStoreTranfer($scope.data[i]);
                         }
-                        toastr.success('Đã thêm thành công.');
+                        toastr.success('Đã thêm yêu cầu thành công.');
+                        $scope.data = [];
                     } else
                         toastr.error(response.data[0]);
                 });
@@ -105,12 +111,9 @@ app.controller('StoreTranferController', function($scope, $http, API) {
     };
 
     // Xem danh sách nhập kho
-    $scope.readInputStore = function (inputStore) {
-        $http.get(API + 'input-store/' + inputStore.id).then(function (response) {
+    $scope.readStoreTranfer = function (storeTranfer) {
+        $http.get(API + 'store-tranfer/' + storeTranfer.id).then(function (response) {
             $scope.selected = response.data;
-        });
-        $http.get(API + 'get-detail-input-store/' + inputStore.id).then(function (response) {
-            $scope.detail = response.data;
         });
     };
 
@@ -119,35 +122,36 @@ app.controller('StoreTranferController', function($scope, $http, API) {
         window.print();
     }
 
-    // Duyệt yêu cầu nhập hàng
+    // Duyệt yêu cầu chuyển kho
     $scope.changeStatus = function () {
-        $http.get(API + 'confirm-input-store/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
+        $http.get(API + 'confirm-store-tranfer/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadInputStore();
+                $scope.loadStoreTranfer();
             } else
                 toastr.error(response.data[0]);
         });
     }
 
     // Xóa bảng giá
-    $scope.deleteInputStore = function () {
+    $scope.deleteStoreTranfer = function () {
         $http({
             method : 'DELETE',
-            url : API + 'input-store/' + $scope.selected.id,
+            url : API + 'store-tranfer/' + $scope.selected.id,
             cache : false,
             header : {'Content-Type':'application/x-www-form-urlencoded'}
         }).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
-                $scope.loadInputStore();
+                $scope.loadStoreTranfer();
             } else
                 toastr.error(response.data[0]);
         });
     };
 
+    // Kiểm tra số lượng chuyển kho
     $scope.checkQuantity = function (quantity_tranfer, quantity_remain) {
         if(quantity_tranfer > quantity_remain) {
             toastr.info('Không được chuyển quá số lượng đang có trong kho.');
