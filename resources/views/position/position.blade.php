@@ -11,7 +11,7 @@
 @section('content')
     <div ng-controller="PositionController">
 
-        {{-- TÌM KIẾM DANH MỤC SẢN PHẨM --}}
+        {{-- TÌM KIẾM DANH MỤC CHỨC VỤ --}}
         <div class="row">
             <div class="col-lg-6 col-xs-6">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createPosition">
@@ -31,7 +31,7 @@
 
         <hr/>
 
-        {{--!DANH SÁCH CHỨC VỤ!--}}
+        {{-- DANH SÁCH CHỨC VỤ --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
                 <th> STT </th>
@@ -56,7 +56,7 @@
             </tbody>
         </table>
 
-        {{-- !TẠO CHỨC VỤ MỚI! --}}
+        {{-- TẠO CHỨC VỤ MỚI --}}
         <div class="modal fade" id="createPosition" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <form class="form-horizontal">
@@ -81,28 +81,28 @@
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label> Bán hàng </label> <br/>
-                                    <input ng-model="role.num1" type="checkbox"> Quản lý đơn hàng <br/>
-                                    <input ng-model="role.num2" type="checkbox"> Quản lý bảng giá <br/>
-                                    <input ng-model="role.num3" type="checkbox"> Quản lý trả về <br/>
+                                    <input ng-model="new.role.order" type="checkbox"> Quản lý đơn hàng <br/>
+                                    <input ng-model="new.role.price_output" type="checkbox"> Quản lý bảng giá <br/>
+                                    <input ng-model="new.role.return" type="checkbox"> Quản lý trả về <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Sản phẩm </label> <br/>
-                                    <input ng-model="role.num4" type="checkbox"> Quản lý sản phẩm <br/>
-                                    <input ng-model="role.num5" type="checkbox"> Quản lý nhà cung cấp <br/>
-                                    <input ng-model="role.num6" type="checkbox"> Quản lý nhà sản xuất <br/>
+                                    <input ng-model="new.role.product" type="checkbox"> Quản lý sản phẩm <br/>
+                                    <input ng-model="new.role.supplier" type="checkbox"> Quản lý nhà cung cấp <br/>
+                                    <input ng-model="new.role.manufacturer" type="checkbox"> Quản lý nhà sản xuất <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Kho </label> <br/>
-                                    <input ng-model="role.num7" type="checkbox"> Quản lý danh sách kho <br/>
-                                    <input ng-model="role.num8" type="checkbox"> Quản lý sản phẩm ở kho <br/>
-                                    <input ng-model="role.num9" type="checkbox"> Quản lý nhập hàng <br/>
-                                    <input ng-model="role.num10" type="checkbox"> Quản lý xuất kho <br/>
-                                    <input ng-model="role.num11" type="checkbox"> Quản lý chuyển kho <br/>
+                                    <input ng-model="new.role.store" type="checkbox"> Quản lý danh sách kho <br/>
+                                    <input ng-model="new.role.product_in_store" type="checkbox"> Quản lý sản phẩm ở kho <br/>
+                                    <input ng-model="new.role.input_store" type="checkbox"> Quản lý nhập hàng <br/>
+                                    <input ng-model="new.role.export_store" type="checkbox"> Quản lý xuất kho <br/>
+                                    <input ng-model="new.role.store_tranfer" type="checkbox"> Quản lý chuyển kho <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Kế toán </label> <br/>
-                                    <input ng-model="role.num12" type="checkbox"> Quản lý tài khoản <br/>
-                                    <input ng-model="role.num13" type="checkbox"> Quản lý thu/chi <br/>
+                                    <input ng-model="new.role.account" type="checkbox"> Quản lý tài khoản <br/>
+                                    <input ng-model="new.role.voucher" type="checkbox"> Quản lý thu/chi <br/>
                                 </div>
                             </div>
                             <hr/>
@@ -112,22 +112,22 @@
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Khách hàng </label> <br/>
-                                    <input ng-model="role.num13" type="checkbox"> Quản lý khách hàng <br/>
-                                    <input ng-model="role.num14" type="checkbox"> Quản lý nhóm khách hàng <br/>
-                                    <input ng-model="role.num15" type="checkbox"> Xem lịch sử mua hàng <br/>
+                                    <input ng-model="new.role.customer" type="checkbox"> Quản lý khách hàng <br/>
+                                    <input ng-model="new.role.customer_group" type="checkbox"> Quản lý nhóm khách hàng <br/>
+                                    <input ng-model="new.role.history" type="checkbox"> Xem lịch sử mua hàng <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Khuyến mãi </label>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Nhân viên </label> <br/>
-                                    <input ng-model="role.num16" type="checkbox"> Quản lý nhân viên <br/>
-                                    <input ng-model="role.num17" type="checkbox"> Quản lý chức vụ <br/>
+                                    <input ng-model="new.role.user" type="checkbox"> Quản lý nhân viên <br/>
+                                    <input ng-model="new.role.position" type="checkbox"> Quản lý chức vụ <br/>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            @{{role}}
+                            @{{new}}
                             <button ng-click="createPosition()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>

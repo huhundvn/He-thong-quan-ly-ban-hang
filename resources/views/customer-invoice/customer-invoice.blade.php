@@ -15,10 +15,6 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
-                <a href="{{ route('createCustomerInvoice') }}" class="btn btn-sm btn-success">
-                    <span class="glyphicon glyphicon-plus"></span> Tạo mới </a>
-            </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
             </div>
@@ -46,42 +42,32 @@
         {{-- DANH SÁCH ĐƠN HÀNG --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-            <th> Mã hóa đơn  </th>
             <th> Ngày thanh toán </th>
-            <th> Tạo bởi </th>
-            <th> Khách hàng </th>
             <th> Mã đơn hàng </th>
-            <th> Tổng tiền </th>
-            <th> Khách đã trả </th>
-            <th> Trạng thái </th>
-            <th> Xóa </th>
+            <th> Thanh toán bởi </th>
+            <th> Khách hàng </th>
+            <th> Tổng tiền (VNĐ) </th>
+            <th> Khách đã trả (VNĐ) </th>
+            <th> Còn nợ (VNĐ) </th>
+            <th> Thanh toán </th>
             </thead>
             <tbody>
             <tr ng-show="orders.length > 0" class="item"
                 dir-paginate="order in orders | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readOrder(order)">
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.updated_at  }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> DH-@{{ order.id }} </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.created_at | date: "dd/MM/yyyy" }} </td>
                 <td data-toggle="modal" data-target="#readInputStore" ng-repeat="user in users" ng-show="user.id == order.created_by">
                     @{{ user.name }}
                 </td>
                 <td data-toggle="modal" data-target="#readInputStore" ng-repeat="customer in customers" ng-show="customer.id==order.customer_id">
                     @{{ customer.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total | number:0 }} VNĐ </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-show="0==order.status"> Đã hủy </p>
-                    <p ng-show="1==order.status"> Chờ duyệt </p>
-                    <p ng-show="2==order.status"> Đã duyệt, đang ship hàng </p>
-                    <p ng-show="3==order.status"> Đã giao hàng </p>
-                </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total | number:0 }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total_paid | number:0 }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total - order.total_paid | number:0 }} </td>
                 <td>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
                         <span class="glyphicon glyphicon-hand-up"></span>
-                    </button>
-                </td>
-                <td>
-                    <button ng-show="0==order.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
-                        <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>
@@ -222,56 +208,49 @@
             </div>
         </div>
 
-        {{-- THAY ĐỔI TRẠNG THÁI NHẬP HÀNG --}}
+        {{-- THANH TOÁN ĐƠN HÀNG --}}
         <div class="modal fade" id="changeInputStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <form class="form-horizontal">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Xác nhận đơn hàng </h4>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thanh toán đơn hàng </h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Trạng thái </label>
+                                <label class="col-sm-3"> Tổng tiền </label>
                                 <div class="col-sm-9">
-                                    <select ng-model="newStatus" class="form-control input-sm" required>
-                                        <option value="" selected> -- Trạng thái -- </option>
-                                        <option value="2"> Xác nhận đơn hàng </option>
-                                        <option value="0"> Hủy đơn hàng </option>
-                                        <option value="3"> Đã nhập vào kho </option>
-                                    </select>
+                                    <input type="text" cleave="options.numeral" ng-model="selected.total" class="form-control input-sm" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Đã thanh toán </label>
+                                <div class="col-sm-9">
+                                    <input type="text" cleave="options.numeral" ng-model="selected.total_paid" class="form-control input-sm" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Thanh toán thêm </label>
+                                <div class="col-sm-9">
+                                    <input type="text" cleave="options.numeral" ng-model="selected.more_paid" class="form-control input-sm">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Còn lại </label>
+                                <div class="col-sm-9">
+                                    <input cleave="options.numeral" type="text" value="@{{selected.total - selected.total_paid - selected.more_paid}}" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button ng-click="changeStatus()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button ng-click="updateOrder()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Hủy </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-        {{-- XÓA ĐƠN HÀNG --}}
-        <div class="modal fade" id="deleteInputStore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title w3-text-red" id="myModalLabel"> Xóa đơn hàng </h4>
-                    </div>
-                    <div class="modal-body">
-                        Bạn thực sự muốn xóa đơn hàng này?
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-click="deleteOrder()" type="submit" class="btn btn-danger"> Xác nhận </button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"> Hủy </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 @endsection
 

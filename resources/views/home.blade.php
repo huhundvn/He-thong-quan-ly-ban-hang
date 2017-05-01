@@ -45,20 +45,4 @@
         </div>
     </div>
 </div>
-
-<p> Đơn hàng đã xác nhận </p>
-<div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar"
-         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-        40%
-    </div>
-</div>
-
-<p> Đơn hàng đã giao </p>
-<div class="progress">
-    <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
-         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-        40%
-    </div>
-</div>
 @endsection

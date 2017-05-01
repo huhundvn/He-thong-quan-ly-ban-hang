@@ -17,4 +17,9 @@ class Product extends Model
 	{
 		return $this->hasMany('App\ProductImage');
 	}
+
+	public function detailPriceOutputs()
+	{
+		return $this->hasMany('App\DetailPriceOutput');
+	}
 }

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('title')
-    404 error
+    Larose | Lỗi 404
 @endsection
 
 @section('content')
-    <h1> Trang không tồn tại </h1>
+    <h1 align="center"> Trang này không tồn tại, kiểm tra lại link </h1>
 @endsection

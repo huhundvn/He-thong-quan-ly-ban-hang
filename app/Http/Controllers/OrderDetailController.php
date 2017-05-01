@@ -29,9 +29,10 @@ class OrderDetailController extends Controller
 		return OrderDetail::find($orderDetail->id);
 	}
 
+	// Xem danh sách chi tiết đơn hàng 
 	public function listOrderDetailByOrderId($orderId)
 	{
-		$orderDetail = OrderDetail::Where('order_id', $orderId);
+		$orderDetail = OrderDetail::Where('order_id', $orderId)->with('product')->orderBy('created_at', 'desc');
 		return $orderDetail->get();
 	}
 

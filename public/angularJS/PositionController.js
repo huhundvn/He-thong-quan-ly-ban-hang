@@ -2,9 +2,8 @@
  * Created by Good on 4/10/2017.
  */
 app.controller('PositionController', function($scope, $http, API) {
-    /**
-     * Load danh sách danh mục sản phẩm
-     */
+
+    // Load danh sách chức vụ
     $scope.loadPosition = function () {
         $http.get(API + 'position').then(function (response) {
             $scope.positions = response.data;
@@ -12,9 +11,7 @@ app.controller('PositionController', function($scope, $http, API) {
     };
     $scope.loadPosition();
 
-    /**
-     * CRUD chức vụ
-     */
+    // CRUD chức vụ
     $scope.createPosition = function () {
         $http({
             method : 'POST',

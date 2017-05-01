@@ -111,8 +111,20 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <input ng-model="new.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
+                                </div>
+                                <div class="col-sm-3">
+                                    <select ng-model="new.district" class="form-control input-sm">
+                                        <option value=""> -- Huyện-- </option>
+                                        <option ng-repeat="district in districts" ng-shơw="new.province == new.district" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select ng-model="new.province" class="form-control input-sm">
+                                        <option value=""> -- Tỉnh -- </option>
+                                        <option ng-repeat="province in provinces" value="@{{province.id}}"> @{{province.type}} @{{province.name}} </option>
+                                    </select>
                                 </div>
                             </div>
                             <hr/>
@@ -133,6 +145,7 @@
                                 <label class="col-sm-3"> Nhóm khách hàng </label>
                                 <div class="col-sm-9">
                                     <select ng-model="new.customer_group_id" class="form-control input-sm">
+                                        <option value=""> -- Nhóm khách hàng -- </option>
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"> @{{x.name}} </option>
                                     </select>
                                 </div>

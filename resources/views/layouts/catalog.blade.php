@@ -1,23 +1,20 @@
 <!-- Danh sách các chức năng hệ thống -->
-<div class="w3-sidebar w3-collapse w3-animate-left w3-border-right" id="mySidebar" style="padding: 5px;"><br>
-    <!-- hiển thị thông tin người dùng đăng nhập -->
-    <br/>
-
+<div ng-controller="HomeController">
+<div class="w3-sidebar w3-collapse w3-animate-left w3-border-right" id="mySidebar" style="padding: 5px;">
     <div class="panel-group" id="accordion">
-
         {{-- Danh mục bán hàng--}}
         <div class="panel w3-blue-grey">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; @lang('catalog.sale') </a>
+                        <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp; Bán hàng </a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="list-group">
-                    <a href="{{route('list-order')}}" class="list-group-item"> Đơn hàng </a>
-                    <a href="{{route('list-price-output')}}" class="list-group-item"> Bảng giá bán </a>
-                    <a href="#" class="list-group-item"> Trả về </a>
+                    <a href="{{ route('list-order') }}" class="list-group-item"> Đơn hàng </a>
+                    <a href="{{ route('list-price-output') }}" class="list-group-item"> Bảng giá bán </a>
+                    <a href="{{ route('list-return-product') }}" class="list-group-item"> Trả về </a>
                 </div>
             </div>
         </div>
@@ -83,9 +80,16 @@
         <div class="panel w3-blue-grey">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a href="{{route('home-report')}}">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
                         <span class="glyphicon glyphicon-duplicate"></span> &nbsp; @lang('catalog.report') </a>
                 </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse">
+                <div class="list-group">
+                    <a href="{{ route('list-account') }}" class="list-group-item"> Doanh thu </a>
+                    <a href="{{ route('list-voucher') }}" class="list-group-item"> Sản phẩm </a>
+                    <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Đơn hàng </a>
+                </div>
             </div>
         </div>
 
@@ -133,7 +137,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>
 </div>

@@ -30,15 +30,6 @@
             <div id="selectMenu1" class="tab-pane fade in active">
                 <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Bảng giá </label>
-                    <div class="col-sm-9">
-                        <select ng-model="new.price_output_id" class="form-control input-sm">
-                            <option value="" selected> --Không chọn-- </option>
-                            <option ng-repeat="priceOutput in priceOutputs" value="@{{priceOutput.id}}"> @{{priceOutput.name}} </option>
-                        </select>
-                    </div>
-                </div> <h3></h3>
-                <div class="row">
                     <label class="col-sm-3"> Khách hàng </label>
                     <div class="col-sm-9">
                         <div angucomplete-alt
@@ -54,6 +45,17 @@
                         </div>
                     </div>
                 </div> <h3> </h3>
+                <div class="row">
+                    <label class="col-sm-3"> Bảng giá </label>
+                    <div class="col-sm-9">
+                        <select ng-model="new.price_output_id" class="form-control input-sm">
+                            <option value="" selected> --Không chọn-- </option>
+                            <option ng-repeat="priceOutput in priceOutputs"
+                                    ng-show="priceOutput.customer_group_id == selectedCustomer.originalObject.customer_group_id"
+                                    value="@{{priceOutput.id}}"> @{{priceOutput.name}} </option>
+                        </select>
+                    </div>
+                </div> <h3></h3>
                 <div class="row">
                     <label class="col-sm-3"> Tên khách hàng </label>
                     <div class="col-sm-9">
@@ -186,6 +188,24 @@
                     <label class="col-sm-3"> Ngân hàng </label>
                     <div class="col-sm-9">
                         <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Ngân hàng...">
+                    </div>
+                </div> <h3> </h3>
+                <div class="row">
+                    <label class="col-sm-3"> Số tiền cần thanh toán </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-sm" value="@{{getTotal()--getTotal()*0.1|number:0}}" readonly>
+                    </div>
+                </div> <h3> </h3>
+                <div class="row">
+                    <label class="col-sm-3"> Số tiền đã thanh toán </label>
+                    <div class="col-sm-9">
+                        <input cleave="options.numeral" ng-model="new.total_paid" type="text" class="form-control input-sm" placeholder="Nhập số...">
+                    </div>
+                </div> <h3> </h3>
+                <div class="row">
+                    <label class="col-sm-3"> Còn lại </label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control input-sm" value="@{{getTotal()--getTotal()*0.1 - new.total_paid | number:0}}" readonly>
                     </div>
                 </div>
             </div>

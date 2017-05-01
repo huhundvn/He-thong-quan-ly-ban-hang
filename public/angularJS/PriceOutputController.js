@@ -37,7 +37,6 @@ app.controller('PriceOutputController', function($scope, $http, API) {
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             $scope.data.push(selected);
-            $("[data-dismiss=modal]").trigger({ type: "click" });
             toastr.info('Đã thêm một sản phẩm vào danh sách.');
         } else
             toastr.info('Sản phẩm đã có trong danh sách.');
@@ -142,8 +141,6 @@ app.controller('PriceOutputController', function($scope, $http, API) {
     $scope.print = function () {
         window.print();
     }
-
-
 
     $scope.options = {
         numeral: {

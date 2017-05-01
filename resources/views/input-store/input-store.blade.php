@@ -23,12 +23,18 @@
                 <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
             </div>
             <div class="col-lg-2 col-xs-2">
-                <select ng-model="term2.status" class="form-control input-sm">
+                <select ng-model="term2.store_id" class="form-control input-sm">
+                    <option value="" selected> -- Kho nhập -- </option>
+                    <option ng-repeat="store in stores" value="@{{ store.id }}"> @{{ store.name }} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>
                     <option value="0"> Đã từ chối </option>
                     <option value="2"> Đã xác nhận </option>
-                    <option value="3"> Đã nhập kho </option>s
+                    <option value="3"> Đã nhập kho </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
@@ -45,14 +51,15 @@
             <th> Nhà cung cấp </th>
             <th> Ngày tạo </th>
             <th> Tạo bởi </th>
-            <th> Tổng tiền </th>
+            <th> Tổng tiền (VNĐ) </th>
+            <th> Kho nhập </th>
             <th> Trạng thái </th>
             <th> Duyệt </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="inputStores.length > 0" class="item"
-                dir-paginate="inputStore in inputStores | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readInputStore(inputStore)">
+                dir-paginate="inputStore in inputStores | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readInputStore(inputStore)">
                 <td data-toggle="modal" data-target="#readInputStore"> YCNH-@{{ inputStore.id }} </td>
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-repeat="supplier in suppliers" ng-show="supplier.id==inputStore.supplier_id"> @{{ supplier.name }}
@@ -63,7 +70,10 @@
                     <p ng-repeat="user in users" ng-show="user.id==inputStore.created_by"> @{{ user.name }}
                     </p>
                 </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.total | number:0 }} VNĐ </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.total | number:0 }} </td>
+                <td data-toggle="modal" data-target="#readInputStore">
+                    <p ng-repeat="store in stores" ng-show="store.id == inputStore.store_id"> @{{ store.name }} </p>
+                </td>
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-show="0==inputStore.status"> Đã từ chối </p>
                     <p ng-show="1==inputStore.status"> Chờ duyệt </p>

@@ -7,7 +7,7 @@ app.controller('InputStoreController', function($scope, $http, API) {
         $scope.users = response.data;
     });
 
-    $http.get(API + 'store').then(function (response) {
+    $http.get(API + 'storage').then(function (response) {
         $scope.stores = response.data;
     });
 

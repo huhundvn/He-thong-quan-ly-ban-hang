@@ -46,7 +46,7 @@
             </div>
         @endif
 
-        <!-- !DANH SÁCH NHÂN VIÊN! -->
+        {{-- DANH SÁCH NHÂN VIÊN --}}
         <table id="listUser" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">

@@ -12,9 +12,7 @@ use App\Position;
 
 class PositionController extends Controller
 {
-	/**
-	 * API lấy danh sách chức vụ
-	 */
+	// API lấy danh sách chức vụ
 	public function index()
 	{
 		return Position::all();
@@ -27,6 +25,7 @@ class PositionController extends Controller
 	{
 		$rules = [
 			'name' => 'required|unique:position,name',
+			'role' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -35,6 +34,7 @@ class PositionController extends Controller
 		else {
 			$new = new Position();
 			$new -> name = Input::get('name');
+			$new -> role = Input::get('role');
 			$new -> description = Input::get('description');
 			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);

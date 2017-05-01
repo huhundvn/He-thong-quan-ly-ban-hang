@@ -50,7 +50,9 @@
             <th> Ngày tạo </th>
             <th> Tạo bởi </th>
             <th> Khách hàng </th>
-            <th> Tổng tiền </th>
+            <th> Tổng tiền (VNĐ) </th>
+            <th> Đã thanh toán (VNĐ) </th>
+            <th> Còn nợ (VNĐ) </th>
             <th> Trạng thái </th>
             <th> Duyệt </th>
             <th> Xóa </th>
@@ -66,7 +68,9 @@
                 <td data-toggle="modal" data-target="#readInputStore" ng-repeat="customer in customers" ng-show="customer.id==order.customer_id">
                     @{{ customer.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total | number:0 }} VNĐ </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total | number:0 }}  </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total_paid | number:0 }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total - order.total_paid | number:0 }} </td>
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-show="0==order.status"> Đã hủy </p>
                     <p ng-show="1==order.status"> Chờ duyệt </p>
@@ -85,7 +89,7 @@
                 </td>
             </tr>
             <tr class="item" ng-show="orders.length==0">
-                <td colspan="9"> Không có dữ liệu </td>
+                <td colspan="10"> Không có dữ liệu </td>
             </tr>
             </tbody>
         </table>

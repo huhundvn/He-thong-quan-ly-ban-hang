@@ -16,20 +16,16 @@ use App\Unit;
 
 class ProductController extends Controller
 {
-
-	/**
-	 * API lấy danh sách sản phẩm
-	 */
+	// API LẤY DANH SÁCH SẢN PHẨM
 	public function index()
 	{
 		return Product::with('images')
 			-> with('attributes')
+			-> with('detailPriceOutputs')
 			-> get();
 	}
 
-	/**
-	 * API tạo sản phẩm mới
-	 */
+	// API TẠO SẢN PHẨM MỚI
 	public function store(Request $request)
 	{
 		// kiểm tra điều kiện
@@ -71,18 +67,14 @@ class ProductController extends Controller
 		}
 	}
 
-	/**
-	 * API lấy thông tin sản phẩm
-	 */
+	// API XEM THÔNG TIN SẢN PHẨM
 	public function show($id)
 	{
 		return Product::with('images')
 			-> with('attributes') -> find($id);
 	}
 
-	/**
-	 * API chỉnh sửa thông tin sản phẩm
-	 */
+	// API CHỈNH SỬA THÔNG TIN SẢN PHẨM
 	public function update(Request $request, $id)
 	{
 		// kiểm tra điều kiện
@@ -103,45 +95,44 @@ class ProductController extends Controller
 			$product = Product::find($id);
 			$product -> name = Input::get('name');
 			$product -> code = Input::get('code');
+
 			$product -> description = Input::get('description');
 			$product -> user_guide = Input::get('user_guide');
+
 			$product -> category_id = Input::get('category_id');
 			$product -> manufacturer_id = Input::get('manufacturer_id');
 			$product -> unit_id = Input::get('unit_id');
 			$product -> min_inventory = Input::get('min_inventory');
 			$product -> max_inventory = Input::get('max_inventory');
 			$product -> web_price = Input::get('web_price');
+
 			$product -> warranty_period = Input::get('warranty_period');
 			$product -> return_period = Input::get('return_period');
+
 			$product -> weight = Input::get('weight');
 			$product -> size = Input::get('size');
 			$product -> volume = Input::get('volume');
+
 			$product -> default_image = Input::get('default_image');
 			$product -> save();
 			return response()->json(['success' => trans('message.update_success')]);
 		}
 	}
 
-	/**
-	 * API xóa thông tin một sản phẩm
-	 */
+	// API XÓA SẢN PHẨM
 	public function destroy($id)
 	{
 		$deleted = Product::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
 	}
 
-	/**
-	 * Xem danh sách sản phẩm
-	 */
+	// DANH SÁCH SẢN PHẨM FRONT-END
 	public function listProduct()
 	{
 		return view('product.product');
 	}
 
-	/**
-	 * Nhập thông tin sản phẩm từ File Excel
-	 */
+	// NHẬP TỪ FILE EXCEL
 	public function importFromFile(Request $request)
 	{
 		// kiểm tra điều kiện nhập
@@ -214,15 +205,13 @@ class ProductController extends Controller
 		return redirect()->route('list-product') -> with('status', 'Đã thêm '.$count.' mục.');
 	}
 
-	/**
-	 * Download mẫu nhập
-	 */
+	// TẢI MẪU NHẬP
 	public function downloadTemplate()
 	{
 		return response() -> download(public_path().'/template/san pham.xlsx');
 	}
 
-	// Upload Image
+	// TẢI ẢNH LÊN FLICKR
 	public function uploadImage(Request $request)
 	{
 		$result = Factory::create(config('uploadphoto.host'), config('uploadphoto.auth'))

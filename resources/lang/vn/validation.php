@@ -30,7 +30,7 @@ return [
         'array'   => 'The :attribute must have between :min and :max items.',
     ],
     'boolean'              => 'The :attribute field must be true or false.',
-    'confirmed'            => 'The :attribute confirmation does not match.',
+    'confirmed'            => 'Xác nhận :attribute sai. Vui lòng nhập lại',
     'date'                 => 'The :attribute is not a valid date.',
     'date_format'          => 'The :attribute does not match the format :format.',
     'different'            => 'The :attribute and :other must be different.',
@@ -115,6 +115,7 @@ return [
     */
 
     'attributes' => [
+    	'password' => 'mật khẩu',
     	'name' => 'tên',
 	    'code' => 'mã',
 	    'phone' => 'số điện thoại',

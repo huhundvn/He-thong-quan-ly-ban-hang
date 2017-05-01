@@ -64,7 +64,6 @@ app.controller('OrderController', function($scope, $http, API) {
     };
     $scope.loadOrder();
 
-
     /**
      * CRUD đơn hàng
      */
@@ -72,9 +71,14 @@ app.controller('OrderController', function($scope, $http, API) {
     $scope.data = [];
     $scope.new = {};
 
-    // Thêm sản phẩm vào danh sách
+    // Thêm sản phẩm vào danh sách đơn hàng
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
+            for(var i=0; i<selected.detail_price_outputs.length; i++) {
+                if(selected.detail_price_outputs[i].price_output_id == $scope.new.price_output_id) {
+                    selected.web_price = selected.detail_price_outputs[i].price_output; break;
+                }
+            }
             $scope.data.push(selected);
             toastr.info('Đã thêm một sản phẩm vào danh sách.');
         } else
@@ -157,12 +161,32 @@ app.controller('OrderController', function($scope, $http, API) {
         });
     };
 
+    // Chỉnh sửa đơn hàng
+    $scope.updateOrder = function () {
+        $scope.selected.total_paid += $scope.selected.more_paid;
+        $http({
+            method : 'PUT',
+            url : API + 'order/' + $scope.selected.id,
+            data : $scope.selected,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadOrder();
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
     // In biểu mẫu
     $scope.print = function () {
         window.print();
     }
 
-    // Duyệt yêu cầu nhập hàng
+    // Duyệt yêu cầu đơn hàng
     $scope.changeStatus = function () {
         $http.get(API + 'confirm-order/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
@@ -174,7 +198,7 @@ app.controller('OrderController', function($scope, $http, API) {
         });
     }
 
-    // Xóa bảng giá
+    // Xóa đơn hàng
     $scope.deleteOrder = function () {
         console.log($scope.selected);
         $http({

@@ -3,8 +3,18 @@
  */
 app.controller('CustomerController', function($scope, $http, API) {
 
+    // Danh sách huyện, thành phố
+    $http.get(API + 'district').then(function (response) {
+        $scope.districts = response.data;
+    });
+
+    // Danh sách tỉnh
+    $http.get(API + 'province').then(function (response) {
+        $scope.provinces = response.data;
+    });
+
     /**
-     * Load danh sách danh mục sản phẩm
+     * Load danh sách danh mục khách hàng
      */
     $scope.loadCustomer = function () {
         $http.get(API + 'customer').then(function (response) {

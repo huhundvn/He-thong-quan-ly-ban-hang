@@ -40,12 +40,12 @@
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
             <div class="col-lg-3 col-xs-3">
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
+                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Quay lại </a>
             </div>
             <div class="col-lg-3 col-xs-3">
-                <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
-                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
             </div>
             <div class="col-lg-3 col-xs-3">
 
