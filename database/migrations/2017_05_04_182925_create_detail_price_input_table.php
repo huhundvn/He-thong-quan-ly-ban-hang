@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetailInputStoreTable extends Migration
+class CreateDetailPriceInputTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateDetailInputStoreTable extends Migration
      */
     public function up()
     {
-	    Schema::create('detail_input_store', function (Blueprint $table) {
+	    Schema::create('detail_price_input', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('input_store_id') -> nullable();
+		    $table->integer('price_input_id') -> nullable();
 		    $table->integer('product_id') -> nullable();
 		    $table->integer('price_input') -> nullable();
-		    $table->integer('quantity') -> nullable();
-		    $table->string('expried_date') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
@@ -32,6 +30,6 @@ class CreateDetailInputStoreTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('detail_input_store');
+	    Schema::dropIfExists('detail_price_input');
     }
 }

@@ -18,9 +18,9 @@ class CreateVoucherTable extends Migration
 		    $table->integer('created_by') -> nullable();
 		    $table->integer('account_id') -> nullable();
 		    $table->integer('store_id') -> nullable();
-		    $table->string('receiver_name') -> nullable();
+		    $table->string('name') -> nullable();
+		    $table->string('address') -> nullable();
 		    $table->integer('total') -> nullable();
-		    $table->string('total_in_words') -> nullable();
 		    $table->string('description') -> nullable();
 		    $table->tinyInteger('type') -> nullable();
 		    $table->tinyInteger('status') -> nullable();
