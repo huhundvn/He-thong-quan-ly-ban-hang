@@ -17,7 +17,7 @@ class CreatePositionTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> nullable();
 		    $table->string('description') -> nullable();
-		    $table->string('role') -> nullable();
+		    $table->text('role') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
