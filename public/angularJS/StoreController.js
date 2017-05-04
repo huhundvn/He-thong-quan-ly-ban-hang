@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('StoreController', function($scope, $http, API) {
+app.controller('StoreController', function($scope, $http, API, $interval) {
 
     /**
      * Xem danh sách các kho/cửa hàng
