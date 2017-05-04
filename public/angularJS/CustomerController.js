@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('CustomerController', function($scope, $http, API) {
+app.controller('CustomerController', function($scope, $http, API, $interval) {
 
     // Danh sách huyện, thành phố
     $http.get(API + 'district').then(function (response) {
@@ -22,6 +22,7 @@ app.controller('CustomerController', function($scope, $http, API) {
         });
     };
     $scope.loadCustomer();
+    $interval($scope.loadCustomer, 3000);
 
     /**
      * Lấy danh sách nhóm khách hàng

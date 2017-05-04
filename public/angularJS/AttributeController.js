@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('AttributeController', function($scope, $http, API) {
+app.controller('AttributeController', function($scope, $http, API, $interval) {
 
     /**
      * Load danh sách thuộc tính
@@ -12,6 +12,7 @@ app.controller('AttributeController', function($scope, $http, API) {
         });
     };
     $scope.loadAttribute();
+    $interval($scope.loadAttribute, 3000);
 
     /**
      * CRUD thuộc tính

@@ -6,40 +6,15 @@
 
     {{-- Nếu là nhân viên hiện chức năng --}}
     @if(!Auth::guest())
-    <div class="w3-dropdown-hover w3-right">
+    <div class="w3-dropdown-hover w3-right" >
         <button class="w3-button"> {{Auth::user()->name}} <span class="caret"></span> </button>
-        <div class="w3-dropdown-content w3-bar-block w3-card-2">
+        <div class="w3-dropdown-content w3-bar-block w3-card-2" style="right:-100">
             <a href="#" class="w3-bar-item w3-button" data-toggle="modal" data-target="#changePass"> Đổi mật khẩu </a>
             <a href="#" class="w3-bar-item w3-button" data-toggle="modal" data-target="#logout"> Đăng xuất </a>
         </div>
     </div>
-
-    {{-- Hiển thị trạng thái đơn hàng --}}
-    <div class="w3-dropdown-hover w3-right" ng-controller="HomeController">
-        <button class="w3-button">  Trạng thái dơn hàng <span class="caret"></span> </button>
-        <div class="w3-dropdown-content w3-bar-block w3-card-4" style="padding: 10px">
-            <label> Đơn hàng chờ duyệt </label>
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:@{{getTotalOrderNotConfirmed()}}%">
-                    @{{ getTotalOrderNotConfirmed() | number:0 }} %
-                </div>
-            </div>
-            <label> Đơn hàng đang giao </label>
-            <div class="progress">
-                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style="width:@{{getTotalOrderShipping()}}%">
-                    @{{ getTotalOrderShipping() | number:0 }} %
-                </div>
-            </div>
-            <label> Đơn hàng đã giao </label>
-            <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width:@{{getTotalOrderShipped()}}%">
-                    @{{ getTotalOrderShipped() | number: 0 }} %
-                </div>
-            </div>
-        </div>
-    </div>
     @endif
-    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right"> Web Online </a>
+    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right"> Shop Online </a>
 </div>
 
 {{-- ĐỔI MẬT KHẨU --}}

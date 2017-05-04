@@ -11,47 +11,16 @@
 @section('content')
     <div ng-controller="InputStoreController">
 
-        {{-- Thông tin nhập--}}
-        <div class="row">
-            <div class="col-sm-3">
-                <label> Ngày nhập dự kiến </label>
-                <input ng-model="info.input_date" type="date" class="form-control input-sm">
-            </div>
-            <div class="col-sm-3">
-                <label> Nhà kho </label>
-                <select ng-model="info.store_id" class="form-control input-sm">
-                    <option value="" selected> --Không chọn-- </option>
-                    <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
-                </select>
-            </div>
-            <div class="col-sm-3">
-                <label> Nhà cung cấp </label>
-                <select ng-model="info.supplier_id" class="form-control input-sm">
-                    <option value="" selected> --Không chọn-- </option>
-                    <option ng-repeat="supplier in suppliers" value="@{{supplier.id}}"> @{{supplier.name}} </option>
-                </select>
-            </div>
-            <div class="col-sm-3">
-                <label> Tài khoản thanh toán </label>
-                <select ng-model="info.account_id" class="form-control input-sm">
-                    <option value="" selected> --Không chọn-- </option>
-                    <option ng-repeat="account in accounts" value="@{{account.id}}"> @{{account.name}} </option>
-                </select>
-            </div>
-        </div>
-
-        <hr/>
-
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
+            <div class="col-lg-3 col-xs-3">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createInputStore()"> Xác nhận  </button>
+                <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Quay lại </a>
+            </div>
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#createProduct"> Thêm SP mới </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
-            </div>
-            <div class="col-lg-3 col-xs-3">
-                <button type="submit" class="btn btn-success btn-sm" ng-click="createInputStore()"> Gửi yêu cầu </button>
-                <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
             </div>
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Tổng tiền: @{{ getTotal() | number:0 }} VNĐ </button>
@@ -59,7 +28,44 @@
             <div class="col-lg-3 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
             </div>
+        </div>
 
+        <hr/>
+
+        {{-- Thông tin nhập--}}
+        <div class="row">
+            <div class="col-xs-2">
+                <label> Ngày nhập dự kiến </label>
+                <input ng-model="info.input_date" type="date" class="form-control input-sm">
+            </div>
+            <div class="col-xs-2">
+                <label> Kho nhập </label>
+                <select ng-model="info.store_id" class="form-control input-sm">
+                    <option value="" selected> --Không chọn-- </option>
+                    <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <label> Nhà cung cấp </label>
+                <select ng-model="info.supplier_id" class="form-control input-sm">
+                    <option value="" selected> --Không chọn-- </option>
+                    <option ng-repeat="supplier in suppliers" value="@{{supplier.id}}"> @{{supplier.name}} </option>
+                </select>
+            </div>
+            <div class="col-xs-4">
+                <label> Bảng giá mua </label>
+                <select ng-model="info.price_input_id" class="form-control input-sm">
+                    <option value="" selected> --Không chọn-- </option>
+                    <option ng-repeat="priceInput in priceInputs" value="@{{priceInput.id}}"> @{{priceInput.name}} </option>
+                </select>
+            </div>
+            <div class="col-xs-2">
+                <label> Tài khoản thanh toán </label>
+                <select ng-model="info.account_id" class="form-control input-sm">
+                    <option value="" selected> --Không chọn-- </option>
+                    <option ng-repeat="account in accounts" value="@{{account.id}}"> @{{account.name}} </option>
+                </select>
+            </div>
         </div>
 
         <hr/>
@@ -89,13 +95,13 @@
                     <input cleave="options.numeral" type="text" ng-model="item.quantity" class="form-control input-sm input-numeral">
                 </td>
                 <td>
-                    <input cleave="options.numeral" type="text" ng-model="item.price" class="form-control input-sm input-numeral">
+                    <input cleave="options.numeral" type="text" ng-model="item.price_input" class="form-control input-sm input-numeral">
                 </td>
                 <td>
                     <input type="date" ng-model="item.expried_date" class="form-control input-sm">
                 </td>
                 <td>
-                    @{{ item.quantity * item.price | number:0 }}
+                    @{{ item.quantity * item.price_input | number:0 }}
                 </td>
                 <td>
                     <button class="btn btn-sm btn-danger btn-sm" ng-click="delete(item)">

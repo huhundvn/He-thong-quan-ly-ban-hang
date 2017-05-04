@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('CustomerGroupController', function($scope, $http, API) {
+app.controller('CustomerGroupController', function($scope, $http, API, $interval) {
 
     /**
      * Load danh sách danh sách nhóm khách hàng
@@ -12,6 +12,7 @@ app.controller('CustomerGroupController', function($scope, $http, API) {
         });
     };
     $scope.loadCustomerGroup();
+    $interval($scope.loadCustomerGroup, 3000);
 
     /**
      * CRUD nhóm khách hàng

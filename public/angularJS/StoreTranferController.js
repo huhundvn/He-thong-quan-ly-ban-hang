@@ -5,7 +5,7 @@
 /**
  * Created by Good on 4/16/2017.
  */
-app.controller('StoreTranferController', function($scope, $http, API) {
+app.controller('StoreTranferController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'user').then(function (response) {
         $scope.users = response.data;
@@ -34,6 +34,7 @@ app.controller('StoreTranferController', function($scope, $http, API) {
         });
     };
     $scope.loadStoreTranfer();
+    $interval($scope.loadStoreTranfer, 3000);
 
 
     /**

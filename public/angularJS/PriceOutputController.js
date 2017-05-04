@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/16/2017.
  */
-app.controller('PriceOutputController', function($scope, $http, API) {
+app.controller('PriceOutputController', function($scope, $http, API, $interval) {
 
     // Lấy danh sách sản phẩm
     $http.get(API + 'product').then(function (response) {
@@ -25,6 +25,7 @@ app.controller('PriceOutputController', function($scope, $http, API) {
         });
     };
     $scope.loadPriceOutput();
+    $interval($scope.loadPriceOutput, 3000);
 
     /**
      * CRUD bảng giá

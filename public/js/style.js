@@ -28,7 +28,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function() {
 };
 
 toastr.options = {
-    "positionClass": "toast-bottom-right",
+    "positionClass": "toast-bottom-left",
     "preventDuplicates": true,
 };
 

@@ -35,16 +35,16 @@
         {{-- DANH SÁCH TÀI KHOẢN --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-            <th> Mã </th>
+            <th> Mã tài khoản </th>
             <th> Tên tài khoản </th>
-            <th> Số tiền hiện còn </th>
+            <th> Tổng tiền (VNĐ) </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr class="item" ng-show="accounts.length > 0" class="item" dir-paginate="account in accounts | filter:term | itemsPerPage: 7" ng-click="readAccount(account)">
                 <td data-toggle="modal" data-target="#readAccount"> TK-@{{ account.id }} </td>
                 <td data-toggle="modal" data-target="#readAccount"> @{{ account.name }} </td>
-                <td data-toggle="modal" data-target="#readAccount"> @{{ account.total | number:0 }} VNĐ </td>
+                <td data-toggle="modal" data-target="#readAccount"> @{{ account.total | number:0 }} </td>
                 <td>
                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteAccount">
                         <span class="glyphicon glyphicon-trash"></span>

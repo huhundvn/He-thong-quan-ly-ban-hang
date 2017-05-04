@@ -31,9 +31,9 @@
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
-                    <option value="1"> Chờ duyệt </option>
+                    <option value="1"> Đã duyệt </option>
                     <option value="0"> Đã từ chối </option>
-                    <option value="2"> Đã xác nhận </option>
+                    <option value="2"> Đang lấy hàng </option>
                     <option value="3"> Đã nhập kho </option>
                 </select>
             </div>
@@ -77,7 +77,7 @@
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-show="0==inputStore.status"> Đã từ chối </p>
                     <p ng-show="1==inputStore.status"> Chờ duyệt </p>
-                    <p ng-show="2==inputStore.status"> Đã duyệt, đang ship hàng </p>
+                    <p ng-show="2==inputStore.status"> Đang lấy hàng </p>
                     <p ng-show="3==inputStore.status"> Đã nhập kho </p>
                 </td>
                 <td>

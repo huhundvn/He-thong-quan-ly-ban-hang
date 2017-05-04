@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Product;
 use App\InputStore;
 use App\ProductInStore;
+use App\Supplier;
+use App\Voucher;
+use App\Account;
 
 class InputStoreController extends Controller
 {
@@ -55,7 +58,36 @@ class InputStoreController extends Controller
 	// API chỉnh sửa thông tin đợt nhập hàng
 	public function update(Request $request, $id)
 	{
+		// kiểm tra điều kiện
+		$rules = [
 
+		];
+		$validation = Validator::make(Input::all(), $rules);
+
+		if($validation->fails())
+			return $validation -> errors() -> all();
+		else {
+			$update = InputStore::find($id);
+			$update -> total_paid = Input::get('total_paid');
+			$supplier = Supplier::find($update -> supplier_id);
+			$account = Account::find($update -> account_id);
+
+			$account -> total -= $update -> total_paid;
+
+			$voucher  = new Voucher();
+			$voucher -> created_by = Auth::user() -> id;
+			$voucher -> description = "Chi nhập hàng YCNH-".$id;
+			$voucher -> total = Input::get('more_paid');
+			$voucher -> type = 1;
+			$voucher -> account_id = Input::get('account_id');
+			$voucher -> name = $supplier -> name;
+			$voucher -> address = $supplier -> address;
+
+			$account -> save();
+			$voucher -> save();
+			$update -> save();
+			return response()->json(['success' => trans('message.update_success')]);
+		}
 	}
 
 	// API xóa đợt nhập hàng
@@ -100,6 +132,12 @@ class InputStoreController extends Controller
 	public function listInputStore()
 	{
 		return view('input-store.input-store');
+	}
+
+	// Xem lịch sử thanh toán nhà cung cấp
+	public function listInputStoreInvoice()
+	{
+		return view('input-store-invoice.input-store-invoice');
 	}
 
 	// Tạo đơn nhập hàng mới

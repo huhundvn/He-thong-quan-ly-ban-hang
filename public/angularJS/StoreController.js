@@ -19,6 +19,7 @@ app.controller('StoreController', function($scope, $http, API) {
         });
     };
     $scope.loadStore();
+    $interval($scope.loadStore, 3000);
 
     /**
      * CRUD nhóm sản phẩm

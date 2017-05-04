@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/10/2017.
  */
-app.controller('PositionController', function($scope, $http, API) {
+app.controller('PositionController', function($scope, $http, API, $interval) {
 
     // Load danh sách chức vụ
     $scope.loadPosition = function () {
@@ -10,8 +10,20 @@ app.controller('PositionController', function($scope, $http, API) {
         });
     };
     $scope.loadPosition();
+    $interval($scope.loadPosition, 3000);
 
     // CRUD chức vụ
+    $scope.new = {};
+    $scope.new.role = [];
+
+    $scope.add = function(role) {
+        if($scope.new.role.indexOf(role) != -1) {
+            $scope.new.role.splice($scope.new.role.indexOf(role), 1);
+        } else {
+            $scope.new.role.push(role);
+        }
+    }
+
     $scope.createPosition = function () {
         $http({
             method : 'POST',

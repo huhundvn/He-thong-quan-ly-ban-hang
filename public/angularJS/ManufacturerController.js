@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('ManufacturerController', function($scope, $http, API) {
+app.controller('ManufacturerController', function($scope, $http, API, $interval) {
     /**
      * Load danh sách nhà sản xuất
      */
@@ -11,6 +11,7 @@ app.controller('ManufacturerController', function($scope, $http, API) {
         });
     };
     $scope.loadManufacturer();
+    $interval($scope.loadManufacturer, 3000);
 
     /**
      * CRUD nhà sản xuất

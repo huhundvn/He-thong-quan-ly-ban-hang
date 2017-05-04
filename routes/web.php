@@ -1,5 +1,23 @@
 <?php
 
+use App\Http\Middleware\CheckOrderRole;
+use App\Http\Middleware\CheckPriceOutputRole;
+use App\Http\Middleware\CheckProductRole;
+use App\Http\Middleware\CheckSupplierRole;
+use App\Http\Middleware\CheckManufacturerRole;
+use App\Http\Middleware\CheckStoreRole;
+use App\Http\Middleware\CheckProductInStoreRole;
+use App\Http\Middleware\CheckInputStoreRole;
+use App\Http\Middleware\CheckPriceInputRole;
+use App\Http\Middleware\CheckStoreTranferRole;
+use App\Http\Middleware\CheckVoucherRole;
+use App\Http\Middleware\CheckCustomerInvoiceRole;
+use App\Http\Middleware\CheckSupplierInvoiceRole;
+use App\Http\Middleware\CheckAccountRole;
+use App\Http\Middleware\CheckUserRole;
+use App\Http\Middleware\CheckPositionRole;
+use App\Http\Middleware\CheckCustomerRole;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +39,6 @@ Auth::routes();
  */
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index') -> name('home');
-Route::get('/lang/{locale}', array(
-    'Middleware' => 'LanguageSwitcher',
-    'uses' => 'LanguageController@change'
-));
-
 
 //Route::resource('orders', 'OrderController');
 //Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
@@ -107,6 +120,11 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
 
+	Route::resource('price-input', 'PriceInputController'); //CRUD bảng giá bán nhà cung cấp
+	Route::get('/confirm-price-input/{price_input_id}/{status}', 'PriceInputController@confirm'); //duyệt bảng giá
+	Route::resource('detail-price-input', 'DetailPriceInputController'); //CRUD chi tiết bảng giá
+	Route::get('/get-detail-price-input/{price_input_id}', 'DetailPriceInputController@getDetail');
+
 	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
@@ -122,101 +140,113 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('district', 'DistrictController'); //CRUD địa chỉ huyện
 	Route::resource('province', 'ProvinceController'); //CRUD địa chỉ tỉnh
 	Route::resource('return-product', 'ReturnProductController'); //CRUD trả về
+
+	Route::get('/top-product', 'ReportController@getTopProduct');
+
+	Route::get('/get-role', 'RoleController@getRole');
 });
 
 // FRONT-END GIAO ĐIỆN WEB
 Route::group(['middleware' => 'auth'], function (){
 
    	// NHÂN VIÊN
-    Route::get('/list-user', 'UserController@listUser') -> name('list-user');
-    Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile');
-	Route::get('/download-user-template', 'UserController@downloadTemplate') -> name('downloadUserTemplate');
+    Route::get('/list-user', 'UserController@listUser') -> name('list-user') -> middleware(CheckUserRole::class);
+    Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile') -> middleware(CheckUserRole::class);
+	Route::get('/download-user-template', 'UserController@downloadTemplate') -> name('downloadUserTemplate') -> middleware(CheckUserRole::class);
 	Route::post('/user/changePassword', 'UserController@changePassword') -> name('changePassword');
 
     //CHỨC VỤ
-    Route::get('/list-position', 'PositionController@listPosition') -> name('list-position');
+    Route::get('/list-position', 'PositionController@listPosition') -> name('list-position') -> middleware(CheckPositionRole::class);
 
     //KHÁCH HÀNG
-    Route::get('/list-customer', 'CustomerController@listCustomer') -> name('list-customer');
-    Route::post('/customer/importFromFile', 'CustomerController@importFromFile') -> name('importCustomerFromFile');
-	Route::get('/download-customer-template', 'CustomerController@downloadTemplate') -> name('downloadCustomerTemplate');
+    Route::get('/list-customer', 'CustomerController@listCustomer') -> name('list-customer') -> middleware(CheckCustomerRole::class);
+    Route::post('/customer/importFromFile', 'CustomerController@importFromFile') -> name('importCustomerFromFile') -> middleware(CheckCustomerRole::class);
+	Route::get('/download-customer-template', 'CustomerController@downloadTemplate') -> name('downloadCustomerTemplate') -> middleware(CheckCustomerRole::class);
 
     //NHÓM KHÁCH HÀNG
-    Route::get('/list-customer-group', 'CustomerGroupController@listGroupCustomer') -> name('list-customer-group');
-    Route::post('/customer-group/importFromFile', 'CustomerGroupController@importFromFile') -> name('importCustomerGroupFromFile');
-	Route::get('/download-customergroup-template', 'CustomerGroupController@downloadTemplate') -> name('downloadCustomerGroupTemplate');
+    Route::get('/list-customer-group', 'CustomerGroupController@listGroupCustomer') -> name('list-customer-group') -> middleware(CheckCustomerRole::class);
+    Route::post('/customer-group/importFromFile', 'CustomerGroupController@importFromFile') -> name('importCustomerGroupFromFile') -> middleware(CheckCustomerRole::class);
+	Route::get('/download-customergroup-template', 'CustomerGroupController@downloadTemplate') -> name('downloadCustomerGroupTemplate') -> middleware(CheckCustomerRole::class);
 
 	//CỬA HÀNG, KHO HÀNG
-	Route::get('/list-store', 'StoreController@listStore') -> name('list-store');
-	Route::post('/store/importFromFile', 'StoreController@importFromFile') -> name('importStoreFromFile');
-	Route::get('/download-store-template', 'StoreController@downloadTemplate') -> name('downloadStoreTemplate');
-
-	//ĐƠN VỊ TÍNH
-	Route::get('/list-unit', 'UnitController@listUnit') -> name('list-unit');
-	
-	Route::post('/unit/importFromFile', 'UnitController@importFromFile') -> name('importUnitFromFile');
-	Route::get('/download-unit-template', 'UnitController@downloadTemplate') -> name('downloadUnitTemplate');
+	Route::get('/list-store', 'StoreController@listStore') -> name('list-store') -> middleware(CheckStoreRole::class);
+	Route::post('/store/importFromFile', 'StoreController@importFromFile') -> name('importStoreFromFile') -> middleware(CheckStoreRole::class);
+	Route::get('/download-store-template', 'StoreController@downloadTemplate') -> name('downloadStoreTemplate') -> middleware(CheckStoreRole::class);
 
 	//NHÀ SẢN XUẤT
-	Route::get('/list-manufacturer', 'ManufacturerController@listManufacturer') -> name('list-manufacturer');
-	Route::post('/manufacturer/importFromFile', 'ManufacturerController@importFromFile') -> name('importManufacturerFromFile');
-	Route::get('/download-manufacturer-template', 'ManufacturerController@downloadTemplate') -> name('downloadManufacturerTemplate');
+	Route::get('/list-manufacturer', 'ManufacturerController@listManufacturer') -> name('list-manufacturer') -> middleware(CheckManufacturerRole::class);
+	Route::post('/manufacturer/importFromFile', 'ManufacturerController@importFromFile') -> name('importManufacturerFromFile') -> middleware(CheckManufacturerRole::class);
+	Route::get('/download-manufacturer-template', 'ManufacturerController@downloadTemplate') -> name('downloadManufacturerTemplate') -> middleware(CheckManufacturerRole::class);
 
 	//NHÀ CUNG CẤP
-	Route::get('/list-supplier', 'SupplierController@listSupplier') -> name('list-supplier');
-	Route::post('/supplier/importFromFile', 'SupplierController@importFromFile') -> name('importSupplierFromFile');
-	Route::get('/download-supplier-template', 'SupplierController@downloadTemplate') -> name('downloadSupplierTemplate');
+	Route::get('/list-supplier', 'SupplierController@listSupplier') -> name('list-supplier') -> middleware(CheckSupplierRole::class);
+	Route::post('/supplier/importFromFile', 'SupplierController@importFromFile') -> name('importSupplierFromFile') -> middleware(CheckSupplierRole::class);
+	Route::get('/download-supplier-template', 'SupplierController@downloadTemplate') -> name('downloadSupplierTemplate') -> middleware(CheckSupplierRole::class);
 
 	//THUỘC TÍNH SẢN PHẨM
-	Route::get('/list-attribute', 'AttributeController@listAttribute') -> name('list-attribute');
-	Route::post('/attribute/importFromFile', 'AttributeController@importFromFile') -> name('importAttributeFromFile');
-	Route::get('/download-attribute-template', 'AttributeController@downloadTemplate') -> name('downloadAttributeTemplate');
+	Route::get('/list-attribute', 'AttributeController@listAttribute') -> name('list-attribute') -> middleware(CheckProductRole::class);
+	Route::post('/attribute/importFromFile', 'AttributeController@importFromFile') -> name('importAttributeFromFile') -> middleware(CheckProductRole::class);
+	Route::get('/download-attribute-template', 'AttributeController@downloadTemplate') -> name('downloadAttributeTemplate') -> middleware(CheckProductRole::class);
 
 	//SẢN PHẨM
-	Route::get('/list-product', 'ProductController@listProduct') -> name('list-product');
-	Route::post('/product/importFromFile', 'ProductController@importFromFile') -> name('importProductFromFile');
-	Route::post('/upload-image', 'ProductController@uploadImage') -> name('uploadImage');
-	Route::get('/download-product-template', 'ProductController@downloadTemplate') -> name('downloadProductTemplate');
+	Route::get('/list-product', 'ProductController@listProduct') -> name('list-product') -> middleware(CheckProductRole::class);
+	Route::post('/product/importFromFile', 'ProductController@importFromFile') -> name('importProductFromFile') -> middleware(CheckProductRole::class);
+	Route::post('/upload-image', 'ProductController@uploadImage') -> name('uploadImage') -> middleware(CheckProductRole::class);
+	Route::get('/download-product-template', 'ProductController@downloadTemplate') -> name('downloadProductTemplate') -> middleware(CheckProductRole::class);
+
+	//ĐƠN VỊ TÍNH
+	Route::get('/list-unit', 'UnitController@listUnit') -> name('list-unit') -> middleware(CheckProductRole::class);
+	Route::post('/unit/importFromFile', 'UnitController@importFromFile') -> name('importUnitFromFile') -> middleware(CheckProductRole::class);
+	Route::get('/download-unit-template', 'UnitController@downloadTemplate') -> name('downloadUnitTemplate') -> middleware(CheckProductRole::class);
 
 	//SẢN PHẨM TRONG KHO
-	Route::get('/list-product-in-store', 'ProductInStoreController@listProductInStore') -> name('list-product-in-store');
+	Route::get('/list-product-in-store', 'ProductInStoreController@listProductInStore') -> name('list-product-in-store') -> middleware(CheckProductInStoreRole::class);
 
 	//NHÓM SẢN PHẨM
-	Route::post('/category/importFromFile', 'CategoryController@importFromFile') -> name('importCategoryFromFile');
-	Route::get('/list-category', 'CategoryController@listCategory') -> name('list-category');
-	Route::get('/download-category-template', 'CategoryController@downloadTemplate') -> name('downloadCategoryTemplate');
-
+	Route::post('/category/importFromFile', 'CategoryController@importFromFile') -> name('importCategoryFromFile') -> middleware(CheckProductRole::class);
+	Route::get('/list-category', 'CategoryController@listCategory') -> name('list-category') -> middleware(CheckProductRole::class);
+	Route::get('/download-category-template', 'CategoryController@downloadTemplate') -> name('downloadCategoryTemplate') -> middleware(CheckProductRole::class);
 
 	//TÀI KHOẢN THANH TOÁN
-	Route::get('/list-account', 'AccountController@listAccount') -> name('list-account');
-	Route::get('/download-account-template', 'AccountController@downloadTemplate') -> name('downloadAccountTemplate');
+	Route::get('/list-account', 'AccountController@listAccount') -> name('list-account') -> middleware(CheckAccountRole::class);
+	Route::get('/download-account-template', 'AccountController@downloadTemplate') -> name('downloadAccountTemplate') -> middleware(CheckAccountRole::class);
 
 	//NHẬP KHO
-	Route::post('/input-store/importFromFile', 'InputStoreController@importFromFile') -> name('importInputStoreFromFile');
-	Route::get('/list-input-store', 'InputStoreController@listInputStore') -> name('list-input-store');
-	Route::get('/create-input-store', 'InputStoreController@createInputStore') -> name('createInputStore');
-	Route::get('/download-input-template', 'InputController@downloadTemplate') -> name('downloadInputStoreTemplate');
+	Route::post('/input-store/importFromFile', 'InputStoreController@importFromFile') -> name('importInputStoreFromFile') -> middleware(CheckInputStoreRole::class);
+	Route::get('/list-input-store', 'InputStoreController@listInputStore') -> name('list-input-store') -> middleware(CheckInputStoreRole::class);
+	Route::get('/create-input-store', 'InputStoreController@createInputStore') -> name('createInputStore') -> middleware(CheckInputStoreRole::class);
+	Route::get('/download-input-template', 'InputController@downloadTemplate') -> name('downloadInputStoreTemplate') -> middleware(CheckInputStoreRole::class);
 
 	//BẢNG GIÁ BÁN
-	Route::get('/list-price-output', 'PriceOutputController@listPriceOutput') -> name('list-price-output');
-	Route::get('/create-price-output', 'PriceOutputController@createPriceOutput') -> name('createPriceOutput');
+	Route::get('/list-price-output', 'PriceOutputController@listPriceOutput') -> name('list-price-output') -> middleware(CheckPriceOutputRole::class);
+	Route::get('/create-price-output', 'PriceOutputController@createPriceOutput') -> name('createPriceOutput') -> middleware(CheckPriceOutputRole::class);
 
-	//PHIẾU THU, CHI
-	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher');
+	//BẢNG GIÁ MUA NHÀ CUNG CẤP
+	Route::get('/list-price-input', 'PriceInputController@listPriceInput') -> name('list-price-input') -> middleware(CheckPriceInputRole::class);
+	Route::get('/create-price-input', 'PriceInputController@createPriceInput') -> name('createPriceInput') -> middleware(CheckPriceInputRole::class);
 
 	//CHUYỂN KHO
-	Route::get('/list-store-tranfer', 'StoreTranferController@listStoreTranfer') -> name('list-store-tranfer');
-	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer');
+	Route::get('/list-store-tranfer', 'StoreTranferController@listStoreTranfer') -> name('list-store-tranfer') -> middleware(CheckStoreTranferRole::class);
+	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer') -> middleware(CheckStoreTranferRole::class);
+
+	//PHIẾU THU, CHI
+	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher') -> middleware(CheckVoucherRole::class);
 
 	//ĐƠN HÀNG
-	Route::get('/list-order', 'OrderController@listOrder') -> name('list-order');
-	Route::get('/create-order', 'OrderController@createOrder') -> name('createOrder');
+	Route::get('/list-order', 'OrderController@listOrder') -> name('list-order') -> middleware(CheckOrderRole::class);
+	Route::get('/create-order', 'OrderController@createOrder') -> name('createOrder') -> middleware(CheckOrderRole::class);
 
 	//HÓA ĐƠN KHÁCH HÀNG
-	Route::get('/list-customer-invoice', 'CustomerInvoiceController@listCustomerInvoice') -> name('list-customer-invoice');
-	Route::get('/create-customer-invoice', 'CustomerInvoiceController@createCustomerInvoice') -> name('createCustomerInvoice');
+	Route::get('/list-customer-invoice', 'CustomerInvoiceController@listCustomerInvoice') -> name('list-customer-invoice') -> middleware(CheckCustomerInvoiceRole::class);
+//	Route::get('/create-customer-invoice', 'CustomerInvoiceController@createCustomerInvoice') -> name('createCustomerInvoice');
+
+	// HÓA ĐƠN NHÀ CUNG CẤP
+	Route::get('/list-input-store-invoice', 'InputStoreController@listInputStoreInvoice') -> name('list-input-store-invoice') -> middleware(CheckSupplierInvoiceRole::class);
 
 	//TRẢ VỀ
 	Route::get('/list-return-product', 'ReturnProductController@listReturnProduct') -> name('list-return-product');
-	Route::get('/create-order', 'OrderController@createOrder') -> name('createOrder');
+
+	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');
+
+	Route::get('/no-permission', 'HomeController@checkPermission') -> name('no-permission');
 });

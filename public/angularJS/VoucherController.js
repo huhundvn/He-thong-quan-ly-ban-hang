@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/19/2017.
  */
-app.controller('VoucherController', function($scope, $http, API) {
+app.controller('VoucherController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'account').then(function (response) {
         $scope.accounts = response.data;
@@ -18,6 +18,7 @@ app.controller('VoucherController', function($scope, $http, API) {
         });
     };
     $scope.loadVoucher();
+    $interval($scope.loadVoucher, 3000);
 
     /**
      * CRUD phiếu thu, chi

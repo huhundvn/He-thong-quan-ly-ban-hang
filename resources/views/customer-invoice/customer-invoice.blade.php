@@ -239,7 +239,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Còn lại </label>
                                 <div class="col-sm-9">
-                                    <input cleave="options.numeral" type="text" value="@{{selected.total - selected.total_paid - selected.more_paid}}" class="form-control input-sm" readonly>
+                                    <input type="text" value="@{{selected.total - selected.total_paid - selected.more_paid | number:0}}" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                         </div>

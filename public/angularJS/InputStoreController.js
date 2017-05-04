@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/16/2017.
  */
-app.controller('InputStoreController', function($scope, $http, API) {
+app.controller('InputStoreController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'user').then(function (response) {
         $scope.users = response.data;
@@ -27,14 +27,8 @@ app.controller('InputStoreController', function($scope, $http, API) {
         $scope.units = response.data;
     });
 
-    // Lấy danh sách nhóm sản phẩm
-    $http.get(API + 'category').then(function (response) {
-        $scope.categorys = response.data;
-    });
-
-    // Lấy danh sách nhà cung cấp
-    $http.get(API + 'manufacturer').then(function (response) {
-        $scope.manufacturers = response.data;
+    $http.get(API + 'price-input').then(function (response) {
+        $scope.priceInputs = response.data;
     });
 
     //Load danh sách nhập kho
@@ -44,6 +38,7 @@ app.controller('InputStoreController', function($scope, $http, API) {
         });
     };
     $scope.loadInputStore();
+    $interval($scope.loadInputStore, 3000);
 
 
     /**
@@ -79,8 +74,12 @@ app.controller('InputStoreController', function($scope, $http, API) {
     // Thêm sản phẩm vào danh sách
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
+            for(var i=0; i<selected.detail_price_inputs.length; i++) {
+                if(selected.detail_price_inputs[i].price_input_id == $scope.info.price_input_id) {
+                    selected.price_input = selected.detail_price_inputs[i].price_input; break;
+                }
+            }
             $scope.data.push(selected);
-            $("[data-dismiss=modal]").trigger({ type: "click" });
             toastr.info('Đã thêm một sản phẩm vào danh sách.');
         } else
             toastr.info('Sản phẩm đã có trong danh sách.');
@@ -96,7 +95,7 @@ app.controller('InputStoreController', function($scope, $http, API) {
     $scope.getTotal = function () {
         $scope.info.total = 0;
         for (var i=0; i<$scope.data.length; i++) {
-            $scope.info.total = $scope.info.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].price);
+            $scope.info.total = $scope.info.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].price_input);
         }
         return $scope.info.total;
     };
@@ -123,7 +122,7 @@ app.controller('InputStoreController', function($scope, $http, API) {
         else {
             var check = true;
             for (var i=0; i<$scope.data.length; i++) {
-                if($scope.data[i].price == null || $scope.data[i].expried_date == null) {
+                if($scope.data[i].price_input == null || $scope.data[i].expried_date == null) {
                     check = false; break;
                 }
             };
@@ -158,6 +157,26 @@ app.controller('InputStoreController', function($scope, $http, API) {
         });
         $http.get(API + 'get-detail-input-store/' + inputStore.id).then(function (response) {
             $scope.detail = response.data;
+        });
+    };
+
+    // Thanh toán nhập kho
+    $scope.updateInputStore = function () {
+        $scope.selected.total_paid += parseInt($scope.selected.more_paid);
+        $http({
+            method : 'PUT',
+            url : API + 'input-store/' + $scope.selected.id,
+            data : $scope.selected,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadInputStore();
+            }
+            else
+                toastr.error(response.data[0]);
         });
     };
 

@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/22/2017.
  */
-app.controller('OrderController', function($scope, $http, API) {
+app.controller('OrderController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'customer').then(function (response) {
         $scope.customers = response.data;
@@ -35,6 +35,10 @@ app.controller('OrderController', function($scope, $http, API) {
         $scope.units = response.data;
     });
 
+    $http.get(API + 'account').then(function (response) {
+        $scope.accounts = response.data;
+    });
+
     // Tạo khách hàng mới
     $scope.createCustomer = function () {
         $http({
@@ -63,6 +67,7 @@ app.controller('OrderController', function($scope, $http, API) {
         });
     };
     $scope.loadOrder();
+    $interval($scope.loadOrder, 3000);
 
     /**
      * CRUD đơn hàng
@@ -163,7 +168,7 @@ app.controller('OrderController', function($scope, $http, API) {
 
     // Chỉnh sửa đơn hàng
     $scope.updateOrder = function () {
-        $scope.selected.total_paid += $scope.selected.more_paid;
+        $scope.selected.total_paid += parseInt($scope.selected.more_paid);
         $http({
             method : 'PUT',
             url : API + 'order/' + $scope.selected.id,

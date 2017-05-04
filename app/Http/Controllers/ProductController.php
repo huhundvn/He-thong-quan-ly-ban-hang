@@ -22,6 +22,7 @@ class ProductController extends Controller
 		return Product::with('images')
 			-> with('attributes')
 			-> with('detailPriceOutputs')
+			-> with('detailPriceInputs')
 			-> get();
 	}
 

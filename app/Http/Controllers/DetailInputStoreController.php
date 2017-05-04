@@ -25,7 +25,7 @@ class DetailInputStoreController extends Controller
 			'input_store_id' => 'required',
 			'expried_date' => 'required',
 			'quantity' => 'required',
-			'price' => 'required',
+			'price_input' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -37,7 +37,7 @@ class DetailInputStoreController extends Controller
 			$new -> product_id = Input::get('id');
 			$new -> expried_date = Input::get('expried_date');
 			$new -> quantity = Input::get('quantity');
-			$new -> price = Input::get('price');
+			$new -> price_input = Input::get('price_input');
 			$new -> save();
 		}
 		return response()->json(['success' => trans('message.create_success')]);

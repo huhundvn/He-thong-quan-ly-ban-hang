@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('CategoryController', function($scope, $http, API) {
+app.controller('CategoryController', function($scope, $http, API, $interval) {
 
     /**
      * Load danh sách danh mục sản phẩm
@@ -12,6 +12,7 @@ app.controller('CategoryController', function($scope, $http, API) {
         });
     };
     $scope.loadCategory();
+    $interval($scope.loadCategory, 3000);
 
     /**
      * CRUD nhóm sản phẩm

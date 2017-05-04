@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('SupplierController', function($scope, $http, API) {
+app.controller('SupplierController', function($scope, $http, API, $interval) {
 
     /**
      * Load danh sách nhà cung cấp
@@ -12,6 +12,7 @@ app.controller('SupplierController', function($scope, $http, API) {
         });
     };
     $scope.loadSupplier();
+    $interval($scope.loadSupplier, 3000);
 
     /**
      * CRUD nhà cung cấp

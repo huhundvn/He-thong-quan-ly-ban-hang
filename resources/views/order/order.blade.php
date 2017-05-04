@@ -74,8 +74,9 @@
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-show="0==order.status"> Đã hủy </p>
                     <p ng-show="1==order.status"> Chờ duyệt </p>
-                    <p ng-show="2==order.status"> Đã duyệt, đang ship hàng </p>
+                    <p ng-show="2==order.status"> Đang ship hàng </p>
                     <p ng-show="3==order.status"> Đã giao hàng </p>
+                    <p ng-show="4==order.status"> Đã thanh toán </p>
                 </td>
                 <td>
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
@@ -240,9 +241,10 @@
                                 <div class="col-sm-9">
                                     <select ng-model="newStatus" class="form-control input-sm" required>
                                         <option value="" selected> -- Trạng thái -- </option>
-                                        <option value="2"> Xác nhận đơn hàng </option>
+                                        <option value="2"> Duyệt đơn hàng </option>
                                         <option value="0"> Hủy đơn hàng </option>
-                                        <option value="3"> Đã nhập vào kho </option>
+                                        <option value="3"> Đã giao hàng </option>
+                                        <option value="4"> Đã thanh toán </option>
                                     </select>
                                 </div>
                             </div>

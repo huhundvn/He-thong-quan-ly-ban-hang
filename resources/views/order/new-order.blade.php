@@ -135,7 +135,7 @@
                             <input cleave="options.numeral" type="text" ng-model="item.quantity" class="form-control input-sm input-numeral">
                         </td>
                         <td>
-                            @{{ item.web_price | number:0 }}
+                            <input cleave="options.numeral" type="text" ng-model="item.web_price" class="form-control input-sm input-numeral">
                         </td>
                         <td>
                             @{{ item.quantity * item.web_price | number:0 }}
@@ -175,6 +175,7 @@
                             <option value="" selected> --Không chọn-- </option>
                             <option value="Tiền mặt"> Tiền mặt </option>
                             <option value="Thẻ ngân hàng"> Thẻ ngân hàng </option>
+                            <option value="Chuyển khoản"> Chuyển khoản </option>
                         </select>
                     </div>
                 </div> <h3> </h3>
@@ -188,6 +189,15 @@
                     <label class="col-sm-3"> Ngân hàng </label>
                     <div class="col-sm-9">
                         <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Ngân hàng...">
+                    </div>
+                </div> <h3> </h3>
+                <div class="row">
+                    <label class="col-sm-3"> Tài khoản nhận tiền </label>
+                    <div class="col-sm-9">
+                        <select ng-model="new.account_id" class="form-control input-sm">
+                            <option value=""> -- Chọn tài khoản -- </option>
+                            <option ng-repeat="account in accounts" value="@{{account.id}}"> @{{account.name}} </option>
+                        </select>
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
@@ -350,8 +360,8 @@
                                 <th> Tên </th>
                                 <th> Mã vạch </th>
                                 <th> Đơn vị tính </th>
-                                <th> Số lượng </th>
-                                <th> Tình trạng </th>
+                                <th> Số lượng còn </th>
+                                <th> Giá </th>
                             </thead>
                             <tbody>
                             <tr class="item"
@@ -365,8 +375,7 @@
                                 </td>
                                 <td> @{{ product.total_quantity | number: 0 }} </td>
                                 <td>
-                                    <p ng-show="product.total_quantity != 0"> Còn hàng </p>
-                                    <p ng-show="product.total_quantity == 0"> Hết hàng </p>
+                                    @{{ product.web_price | number:0 }}
                                 </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">

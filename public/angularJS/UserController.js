@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('UserController', function($scope, $http, API) {
+app.controller('UserController', function($scope, $http, API, $interval) {
 
     /**
      * Lấy danh sách các nơi làm việc
@@ -26,6 +26,7 @@ app.controller('UserController', function($scope, $http, API) {
         });
     };
     $scope.loadUser();
+    $interval($scope.loadUser, 3000);
 
     /**
      * CRUD nhân viên

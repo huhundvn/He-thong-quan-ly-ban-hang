@@ -2,7 +2,7 @@
  * Created by Good on 3/28/2017.
  */
 
-app.controller('ProductController', function($scope, $http, API) {
+app.controller('ProductController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'category').then(function (response) {
         $scope.categorys = response.data;
@@ -27,6 +27,7 @@ app.controller('ProductController', function($scope, $http, API) {
         });
     };
     $scope.loadProduct();
+    $interval($scope.loadProduct, 3000);
 
     /**
      * CRUD sản phẩm

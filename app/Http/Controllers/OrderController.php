@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Validator;
 
 //MODEL CSDL
 use App\Order;
-use Illuminate\Validation\Rules\In;
+use App\Voucher;
+use App\Customer;
+use App\Account;
 
 class OrderController extends Controller
 {
+
+
 	// API lấy danh sách đơn hàng
 	public function index()
 	{
@@ -24,6 +28,8 @@ class OrderController extends Controller
 	{
 		$rules = [
 			'customer_id' => 'required',
+			'payment_method' => 'required',
+			'account_id' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -37,6 +43,7 @@ class OrderController extends Controller
 			$new -> payment_method = Input::get('payment_method');
 			$new -> bank = Input::get('bank');
 			$new -> bank_account = Input::get('bank_account');
+			$new -> account_id = Input::get('account_id');
 
 			$new -> contact_name = Input::get('contact_name');
 			$new -> contact_address = Input::get('contact_address');
@@ -68,8 +75,19 @@ class OrderController extends Controller
 		    return $validation -> errors() -> all();
 	    else {
 	    	$update = Order::find($id);
-	    	$update -> total_paid = $update -> total_paid + Input::get('');
+		    $customer = Customer::find($update -> customer_id);
+	    	$update -> total_paid = $update -> total_paid + Input::get('total_paid');
 		    $update -> save();
+
+		    $voucher  = new Voucher();
+		    $voucher -> created_by = Auth::user() -> id;
+		    $voucher -> description = "Thanh toán đơn hàng DH-".$id;
+		    $voucher -> total = Input::get('more_paid');
+		    $voucher -> type = 0;
+		    $voucher -> name = $customer -> name;
+		    $voucher -> address = $customer -> address;
+		    $voucher -> save();
+
 		    return response()->json(['success' => trans('message.update_success')]);
 	    }
     }
@@ -85,6 +103,22 @@ class OrderController extends Controller
 	public function confirm($id, $status)
 	{
 		$selected = Order::find($id);
+		if($status == 4 && $selected -> status != 4) {
+			$account = Account::find($selected -> account_id);
+			$account -> total += $selected -> total_paid;
+			$account -> save();
+
+			$customer = Customer::find($selected -> customer_id);
+
+			$voucher  = new Voucher();
+			$voucher -> created_by = Auth::user() -> id;
+			$voucher -> description = "Thanh toán đơn hàng DH-".$id;
+			$voucher -> total = $selected -> total_paid;
+			$voucher -> type = 0;
+			$voucher -> name = $customer -> name;
+			$voucher -> address = $customer -> address;
+			$voucher -> save();
+		}
 		$selected -> status = $status;
 		$selected -> save();
 		return response()->json(['success' => trans('message.update_success')]);

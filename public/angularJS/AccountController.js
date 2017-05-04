@@ -1,7 +1,7 @@
 /**
  * Created by Good on 4/12/2017.
  */
-app.controller('AccountController', function($scope, $http, API) {
+app.controller('AccountController', function($scope, $http, API, $interval) {
     
     //Load danh sách danh mục tài khoản 
     $scope.loadAccount = function () {
@@ -10,6 +10,7 @@ app.controller('AccountController', function($scope, $http, API) {
         });
     };
     $scope.loadAccount();
+    $interval($scope.loadAccount, 3000); // tự động refresh lại nếu có dữ liệu mới
 
     //Tìm thông tin tài khoản
      

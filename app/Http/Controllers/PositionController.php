@@ -34,7 +34,7 @@ class PositionController extends Controller
 		else {
 			$new = new Position();
 			$new -> name = Input::get('name');
-			$new -> role = Input::get('role');
+			$new -> role = json_encode(Input::get('role'));
 			$new -> description = Input::get('description');
 			$new -> save();
 			return response()->json(['success' => trans('message.create_success')]);

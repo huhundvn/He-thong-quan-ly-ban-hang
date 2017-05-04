@@ -49,6 +49,7 @@
             <th> Người tạo </th>
             <th> Người thanh toán </th>
             <th> Loại </th>
+            <th> Mô tả </th>
             <th> Tổng tiền (VNĐ) </th>
             <th> Xóa </th>
             </thead>
@@ -56,9 +57,8 @@
             <tr ng-show="vouchers.length > 0" class="item"
                 dir-paginate="voucher in vouchers | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readVoucher(voucher)">
                 <td data-toggle="modal" data-target="#readVoucher">
-                    <b ng-show="0==voucher.type">PT</b>
-                    <b ng-show="1==voucher.type">PC</b>
-                    -@{{ voucher.id }}
+                    <p ng-show="0==voucher.type">PT-@{{ voucher.id }}</p>
+                    <p ng-show="1==voucher.type">PC-@{{ voucher.id }}</p>
                 </td>
                 <td data-toggle="modal" data-target="#readVoucher"> @{{ voucher.created_at | date: "dd/MM/yyyy"}} </td>
                 <td data-toggle="modal" data-target="#readVoucher">
@@ -67,6 +67,9 @@
                 <td data-toggle="modal" data-target="#readVoucher">
                     <p ng-show="voucher.type==0"> Phiếu thu </p>
                     <p ng-show="voucher.type==1"> Phiếu chi </p> </td>
+                <td data-toggle="modal" data-target="#readVoucher">
+                    @{{ voucher.description }}
+                </td>
                 <td data-toggle="modal" data-target="#readVoucher">
                     @{{ voucher.total | number:0 }}
                 </td>

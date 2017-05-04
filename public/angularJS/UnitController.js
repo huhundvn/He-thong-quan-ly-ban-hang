@@ -1,7 +1,7 @@
 /**
  * Created by Good on 3/28/2017.
  */
-app.controller('UnitController', function($scope, $http, API) {
+app.controller('UnitController', function($scope, $http, API, $interval) {
 
     /**
      * Load danh sách danh mục sản phẩm
@@ -12,6 +12,7 @@ app.controller('UnitController', function($scope, $http, API) {
         });
     };
     $scope.loadUnit();
+    $interval($scope.loadUnit, 3000);
 
     /**
      * CRUD đơn vị tính
