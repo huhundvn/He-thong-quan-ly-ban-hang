@@ -19,10 +19,10 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS province;
 CREATE TABLE province (
-  id int(5) NOT NULL,
-  name varchar(100) NOT NULL,
-  type varchar(30) NOT NULL,
-  PRIMARY KEY (id)
+--   id int(5) NOT NULL,
+--   name varchar(100) NOT NULL,
+--   type varchar(30) NOT NULL,
+--   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
