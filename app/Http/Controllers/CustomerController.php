@@ -18,9 +18,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-	    return Customer::with('province')
-		    -> with('district')
-		    -> get();
+//	    return Customer::with('province')
+//		    -> with('district')
+//		    -> get();
+	    return Customer::all();
     }
 
     /**
