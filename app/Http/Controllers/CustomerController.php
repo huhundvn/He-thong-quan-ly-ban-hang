@@ -88,8 +88,8 @@ class CustomerController extends Controller
 		    $customer -> email = Input::get('email');
 		    $customer -> phone = Input::get('phone');
 		    $customer -> address = Input::get('address');
-		    $customer -> district_id = Input::get('district_id');
-		    $customer -> province_id = Input::get('province_id');
+//		    $customer -> district_id = Input::get('district_id');
+//		    $customer -> province_id = Input::get('province_id');
 		    $customer -> bank_account = Input::get('bank_account');
 		    $customer -> bank = Input::get('bank');
 		    $customer -> customer_group_id = Input::get('customer_group_id');
