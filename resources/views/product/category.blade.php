@@ -42,14 +42,14 @@
         {{--!DANH SÁCH DANH MỤC SẢN PHẨM!--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-            <th> STT </th>
+            <th> Mã nhóm </th>
             <th> Tên </th>
             <th> Mô tả </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="categorys.length > 0" class="item" dir-paginate="category in categorys | filter:term | itemsPerPage: 7" ng-click="readCategory(category)">
-                <td data-toggle="modal" data-target="#readCategory"> @{{ $index+1 }} </td>
+                <td data-toggle="modal" data-target="#readCategory"> NSP-@{{ category.id }} </td>
                 <td data-toggle="modal" data-target="#readCategory"> @{{ category.name }} </td>
                 <td data-toggle="modal" data-target="#readCategory"> @{{ category.description }}</td>
                 <td>
