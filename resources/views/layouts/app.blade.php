@@ -18,15 +18,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
+    <style>
+        .bg {
+            /* The image used */
+            background-image: url( {{asset('bg.jpg')}} );
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body ng-cloak>
-
-    @include('layouts/header')
     {{-- NẾU LÀ KHÁCH YÊU CẦU ĐĂNG NHẬP --}}
     @if(Auth::guest())
         @yield('content')
     @else
+        @include('layouts/header')
         {{-- DANH SÁCH CÁC CHỨC NĂNG --}}
         @include('layouts.catalog')
         {{-- NỘI DUNG --}}

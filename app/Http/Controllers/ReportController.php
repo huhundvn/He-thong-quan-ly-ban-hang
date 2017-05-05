@@ -17,4 +17,8 @@ class ReportController extends Controller
     public function productReport() {
     	return view('report.product');
     }
+
+	public function inputStoreReport() {
+		return view('report.report-input-store');
+	}
 }

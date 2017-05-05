@@ -12,6 +12,27 @@
 @section('content')
     <div ng-controller="PriceOutputController">
 
+        {{-- NHẬP SẢN PHẨM --}}
+        <div class="row">
+            <div class="col-lg-3 col-xs-3">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
+                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Quay lại </a>
+            </div>
+            <div class="col-lg-3 col-xs-3">
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
+            </div>
+            <div class="col-lg-3 col-xs-3">
+
+            </div>
+            <div class="col-lg-3 col-xs-3">
+                <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
+            </div>
+
+        </div>
+
+        <hr/>
+
         {{-- Thông tin nhập--}}
         <div class="row">
             <div class="col-sm-3">
@@ -37,26 +58,7 @@
 
         <hr/>
 
-        {{-- NHẬP SẢN PHẨM --}}
-        <div class="row">
-            <div class="col-lg-3 col-xs-3">
-                <button type="submit" class="btn btn-success btn-sm" ng-click="createPriceOutput()"> Xác nhận </button>
-                <a href="{{route('list-price-output')}}" class="btn btn-default btn-sm"> Quay lại </a>
-            </div>
-            <div class="col-lg-3 col-xs-3">
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
-            </div>
-            <div class="col-lg-3 col-xs-3">
 
-            </div>
-            <div class="col-lg-3 col-xs-3">
-                <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
-            </div>
-
-        </div>
-
-        <hr/>
 
         {{-- Danh sách mặt hàng --}}
         <table class="w3-table table-hover table-bordered w3-centered">
@@ -196,7 +198,6 @@
                                 <th> Mã vạch </th>
                                 <th> Đơn vị tính </th>
                                 <th> Số lượng </th>
-                                <th> Tình trạng </th>
                             </thead>
                             <tbody>
                             <tr class="item"
@@ -209,10 +210,6 @@
                                     @{{ unit.name }}
                                 </td>
                                 <td> @{{ product.total_quantity | number: 0 }}</td>
-                                <td>
-                                    <p ng-show="product.total_quantity != 0"> Còn hàng </p>
-                                    <p ng-show="product.total_quantity == 0"> Hết hàng </p>
-                                </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">
                                 <td colspan="7"> Không có dữ liệu </td>

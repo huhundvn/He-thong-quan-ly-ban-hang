@@ -18,7 +18,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-	    return Customer::all();
+	    return Customer::with('province')
+		    -> with('district')
+		    -> get();
     }
 
     /**
@@ -43,6 +45,8 @@ class CustomerController extends Controller
 		    $customer -> email = Input::get('email');
 		    $customer -> phone = Input::get('phone');
 		    $customer -> address = Input::get('address');
+		    $customer -> district_id = Input::get('district_id');
+		    $customer -> province_id = Input::get('province_id');
 		    $customer -> bank_account = Input::get('bank_account');
 		    $customer -> bank = Input::get('bank');
 		    $customer -> customer_group_id = Input::get('customer_group_id');
@@ -70,7 +74,7 @@ class CustomerController extends Controller
 		    'email' => 'email|required|distinct',
 		    'phone' => 'required',
 		    'address' => 'required',
-		    'bank_account' => 'distinct|required',
+		    'bank_account' => 'distinct',
 		    'bank' => 'required_with:bank_account',
 	    ];
 	    $validation = Validator::make(Input::all(), $rules);
@@ -83,6 +87,8 @@ class CustomerController extends Controller
 		    $customer -> email = Input::get('email');
 		    $customer -> phone = Input::get('phone');
 		    $customer -> address = Input::get('address');
+		    $customer -> district_id = Input::get('district_id');
+		    $customer -> province_id = Input::get('province_id');
 		    $customer -> bank_account = Input::get('bank_account');
 		    $customer -> bank = Input::get('bank');
 		    $customer -> customer_group_id = Input::get('customer_group_id');

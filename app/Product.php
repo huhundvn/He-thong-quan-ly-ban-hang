@@ -8,6 +8,11 @@ class Product extends Model
 {
 	protected $table = 'product';
 
+	public function unit()
+	{
+		return $this->belongsTo('App\Unit');
+	}
+
 	public function attributes()
 	{
 		return $this->hasMany('App\ProductAttribute');

@@ -13,8 +13,7 @@ class DetailPriceOutputController extends Controller
 	// API lấy chi tiết giá bán
 	public function index()
 	{
-		return PriceDetailOutput::with('product')->get();
-		// return DetailPriceOutput::all();
+		return DetailPriceOutput::with('product')-> get();
 	}
 
 	// API tạo chi tiết đơn hàng
@@ -42,8 +41,7 @@ class DetailPriceOutputController extends Controller
 	// API xem chi tiết đơn hàng
 	public function show($id)
 	{
-		return PriceDetailOutput::with('product')->find($id);
-		// return DetailInputStore::find($id);
+		return DetailPriceOutput::with('product')->find($id);
 	}
 
 	// API chỉnh sửa thông tin đơn hàng

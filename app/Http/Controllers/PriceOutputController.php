@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,7 +16,10 @@ class PriceOutputController extends Controller
 	//API lấy danh sách bảng giá
 	public function index()
 	{
-		return PriceOutput::all();
+		return PriceOutput::with('detailPriceOutputs')
+			-> with('user')
+			-> with('customer_group')
+			-> get();
 	}
 
 	// API tạo nhà cung cấp mới
@@ -33,6 +37,7 @@ class PriceOutputController extends Controller
 			return $validation -> errors() -> all();
 		else {
 			$new = new PriceOutput();
+			$new -> created_by = Auth::user() -> id;
 			$new -> name = Input::get('name');
 			$new -> customer_group_id = Input::get('customer_group_id');
 			$new -> start_date = Input::get('start_date');
@@ -46,7 +51,10 @@ class PriceOutputController extends Controller
 	// API lấy thông tin bảng giá
 	public function show($id)
 	{
-		return PriceOutput::find($id);
+		return PriceOutput::with('detailPriceOutputs')
+			-> with('user')
+			-> with('customer_group')
+			-> find($id);
 	}
 
 	// API chỉnh sửa bảng giá

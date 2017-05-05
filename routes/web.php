@@ -247,6 +247,7 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('/list-return-product', 'ReturnProductController@listReturnProduct') -> name('list-return-product');
 
 	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');
+	Route::get('/report-input-store', 'ReportController@inputStoreReport') -> name('report-input-store');
 
 	Route::get('/no-permission', 'HomeController@checkPermission') -> name('no-permission');
 });

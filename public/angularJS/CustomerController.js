@@ -106,6 +106,8 @@ $('#readCustomer').on('show.bs.modal', function (event) {
     modal.find('#email').attr('readOnly', true);
     modal.find('#phone').attr('readOnly', true);
     modal.find('#address').attr('readOnly', true);
+    modal.find('#district').attr('disabled', true);
+    modal.find('#province').attr('disabled', true);
     modal.find('#bank_account').attr('readOnly', true);
     modal.find('#bank').attr('readOnly', true);
     modal.find('#customer_group').attr('disabled', true);
@@ -120,6 +122,8 @@ $('#readCustomer').on('show.bs.modal', function (event) {
         modal.find('#email').removeAttr('readOnly');
         modal.find('#phone').removeAttr('readOnly');
         modal.find('#address').removeAttr('readOnly');
+        modal.find('#district').removeAttr('disabled');
+        modal.find('#province').removeAttr('disabled');
         modal.find('#bank_account').removeAttr('readOnly');
         modal.find('#bank').removeAttr('readOnly');
         modal.find('#customer_group').removeAttr('disabled');

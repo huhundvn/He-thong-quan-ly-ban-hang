@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    Sản phẩm được quan tâm nhiều
+    Báo cáo nhập kho
 @endsection
 
 @section('location')
     <li> Báo cáo </li>
-    <li> Sản phẩm bán chạy </li>
+    <li> Báo cáo nhập kho </li>
 @endsection
 
 @section('content')

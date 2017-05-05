@@ -63,7 +63,8 @@
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.name}} </td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.email}}</td>
                 <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.phone}} </td>
-                <td data-toggle="modal" data-target="#readCustomer"> @{{ customer.address}} </td>
+                <td data-toggle="modal" data-target="#readCustomer">
+                    @{{ customer.address }}, @{{ customer.district.type }} @{{ customer.district.name }},  @{{ customer.province.type }} @{{ customer.province.name }}</td>
                 <td>
                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUser">
                         <span class="glyphicon glyphicon-trash"></span>
@@ -115,13 +116,13 @@
                                     <input ng-model="new.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
                                 </div>
                                 <div class="col-sm-3">
-                                    <select ng-model="new.district" class="form-control input-sm">
+                                    <select ng-model="new.district_id" class="form-control input-sm">
                                         <option value=""> -- Huyện-- </option>
-                                        <option ng-repeat="district in districts" ng-shơw="new.province == new.district" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>
+                                        <option ng-repeat="district in districts" ng-show="district.province_id == new.province" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
-                                    <select ng-model="new.province" class="form-control input-sm">
+                                    <select ng-model="new.province_id" class="form-control input-sm">
                                         <option value=""> -- Tỉnh -- </option>
                                         <option ng-repeat="province in provinces" value="@{{province.id}}"> @{{province.type}} @{{province.name}} </option>
                                     </select>
@@ -217,8 +218,20 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-3">
                                     <input id="address" ng-model="selected.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ...">
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="district" ng-model="selected.district_id" class="form-control input-sm">
+                                        <option value=""> -- Huyện-- </option>
+                                        <option ng-repeat="district in districts" ng-selected="district.id==selected.district_id" ng-show="district.province_id == selected.province_id" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select id="province" ng-model="selected.province_id" class="form-control input-sm">
+                                        <option value=""> -- Tỉnh -- </option>
+                                        <option ng-repeat="province in provinces" ng-selected="province.id==selected.province_id" value="@{{province.id}}"> @{{province.type}} @{{province.name}} </option>
+                                    </select>
                                 </div>
                             </div>
                             <hr/>

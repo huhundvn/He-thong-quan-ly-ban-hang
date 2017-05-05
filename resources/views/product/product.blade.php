@@ -73,9 +73,7 @@
                 <td> SP-@{{product.id}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.name}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.code }}</td>
-                <td data-toggle="modal" data-target="#readProduct" ng-repeat="unit in units" ng-show="unit.id==product.unit_id">
-                    @{{ unit.name }}
-                </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ product.unit.name }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.total_quantity | number: 0 }}</td>
                 <td data-toggle="modal" data-target="#readProduct">
                     <p ng-show="product.status == 1"> Còn hàng </p>

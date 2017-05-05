@@ -20,6 +20,7 @@ class ProductController extends Controller
 	public function index()
 	{
 		return Product::with('images')
+			-> with('unit')
 			-> with('attributes')
 			-> with('detailPriceOutputs')
 			-> with('detailPriceInputs')
@@ -72,7 +73,11 @@ class ProductController extends Controller
 	public function show($id)
 	{
 		return Product::with('images')
-			-> with('attributes') -> find($id);
+			-> with('unit')
+			-> with('attributes')
+			-> with('detailPriceOutputs')
+			-> with('detailPriceInputs')
+			-> find($id);
 	}
 
 	// API CHỈNH SỬA THÔNG TIN SẢN PHẨM

@@ -133,14 +133,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
+                                    Người tạo: @{{ selected.user.name }} <br/>
                                     Ngày bắt đầu: @{{ selected.start_date | date: "dd/MM/yyyy"}} <br/>
                                     Ngày kết thúc : @{{ selected.end_date | date: "dd/MM/yyyy" }} <br/>
                                 </div>
                                 <div class="col-sm-6">
                                     Tên bảng giá: @{{ selected.name }}<br/>
-                                    <div ng-repeat="customerGroup in customerGroups" ng-show="customerGroup.id==selected.customer_group_id">
-                                        Áp dụng cho: @{{customerGroup.name}}
-                                    </div>
+                                    Áp dụng cho: @{{selected.customer_group.name}}
                                 </div>
                             </div>
                             <div class="row">
