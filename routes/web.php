@@ -144,6 +144,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/top-product', 'ReportController@getTopProduct');
 
 	Route::get('/get-role', 'RoleController@getRole');
+	Route::post('/changePassword', 'UserController@changePassword');
 });
 
 // FRONT-END GIAO ĐIỆN WEB
@@ -153,7 +154,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/list-user', 'UserController@listUser') -> name('list-user') -> middleware(CheckUserRole::class);
     Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile') -> middleware(CheckUserRole::class);
 	Route::get('/download-user-template', 'UserController@downloadTemplate') -> name('downloadUserTemplate') -> middleware(CheckUserRole::class);
-	Route::post('/user/changePassword', 'UserController@changePassword') -> name('changePassword');
+	Route::post('/user/changePassword', 'UserController@changePassword');
 
     //CHỨC VỤ
     Route::get('/list-position', 'PositionController@listPosition') -> name('list-position') -> middleware(CheckPositionRole::class);

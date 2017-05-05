@@ -120,13 +120,19 @@ class UserController extends Controller
 		// kiểm tra điều kiện nhập
 		$rules = [
 			'old_pass' => 'required',
-			'new_pass' => 'unique:product,code',
+			'new_pass' => 'required',
 			'confirm_pass' => 'required',
 		];
 
-		$new = User::find(Auth::user() -> id);
-		$new -> password = bcrypt(Input::get('new_pass'));
-		$new -> save();
-		return redirect() -> route('home');
+		$validation = Validator::make(Input::all(), $rules);
+
+		if($validation->fails())
+			return $validation -> errors() -> all(); // nếu có lỗi trả về lỗi
+		else {
+			$new = User::find(Auth::user() -> id);
+			$new -> password = bcrypt(Input::get('new_pass'));
+			$new -> save();
+			return response()->json(['success' => 'Đã thay đổi mật khẩu.']);
+		}
 	}
 }

@@ -18,7 +18,7 @@
 </div>
 
 {{-- ĐỔI MẬT KHẨU --}}
-<div id="changePass" class="modal fade" role="dialog">
+<div id="changePass" class="modal fade" role="dialog" ng-controller="HomeController">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -26,30 +26,30 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title w3-text-blue"> Đổi mật khẩu </h4>
             </div>
-            <form class="form-horizontal" action="{{route('changePassword')}}" method="POST"> {{ csrf_field() }}
+            <form class="form-horizontal"> {{ csrf_field() }}
             <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-4"> Mật khẩu cũ </label>
                         <div class="col-sm-8">
-                            <input name="old_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu cũ...">
+                            <input ng-model="password.old_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu cũ...">
                         </div>
                     </div>
                     <hr/>
                     <div class="form-group">
                         <label class="col-sm-4"> Mật khẩu mới </label>
                         <div class="col-sm-8">
-                            <input name="new_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu mới...">
+                            <input ng-model="password.new_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu mới...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4"> Xác nhận mật khẩu </label>
                         <div class="col-sm-8">
-                            <input name="confirm_pass" type="password" class="form-control input-sm" placeholder="Xác nhận mật khẩu...">
+                            <input ng-model="password.confirm_pass" type="password" class="form-control input-sm" placeholder="Xác nhận mật khẩu...">
                         </div>
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-info"> Xác nhận </button>
+                <button ng-click="changePassword()" type="submit" class="btn btn-info"> Xác nhận </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal"> Hủy </button>
             </div>
             </form>

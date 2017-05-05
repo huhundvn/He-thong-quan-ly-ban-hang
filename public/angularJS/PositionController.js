@@ -15,12 +15,22 @@ app.controller('PositionController', function($scope, $http, API, $interval) {
     // CRUD chức vụ
     $scope.new = {};
     $scope.new.role = [];
+    // $scope.selected = {};
+    // $scope.selected.role = [];
 
+    // Thêm quyền
     $scope.add = function(role) {
         if($scope.new.role.indexOf(role) != -1) {
             $scope.new.role.splice($scope.new.role.indexOf(role), 1);
         } else {
             $scope.new.role.push(role);
+        }
+        if($scope.selected.role.indexOf(role) != -1) {
+            $scope.selected.role = $scope.selected.role.replace(',"' + role + '"', '');
+        } else {
+            $scope.selected.role = $scope.selected.role.replace(']', '');
+            $scope.selected.role = $scope.selected.role.concat(',"' + role, '"');
+            $scope.selected.role = $scope.selected.role.concat(']');
         }
     }
 

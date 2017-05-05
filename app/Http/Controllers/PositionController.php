@@ -65,6 +65,7 @@ class PositionController extends Controller
 			$unit = Position::find($id);
 			$unit -> name = Input::get('name');
 			$unit -> description = Input::get('description');
+			$unit -> role = Input::get('role');
 			$unit -> save();
 			return response()->json(['success' => trans('message.update_success')]);
 		}

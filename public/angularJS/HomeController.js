@@ -23,6 +23,23 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
             $scope.roles = response.data;
         });
     };
-
     $interval($scope.loadRole, 3000);
+
+    $scope.changePassword = function () {
+        $http({
+            method : 'POST',
+            url : API + 'changePassword',
+            data : $scope.password,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
+                $scope.loadCustomer();
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
 });
