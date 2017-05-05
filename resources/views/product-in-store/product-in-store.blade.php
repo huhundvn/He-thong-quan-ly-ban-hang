@@ -38,10 +38,10 @@
             </div>
             <div class="col-lg-2 col-xs-2">
                 <div class="btn-group">
-                    <button id="viewList" type="button" class="btn btn-sm btn-default">
+                    <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
                     </button>
-                    <button id="viewGrid" type="button" class="btn btn-sm btn-default w3-blue-grey">
+                    <button id="viewGrid" type="button" class="btn btn-sm btn-default">
                         <span class="glyphicon glyphicon-th"></span>
                     </button>
                 </div>
@@ -51,7 +51,7 @@
         <hr/>
 
         {{-- !DANH SÁCH SẢN PHẨM! --}}
-        <table id="list" class="w3-table table-hover table-bordered w3-centered" hidden>
+        <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
@@ -60,8 +60,9 @@
                 <th> Đơn vị tính </th>
                 <th> Nhà cung cấp </th>
                 <th> Số lượng </th>
-                <th> Giá mua </th>
+                <th> Giá mua (VNĐ) </th>
                 <th> Hạn sử dụng </th>
+                <th> Kho hàng </th>
             </thead>
             <tbody>
             <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
@@ -75,8 +76,11 @@
                     @{{ supplier.name }}
                 </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.quantity | number: 0 }} </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} VNĐ </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
+                <td data-toggle="modal" data-target="#readProduct" ng-repeat="store in stores" ng-show="store.id==productInStore.store_id">
+                    @{{ store.name }}
+                </td>
             </tr>
             <tr class="item" ng-show="productInStores.length==0">
                 <td colspan="9"> Không có dữ liệu </td>
@@ -84,7 +88,7 @@
             </tbody>
         </table>
 
-        <div id="grid" class="row" align="center">
+        <div id="grid" class="row" align="center" hidden>
             <div class="col-lg-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
                 <img src="@{{productInStore.default_image}}" class="image">
                 <b> <h5 class="w3-text-blue-gray"> <b> @{{productInStore.name}} </b> </h5>

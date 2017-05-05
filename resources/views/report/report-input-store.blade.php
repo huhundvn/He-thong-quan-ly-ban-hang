@@ -12,9 +12,8 @@
 @section('content')
     <div ng-controller="ReportController">
         <div class="row">
-            <canvas class="chart-bar" chart-data="data" chart-labels="labels"></canvas>
+
         </div>
-        @{{labels}}
     </div>
 @endsection
 

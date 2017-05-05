@@ -90,7 +90,7 @@
                     <a href="{{ route('top-product') }}" class="list-group-item"> Sản phẩm bán chạy </a>
                     <a href="{{ route('list-voucher') }}" class="list-group-item"> Doanh thu bán hàng </a>
                     <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Khách hàng mua nhiều </a>
-                    <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Bảng kê nhập kho </a>
+                    <a href="{{ route('report-input-store') }}" class="list-group-item"> Bảng kê nhập kho </a>
                     <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Bảng kê tồn kho </a>
                 </div>
             </div>
