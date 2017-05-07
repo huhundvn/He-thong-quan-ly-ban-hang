@@ -35,8 +35,8 @@ class CreateOrderTable extends Migration
 		    $table->string('bank_account') -> nullable();
 		    $table->integer('account_id') -> nullable();
 
-		    $table->integer('tax') -> nullable() -> change();
-		    $table->integer('discount') -> nullable() -> change();
+		    $table->integer('tax') -> nullable();
+		    $table->integer('discount') -> nullable();
 
 		    $table->timestamps();
 		    $table->softDeletes();
