@@ -4,18 +4,18 @@
 app.controller('HomeController', function($scope, $http, API, $interval) {
 
     // lấy danh sách các đơn hàng
-    $http.get(API + 'order').then(function (response) {
-        $scope.orders = response.data;
+    $http.get(API + 'get-today-order').then(function (response) {
+        $scope.today_order = response.data;
     });
 
-    // lấy danh sách các chức vụ
-    $http.get(API + 'customer').then(function (response) {
-        $scope.customers = response.data;
+    // lấy danh sách khách hàng
+    $http.get(API + 'get-sum-customer').then(function (response) {
+        $scope.sum_customer = response.data;
     });
 
-    // lấy danh sách các chức vụ
-    $http.get(API + 'user').then(function (response) {
-        $scope.users = response.data;
+    // lấy danh sách các nhân viên
+    $http.get(API + 'get-sum-user').then(function (response) {
+        $scope.sum_user = response.data;
     });
 
     $scope.loadRole = function() {

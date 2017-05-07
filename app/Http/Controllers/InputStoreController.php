@@ -20,7 +20,26 @@ class InputStoreController extends Controller
 	// API lấy lịch sử nhập hàng
 	public function index()
 	{
-		return InputStore::all();
+		return InputStore::with('store')
+			-> with('detailInputStores')
+			-> with('user')
+			-> with('supplier')
+			-> with('account')
+			-> get();
+	}
+
+	// API lấy danh sách đơn hàng đã thanh toán
+	public function getPaidInputStore()
+	{
+		return InputStore::with('store')
+			-> with('detailInputStores')
+			-> with('user')
+			-> with('supplier')
+			-> with('account')
+			-> where('status', '=', 2)
+			-> orWhere('status', '=', 3)
+			-> orWhere('status', '=', 4)
+			-> get();
 	}
 
 	// API lưu đợt nhập hàng mới
@@ -39,11 +58,16 @@ class InputStoreController extends Controller
 			$new = new InputStore();
 			$new -> created_by = Auth::user() -> id;
 			$new -> store_id = Input::get('store_id');
+
 			$new -> account_id = Input::get('account_id');
 			$new -> input_date = Input::get('input_date');
 			$new -> supplier_id = Input::get('supplier_id');
+			$new -> tax = Input::get('tax');
+			$new -> discount = Input::get('discount');
+
 			$new -> total = Input::get('total');
 			$new -> status = 1;
+
 			$new -> save();
 			return response()->json(['success' => ($new->id)]);
 		}
@@ -52,7 +76,11 @@ class InputStoreController extends Controller
 	// API xem thông tin đợt nhập hàng
 	public function show($id)
 	{
-		return InputStore::find($id);
+		return InputStore::with('store')
+			-> with('user')
+			-> with('supplier')
+			-> with('account')
+			-> find($id);
 	}
 
 	// API chỉnh sửa thông tin đợt nhập hàng
@@ -118,7 +146,7 @@ class InputStoreController extends Controller
 				$update2 -> store_id = $row -> store_id;
 				$update2 -> supplier_id = $row -> supplier_id;
 				$update2 -> quantity = $row -> quantity;
-				$update2 -> price = $row -> price;
+				$update2 -> price_input = $row -> price_input;
 				$update2 -> expried_date = $row -> expried_date;
 				$update2 -> save();
 			}

@@ -16,7 +16,9 @@ class StoreTranferController extends Controller
 	// API lấy lịch sử nhập hàng
 	public function index()
 	{
-		return StoreTranfer::with('detailStoreTranfers') -> get();
+		return StoreTranfer::with('detailStoreTranfers')
+			-> with('user')
+			-> get();
 	}
 
 	// API lưu chuyển kho mới
@@ -72,14 +74,23 @@ class StoreTranferController extends Controller
 				-> get(); //Lây chi tiết danh sách các mặt hàng cần nhập
 			foreach ($rows as $row) {
 				// Cập nhật hàng trong kho tương ứng
-				$update = new ProductInStore();
-				$update -> product_id = $row -> product_id;
-				$update -> store_id = $row -> store_id;
-				$update -> supplier_id = $row -> supplier_id;
-				$update -> quantity = $row -> quantity;
-				$update -> price = $row -> price;
-				$update -> expried_date = $row -> expried_date;
+				$update = ProductInStore::where('store_id', '=', $row -> from_store_id)
+					-> where('product_id', '=' , $row -> product_id)
+					-> where('supplier_id', '=' , $row -> supplier_id)
+					-> where('price_input', '=' , $row -> price_input)
+					-> where('expried_date', '=' , $row -> expried_date)
+					-> first();
+				$update -> quantity -= $row -> quantity_tranfer;
 				$update -> save();
+
+				$update03 = new ProductInStore();
+				$update03 -> product_id = $row -> product_id;
+				$update03 -> store_id = $row -> to_store_id;
+				$update03 -> supplier_id = $row -> supplier_id;
+				$update03 -> price_input = $row -> price_input;
+				$update03 -> expried_date = $row -> expried_date;
+				$update03 -> quantity = $row -> quantity_tranfer;
+				$update03 -> save();
 			}
 		}
 		$selected -> status = $status;

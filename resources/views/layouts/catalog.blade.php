@@ -3,6 +3,16 @@
 <div class="w3-sidebar w3-collapse w3-border-right" id="mySidebar" style="padding: 5px;">
     <div class="panel-group" id="accordion">
 
+        {{-- Danh mục khuyến mãi --}}
+        <div class="panel w3-blue-grey">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="{{ route('home') }}">
+                        <span class="glyphicon glyphicon-home"></span> &nbsp; Trang chủ </a>
+                </h4>
+            </div>
+        </div>
+
         {{-- Danh mục bán hàng--}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('order') != -1 || roles.indexOf('price-output') != -1 || roles.indexOf('return') != -1">
             <div class="panel-heading">
@@ -89,9 +99,8 @@
                 <div class="list-group">
                     <a href="{{ route('top-product') }}" class="list-group-item"> Sản phẩm bán chạy </a>
                     <a href="{{ route('list-voucher') }}" class="list-group-item"> Doanh thu bán hàng </a>
-                    <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Khách hàng mua nhiều </a>
                     <a href="{{ route('report-input-store') }}" class="list-group-item"> Bảng kê nhập kho </a>
-                    <a href="{{ route('list-customer-invoice') }}" class="list-group-item"> Bảng kê tồn kho </a>
+                    <a href="{{ route('report-product-in-store') }}" class="list-group-item"> Bảng kê tồn kho </a>
                 </div>
             </div>
         </div>
@@ -111,18 +120,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Danh mục khuyến mãi --}}
-        {{--<div class="panel w3-blue-grey">--}}
-            {{--<div class="panel-heading">--}}
-                {{--<h4 class="panel-title">--}}
-                    {{--<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">--}}
-                        {{--<span class="glyphicon glyphicon-star-empty"></span> &nbsp; @lang('catalog.promotion') </a>--}}
-                {{--</h4>--}}
-            {{--</div>--}}
-            {{--<div id="collapse3" class="panel-collapse collapse">--}}
-            {{--</div>--}}
-        {{--</div>--}}
 
         {{-- Danh mục nhân viên --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('user') != -1 || roles.indexOf('position') != -1">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Lịch sử nhập kho
+    Lịch sử nhập kho
 @endsection
 
 @section('location')
@@ -31,10 +31,11 @@
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
-                    <option value="1"> Đã duyệt </option>
+                    <option value="1"> Chờ duyệt </option>
                     <option value="0"> Đã từ chối </option>
-                    <option value="2"> Đang lấy hàng </option>
-                    <option value="3"> Đã nhập kho </option>
+                    <option value="2"> Đã xác nhận </option>
+                    <option value="3"> Đang lấy hàng </option>
+                    <option value="4"> Đã nhập kho </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
@@ -61,32 +62,25 @@
             <tr ng-show="inputStores.length > 0" class="item"
                 dir-paginate="inputStore in inputStores | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readInputStore(inputStore)">
                 <td data-toggle="modal" data-target="#readInputStore"> YCNH-@{{ inputStore.id }} </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="supplier in suppliers" ng-show="supplier.id==inputStore.supplier_id"> @{{ supplier.name }}
-                    </p>
-                </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.supplier.name }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.created_at | date: "dd/MM/yyyy" }} </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="user in users" ng-show="user.id==inputStore.created_by"> @{{ user.name }}
-                    </p>
-                </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.user.name }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.total | number:0 }} </td>
-                <td data-toggle="modal" data-target="#readInputStore">
-                    <p ng-repeat="store in stores" ng-show="store.id == inputStore.store_id"> @{{ store.name }} </p>
-                </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ inputStore.store.name }} </td>
                 <td data-toggle="modal" data-target="#readInputStore">
                     <p ng-show="0==inputStore.status"> Đã từ chối </p>
                     <p ng-show="1==inputStore.status"> Chờ duyệt </p>
-                    <p ng-show="2==inputStore.status"> Đang lấy hàng </p>
-                    <p ng-show="3==inputStore.status"> Đã nhập kho </p>
+                    <p ng-show="2==inputStore.status"> Đã xác nhận </p>
+                    <p ng-show="3==inputStore.status"> Đang lấy hàng </p>
+                    <p ng-show="4==inputStore.status"> Đã nhập kho </p>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
+                    <button ng-show="4!=inputStore.status" class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
                 <td>
-                    <button ng-show="0==inputStore.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore"">
+                    <button ng-show="0==inputStore.status||4==inputStore.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore"">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
@@ -145,27 +139,26 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
-                                        Nhà cung cấp: @{{ supplier.name }} <br/>
-                                        Địa chỉ: @{{ supplier.address }} <br/>
-                                        Số điện thoại: @{{ supplier.phone }}
-                                    </div>
-                                    <div ng-repeat="account in accounts" ng-show="account.id==selected.account_id">
-                                        Hình thức thanh toán: @{{account.name}}
-                                    </div>
-                                    Tổng tiền: @{{ selected.total | number:0 }} VNĐ <br/>
+                                    Nhà cung cấp: @{{ selected.supplier.name }} <br/>
+                                    Địa chỉ: @{{ selected.supplier.address }} <br/>
+                                    Số điện thoại: @{{ selected.supplier.phone }} <br/>
+                                    Hình thức thanh toán: @{{ selected.account.name }}
                                 </div>
                                 <div class="col-xs-6">
-                                    <div ng-repeat="store in stores" ng-show="store.id==selected.store_id">
-                                        Nhập về kho: @{{ store.name }} <br/>
-                                        Địa chỉ: @{{ store.address }} <br/>
-                                        Số điện thoại: @{{ store.phone }}
-                                    </div>
+                                    Nhập về kho: @{{ selected.store.name }} <br/>
+                                    Địa chỉ: @{{ selected.store.address }} <br/>
+                                    Số điện thoại: @{{ selected.store.phone }} <br/>
                                     Ngày giao hàng: @{{selected.input_date | date: "dd/MM/yyyy"}}<br/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12"> Ghi chú: @{{ selected.note }}</div>
+                                <div class="col-xs-12">
+                                    <hr/>
+                                    Chiết khấu: @{{ selected.discount | number:0 }} (VNĐ) <br/>
+                                    Thuế VAT: @{{ selected.tax }} % <br/>
+                                    Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
+                                    Ghi chú: @{{ selected.note }}
+                                </div>
                             </div>
                             <h1></h1>
                             <div class="row">
@@ -191,9 +184,9 @@
                                         </td>
                                         <td> <p ng-repeat="unit in units" ng-show="unit.id==item.unit_id"> @{{ unit.name }} </p> </td>
                                         <td> @{{ item.quantity }} </td>
-                                        <td> @{{ item.price | number:0 }} </td>
+                                        <td> @{{ item.price_input | number:0 }} </td>
                                         <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
-                                        <td> @{{ item.quantity * item.price | number: 0 }} </td>
+                                        <td> @{{ item.quantity * item.price_input | number: 0 }} </td>
                                     </tr>
                                     <tr class="item" ng-show="detail.length==0">
                                         <td colspan="9"> Không có dữ liệu </td>
@@ -243,7 +236,8 @@
                                         <option value="" selected> -- Trạng thái -- </option>
                                         <option value="2"> Xác nhận đơn hàng </option>
                                         <option value="0"> Hủy đơn hàng </option>
-                                        <option value="3"> Đã nhập vào kho </option>
+                                        <option value="3"> Đang lấy hàng </option>
+                                        <option value="4"> Đã nhập vào kho </option>
                                     </select>
                                 </div>
                             </div>

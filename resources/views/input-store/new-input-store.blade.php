@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Yêu cầu nhập hàng
+    Yêu cầu nhập kho
 @endsection
 
 @section('location')
@@ -13,23 +13,19 @@
 
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
-            <div class="col-lg-3 col-xs-3">
+            <div class="col-lg-4 col-xs-3">
                 <button type="submit" class="btn btn-success btn-sm" ng-click="createInputStore()"> Xác nhận  </button>
                 <a href="{{route('list-input-store')}}" class="btn btn-default btn-sm"> Quay lại </a>
             </div>
-            <div class="col-lg-3 col-xs-3">
+            <div class="col-lg-6 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#createProduct"> Thêm SP mới </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
             </div>
-            <div class="col-lg-3 col-xs-3">
-                <button class="btn btn-sm w3-blue-grey"> Tổng tiền: @{{ getTotal() | number:0 }} VNĐ </button>
-            </div>
-            <div class="col-lg-3 col-xs-3">
+            <div class="col-lg-2 col-xs-3">
                 <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
             </div>
         </div>
-
         <hr/>
 
         {{-- Thông tin nhập--}}
@@ -67,7 +63,6 @@
                 </select>
             </div>
         </div>
-
         <hr/>
 
         {{-- Danh sách mặt hàng --}}
@@ -88,9 +83,7 @@
                 <td> @{{ $index+1 }}</td>
                 <td> @{{ item.code }} </td>
                 <td> @{{ item.name }} </td>
-                <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                    @{{ unit.name }}
-                </td>
+                <td> @{{ item.unit.name }} </td>
                 <td>
                     <input cleave="options.numeral" type="text" ng-model="item.quantity" class="form-control input-sm input-numeral">
                 </td>
@@ -118,6 +111,32 @@
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%;">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
+        </div>
+
+        <p></p>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label"> Số tiền ban đầu:  </label>
+                <label class="col-xs-2 control-label"> @{{ getTotal() | number:0 }} (VNĐ) </label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"> Thuế VAT (%) </label>
+                <div class="col-xs-2">
+                    <input ng-model="info.tax" type="text" class="form-control input-sm">
+                </div>
+                <label class="col-xs-2 control-label"> = @{{ getTotal() * (info.tax/100) | number:0 }} (VNĐ) </label>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"> Chiết khấu (VNĐ) </label>
+                <div class="col-xs-2">
+                    <input cleave="options.numeral" ng-model="info.discount" type="text" class="form-control input-sm">
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <label class="col-xs-2 control-label"> Tổng tiền:  </label>
+                <label class="col-xs-2 control-label"> @{{ getTotal() -- (getTotal() * (info.tax/100)) - info.discount | number:0 }} (VNĐ) </label>
+            </div>
         </div>
 
         {{-- Xem biểu mẫu --}}
@@ -155,7 +174,10 @@
                                         <div ng-repeat="account in accounts" ng-show="account.id==info.account_id">
                                             Hình thức thanh toán: @{{account.name}}
                                         </div>
-                                        Tổng tiền: <br/>
+                                        Số tiền ban đầu: @{{ getTotal() | number:0 }} (VNĐ) <br/>
+                                        Chiết khấu: @{{ info.discount | number:0 }} (VNĐ) <br/>
+                                        Thuế VAT: @{{ info.tax }} % <br/>
+                                        Tổng tiền: @{{ getTotal() -- getTotal() * (info.tax/100) - info.discount | number:0 }} (VNĐ) <br/>
                                     </div>
                                     <div class="col-sm-6">
                                         <div ng-repeat="store in stores" ng-show="store.id==info.store_id">
@@ -188,9 +210,9 @@
                                             <td> @{{ item.name }} </td>
                                             <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">@{{ unit.name }}</td>
                                             <td> @{{ item.quantity }} </td>
-                                            <td> @{{ item.price | number:0 }} </td>
+                                            <td> @{{ item.price_input | number:0 }} </td>
                                             <td> @{{ item.expried_date | date: "dd/MM/yyyy"}} </td>
-                                            <td> @{{ item.quantity * item.price | number: 0 }} </td>
+                                            <td> @{{ item.quantity * item.price_input | number: 0 }} </td>
                                         </tr>
                                         <tr class="item" ng-show="data.length==0">
                                             <td colspan="9"> Không có dữ liệu </td>
@@ -228,29 +250,36 @@
                         <h4 class="modal-title w3-text-blue" id="myModalLabel"> Chọn sản phẩm </h4>
                     </div>
                     <div class="modal-body">
-                        <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
+                            </div>
+                            <div class="col-xs-4">
+                                <select ng-model="term2.status" class="form-control input-sm">
+                                    <option value=""> -- Trạng thái -- </option>
+                                    <option value="1"> Còn hàng </option>
+                                    <option value="0"> Hết hàng </option>
+                                </select>
+                            </div>
+                        </div>
                         <h1></h1>
                         {{-- !DANH SÁCH SẢN PHẨM! --}}
                         <table class="w3-table table-hover table-bordered w3-centered">
                             <thead>
                             <tr class="w3-blue-grey">
-                                <th> STT </th>
+                                <th> Mã SP </th>
                                 <th> Tên </th>
-                                <th> Mã vạch </th>
                                 <th> Đơn vị tính </th>
                                 <th> Số lượng </th>
                                 <th> Tình trạng </th>
                             </thead>
                             <tbody>
                             <tr class="item"
-                                ng-show="products.length > 0" dir-paginate="product in products | filter:term | itemsPerPage: 5"
+                                ng-show="products.length > 0" dir-paginate="product in products | filter:term | filter:term2 | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
-                                <td> @{{$index+1}} </td>
-                                <td> @{{ product.name}} </td>
-                                <td> @{{ product.code }}</td>
-                                <td ng-repeat="unit in units" ng-show="unit.id==product.unit_id">
-                                    @{{ unit.name }}
-                                </td>
+                                <td> SP-@{{ product.id }}</td>
+                                <td> @{{ product.name }} </td>
+                                <td> @{{ product.unit.name }} </td>
                                 <td> @{{ product.total_quantity | number: 0 }}</td>
                                 <td>
                                     <p ng-show="product.total_quantity != 0"> Còn hàng </p>

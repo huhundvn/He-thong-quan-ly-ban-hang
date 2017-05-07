@@ -11,10 +11,6 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         $scope.customerGroups = response.data;
     });
 
-    $http.get(API + 'user').then(function (response) {
-        $scope.users = response.data;
-    });
-
     $http.get(API + 'price-output').then(function (response) {
         $scope.priceOutputs = response.data;
     });
@@ -27,12 +23,12 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         $scope.suppliers = response.data;
     });
 
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
+    $http.get(API + 'user').then(function (response) {
+        $scope.users = response.data;
     });
 
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
+    $http.get(API + 'product').then(function (response) {
+        $scope.products = response.data;
     });
 
     $http.get(API + 'account').then(function (response) {
@@ -68,6 +64,15 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
     };
     $scope.loadOrder();
     $interval($scope.loadOrder, 3000);
+
+    //Load danh sách đơn hàng đã thanh toán
+    $scope.loadPaidOrder = function () {
+        $http.get(API + 'get-paid-order').then(function (response) {
+            $scope.paidOrders = response.data;
+        });
+    };
+    $scope.loadPaidOrder();
+    $interval($scope.loadPaidOrder, 3000);
 
     /**
      * CRUD đơn hàng
@@ -135,7 +140,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
                 toastr.info('Vui lòng điền số lượng cần mua');
             else {
                 $scope.new.customer_id = $scope.selectedCustomer.originalObject.id;
-                $scope.new.total = $scope.getTotal() + parseInt($scope.getTotal() * 0.1);
+                $scope.new.total = $scope.getTotal() + parseInt($scope.getTotal()*($scope.new.tax/100)) - parseInt($scope.new.discount);
                 console.log($scope.new);
                 $http({
                     method : 'POST',
@@ -152,6 +157,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
                         }
                         toastr.success('Đã thêm đơn hàng thành công.');
                         $scope.data = [];
+                        $scope.new = {};
                     } else
                         toastr.error(response.data[0]);
                 });
@@ -163,6 +169,9 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
     $scope.readOrder = function (order) {
         $http.get(API + 'order/' + order.id).then(function (response) {
             $scope.selected = response.data;
+        });
+        $http.get(API + 'get-order-detail/' + order.id).then(function (response) {
+            $scope.detail = response.data;
         });
     };
 
@@ -180,6 +189,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadOrder();
+                $scope.loadPaidOrder();
             }
             else
                 toastr.error(response.data[0]);

@@ -19,7 +19,7 @@ class CreateStoreTranferTable extends Migration
 		    $table->integer('to_store_id') -> nullable();
 		    $table->string('reason') -> nullable();
 		    $table->tinyInteger('status') -> nullable();
-		    $table->integer('approved_by') -> nullable();
+		    $table->integer('created_by') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });

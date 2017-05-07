@@ -69,7 +69,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 7" ng-click="readProduct(product)">
+            <tr class="item" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 6" ng-click="readProduct(product)">
                 <td> SP-@{{product.id}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.name}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.code }}</td>
@@ -93,7 +93,7 @@
 
         {{-- Xem dạng hình ảnh--}}
         <div id="grid" class="row" align="center" hidden>
-            <div class="col-lg-3" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 7" ng-click="readProduct(product)">
+            <div class="col-lg-3" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 8" ng-click="readProduct(product)">
                 <img src="@{{product.default_image}}" class="image">
                 <h5 class="w3-text-blue-gray"> <b> @{{product.name}} </b> </h5>
                 <b> Tổng số: @{{product.total_quantity}} sản phẩm </b>
@@ -489,7 +489,7 @@
                                 <div id="selectMenu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-4">
                                             <form id="my_dropzone02" method="post" action="{{route('uploadImage')}}" class="dropzone" enctype="multipart/form-data"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
@@ -502,14 +502,15 @@
                                             <h3></h3>
                                             <button id="addImage" ng-click="uploadImage()" class="btn btn-success"> Upload ảnh </button>
                                         </div>
-                                        <div class="col-xs-6" align="center">
-                                            <img src="@{{selected.default_image}}" class="image">
-                                            <div class="thumbnail col-xs-3" ng-repeat="item in selected.images">
-                                                <img src="@{{item.image}}" width="50px">
-                                                <div class="caption">
-                                                    <button class="btn btn-sm btn-danger" ng-click="deleteProductImage(item)">
-                                                        Xóa
-                                                    </button>
+                                        <div class="col-xs-4" align="center">
+                                            <img src="@{{selected.default_image}}" class="image"> <br/>
+                                            <a href="" ng-click="selected.default_image=null"> Xóa </a>
+                                        </div>
+                                        <div class="col-xs-4" align="center">
+                                            <div class="thumbnail col-xs-3" ng-repeat="item in selected.images" align="center">
+                                                <img src="@{{item.image}}" align="center">
+                                                <div class="caption" align="center">
+                                                    <a href="" ng-click="deleteProductImage(item)"> Xóa </a>
                                                 </div>
                                             </div>
                                         </div>

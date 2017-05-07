@@ -74,16 +74,21 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         myDropzone02.processQueue();
         myDropzone.on("success", function(file, response) {
             $scope.tmp = {};
-            $scope.new.default_image = response;
-            $scope.tmp.image = response;
-            $scope.image.push($scope.tmp);
-
+            if($scope.new.default_image == null)
+                $scope.new.default_image = response;
+            else {
+                $scope.tmp.image = response;
+                $scope.image.push($scope.tmp);
+            }
         });
         myDropzone02.on("success", function(file, response) {
             $scope.tmp = {};
-            $scope.selected.default_image = response;
-            $scope.tmp.image = response;
-            $scope.image.push($scope.tmp);
+            if($scope.selected.default_image == null)
+                $scope.selected.default_image = response;
+            else {
+                $scope.tmp.image = response;
+                $scope.image.push($scope.tmp);
+            }
         });
     };
 
@@ -203,8 +208,9 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         }).then(function (response) {
             if(response.data.success) {
                 toastr.success(response.data.success);
-                $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadProduct();
+                $scope.readProduct($scope.selected);
+                $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.data = [];
                 $scope.image = [];
             }

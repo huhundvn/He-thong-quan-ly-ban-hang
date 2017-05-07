@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    Báo cáo nhập kho
+    Báo cáo tồn kho
 @endsection
 
 @section('location')
     <li> Báo cáo </li>
-    <li> Báo cáo nhập kho </li>
+    <li> Báo cáo tồn kho </li>
 @endsection
 
 @section('content')
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="loadInputStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> In báo cáo </button>
+                    <button ng-click="loadProductInStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> In báo cáo </button>
                 </div>
             </div>
         </form>
@@ -80,41 +80,31 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h2 align="center"> <b> Bảng kê nhập hàng @{{store.name}} </b> </h2>
+                                    <h2 align="center"> <b> Bảng kê tồn kho </b> </h2>
                                     <p align="center"> Từ ngày @{{ info.start_date | date: "dd/MM/yyyy" }} đến ngày @{{ info.end_date | date: "dd/MM/yyyy"}} </p>
-                                    <p align="center" ng-repeat="store in stores" ng-show="store.id==info.store_id"> Thống kê @{{store.name}} </p>
+                                    <p align="center" ng-repeat="store in stores" ng-show="store.id==info.store_id"> Thống kê tại @{{store.name}} </p>
                                 </div>
                                 <div class="row">
                                     <table class="w3-table w3-center table-bordered">
                                         <thead>
-                                            <th> Ngày nhập </th>
-                                            <th> Số Phiếu </th>
-                                            <th>
-                                                <table style="width:100%">
-                                                    <tr>
-                                                        <td style="width:30%;"> Tên </td>
-                                                        <td style="width:30%;"> Đơn vị tính </td>
-                                                        <td style="width:30%;"> Số lượng </td>
-                                                    </tr>
-                                                </table>
-                                            </th>
+                                        <th> STT </th>
+                                        <th> Mã SP </th>
+                                        <th> Tên sản phẩm </th>
+                                        <th> Đơn vị tính </th>
+                                        <th> Ngày nhập </th>
+                                        <th> Hạn sử dụng </th>
                                         </thead>
                                         <tbody>
-                                        <tr ng-show="inputStores.length > 0" ng-repeat="item in inputStores">
-                                            <td> @{{item.created_at | date: "dd/MM/yyyy" }}</td>
-                                            <td> YCNH-@{{item.id}} </td>
-                                            <td>
-                                                <table style="width:100%">
-                                                    <tr  ng-repeat="data in item.detail_input_stores">
-                                                        <td style="width:30%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
-                                                        <td style="width:30%;"> @{{ data.unit_id }} </td>
-                                                        <td style="width:30%;"> @{{ data.quantity }} </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
+                                        <tr ng-show="productInStores.length > 0" ng-repeat="item in productInStores">
+                                            <td> @{{ $index+1 }}</td>
+                                            <td> SP-@{{item.id}} </td>
+                                            <td> @{{ item.name }} </td>
+                                            <td> @{{ item.unit.name }} </td>
+                                            <td> @{{ item.created_at }} </td>
+                                            <td> @{{item.expried_date | date: "dd/MM/yyyy" }}</td>
                                         </tr>
-                                        <tr class="item" ng-show="inputStores.length == 0">
-                                            <td colspan="3" align="center"> Không có dữ liệu </td>
+                                        <tr class="item" ng-show="productInStores.length == 0">
+                                            <td colspan="6" align="center"> Không có dữ liệu </td>
                                         </tr>
                                         </tbody>
                                     </table>

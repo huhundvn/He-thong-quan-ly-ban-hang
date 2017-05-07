@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Hóa đơn khách hàng
+    Hóa đơn khách hàng
 @endsection
 
 @section('location')
@@ -15,9 +15,6 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-4 col-xs-4">
-                <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
-            </div>
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term2.created_by" class="form-control input-sm">
                     <option value="" selected> -- Nhân viên -- </option>
@@ -27,14 +24,13 @@
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
-                    <option value="1"> Chờ duyệt </option>
-                    <option value="0"> Đã từ chối </option>
                     <option value="2"> Đã xác nhận </option>
-                    <option value="3"> Đã nhập kho </option>s
+                    <option value="3"> Đang giao  </option>
+                    <option value="4"> Đã thanh toán </option>s
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{orders.length}} mục </button>
+                <button class="btn btn-sm btn-info"> Tổng số: @{{paidOrders.length}} mục </button>
             </div>
         </div>
         <hr/>
@@ -53,15 +49,11 @@
             </thead>
             <tbody>
             <tr ng-show="orders.length > 0" class="item"
-                dir-paginate="order in orders | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readOrder(order)">
+                dir-paginate="order in paidOrders | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readOrder(order)">
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.updated_at  }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> DH-@{{ order.id }} </td>
-                <td data-toggle="modal" data-target="#readInputStore" ng-repeat="user in users" ng-show="user.id == order.created_by">
-                    @{{ user.name }}
-                </td>
-                <td data-toggle="modal" data-target="#readInputStore" ng-repeat="customer in customers" ng-show="customer.id==order.customer_id">
-                    @{{ customer.name }}
-                </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.user.name }} </td>
+                <td data-toggle="modal" data-target="#readInputStore"> @{{ order.customer.name }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total | number:0 }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total_paid | number:0 }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total - order.total_paid | number:0 }} </td>
@@ -137,12 +129,18 @@
                                         Số điện thoại: @{{ selected.contact_phone }}
                                     </div>
                                 </div>
+                                <hr/>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <hr/>
+                                    <div class="col-xs-6">
+                                        Người tạo: @{{ selected.user.name }} <br/>
+                                        Bảng giá áp dụng: @{{ selected.price_output.name }} <br/>
                                         Phương thức thanh toán: @{{ selected.payment_method }} <br/>
-                                        Tổng tiền: @{{ selected.total | number:0 }} VNĐ <br/>
                                         Ghi chú: @{{ selected.note }}
+                                    </div>
+                                    <div class="col-xs-6">
+                                        Thuế VAT: @{{ selected.tax }}% <br/>
+                                        Giảm giá: @{{ selected.discount }} (VNĐ) <br/>
+                                        Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
                                     </div>
                                 </div>
                                 <h1></h1>
@@ -150,7 +148,7 @@
                                 <div class="row">
                                     <table class="w3-table table-bordered w3-centered">
                                         <thead>
-                                        <th> STT </th>
+                                        <th> Mã SP </th>
                                         <th> Mã vạch </th>
                                         <th> Tên </th>
                                         <th> Đơn vị tính </th>
@@ -159,22 +157,16 @@
                                         <th> Thành tiền (VNĐ) </th>
                                         </thead>
                                         <tbody>
-                                        <tr ng-show="selected.order_details.length > 0" class="item" ng-repeat="item in selected.order_details">
-                                            <td> @{{ item.product_id }}</td>
-                                            <td ng-repeat="product in products" ng-show="product.id==item.product_id">
-                                                @{{ product.code }}
-                                            </td>
-                                            <td ng-repeat="product in products" ng-show="product.id==item.product_id">
-                                                @{{ product.name }}
-                                            </td>
-                                            <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                                                @{{ unit.name }}
-                                            </td>
+                                        <tr ng-show="detail.length > 0" class="item" ng-repeat="item in detail">
+                                            <td> SP-@{{ item.product_id }}</td>
+                                            <td> @{{ item.code }} </td>
+                                            <td> @{{ item.name }} </td>
+                                            <td> @{{ item.unit.name }} </td>
                                             <td> @{{ item.quantity }} </td>
                                             <td> @{{ item.price | number:0 }} </td>
                                             <td> @{{ item.quantity * item.price | number: 0 }} </td>
                                         </tr>
-                                        <tr class="item" ng-show="selected.order_details.length==0">
+                                        <tr class="item" ng-show="detail.length==0">
                                             <td colspan="9"> Không có dữ liệu </td>
                                         </tr>
                                         </tbody>

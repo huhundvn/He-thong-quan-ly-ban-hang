@@ -3,12 +3,12 @@
  */
 app.controller('InputStoreController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'user').then(function (response) {
-        $scope.users = response.data;
-    });
-
     $http.get(API + 'storage').then(function (response) {
         $scope.stores = response.data;
+    });
+
+    $http.get(API + 'unit').then(function (response) {
+        $scope.units = response.data;
     });
 
     $http.get(API + 'supplier').then(function (response) {
@@ -21,10 +21,6 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
 
     $http.get(API + 'product').then(function (response) {
         $scope.products = response.data;
-    });
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
     });
 
     $http.get(API + 'price-input').then(function (response) {
@@ -40,6 +36,14 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
     $scope.loadInputStore();
     $interval($scope.loadInputStore, 3000);
 
+    //Load danh sách nhập kho
+    $scope.loadPaidInputStore = function () {
+        $http.get(API + 'get-paid-input-store').then(function (response) {
+            $scope.paidInputStores = response.data;
+        });
+    };
+    $scope.loadPaidInputStore();
+    $interval($scope.loadPaidInputStore, 3000);
 
     /**
      * CRUD nhập kho
@@ -93,11 +97,11 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
 
     // Tính tổng tiền
     $scope.getTotal = function () {
-        $scope.info.total = 0;
+        $scope.total = 0;
         for (var i=0; i<$scope.data.length; i++) {
-            $scope.info.total = $scope.info.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].price_input);
+            $scope.total = $scope.total + parseInt($scope.data[i].quantity) * parseInt($scope.data[i].price_input);
         }
-        return $scope.info.total;
+        return $scope.total;
     };
 
     // Thêm chi tiết đơn hàng
@@ -129,6 +133,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
             if (!check)
                 toastr.info('Vui lòng điền đủ giá nhập hoặc hạn sử dụng');
             else {
+                $scope.info.total = $scope.getTotal() + parseInt($scope.getTotal()*($scope.info.tax/100)) - parseInt($scope.info.discount);
                 $http({
                     method : 'POST',
                     url : API + 'input-store',
@@ -142,6 +147,8 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
                             $scope.createDetailInputStore($scope.data[i]);
                         }
                         toastr.success('Đã thêm thành công.');
+                        $scope.data = [];
+                        $scope.info = {};
                     } else
                         toastr.error(response.data[0]);
                 });
@@ -174,6 +181,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadInputStore();
+                $scope.loadPaidInputStore();
             }
             else
                 toastr.error(response.data[0]);

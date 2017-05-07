@@ -12,4 +12,9 @@ class StoreTranfer extends Model
 	{
 		return $this->hasMany('App\DetailStoreTranfer');
 	}
+
+	public function user()
+	{
+		return $this->belongsTo('App\User', 'created_by', 'id');
+	}
 }

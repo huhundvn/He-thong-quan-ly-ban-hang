@@ -10,6 +10,11 @@ class OrderDetail extends Model
 	
 	public function product()
     {
-        return $this->hasOne('App\Product', 'id', 'product_id');
+        return $this->belongsTo('App\Product', 'id', 'product_id');
     }
+
+	public function unit()
+	{
+		return $this->belongsTo('App\Unit');
+	}
 }

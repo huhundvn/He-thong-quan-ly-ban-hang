@@ -86,9 +86,13 @@ Route::get('/home', 'HomeController@index') -> name('home');
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
     Route::resource('user', 'UserController'); //CRUD nhân viên
+	Route::get('/get-sum-user', 'UserController@getSumUser'); // Lấy số lượng nhân viên
     Route::resource('position', 'PositionController'); //CRUD chức vụ
+	Route::get('/get-role', 'RoleController@getRole');
+	Route::post('/changePassword', 'UserController@changePassword');
 
     Route::resource('customer', 'CustomerController'); //CRUD khách hàng
+	Route::get('/get-sum-customer', 'CustomerController@getSumCustomer'); // Lấy số lượng khách hàng
     Route::resource('customerGroup', 'CustomerGroupController'); //CRUD nhóm khách hàng
 
 	Route::resource('store', 'StoreController'); //CRUD cửa hàng, kho hàng
@@ -111,6 +115,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
 	Route::get('/confirm-input-store/{input_store_id}/{status}', 'InputStoreController@confirm'); //duyệt nhập kho
+	Route::get('/get-paid-input-store', 'InputStoreController@getPaidInputStore'); // Lấy hóa đơn nhập kho đã thanh toán
 
 	Route::resource('detail-input-store', 'DetailInputStoreController'); //CRUD chi tiết nhập kho
 	Route::get('/get-detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail');
@@ -131,10 +136,14 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho
 	Route::get('/confirm-store-tranfer/{store_tranfer_id}/{status}', 'StoreTranferController@confirm'); //duyệt chuyển kho
 	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
+	Route::get('/get-detail-store-tranfer/{store_tranfer_id}', 'DetailStoreTranferController@getDetail');
 
 	Route::resource('order', 'OrderController'); //CRUD đơn đặt hàng
 	Route::get('/confirm-order/{order_id}/{status}', 'OrderController@confirm'); //duyệt đơn hàng
 	Route::resource('order-detail', 'OrderDetailController'); //CRUD chi tiết đơn hàng
+	Route::get('/get-order-detail/{order_id}', 'OrderDetailController@getDetail');
+	Route::get('/get-paid-order', 'OrderController@getPaidOrder'); // Lấy đơn hàng đã thanh toán
+	Route::get('/get-today-order', 'OrderController@getTodayOrder'); // Lấy số lượng đơn hàng hôm nay
 
 	Route::resource('customer-invoice', 'CustomerInvoiceController'); //CRUD hóa đơn khách hàng
 	Route::resource('district', 'DistrictController'); //CRUD địa chỉ huyện
@@ -142,9 +151,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('return-product', 'ReturnProductController'); //CRUD trả về
 
 	Route::get('/top-product', 'ReportController@getTopProduct');
-
-	Route::get('/get-role', 'RoleController@getRole');
-	Route::post('/changePassword', 'UserController@changePassword');
+	Route::post('/report-input-store', 'ReportController@getReportInputStore');
+	Route::post('/report-product-in-store', 'ReportController@getReportProductInStore');
 });
 
 // FRONT-END GIAO ĐIỆN WEB
@@ -247,8 +255,10 @@ Route::group(['middleware' => 'auth'], function (){
 	//TRẢ VỀ
 	Route::get('/list-return-product', 'ReturnProductController@listReturnProduct') -> name('list-return-product');
 
+	// BÁO CÁO
 	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');
 	Route::get('/report-input-store', 'ReportController@inputStoreReport') -> name('report-input-store');
+	Route::get('/report-product-in-store', 'ReportController@productInStoreReport') -> name('report-product-in-store');
 
 	Route::get('/no-permission', 'HomeController@checkPermission') -> name('no-permission');
 });

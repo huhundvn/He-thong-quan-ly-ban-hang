@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Yêu cầu chuyển kho
+    Yêu cầu chuyển kho
 @endsection
 
 @section('location')
@@ -12,20 +12,34 @@
 @section('content')
     <div ng-controller="StoreTranferController">
 
+        {{-- NHẬP SẢN PHẨM --}}
+        <div class="row">
+            <div class="col-lg-4 col-xs-4">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="createStoreTranfer()"> Xác nhận </button>
+                <a href="{{route('list-store-tranfer')}}" class="btn btn-default btn-sm"> Quay lại </a>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
+                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
+            </div>
+
+        </div>
+
+        <hr/>
+
         {{-- Thông tin nhập--}}
         <div class="row">
-            <div class="col-sm-4">
-                <label> Ngày chuyển dự kiến </label>
-                <input ng-model="info.tranfer_date" type="date" class="form-control input-sm">
-            </div>
-            <div class="col-sm-4">
+            <div class="col-xs-3">
                 <label> Kho chuyển </label>
                 <select ng-model="info.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho chuyển -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-sm-4">
+            <div class="col-xs-3">
                 <label> Kho nhận </label>
                 <select ng-model="info.to_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhận -- </option>
@@ -39,24 +53,6 @@
 
         <hr/>
 
-        {{-- NHẬP SẢN PHẨM --}}
-        <div class="row">
-            <div class="col-lg-4 col-xs-4">
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
-                <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
-            </div>
-            <div class="col-lg-4 col-xs-4">
-                <button type="submit" class="btn btn-success btn-sm" ng-click="createStoreTranfer()"> Gửi yêu cầu </button>
-                <a href="{{route('list-store-tranfer')}}" class="btn btn-default btn-sm"> Hủy yêu cầu </a>
-            </div>
-            <div class="col-lg-4 col-xs-4">
-                <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
-            </div>
-
-        </div>
-
-        <hr/>
-
         {{-- Danh sách mặt hàng --}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
@@ -65,7 +61,7 @@
             <th> Mã vạch </th>
             <th> Đơn vị tính </th>
             <th> Số lượng chuyển </th>
-            <th> Còn lại </th>
+            <th> Số lượng còn lại </th>
             <th> Giá nhập (VNĐ) </th>
             <th> Hạn sử dụng </th>
             <th> Xóa </th>
@@ -75,16 +71,15 @@
                 <td> @{{ $index+1 }}</td>
                 <td> @{{ item.name }} </td>
                 <td> @{{ item.code }} </td>
-                <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                    @{{ unit.name }}
+                <td> @{{ item.unit.name }}
                 </td>
                 <td>
                     <input cleave="options.numeral" type="text"
                            ng-model="item.quantity_tranfer" ng-change="checkQuantity(item.quantity_tranfer, item.quantity)"
                            class="form-control input-sm input-numeral">
                 </td>
-                <td> @{{ item.quantity - item.quantity_tranfer }} </td>
-                <td> @{{ item.price | number: 0 }} </td>
+                <td> @{{ item.quantity - item.quantity_tranfer | number:0 }} </td>
+                <td> @{{ item.price_input | number: 0 }} </td>
                 <td> @{{ item.expried_date | date: "dd/MM/yyyy" }} </td>
                 <td>
                     <button class="btn btn-sm btn-danger btn-sm" ng-click="delete(item)">
@@ -147,7 +142,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1></h1>
-                                    Ngày chuyển dự kiến: @{{info.tranfer_date | date: "dd/MM/yyyy"}}<br/>
                                     Lý do chuyển: @{{ info.reason }}
                                     <h1></h1>
                                 </div>
@@ -165,15 +159,13 @@
                                     </thead>
                                     <tbody ng-init="total = 0">
                                     <tr ng-show="data.length > 0" class="item" dir-paginate="item in data | itemsPerPage: 4">
-                                        <td> @{{ $index+1 }}</td>
+                                        <td> SP-@{{ item.id }}</td>
                                         <td> @{{ item.name }} </td>
                                         <td> @{{ item.code }} </td>
-                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                                            @{{ unit.name }}
-                                        </td>
-                                        <td> @{{item.quantity_tranfer}} </td>
+                                        <td> @{{ item.unit.name }} </td>
+                                        <td> @{{ item.quantity_tranfer}} </td>
+                                        <td> @{{ item.price_input | number: 0 }} </td>
                                         <td> @{{ item.expried_date | date: "dd/MM/yyyy" }} </td>
-                                        <td> @{{ item.price | number: 0 }} </td>
                                     </tr>
                                     <tr class="item" ng-show="data.length==0">
                                         <td colspan="9"> Không có dữ liệu </td>
@@ -219,7 +211,7 @@
                             <input ng-model="term.name" type="text" class="form-control input-sm">
                         </div>
                         <div class="col-sm-4">
-                            <select ng-model="info.store_id" class="form-control input-sm" disabled>
+                            <select ng-model="info.store_id" class="form-control input-sm">
                                 <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                             </select>
                         </div>
@@ -239,16 +231,14 @@
                             </thead>
                             <tbody>
                             <tr class="item"
-                                ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | itemsPerPage: 5"
+                                ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | filter:info | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
                                 <td> @{{$index+1}} </td>
                                 <td> @{{ product.name}} </td>
                                 <td> @{{ product.code }}</td>
-                                <td ng-repeat="unit in units" ng-show="unit.id==product.unit_id">
-                                    @{{ unit.name }}
-                                </td>
+                                <td> @{{ product.unit.name }} </td>
                                 <td> @{{ product.quantity | number: 0 }} </td>
-                                <td> @{{ product.price | number: 0 }} </td>
+                                <td> @{{ product.price_input | number: 0 }} </td>
                                 <td> @{{ product.expried_date | date: "dd/MM/yyyy" }} </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">

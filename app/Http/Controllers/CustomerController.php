@@ -18,11 +18,13 @@ class CustomerController extends Controller
      */
     public function index()
     {
-//	    return Customer::with('province')
-//		    -> with('district')
-//		    -> get();
 	    return Customer::all();
     }
+
+	// API lấy số lượng khách hàng
+	public function getSumCustomer() {
+		return count(Customer::all());
+	}
 
     /**
      * API thêm khách hàng mới

@@ -34,7 +34,7 @@ class CreateProductTable extends Migration
 		    $table->integer('max_inventory') -> nullable();
 		    $table->integer('min_inventory') -> nullable();
 
-		    $table->decimal('web_price') -> nullable();
+		    $table->integer('web_price') -> nullable();
 		    $table->string('default_image') -> nullable();
 		    $table->integer('total_quantity') -> nullable();
 

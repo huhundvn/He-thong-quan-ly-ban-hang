@@ -21,6 +21,11 @@ class UserController extends Controller
         return User::with('position') -> get();
     }
 
+	// API lấy số lượng nhân viên
+	public function getSumUser() {
+		return count(User::all());
+	}
+
     // API tạo nhân viên mới
     public function store(Request $request)
     {

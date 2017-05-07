@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Danh sách sản phẩm trong kho
+    Danh sách sản phẩm trong kho
 @endsection
 
 @section('location')
@@ -65,22 +65,18 @@
                 <th> Kho hàng </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
+            <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 6" ng-click="readProduct(productInStore)">
                 <td data-toggle="modal" data-target="#readProduct"> SP-@{{ productInStore.product_id }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.name }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.code }}</td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="unit in units" ng-show="unit.id==productInStore.unit_id">
                     @{{ unit.name }}
                 </td>
-                <td data-toggle="modal" data-target="#readProduct" ng-repeat="supplier in suppliers" ng-show="supplier.id==productInStore.supplier_id">
-                    @{{ supplier.name }}
-                </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.supplier.name }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.quantity | number: 0 }} </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price | number: 0 }} </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.price_input | number: 0 }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.expried_date | date: "dd/MM/yyyy" }} </td>
-                <td data-toggle="modal" data-target="#readProduct" ng-repeat="store in stores" ng-show="store.id==productInStore.store_id">
-                    @{{ store.name }}
-                </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.store.name }} </td>
             </tr>
             <tr class="item" ng-show="productInStores.length==0">
                 <td colspan="9"> Không có dữ liệu </td>
@@ -89,10 +85,10 @@
         </table>
 
         <div id="grid" class="row" align="center" hidden>
-            <div class="col-lg-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 7" ng-click="readProduct(productInStore)">
+            <div class="col-lg-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
                 <img src="@{{productInStore.default_image}}" class="image">
                 <b> <h5 class="w3-text-blue-gray"> <b> @{{productInStore.name}} </b> </h5>
-                Giá nhập: @{{productInStore.price | number: 0}} VNĐ <br/>
+                Giá nhập: @{{productInStore.price_input | number: 0}} VNĐ <br/>
                 Đang có: @{{productInStore.quantity | number: 0}} sản phẩm <br/>
                 Hạn dùng: @{{productInStore.expried_date | date: "dd/MM/yyyy" }}  </b> <br/>
                 <div class="middle">

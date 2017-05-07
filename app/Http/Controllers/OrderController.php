@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -15,12 +17,36 @@ use App\Account;
 
 class OrderController extends Controller
 {
-
-
 	// API lấy danh sách đơn hàng
 	public function index()
 	{
-		return Order::with('orderDetails') -> get();
+		return Order::with('orderDetails')
+			-> with('user')
+			-> with('customer')
+			-> with('priceOutput')
+			-> get();
+	}
+
+	// API lấy danh sách đơn hàng hôm nay
+	public function getTodayOrder() {
+		return count(
+				Order::where('created_at', '>=', Carbon::yesterday())
+					-> where('created_at', '<=', Carbon::now())
+					-> get()
+			);
+	}
+
+	// API lấy danh sách đơn hàng đã thanh toán
+	public function getPaidOrder()
+	{
+		return Order::with('orderDetails')
+			-> with('user')
+			-> with('customer')
+			-> with('priceOutput')
+			-> where('status', '=', 2)
+			-> orWhere('status', '=', 3)
+			-> orWhere('status', '=', 4)
+			-> get();
 	}
 
 	// API tạo đơn hàng mới
@@ -40,6 +66,8 @@ class OrderController extends Controller
 			$new -> created_by = Auth::user() -> id;
 			$new -> customer_id = Input::get('customer_id');
 
+			$new -> price_output_id = Input::get('price_output_id');
+
 			$new -> payment_method = Input::get('payment_method');
 			$new -> bank = Input::get('bank');
 			$new -> bank_account = Input::get('bank_account');
@@ -50,6 +78,10 @@ class OrderController extends Controller
 			$new -> contact_phone = Input::get('contact_phone');
 			$new -> total = Input::get('total');
 			$new -> total_paid = Input::get('total_paid');
+
+			$new -> tax = Input::get('tax');
+			$new -> discount = Input::get('discount');
+
 			$new -> status = 1;
 			$new -> save();
 			return response()->json(['success' => ($new->id)]);
@@ -59,7 +91,11 @@ class OrderController extends Controller
 	// API lấy thông tin đơn hàng
 	public function show($id)
 	{
-		return Order::with('orderDetails') -> find($id);
+		return Order::with('orderDetails')
+			-> with('user')
+			-> with('customer')
+			-> with('priceOutput')
+			-> find($id);
 	}
 
 	// API chỉnh sửa đơn hàng
@@ -96,6 +132,7 @@ class OrderController extends Controller
 	public function destroy($id)
 	{
 		$deleted = Order::find($id) -> delete();
+		OrderDetail::where('order_id', '=', $id) -> delete();
 		return response()->json(['success' => 'Xóa đơn hàng thành công']);
 	}
 

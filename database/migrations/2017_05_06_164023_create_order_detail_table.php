@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetailStoreTranferTable extends Migration
+class CreateOrderDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateDetailStoreTranferTable extends Migration
      */
     public function up()
     {
-	    Schema::create('detail_store_tranfer', function (Blueprint $table) {
+	    Schema::create('order_detail', function (Blueprint $table) {
 		    $table->increments('id');
-		    $table->integer('store_tranfer_id') -> nullable();
+		    $table->integer('order_id') -> nullable();
 		    $table->integer('product_id') -> nullable();
-		    $table->string('expried_date') -> nullable();
-		    $table->integer('quantity_tranfer') -> nullable();
-		    $table->integer('price_input') -> nullable();
+		    $table->integer('price') -> nullable();
+		    $table->integer('quantity') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
@@ -32,6 +31,6 @@ class CreateDetailStoreTranferTable extends Migration
      */
     public function down()
     {
-	    Schema::dropIfExists('detail_store_tranfer');
+	    Schema::dropIfExists('order_detail');
     }
 }

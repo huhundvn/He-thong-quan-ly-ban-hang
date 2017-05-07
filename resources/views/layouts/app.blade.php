@@ -21,6 +21,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
     <style>
+        a {
+            color: black;
+        }
         .bg {
             /* The image used */
             background-image: url( {{asset('bg.jpg')}} );
@@ -86,7 +89,7 @@
     @endif
 
     {{-- THƯ VIỆN JAVASCRIPT --}}
-    <script src="{{asset('js/toastr.js')}}"></script>
+    <script async src="{{asset('js/toastr.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

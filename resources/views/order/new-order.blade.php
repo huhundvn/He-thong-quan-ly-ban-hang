@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Tạo đơn hàng mới
+    Tạo đơn hàng mới
 @endsection
 
 @section('location')
@@ -114,7 +114,6 @@
                 {{-- Danh sách mặt hàng --}}
                 <table class="w3-table table-hover table-bordered w3-centered">
                     <thead class="w3-blue-grey">
-                    <th> STT </th>
                     <th> Mã vạch </th>
                     <th> Tên </th>
                     <th> Đơn vị tính </th>
@@ -125,11 +124,9 @@
                     </thead>
                     <tbody>
                     <tr ng-show="data.length > 0" class="item" dir-paginate="item in data | itemsPerPage: 4">
-                        <td> @{{ $index+1 }}</td>
                         <td> @{{ item.code }} </td>
                         <td> @{{ item.name }} </td>
-                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                            @{{ unit.name }}
+                        <td> @{{ item.unit.name }}
                         </td>
                         <td>
                             <input cleave="options.numeral" type="text" ng-model="item.quantity" class="form-control input-sm input-numeral">
@@ -152,17 +149,35 @@
                     </tbody>
                 </table>
 
-                <p>
-                    <h1></h1>
-                    <b> Số tiền: @{{ getTotal() | number:0 }} VNĐ <br/>
-                    Thuế VAT (10%): @{{ getTotal() * 0.1 | number:0 }} VNĐ <br/>
-                    <hr/>
-                    Tổng tiền: @{{ getTotal() -- getTotal() * 0.1 | number:0 }} VNĐ </b>
-                </p>
-
                 {{-- PHÂN TRANG --}}
                 <div style="margin-left: 35%;">
                     <dir-pagination-controls max-size="4"> </dir-pagination-controls>
+                </div>
+
+                <p></p>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Số tiền ban đầu:  </label>
+                        <label class="col-xs-2 control-label"> @{{ getTotal() | number:0 }} (VNĐ) </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Thuế VAT (%) </label>
+                        <div class="col-xs-2">
+                            <input ng-model="new.tax" type="text" class="form-control input-sm">
+                        </div>
+                        <label class="col-xs-2 control-label"> = @{{ getTotal() * (new.tax/100) | number:0 }} (VNĐ) </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Giảm giá (VNĐ) </label>
+                        <div class="col-xs-2">
+                            <input cleave="options.numeral" ng-model="new.discount" type="text" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label"> Tổng tiền:  </label>
+                        <label class="col-xs-2 control-label"> @{{ getTotal() -- (getTotal() * (new.tax/100)) - new.discount | number:0 }} (VNĐ) </label>
+                    </div>
                 </div>
 
             </div>
@@ -203,7 +218,7 @@
                 <div class="row">
                     <label class="col-sm-3"> Số tiền cần thanh toán </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control input-sm" value="@{{getTotal()--getTotal()*0.1|number:0}}" readonly>
+                        <input type="text" class="form-control input-sm" value="@{{ getTotal() -- (getTotal() * (new.tax/100)) - new.discount | number:0 }}" readonly>
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
@@ -215,7 +230,7 @@
                 <div class="row">
                     <label class="col-sm-3"> Còn lại </label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control input-sm" value="@{{getTotal()--getTotal()*0.1 - new.total_paid | number:0}}" readonly>
+                        <input type="text" class="form-control input-sm" value="@{{getTotal() -- (getTotal() * (new.tax/100)) - new.discount - new.total_paid | number:0}}" readonly>
                     </div>
                 </div>
             </div>
@@ -370,13 +385,9 @@
                                 <td> @{{$index+1}} </td>
                                 <td> @{{ product.name}} </td>
                                 <td> @{{ product.code }}</td>
-                                <td ng-repeat="unit in units" ng-show="unit.id==product.unit_id">
-                                    @{{ unit.name }}
-                                </td>
+                                <td> @{{ product.unit.name }} </td>
                                 <td> @{{ product.total_quantity | number: 0 }} </td>
-                                <td>
-                                    @{{ product.web_price | number:0 }}
-                                </td>
+                                <td> @{{ product.web_price | number:0 }} </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">
                                 <td colspan="7"> Không có dữ liệu </td>

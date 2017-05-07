@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Lịch sử chuyển kho
+    Lịch sử chuyển kho
 @endsection
 
 @section('location')
@@ -55,36 +55,36 @@
             <th> Tạo bởi </th>
             <th> Kho chuyển </th>
             <th> Kho nhận </th>
+            <th> Mô tả </th>
             <th> Trạng thái </th>
             <th> Duyệt </th>
             <th> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="storeTranfers.length > 0" class="item"
-                dir-paginate="storeTranfer in storeTranfers | filter:term | filter:term2 | filter:term3 | itemsPerPage: 7"
+                dir-paginate="storeTranfer in storeTranfers | filter:term | filter:term2 | filter:term3 | itemsPerPage: 8"
                 ng-click="readStoreTranfer(storeTranfer)">
                 <td data-toggle="modal" data-target="#readStoreTranfer"> CK-@{{ storeTranfer.id }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.created_at }} </td>
-                <td data-toggle="modal" data-target="#readStoreTranfer" ng-repeat="user in users" ng-show="user.id==storeTranfer.created_by">
-                    @{{ user.name }}
-                </td>
+                <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.user.name }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer" ng-repeat="store in stores" ng-show="store.id==storeTranfer.from_store_id">
                     @{{ store.name }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer" ng-repeat="store in stores" ng-show="store.id==storeTranfer.to_store_id">
                     @{{ store.name }}  </td>
+                <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.reason }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer">
                     <p ng-show="0==storeTranfer.status"> Đã từ chối </p>
                     <p ng-show="1==storeTranfer.status"> Chờ duyệt </p>
-                    <p ng-show="2==storeTranfer.status"> Đã duyệt, đang chuyển </p>
+                    <p ng-show="2==storeTranfer.status"> Đang chuyển </p>
                     <p ng-show="3==storeTranfer.status"> Đã chuyển kho </p>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
+                    <button ng-show="3 != storeTranfer.status" class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
                 <td>
-                    <button ng-show="0==storeTranfer.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
+                    <button ng-show="0==storeTranfer.status || 3==storeTranfer.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
                     <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
@@ -160,7 +160,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1></h1>
-                                    Ngày chuyển dự kiến: @{{selected.tranfer_date | date: "dd/MM/yyyy"}}<br/>
                                     Lý do chuyển: @{{ selected.reason }}
                                     <h1></h1>
                                 </div>
@@ -177,15 +176,13 @@
                                     <th> Hạn sử dụng </th>
                                     </thead>
                                     <tbody>
-                                    <tr ng-show="selected.detail_store_tranfers.length > 0" class="item" dir-paginate="item in selected.detail_store_tranfers | itemsPerPage: 4">
+                                    <tr ng-show="detail.length > 0" class="item" dir-paginate="item in detail | itemsPerPage: 4">
                                         <td> SP-@{{ item.product_id }}</td>
-                                        <td ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.name }} </td>
-                                        <td ng-repeat="product in products" ng-show="product.id==item.product_id"> @{{ product.code }} </td>
-                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id">
-                                            @{{ unit.name }}
-                                        </td>
-                                        <td> @{{ item.quantity }} </td>
-                                        <td> @{{ item.price | number: 0 }} </td>
+                                        <td> @{{ item.name }} </td>
+                                        <td> @{{ item.code }} </td>
+                                        <td ng-repeat="unit in units" ng-show="unit.id==item.unit_id"> @{{ unit.name }} </td>
+                                        <td> @{{ item.quantity_tranfer }} </td>
+                                        <td> @{{ item.price_input | number: 0 }} </td>
                                         <td> @{{ item.expried_date | date: "dd/MM/yyyy" }} </td>
                                     </tr>
                                     <tr class="item" ng-show="selected.detail_store_tranfers.length==0">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Danh sách khách hàng
+    Danh sách kho, cửa hàng
 @endsection
 
 @section('location')

@@ -24,8 +24,8 @@ class DetailStoreTranferController extends Controller
 			'store_tranfer_id' => 'required',
 			'product_id' => 'required',
 			'expried_date' => 'required',
-			'quantity' => 'required',
-			'price' => 'required',
+			'quantity_tranfer' => 'required',
+			'price_input' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -36,10 +36,9 @@ class DetailStoreTranferController extends Controller
 			$new -> store_tranfer_id = Input::get('store_tranfer_id');
 			$new -> product_id = Input::get('product_id');
 			$new -> expried_date = Input::get('expried_date');
-			$new -> quantity = Input::get('quantity_tranfer');
-			$new -> price = Input::get('price');
+			$new -> quantity_tranfer = Input::get('quantity_tranfer');
+			$new -> price_input = Input::get('price_input');
 			$new -> supplier_id = Input::get('supplier_id');
-			$new -> unit_id = Input::get('unit_id');
 			$new -> save();
 		}
 		return response()->json(['success' => trans('message.create_success')]);
@@ -62,5 +61,12 @@ class DetailStoreTranferController extends Controller
 	{
 		$deleted = DetailInputStore::find($id) -> delete();
 		return response()->json(['success' => trans('message.delete_success')]);
+	}
+
+	// Xem chi tiết chuyển kho
+	public function getDetail($storeTranferID)
+	{
+		return DetailStoreTranfer::join('product', 'detail_store_tranfer.product_id', '=', 'product.id')
+			-> where('detail_store_tranfer.store_tranfer_id', '=', $storeTranferID) -> get();
 	}
 }
