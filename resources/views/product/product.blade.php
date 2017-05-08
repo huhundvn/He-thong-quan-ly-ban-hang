@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Larose | Danh sách sản phẩm
+    Danh sách sản phẩm
 @endsection
 
 @section('location')
@@ -14,28 +14,34 @@
 
         {{-- TÌM KIẾM SẢN PHẨM--}}
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-4">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
-                    <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
+                    <span class="glyphicon glyphicon-plus w3-hide-medium"></span> Thêm SP </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
-                    <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
+                    <span class="glyphicon glyphicon-file"></span> Từ File </button>
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
-                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu Nhập </a>
             </div>
             <div class="col-lg-2 col-md-2">
                 <input ng-model="term1.name" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
             </div>
             <div class="col-lg-2 col-md-2">
-                <select ng-model="term2.status" class="form-control input-sm">
-                    <option value="" selected> -- Tất cả -- </option>
+                <select ng-model="term2.category_id" class="form-control input-sm">
+                    <option value="" selected> -- Nhóm SP -- </option>
+                    <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <select ng-model="term3.status" class="form-control input-sm">
+                    <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Còn hàng </option>
                     <option value="0"> Hết hàng </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-md-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{ products.length }} mục </button>
+            <div class="col-lg-1 col-md-1">
+                <button class="btn btn-sm btn-info"> @{{ products.length }} mục </button>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-1 col-md-1">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
@@ -69,7 +75,7 @@
                 <th> Xóa </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 6" ng-click="readProduct(product)">
+            <tr class="item" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 6" ng-click="readProduct(product)">
                 <td> SP-@{{product.id}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.name}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.code }}</td>
@@ -93,7 +99,7 @@
 
         {{-- Xem dạng hình ảnh--}}
         <div id="grid" class="row" align="center" hidden>
-            <div class="col-lg-3" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | itemsPerPage: 8" ng-click="readProduct(product)">
+            <div class="col-lg-3" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(product)">
                 <img src="@{{product.default_image}}" class="image">
                 <h5 class="w3-text-blue-gray"> <b> @{{product.name}} </b> </h5>
                 <b> Tổng số: @{{product.total_quantity}} sản phẩm </b>
@@ -105,7 +111,7 @@
         </div>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%;">
+        <div style="margin-left: 35%;bottom:0; position: fixed;">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 

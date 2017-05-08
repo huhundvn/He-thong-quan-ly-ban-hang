@@ -18,86 +18,33 @@ use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\CheckPositionRole;
 use App\Http\Middleware\CheckCustomerRole;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-/*
- *
- */
+// XÁC THỰC NGƯỜI DÙNG
 Auth::routes();
 
-/**
- * Day la noi ta co the truy cao vao trang chu
- */
+// TRANG CHỦ
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index') -> name('home');
 
-//Route::resource('orders', 'OrderController');
-//Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
-//Route::get('/orders/{status}/status', 'OrderController@listOrderByStatus');
-//Route::get('/orders/{status}/{customer_id}', 'OrderController@listOrderByStatusAndCustomerId');
-//Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
-//
-///**
-// * CRUD order details
-// */
-//Route::resource('order-details', 'OrderDetailController');
-//Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
-//Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
-//
-///**
-// * CRUD Price detail output
-// */
-//Route::resource("price-detail-output", 'PriceDetailOutputController');
-//Route::get("price-detail-output/{id}/price-output", "PriceDetailOutputController@listPriceDetailOutputByOutputId");
-//
-///**
-// * CRUD Price output
-// */
-//Route::resource("price-output", 'PriceOutputController');
-//Route::get('price-output/{id}/customer-group', 'PriceOutputController@listPriceDetailOutput');
-//
-///**
-// * CRUD address
-// */
-//Route::resource('address', 'AddressController');
-//Route::get('address/{customer_id}/customer', 'AddressController@listAddressByCustomerId');
-//
-///**
-// * CRUD cart
-// */
-//Route::resource('carts', 'CartController');
-//Route::get('/carts/{customer_id}/customers', 'CartController@listCartByCustomerId')->name('listCartByCustomerId');
-//Route::put('/carts/{customer_id}/{product_id}', 'CartController@updateCartByCustomerId');
-//Route::delete('/carts/{customer_id}/customer', 'CartController@deleteCartByCustomerId');
-//Route::delete('/carts/{customer_id}/{product_id}', 'CartController@deleteProductInCart');
-//
-//
-//
 // WEB SERVICE - CÁC API LẤY DỮ LIỆU SERVER TRẢ VỀ KIỂU JSON
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
-    Route::resource('user', 'UserController'); //CRUD nhân viên
+    // NHÂN VIÊN
+	Route::resource('user', 'UserController'); //CRUD nhân viên
 	Route::get('/get-sum-user', 'UserController@getSumUser'); // Lấy số lượng nhân viên
     Route::resource('position', 'PositionController'); //CRUD chức vụ
 	Route::get('/get-role', 'RoleController@getRole');
 	Route::post('/changePassword', 'UserController@changePassword');
 
+	// KHÁCH HÀNG
     Route::resource('customer', 'CustomerController'); //CRUD khách hàng
 	Route::get('/get-sum-customer', 'CustomerController@getSumCustomer'); // Lấy số lượng khách hàng
     Route::resource('customerGroup', 'CustomerGroupController'); //CRUD nhóm khách hàng
 
+	// KHO
 	Route::resource('store', 'StoreController'); //CRUD cửa hàng, kho hàng
 	Route::get('/storage', 'StoreController@getStorage'); // CRUD kho hàng
 
+	// SẢN PHẨM
 	Route::resource('manufacturer', 'ManufacturerController'); //CRUD nhà sản xuất
 	Route::resource('supplier', 'SupplierController'); //CRUD nhà cung cấp
 
@@ -110,38 +57,42 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('product-attribute', 'ProductAttributeController'); //CRUD chi tiết thuộc tính
 	Route::resource('product-image', 'ProductImageController'); //CRUD hình ảnh sản phẩm
 
-
+	// KẾ TOÁN
 	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
+	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
+	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
+	// NHẬP KHO
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
 	Route::get('/confirm-input-store/{input_store_id}/{status}', 'InputStoreController@confirm'); //duyệt nhập kho
 	Route::get('/get-paid-input-store', 'InputStoreController@getPaidInputStore'); // Lấy hóa đơn nhập kho đã thanh toán
-
 	Route::resource('detail-input-store', 'DetailInputStoreController'); //CRUD chi tiết nhập kho
 	Route::get('/get-detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail');
 
+	// BẢNG GIÁ BÁN
 	Route::resource('price-output', 'PriceOutputController'); //CRUD bảng giá bán
 	Route::get('/confirm-price-output/{price_output_id}/{status}', 'PriceOutputController@confirm'); //duyệt bảng giá
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
 
+	// BẢNG GIÁ MUA
 	Route::resource('price-input', 'PriceInputController'); //CRUD bảng giá bán nhà cung cấp
 	Route::get('/confirm-price-input/{price_input_id}/{status}', 'PriceInputController@confirm'); //duyệt bảng giá
 	Route::resource('detail-price-input', 'DetailPriceInputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-input/{price_input_id}', 'DetailPriceInputController@getDetail');
 
-	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
-	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
-
+	// XUẤT KHO
 	Route::resource('store-output', 'StoreOutputController'); //CRUD xuất kho
 	Route::resource('detail-store-output', 'DetailStoreOutputController'); //CRUD chi tiết chuyển kho
 	Route::get('/get-detail-store-output/{store_output_id}', 'DetailStoreOutputController@getDetail');
 
+	// CHUYỂN KHO
 	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho
 	Route::get('/confirm-store-tranfer/{store_tranfer_id}/{status}', 'StoreTranferController@confirm'); //duyệt chuyển kho
 	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
 	Route::get('/get-detail-store-tranfer/{store_tranfer_id}', 'DetailStoreTranferController@getDetail');
 
+	// ĐƠN HÀNG
 	Route::resource('order', 'OrderController'); //CRUD đơn đặt hàng
 	Route::get('/confirm-order/{order_id}/{status}', 'OrderController@confirm'); //duyệt đơn hàng
 	Route::resource('order-detail', 'OrderDetailController'); //CRUD chi tiết đơn hàng
@@ -149,6 +100,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/get-paid-order', 'OrderController@getPaidOrder'); // Lấy đơn hàng đã thanh toán
 	Route::get('/get-today-order', 'OrderController@getTodayOrder'); // Lấy số lượng đơn hàng hôm nay
 
+	// THANH TOÁN KHÁCH HÀNG
 	Route::resource('customer-invoice', 'CustomerInvoiceController'); //CRUD hóa đơn khách hàng
 	Route::resource('district', 'DistrictController'); //CRUD địa chỉ huyện
 	Route::resource('province', 'ProvinceController'); //CRUD địa chỉ tỉnh
@@ -161,7 +113,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::post('/report-product-in-store', 'ReportController@getReportProductInStore');
 });
 
-// FRONT-END GIAO ĐIỆN WEB
+// FRONT-END GIAO ĐIỆN WEB ADMIN
 Route::group(['middleware' => 'auth'], function (){
 
    	// NHÂN VIÊN
@@ -273,3 +225,46 @@ Route::group(['middleware' => 'auth'], function (){
 
 	Route::get('/no-permission', 'HomeController@checkPermission') -> name('no-permission');
 });
+
+//Route::resource('orders', 'OrderController');
+//Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
+//Route::get('/orders/{status}/status', 'OrderController@listOrderByStatus');
+//Route::get('/orders/{status}/{customer_id}', 'OrderController@listOrderByStatusAndCustomerId');
+//Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
+//
+///**
+// * CRUD order details
+// */
+//Route::resource('order-details', 'OrderDetailController');
+//Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
+//Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
+//
+///**
+// * CRUD Price detail output
+// */
+//Route::resource("price-detail-output", 'PriceDetailOutputController');
+//Route::get("price-detail-output/{id}/price-output", "PriceDetailOutputController@listPriceDetailOutputByOutputId");
+//
+///**
+// * CRUD Price output
+// */
+//Route::resource("price-output", 'PriceOutputController');
+//Route::get('price-output/{id}/customer-group', 'PriceOutputController@listPriceDetailOutput');
+//
+///**
+// * CRUD address
+// */
+//Route::resource('address', 'AddressController');
+//Route::get('address/{customer_id}/customer', 'AddressController@listAddressByCustomerId');
+//
+///**
+// * CRUD cart
+// */
+//Route::resource('carts', 'CartController');
+//Route::get('/carts/{customer_id}/customers', 'CartController@listCartByCustomerId')->name('listCartByCustomerId');
+//Route::put('/carts/{customer_id}/{product_id}', 'CartController@updateCartByCustomerId');
+//Route::delete('/carts/{customer_id}/customer', 'CartController@deleteCartByCustomerId');
+//Route::delete('/carts/{customer_id}/{product_id}', 'CartController@deleteProductInCart');
+//
+//
+//

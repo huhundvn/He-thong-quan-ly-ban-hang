@@ -3,7 +3,7 @@
 <div class="w3-sidebar w3-collapse w3-border-right" id="mySidebar" style="padding: 5px;">
     <div class="panel-group" id="accordion">
 
-        {{-- TRAN CHỦ --}}
+        {{-- TRANG CHỦ --}}
         <div class="panel w3-blue-grey">
             <div class="panel-heading">
                 <h4 class="panel-title">

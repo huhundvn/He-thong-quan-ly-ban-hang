@@ -17,7 +17,7 @@
                 Thu / chi cửa hàng
             </div>
             <div class="panel-body">
-                <h3 class="w3-text-blue"> Tổng thu: 100.000 </h3>
+                <h3 class="w3-text-blue"> 100.000.000 </h3>
             </div>
             <div class="panel-footer"> <a href="{{ route('list-voucher') }}"> Xem thêm... </a> </div>
         </div>

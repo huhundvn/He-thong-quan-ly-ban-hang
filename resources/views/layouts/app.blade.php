@@ -20,54 +20,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
-    <style>
-        a {
-            color: black;
-        }
-        .bg {
-            /* The image used */
-            background-image: url( {{asset('bg.jpg')}} );
-
-            /* Full height */
-            height: 100%;
-
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .hero-image {
-            /* The image used */
-            background-image: url( {{asset('bg.jpg')}} );
-
-            /* Set a specific height */
-            height: 100%;
-
-            /* Position and center the image to scale nicely on all screens */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-        }
-
-        /* Place text in the middle of the image */
-        .hero-text-left {
-            text-align: center;
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            transform: translate(-50%, -50%);
-            color: white;
-        }
-        .hero-text {
-            text-align: center;
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-        }
-    </style>
 </head>
 
 <body ng-cloak>
@@ -104,18 +56,5 @@
     <script src="{{ asset('angularJS/HomeController.js') }}"> </script>
     @yield('script')
     <script src="{{asset('js/style.js')}}"></script>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/5879d0232438f53b0a290835/default';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-    </script>
-    <!--End of Tawk.to Script-->
 </body>
 </html>
