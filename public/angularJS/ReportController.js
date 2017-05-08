@@ -7,11 +7,13 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.labels = [];
         $scope.data = [];
         $scope.series = ['Series A', 'Series B'];
+        $scope.data.push(0);
         for (var i = 0; i < response.data.length; i++) {
-            $scope.labels.push(response.data[i].product_id);
+            $http.get(API + 'product/' + response.data[i].product_id).then(function (response02) {
+                $scope.labels.push(response02.data.name);
+            });
             $scope.data.push(response.data[i].sum);
         }
-        $scope.data.push(0);
     });
 
     $http.get(API + 'storage').then(function (response) {

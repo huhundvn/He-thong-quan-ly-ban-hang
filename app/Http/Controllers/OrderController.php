@@ -30,7 +30,8 @@ class OrderController extends Controller
 	// API lấy danh sách đơn hàng hôm nay
 	public function getTodayOrder() {
 		return count(
-				Order::where('created_at', '>=', Carbon::yesterday())
+				Order::where('status', '=', 1)
+					-> where('created_at', '>=', Carbon::yesterday())
 					-> where('created_at', '<=', Carbon::now())
 					-> get()
 			);
