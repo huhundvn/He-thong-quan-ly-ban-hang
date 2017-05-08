@@ -26,6 +26,20 @@ class ReportController extends Controller
 		return $topProducts;
 	}
 
+	public function getReportRevenue() {
+		$sum01 = DB::table('voucher')
+			-> selectRaw('type, total, created_at')
+			-> where('type', '=', 0)
+			-> limit(10)
+			-> get();
+		$sum02 = DB::table('voucher')
+			-> selectRaw('type, total, created_at')
+			-> where('type', '=', 1)
+			-> limit(10)
+			-> get();
+		return ['sum01' => $sum01, 'sum02' => $sum02];
+	}
+
 	public function getReportInputStore(Request $request) {
 		$rules = [
 			'store_id' => 'required',
@@ -78,6 +92,10 @@ class ReportController extends Controller
     public function productReport() {
     	return view('report.product');
     }
+
+	public function revenueReport() {
+		return view('report.report-revenue');
+	}
 
 	public function inputStoreReport() {
 		return view('report.report-input-store');

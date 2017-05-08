@@ -133,6 +133,10 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 
+	Route::resource('store-output', 'StoreOutputController'); //CRUD xuất kho
+	Route::resource('detail-store-output', 'DetailStoreOutputController'); //CRUD chi tiết chuyển kho
+	Route::get('/get-detail-store-output/{store_output_id}', 'DetailStoreOutputController@getDetail');
+
 	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho
 	Route::get('/confirm-store-tranfer/{store_tranfer_id}/{status}', 'StoreTranferController@confirm'); //duyệt chuyển kho
 	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
@@ -150,7 +154,9 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('province', 'ProvinceController'); //CRUD địa chỉ tỉnh
 	Route::resource('return-product', 'ReturnProductController'); //CRUD trả về
 
+	// API BÁO CÁO
 	Route::get('/top-product', 'ReportController@getTopProduct');
+	Route::get('/report-revenue', 'ReportController@getReportRevenue');
 	Route::post('/report-input-store', 'ReportController@getReportInputStore');
 	Route::post('/report-product-in-store', 'ReportController@getReportProductInStore');
 });
@@ -238,6 +244,10 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('/list-store-tranfer', 'StoreTranferController@listStoreTranfer') -> name('list-store-tranfer') -> middleware(CheckStoreTranferRole::class);
 	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer') -> middleware(CheckStoreTranferRole::class);
 
+	//XUẤT KHO
+	Route::get('/list-store-output', 'StoreOutputController@listStoreOutput') -> name('list-store-output') -> middleware(CheckStoreTranferRole::class);
+	Route::get('/create-store-output', 'StoreOutputController@createStoreOutput') -> name('createStoreOutput') -> middleware(CheckStoreTranferRole::class);
+
 	//PHIẾU THU, CHI
 	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher') -> middleware(CheckVoucherRole::class);
 
@@ -257,6 +267,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 	// BÁO CÁO
 	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');
+	Route::get('/report-revenue', 'ReportController@revenueReport') -> name('report-revenue');
 	Route::get('/report-input-store', 'ReportController@inputStoreReport') -> name('report-input-store');
 	Route::get('/report-product-in-store', 'ReportController@productInStoreReport') -> name('report-product-in-store');
 

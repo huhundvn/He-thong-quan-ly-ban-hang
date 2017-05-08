@@ -107,10 +107,11 @@
                                 <div class="col-xs-3">
                                     <label> Kho </label> <br/>
                                     <input ng-model="role09" type="checkbox" ng-true-value="'store'" ng-false-value="'store'" ng-click="add(role09)"> Quản lý danh sách kho <br/>
-                                    <input ng-model="role10" type="checkbox" ng-true-value="'product-in-store'" ng-false-value="'product-in-store'" ng-click="add(role10)"> Quản lý sản phẩm trong kho <br/>
-                                    <input ng-model="role11" type="checkbox" ng-true-value="'input-store'" ng-false-value="'input-store'" ng-click="add(role11)"> Quản lý nhập hàng <br/>
-                                    <input ng-model="role12" type="checkbox" ng-true-value="'price-input'" ng-false-value="'price-input'" ng-click="add(role12)"> Quản lý bảng giá mua <br/>
+                                    <input ng-model="role11" type="checkbox" ng-true-value="'input-store'" ng-false-value="'input-store'" ng-click="add(role11)"> Quản lý nhập kho <br/>
+                                    <input ng-model="role22" type="checkbox" ng-true-value="'store-output'" ng-false-value="'store-output'" ng-click="add(role22)"> Quản lý xuất kho <br/>
                                     <input ng-model="role13" type="checkbox" ng-true-value="'store-tranfer'" ng-false-value="'store-tranfer'" ng-click="add(role13)"> Quản lý chuyển kho <br/>
+                                    <input ng-model="role10" type="checkbox" ng-true-value="'product-in-store'" ng-false-value="'product-in-store'" ng-click="add(role10)"> Quản lý sản phẩm trong kho <br/>
+                                    <input ng-model="role12" type="checkbox" ng-true-value="'price-input'" ng-false-value="'price-input'" ng-click="add(role12)"> Quản lý bảng giá mua <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Kế toán </label> <br/>
@@ -214,6 +215,7 @@
                                     <input ng-checked="selected.role.indexOf('input-store') != -1" ng-model="urole11" type="checkbox" ng-true-value="'input-store'" ng-false-value="'input-store'" ng-click="add(urole11)"> Quản lý nhập hàng <br/>
                                     <input ng-checked="selected.role.indexOf('price-input') != -1" ng-model="urole12" type="checkbox" ng-true-value="'price-input'" ng-false-value="'price-input'" ng-click="add(urole12)"> Quản lý bảng giá mua <br/>
                                     <input ng-checked="selected.role.indexOf('store-tranfer') != -1" ng-model="urole13" type="checkbox" ng-true-value="'store-tranfer'" ng-false-value="'store-tranfer'" ng-click="add(urole13)"> Quản lý chuyển kho <br/>
+                                    <input ng-checked="selected.role.indexOf('store-output') != -1" ng-model="urole22" type="checkbox" ng-true-value="'store-output'" ng-false-value="'store-output'" ng-click="add(urole22)"> Quản lý chuyển kho <br/>
                                 </div>
                                 <div class="col-xs-3">
                                     <label> Kế toán </label> <br/>
@@ -233,9 +235,9 @@
                                     <label> Khách hàng </label> <br/>
                                     <input ng-checked="selected.role.indexOf('customer') != -1" ng-model="urole19" type="checkbox" ng-true-value="'customer'" ng-false-value="'customer'" ng-click="add(urole19)"> Quản lý khách hàng <br/>
                                 </div>
-                                <div class="col-xs-3">
-                                    <label> Khuyến mãi </label>
-                                </div>
+                                {{--<div class="col-xs-3">--}}
+                                    {{--<label> Khuyến mãi </label>--}}
+                                {{--</div>--}}
                                 <div class="col-xs-3">
                                     <label> Nhân viên </label> <br/>
                                     <input ng-checked="selected.role.indexOf('user') != -1" ng-model="urole20" type="checkbox" ng-true-value="'user'" ng-false-value="'user'" ng-click="add(urole20)"> Quản lý nhân viên <br/>

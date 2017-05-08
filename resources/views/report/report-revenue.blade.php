@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('title')
-    Sản phẩm được quan tâm nhiều
+    Doanh thu cửa hàng
 @endsection
 
 @section('location')
     <li> Báo cáo </li>
-    <li> Top 10 sản phẩm bán chạy </li>
+    <li> Doanh thu cửa hàng </li>
 @endsection
 
 @section('content')
     <div ng-controller="ReportController">
         <div class="container-fluid">
-            <canvas class="chart-bar" chart-series="series" chart-data="data" chart-labels="labels"></canvas>
+            <canvas class="chart chart-bar" chart-series="series" chart-data="data02" chart-labels="labels02"></canvas>
         </div>
     </div>
 @endsection

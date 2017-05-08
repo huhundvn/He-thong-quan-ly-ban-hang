@@ -3,19 +3,6 @@
  */
 app.controller('ReportController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'top-product').then(function (response) {
-        $scope.labels = [];
-        $scope.data = [];
-        $scope.series = ['Series A', 'Series B'];
-        $scope.data.push(0);
-        for (var i = 0; i < response.data.length; i++) {
-            $http.get(API + 'product/' + response.data[i].product_id).then(function (response02) {
-                $scope.labels.push(response02.data.name);
-            });
-            $scope.data.push(response.data[i].sum);
-        }
-    });
-
     $http.get(API + 'storage').then(function (response) {
         $scope.stores = response.data;
     });
@@ -32,7 +19,28 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.products = response.data;
     });
 
-    //Load danh sách nhập kho
+    // LẤY DANH SÁCH 10 SẢN PHẨM BÁN CHẠY
+    $http.get(API + 'top-product').then(function (response) {
+        $scope.labels = [];
+        $scope.data = [];
+        $scope.series = ['Thu', 'Chi'];
+        for (var i = 0; i < response.data.length; i++) {
+            $http.get(API + 'product/' + response.data[i].product_id).then(function (response02) {
+                $scope.labels.push(response02.data.name);
+            });
+            $scope.data.push(response.data[i].sum);
+        }
+        $scope.data.push(0);
+    });
+
+    $scope.labels02 = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', '2010', '2011', '2012'];
+
+    $scope.data02 = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
+
+    // LẤY DANH SÁCH NHẬP KHO
     $scope.loadInputStore = function () {
         $http({
             method : 'POST',
@@ -48,7 +56,7 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         });
     };
 
-    //Load danh sách tồn kho
+    //LẤY DANH SÁCH TỒN KHO
     $scope.loadProductInStore = function () {
         $http({
             method : 'POST',

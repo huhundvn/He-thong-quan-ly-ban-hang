@@ -42,4 +42,12 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
                 toastr.error(response.data[0]);
         });
     };
+
+    $scope.labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+
+    $scope.data = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
 });

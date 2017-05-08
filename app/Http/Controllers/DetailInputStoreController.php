@@ -49,12 +49,6 @@ class DetailInputStoreController extends Controller
 		return DetailInputStore::find($id);
 	}
 
-	// API chỉnh sửa thông tin đơn hàng
-	public function update(Request $request, $id)
-	{
-
-	}
-
 	// API xóa thông tin đơn hàng
 	public function destroy($id)
 	{

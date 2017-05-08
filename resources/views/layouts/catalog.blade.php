@@ -3,7 +3,7 @@
 <div class="w3-sidebar w3-collapse w3-border-right" id="mySidebar" style="padding: 5px;">
     <div class="panel-group" id="accordion">
 
-        {{-- Danh mục khuyến mãi --}}
+        {{-- TRAN CHỦ --}}
         <div class="panel w3-blue-grey">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        {{-- Danh mục bán hàng--}}
+        {{-- BÁN HÀNG--}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('order') != -1 || roles.indexOf('price-output') != -1 || roles.indexOf('return') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -25,12 +25,12 @@
                 <div class="list-group">
                     <a ng-show="roles.indexOf('order') != -1" href="list-order" class="list-group-item"> Đơn hàng </a>
                     <a ng-show="roles.indexOf('price-output') != -1" href="{{ route('list-price-output') }}" class="list-group-item"> Bảng giá bán </a>
-                    <a ng-show="roles.indexOf('return') != -1" href="{{ route('list-return-product') }}" class="list-group-item"> Trả về </a>
+                    {{--<a ng-show="roles.indexOf('return') != -1" href="{{ route('list-return-product') }}" class="list-group-item"> Trả về </a>--}}
                 </div>
             </div>
         </div>
 
-        {{-- Danh mục sản phẩm--}}
+        {{-- SẢN PHẨM --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('product') != -1 || roles.indexOf('manufacturer') != -1 || roles.indexOf('supplier') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -44,13 +44,13 @@
                     <a ng-show="roles.indexOf('product') != -1" href="{{route('list-category')}}" class="list-group-item"> Nhóm sản phẩm </a>
                     <a ng-show="roles.indexOf('product') != -1" href="{{route('list-attribute')}}" class="list-group-item"> Thuộc tính sản phẩm </a>
                     <a ng-show="roles.indexOf('product') != -1" href="{{route('list-unit')}}" class="list-group-item"> Đơn vị tính </a>
-                    <a ng-show="roles.indexOf('manufacturer') != -1" href="{{route('list-manufacturer')}}" class="list-group-item"> Nhà sản xuất </a>
                     <a ng-show="roles.indexOf('supplier') != -1" href="{{route('list-supplier')}}" class="list-group-item"> Nhà cung cấp </a>
+                    <a ng-show="roles.indexOf('manufacturer') != -1" href="{{route('list-manufacturer')}}" class="list-group-item"> Nhà sản xuất </a>
                 </div>
             </div>
         </div>
 
-        {{-- Danh mục kho --}}
+        {{-- KHO --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('store') != -1 || roles.indexOf('product-in-store') != -1 || roles.indexOf('price-input') != -1 || roles.indexOf('input-store') != -1 || roles.indexOf('store-tranfer') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -61,15 +61,16 @@
             <div id="collapse4" class="panel-collapse collapse">
                 <div class="list-group">
                     <a ng-show="roles.indexOf('store') != -1" href="{{route('list-store')}}" class="list-group-item"> Danh sách kho </a>
+                    <a ng-show="roles.indexOf('input-store') != -1" href="{{route('list-input-store')}}" class="list-group-item"> Nhập kho </a>
+                    <a ng-show="roles.indexOf('store-output') != -1" href="{{route('list-store-output')}}" class="list-group-item"> Xuất kho </a>
+                    <a ng-show="roles.indexOf('store-tranfer') != -1" href="{{route('list-store-tranfer')}}" class="list-group-item"> Chuyển kho </a>
                     <a ng-show="roles.indexOf('product-in-store') != -1" href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
                     <a ng-show="roles.indexOf('price-input') != -1" href="{{route('list-price-input')}}" class="list-group-item"> Bảng giá mua </a>
-                    <a ng-show="roles.indexOf('input-store') != -1" href="{{route('list-input-store')}}" class="list-group-item"> Nhập hàng </a>
-                    <a ng-show="roles.indexOf('store-tranfer') != -1" href="{{route('list-store-tranfer')}}" class="list-group-item"> Chuyển kho </a>
                 </div>
             </div>
         </div>
 
-        {{-- Danh mục kế toán --}}
+        {{-- KẾ TOÁN --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('account') != -1 || roles.indexOf('voucher') != -1 || roles.indexOf('customer-invoice') != -1 || roles.indexOf('supplier-invoice') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -87,7 +88,7 @@
             </div>
         </div>
 
-        {{-- Danh mục báo cáo --}}
+        {{-- BÁO CÁO --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('report') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -98,14 +99,14 @@
             <div id="collapse6" class="panel-collapse collapse">
                 <div class="list-group">
                     <a href="{{ route('top-product') }}" class="list-group-item"> Sản phẩm bán chạy </a>
-                    <a href="{{ route('list-voucher') }}" class="list-group-item"> Doanh thu bán hàng </a>
+                    <a href="{{ route('report-revenue') }}" class="list-group-item"> Doanh thu bán hàng </a>
                     <a href="{{ route('report-input-store') }}" class="list-group-item"> Bảng kê nhập kho </a>
                     <a href="{{ route('report-product-in-store') }}" class="list-group-item"> Bảng kê tồn kho </a>
                 </div>
             </div>
         </div>
 
-        {{-- Danh mục khách hàng--}}
+        {{-- KHÁCH HÀNG --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('customer') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -121,7 +122,7 @@
             </div>
         </div>
 
-        {{-- Danh mục nhân viên --}}
+        {{-- NHÂN VIÊN --}}
         <div class="panel w3-blue-grey" ng-show="roles.indexOf('user') != -1 || roles.indexOf('position') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">

@@ -89,13 +89,21 @@
     @endif
 
     {{-- THƯ VIỆN JAVASCRIPT --}}
-    <script async src="{{asset('js/toastr.js')}}"></script>
+    {{--<script async src="{{asset('js/toastr.js')}}"></script>--}}
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
+    {{-- XỬ LÝ ANGULARJS --}}
+    <script src="{{ asset('angularJS/dirPagination.js') }}"></script>
+    <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
+    <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
+    <script src="{{ asset('angularJS/Config.js') }}"> </script>
+    <script src="{{ asset('angularJS/HomeController.js') }}"> </script>
+    @yield('script')
+    <script src="{{asset('js/style.js')}}"></script>
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
         var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -109,14 +117,5 @@
         })();
     </script>
     <!--End of Tawk.to Script-->
-
-    {{-- XỬ LÝ ANGULARJS --}}
-    <script src="{{ asset('angularJS/dirPagination.js') }}"></script>
-    <script src="{{ asset('angularJS/cleave-angular.min.js') }}"></script>
-    <script src="{{ asset('angularJS/angucomplete-alt.js') }}"></script>
-    <script src="{{ asset('angularJS/Config.js') }}"> </script>
-    <script src="{{ asset('angularJS/HomeController.js') }}"> </script>
-    @yield('script')
-    <script src="{{asset('js/style.js')}}"></script>
 </body>
 </html>

@@ -14,12 +14,12 @@
     <div class="col-lg-3">
         <div class="panel panel-default">
             <div class="panel-heading w3-blue-grey">
-                Doanh thu
+                Thu / chi cửa hàng
             </div>
             <div class="panel-body">
-                <h3 class="w3-text-blue"> 10%  <span class="glyphicon glyphicon-arrow-up"></span> </h3>
+                <h3 class="w3-text-blue"> Tổng thu: 100.000 </h3>
             </div>
-            <div class="panel-footer"> <a href="{{ route('list-user') }}"> Xem thêm... </a> </div>
+            <div class="panel-footer"> <a href="{{ route('list-voucher') }}"> Xem thêm... </a> </div>
         </div>
     </div>
     <div class="col-lg-3">
@@ -50,31 +50,12 @@
         </div>
     </div>
 </div>
-
-<canvas id="myChart" height="80"></canvas>
-<script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9"],
-            datasets: [{
-                label: '# of Votes',
-                data: [100, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-    });
-</script>
+<div class="row">
+    <div class="col-lg-12">
+    <canvas class="chart chart-line" chart-series="series" chart-data="data" chart-labels="labels" height="80px"></canvas>
+    <p align="center"> Biểu đồ doanh thu </p>
+    </div>
+</div>
 </div>
 @endsection
 
