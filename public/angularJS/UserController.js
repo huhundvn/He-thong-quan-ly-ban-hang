@@ -4,29 +4,23 @@
 app.controller('UserController', function($scope, $http, API, $interval) {
 
     /**
-     * Lấy danh sách các nơi làm việc
-     */
-    $http.get(API + 'store').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    /**
-     * Lấy danh sách chức vụ
-     */
-    $http.get(API + 'position').then(function (response) {
-        $scope.positions = response.data;
-    });
-
-    /**
      * Load danh sách nhân viên
      */
     $scope.loadUser = function () {
+        $http.get(API + 'store').then(function (response) {
+            $scope.stores = response.data;
+        });
+
+        $http.get(API + 'position').then(function (response) {
+            $scope.positions = response.data;
+        });
+
         $http.get(API + 'user').then(function (response) {
             $scope.users = response.data;
         });
     };
     $scope.loadUser();
-    $interval($scope.loadUser, 3000);
+    $interval($scope.loadUser, 5000);
 
     /**
      * CRUD nhân viên

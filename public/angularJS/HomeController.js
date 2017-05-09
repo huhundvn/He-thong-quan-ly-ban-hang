@@ -2,29 +2,32 @@
  * Created by Good on 4/29/2017.
  */
 app.controller('HomeController', function($scope, $http, API, $interval) {
+    // SỐ LƯỢNG CÁC ĐƠN HÀNG HÔM NAY
+        $http.get(API + 'get-today-order').then(function (response) {
+            $scope.today_order = response.data;
+        });
 
-    // lấy danh sách các đơn hàng
-    $http.get(API + 'get-today-order').then(function (response) {
-        $scope.today_order = response.data;
-    });
+        // SỐ LƯỢNG KHÁCH HÀNG
+        $http.get(API + 'get-sum-customer').then(function (response) {
+            $scope.sum_customer = response.data;
+        });
 
-    // lấy danh sách khách hàng
-    $http.get(API + 'get-sum-customer').then(function (response) {
-        $scope.sum_customer = response.data;
-    });
-
-    // lấy danh sách các nhân viên
-    $http.get(API + 'get-sum-user').then(function (response) {
-        $scope.sum_user = response.data;
-    });
+        // SỐ LƯỢNG NHÂN VIÊN
+        $http.get(API + 'get-sum-user').then(function (response) {
+            $scope.sum_user = response.data;
+        });
 
     $scope.loadRole = function() {
+
+        // QUYỀN NGƯỜI DÙNG
         $http.get(API + 'get-role').then(function (response) {
             $scope.roles = response.data;
         });
     };
-    $interval($scope.loadRole, 3000);
+    $scope.loadRole();
+    $interval($scope.loadRole, 5000);
 
+    // ĐỔI MẬT KHẨU
     $scope.changePassword = function () {
         $http({
             method : 'POST',

@@ -12,11 +12,9 @@ app.controller('SupplierController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadSupplier();
-    $interval($scope.loadSupplier, 3000);
+    $interval($scope.loadSupplier, 5000);
 
-    /**
-     * CRUD nhà cung cấp
-     */
+    // TẠO NHÀ CUNG CẤP
     $scope.createSupplier = function () {
         $http({
             method : 'POST',
@@ -35,12 +33,14 @@ app.controller('SupplierController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM NHÀ CUNG CẤP
     $scope.readSupplier = function (supplier) {
         $http.get(API + 'supplier/' + supplier.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA NHÀ CUNG CẤP
     $scope.updateSupplier = function () {
         $http({
             method : 'PUT',
@@ -59,6 +59,7 @@ app.controller('SupplierController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA NHÀ CUNG CẤP
     $scope.deleteSupplier = function () {
         $http({
             method : 'DELETE',

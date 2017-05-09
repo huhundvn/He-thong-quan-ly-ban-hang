@@ -3,57 +3,47 @@
  */
 app.controller('InputStoreController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'storage').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    });
-
-    $http.get(API + 'supplier').then(function (response) {
-        $scope.suppliers = response.data;
-    });
-
-    $http.get(API + 'account').then(function (response) {
-        $scope.accounts = response.data;
-    });
-
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
-    });
-
-    $http.get(API + 'price-input').then(function (response) {
-        $scope.priceInputs = response.data;
-    });
-
-    //Load danh sách nhập kho
+    // DANH SÁCH NHẬP KHO
     $scope.loadInputStore = function () {
+        $http.get(API + 'storage').then(function (response) {
+            $scope.stores = response.data;
+        });
+
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        });
+
+        $http.get(API + 'supplier').then(function (response) {
+            $scope.suppliers = response.data;
+        });
+
+        $http.get(API + 'account').then(function (response) {
+            $scope.accounts = response.data;
+        });
+
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
+        $http.get(API + 'price-input').then(function (response) {
+            $scope.priceInputs = response.data;
+        });
+
         $http.get(API + 'input-store').then(function (response) {
             $scope.inputStores = response.data;
+        });
+
+        $http.get(API + 'get-paid-input-store').then(function (response) {
+            $scope.paidInputStores = response.data;
         });
     };
     $scope.loadInputStore();
     $interval($scope.loadInputStore, 3000);
 
-    //Load danh sách nhập kho
-    $scope.loadPaidInputStore = function () {
-        $http.get(API + 'get-paid-input-store').then(function (response) {
-            $scope.paidInputStores = response.data;
-        });
-    };
-    $scope.loadPaidInputStore();
-    $interval($scope.loadPaidInputStore, 3000);
-
-    /**
-     * CRUD nhập kho
-     */
-
-    // Tạo nhập kho mới
     $scope.data = [];
     $scope.info = {};
 
-    // Tạo sản phẩm mới
+    // THÊM SẢN PHẨM MỚI
     $scope.createProduct = function () {
         if( CKEDITOR.instances.newDescription.getData() )
             $scope.newProduct.description = CKEDITOR.instances.newDescription.getData();
@@ -75,7 +65,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Thêm sản phẩm vào danh sách
+    // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             for(var i=0; i<selected.detail_price_inputs.length; i++) {
@@ -89,13 +79,13 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
             toastr.info('Sản phẩm đã có trong danh sách.');
     };
 
-    // Xóa sản phẩm khỏi danh sách
+    // XÓA SẢN PHẨM KHỎI DANH SÁCH
     $scope.delete = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa 1 sản phẩm khỏi danh sách.');
     };
 
-    // Tính tổng tiền
+    // TÍNH TỔNG TIỀN
     $scope.getTotal = function () {
         $scope.total = 0;
         for (var i=0; i<$scope.data.length; i++) {
@@ -104,7 +94,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         return $scope.total;
     };
 
-    // Thêm chi tiết đơn hàng
+    // TẠO CHI TIẾT NHẬP KHO
     $scope.createDetailInputStore = function (item) {
         $http({
             method : 'POST',
@@ -119,7 +109,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Tạo mới đơn đặt hàng
+    // Tạo NHẬP KHO MỚI
     $scope.createInputStore = function () {
         if($scope.data.length <= 0)
             toastr.info('Vui lòng thêm sản phẩm');
@@ -156,8 +146,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         }
     };
 
-
-    // Xem danh sách nhập kho
+    // XEM THÔNG TIN NHẬP KHO
     $scope.readInputStore = function (inputStore) {
         $http.get(API + 'input-store/' + inputStore.id).then(function (response) {
             $scope.selected = response.data;
@@ -167,7 +156,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Thanh toán nhập kho
+    // THANH TOÁN HÓA ĐƠN NHẬP KHO
     $scope.updateInputStore = function () {
         $scope.selected.total_paid += parseInt($scope.selected.more_paid);
         $http({
@@ -188,12 +177,12 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     };
 
-    // In biểu mẫu
+    // IN BÁO CÁO
     $scope.print = function () {
         window.print();
     }
 
-    // Duyệt yêu cầu nhập hàng
+    // DUYỆT NHẬP KHO
     $scope.changeStatus = function () {
         $http.get(API + 'confirm-input-store/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
@@ -205,7 +194,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     }
 
-    // Xóa bảng giá
+    // XÓA NHẬP KHO
     $scope.deleteInputStore = function () {
         $http({
             method : 'DELETE',

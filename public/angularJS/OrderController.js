@@ -3,39 +3,7 @@
  */
 app.controller('OrderController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'customer').then(function (response) {
-        $scope.customers = response.data;
-    });
-
-    $http.get(API + 'customerGroup').then(function (response) {
-        $scope.customerGroups = response.data;
-    });
-
-    $http.get(API + 'price-output').then(function (response) {
-        $scope.priceOutputs = response.data;
-    });
-
-    $http.get(API + 'storage').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    $http.get(API + 'supplier').then(function (response) {
-        $scope.suppliers = response.data;
-    });
-
-    $http.get(API + 'user').then(function (response) {
-        $scope.users = response.data;
-    });
-
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
-    });
-
-    $http.get(API + 'account').then(function (response) {
-        $scope.accounts = response.data;
-    });
-
-    // Tạo khách hàng mới
+    // TẠO KHÁCH HÀNG MỚI
     $scope.createCustomer = function () {
         $http({
             method : 'POST',
@@ -56,32 +24,56 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
-    //Load danh sách đơn hàng
+    // DANH SÁCH ĐƠN HÀNG
     $scope.loadOrder = function () {
+        $http.get(API + 'customer').then(function (response) {
+            $scope.customers = response.data;
+        });
+
+        $http.get(API + 'customerGroup').then(function (response) {
+            $scope.customerGroups = response.data;
+        });
+
+        $http.get(API + 'price-output').then(function (response) {
+            $scope.priceOutputs = response.data;
+        });
+
+        $http.get(API + 'storage').then(function (response) {
+            $scope.stores = response.data;
+        });
+
+        $http.get(API + 'supplier').then(function (response) {
+            $scope.suppliers = response.data;
+        });
+
+        $http.get(API + 'user').then(function (response) {
+            $scope.users = response.data;
+        });
+
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
+        $http.get(API + 'account').then(function (response) {
+            $scope.accounts = response.data;
+        });    
+        
         $http.get(API + 'order').then(function (response) {
             $scope.orders = response.data;
+        });
+
+        $http.get(API + 'get-paid-order').then(function (response) {
+            $scope.paidOrders = response.data;
         });
     };
     $scope.loadOrder();
     $interval($scope.loadOrder, 3000);
 
-    //Load danh sách đơn hàng đã thanh toán
-    $scope.loadPaidOrder = function () {
-        $http.get(API + 'get-paid-order').then(function (response) {
-            $scope.paidOrders = response.data;
-        });
-    };
-    $scope.loadPaidOrder();
-    $interval($scope.loadPaidOrder, 3000);
-
-    /**
-     * CRUD đơn hàng
-     */
-    // Tạo đơn hàng mới
+    // TẠO ĐƠN HÀNG MỚI
     $scope.data = [];
     $scope.new = {};
 
-    // Thêm sản phẩm vào danh sách đơn hàng
+    // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             for(var i=0; i<selected.detail_price_outputs.length; i++) {
@@ -95,13 +87,13 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
             toastr.info('Sản phẩm đã có trong danh sách.');
     };
 
-    // Xóa sản phẩm khỏi danh sách
+    // XÓA SẢN PHẨM KHỎI DANH SÁCH
     $scope.delete = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa 1 sản phẩm khỏi danh sách.');
     };
 
-    // Tính tổng tiền
+    // TÍNH TỔNG TIỀN
     $scope.getTotal = function () {
         $scope.total = 0;
         for (var i=0; i<$scope.data.length; i++) {
@@ -110,7 +102,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         return $scope.total;
     };
 
-    // Thêm chi tiết đơn hàng
+    // THÊM CHI TIẾT ĐƠN HÀNG
     $scope.createOrderDetail = function (item) {
         $http({
             method : 'POST',
@@ -125,7 +117,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Tạo mới đơn đặt hàng
+    // TẠO ĐƠN HÀNG MỚI
     $scope.createOrder = function () {
         if($scope.data.length <= 0)
             toastr.info('Vui lòng thêm sản phẩm');
@@ -165,7 +157,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         }
     };
 
-    // Xem danh sách đơn hàng
+    // XEM THÔNG TIN ĐƠN HÀNG
     $scope.readOrder = function (order) {
         $http.get(API + 'order/' + order.id).then(function (response) {
             $scope.selected = response.data;
@@ -175,7 +167,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Chỉnh sửa đơn hàng
+    // THANH TOÁN ĐƠN HÀNG
     $scope.updateOrder = function () {
         $scope.selected.total_paid += parseInt($scope.selected.more_paid);
         $http({
@@ -196,12 +188,12 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
-    // In biểu mẫu
+    // IN
     $scope.print = function () {
         window.print();
     }
 
-    // Duyệt yêu cầu đơn hàng
+    // DUYỆT ĐƠN HÀNG
     $scope.changeStatus = function () {
         $http.get(API + 'confirm-order/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
@@ -213,9 +205,8 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     }
 
-    // Xóa đơn hàng
+    // XÓA ĐƠN HÀNG
     $scope.deleteOrder = function () {
-        console.log($scope.selected);
         $http({
             method : 'DELETE',
             url : API + 'order/' + $scope.selected.id,

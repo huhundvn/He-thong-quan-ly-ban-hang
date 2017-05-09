@@ -12,21 +12,7 @@ app.controller('AccountController', function($scope, $http, API, $interval) {
     $scope.loadAccount();
     $interval($scope.loadAccount, 3000); // tự động refresh lại nếu có dữ liệu mới
 
-    //Tìm thông tin tài khoản
-     
-    $scope.searchAccount = function () {
-        if ($scope.term == '') {
-            $scope.loadAccount();
-        } else {
-            $http.get(API + 'account/search/' + $scope.term).then(function (response) {
-                $scope.accounts = response.data;
-            });
-        }
-    };
-
-    /**
-     * CRUD tài khoản
-     */
+    // TẠO TÀI KHOẢN
     $scope.createAccount = function () {
         $http({
             method : 'POST',
@@ -45,12 +31,14 @@ app.controller('AccountController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM TÀI KHOẢN
     $scope.readAccount = function (account) {
         $http.get(API + 'account/' + account.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA TÀI KHOẢN
     $scope.updateAccount = function () {
         $http({
             method : 'PUT',
@@ -69,6 +57,7 @@ app.controller('AccountController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA TÀI KHOẢN
     $scope.deleteAccount = function () {
         $http({
             method : 'DELETE',

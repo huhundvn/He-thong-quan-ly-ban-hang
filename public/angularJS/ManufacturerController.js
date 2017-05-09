@@ -2,9 +2,8 @@
  * Created by Good on 3/28/2017.
  */
 app.controller('ManufacturerController', function($scope, $http, API, $interval) {
-    /**
-     * Load danh sách nhà sản xuất
-     */
+    
+    // DANH SÁCH NHÀ CUNG CẤP
     $scope.loadManufacturer = function () {
         $http.get(API + 'manufacturer').then(function (response) {
             $scope.manufacturers = response.data;
@@ -13,9 +12,7 @@ app.controller('ManufacturerController', function($scope, $http, API, $interval)
     $scope.loadManufacturer();
     $interval($scope.loadManufacturer, 3000);
 
-    /**
-     * CRUD nhà sản xuất
-     */
+    //TẠO NHÀ SẢN XUẤT MỚI
     $scope.createManufacturer = function () {
         $http({
             method : 'POST',
@@ -34,12 +31,14 @@ app.controller('ManufacturerController', function($scope, $http, API, $interval)
         });
     };
 
+    // XEM THÔNG TIN NHÀ SẢN XUẤT
     $scope.readManufacturer = function (manufacturer) {
         $http.get(API + 'manufacturer/' + manufacturer.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA THÔNG TIN NHÀ SẢN XUẤT
     $scope.updateManufacturer = function () {
         $http({
             method : 'PUT',
@@ -58,6 +57,7 @@ app.controller('ManufacturerController', function($scope, $http, API, $interval)
         });
     };
 
+    // XÓA NHÀ SẢN XUẤT
     $scope.deleteManufacturer = function () {
         $http({
             method : 'DELETE',

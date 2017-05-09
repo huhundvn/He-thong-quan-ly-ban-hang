@@ -3,23 +3,23 @@
  */
 app.controller('PriceOutputController', function($scope, $http, API, $interval) {
 
-    // Lấy danh sách sản phẩm
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
-    });
-
-    // Lấy danh sách đơn vị tính
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    });
-
-    // Lấy danh sách nhóm khách hàng
-    $http.get(API + 'customerGroup').then(function (response) {
-        $scope.customerGroups = response.data;
-    });
-
     //Load danh sách bảng giá
     $scope.loadPriceOutput = function () {
+        // Lấy danh sách sản phẩm
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
+        // Lấy danh sách đơn vị tính
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        });
+
+        // Lấy danh sách nhóm khách hàng
+        $http.get(API + 'customerGroup').then(function (response) {
+            $scope.customerGroups = response.data;
+        });
+
         $http.get(API + 'price-output').then(function (response) {
             $scope.priceOutputs = response.data;
         });
@@ -27,14 +27,10 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
     $scope.loadPriceOutput();
     $interval($scope.loadPriceOutput, 3000);
 
-    /**
-     * CRUD bảng giá
-     */
-
     // Tạo bảng giá mới
     $scope.data = [];
 
-    // Thêm sản phẩm vào danh sách
+    // THÊM SẢN PHẨM VÀO BẢNG GIÁ
     $scope.add = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             $scope.data.push(selected);
@@ -43,13 +39,13 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
             toastr.info('Sản phẩm đã có trong danh sách.');
     };
 
-    // Xóa sản phẩm khỏi danh sách
+    // XÓA SẢN PHẨM KHỎI BẢNG GIÁ
     $scope.delete = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa 1 sản phẩm khỏi danh sách.');
     };
 
-    // Thêm chi tiết bảng giá
+    // THÊM CHI TIẾT BẢNG GIÁ
     $scope.createDetailPriceOutput = function (item) {
         $http({
             method : 'POST',
@@ -64,7 +60,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // Tạo mới bảng giá
+    // TẠO BẢNG GIÁ MỚI
     $scope.createPriceOutput = function () {
         if($scope.data.length <= 0)
             toastr.info('Vui lòng thêm sản phẩm');
@@ -98,7 +94,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
         }
     };
 
-    // Xem danh sách bảng giá
+    // XEM BẢNG GIÁ
     $scope.readPriceOutput = function (priceOutput) {
         $http.get(API + 'price-output/' + priceOutput.id).then(function (response) {
             $scope.selected = response.data;
@@ -108,7 +104,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // Duyệt bảng giá
+    // DUYỆT BẢNG GIÁ
     $scope.changeStatus = function () {
         console.log($scope.newStatus, $scope.selected.id);
         $http.get(API + 'confirm-price-output/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
@@ -121,7 +117,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
         });
     }
 
-    // Xóa bảng giá
+    // XÓA BẢNG GIÁ
     $scope.deletePriceOutput = function () {
         $http({
             method : 'DELETE',
@@ -138,7 +134,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // In biểu mẫu
+    // IN
     $scope.print = function () {
         window.print();
     }

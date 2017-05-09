@@ -3,39 +3,34 @@
  */
 app.controller('StoreTranferController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'storage').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
-    });
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    });
-
-    $http.get(API + 'product-in-store').then(function (response) {
-        $scope.productInStores = response.data;
-    });
-
     //Load danh sách nhập kho
     $scope.loadStoreTranfer = function () {
+        $http.get(API + 'storage').then(function (response) {
+            $scope.stores = response.data;
+        });
+
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        });
+
+        $http.get(API + 'product-in-store').then(function (response) {
+            $scope.productInStores = response.data;
+        });
+
         $http.get(API + 'store-tranfer').then(function (response) {
             $scope.storeTranfers = response.data;
         });
     };
     $scope.loadStoreTranfer();
-    $interval($scope.loadStoreTranfer, 3000);
+    $interval($scope.loadStoreTranfer, 5000);
 
-    /**
-     * CRUD chuyển kho
-     */
-
-    // Tạo chuyển kho mới
     $scope.data = [];
 
-    // Thêm sản phẩm vào danh sách
+    // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {
         if(($scope.data.indexOf(selected) == -1)) {
             $scope.data.push(selected);
@@ -44,13 +39,13 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
             toastr.info('Sản phẩm đã có trong danh sách.');
     };
 
-    // Xóa sản phẩm khỏi danh sách
+    // XÓA SẢN PHẨM KHỎI DANH SÁCH
     $scope.delete = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa một sản phẩm khỏi danh sách.');
     };
 
-    // Thêm chi tiết chuyển kho
+    // THÊM CHI TIẾT CHUYỂN KHO
     $scope.createDetailStoreTranfer = function (item) {
         $http({
             method : 'POST',
@@ -65,7 +60,7 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         });
     };
 
-    // Tạo mới đơn chuyển kho
+    // TẠO CHUYỂN KHO MỚI
     $scope.createStoreTranfer = function () {
         if($scope.data.length <= 0)
             toastr.info('Vui lòng thêm sản phẩm');
@@ -101,7 +96,7 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         }
     };
 
-    // Xem danh sách nhập kho
+    // XEM CHUYỂN KHO
     $scope.readStoreTranfer = function (storeTranfer) {
         $http.get(API + 'store-tranfer/' + storeTranfer.id).then(function (response) {
             $scope.selected = response.data;
@@ -111,12 +106,12 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         });
     };
 
-    // In biểu mẫu
+    // IN
     $scope.print = function () {
         window.print();
     }
 
-    // Duyệt yêu cầu chuyển kho
+    // DUYỆT YÊU CẦU CHUYỂN KHO
     $scope.changeStatus = function () {
         $http.get(API + 'confirm-store-tranfer/' + $scope.selected.id + '/' + $scope.newStatus).then(function (response) {
             if(response.data.success) {
@@ -128,7 +123,7 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         });
     }
 
-    // Xóa yêu cầu chuyển kho
+    // XÓA YÊU CẦU CHUYỂN KHO
     $scope.deleteStoreTranfer = function () {
         $http({
             method : 'DELETE',
@@ -145,7 +140,7 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         });
     };
 
-    // Kiểm tra số lượng chuyển kho
+    // KIỂM TRA SỐ LƯỢNG CHUYỂN
     $scope.checkQuantity = function (quantity_tranfer, quantity_remain) {
         if(quantity_tranfer > quantity_remain) {
             toastr.info('Không được chuyển quá số lượng sản phẩm đang có trong kho.');

@@ -3,22 +3,22 @@
  */
 app.controller('VoucherController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'account').then(function (response) {
-        $scope.accounts = response.data;
-    });
-
-    $http.get(API + 'user').then(function (response) {
-        $scope.users = response.data;
-    });
-
     //Load danh sách phiếu thu/chi
     $scope.loadVoucher = function () {
+        $http.get(API + 'account').then(function (response) {
+            $scope.accounts = response.data;
+        });
+
+        $http.get(API + 'user').then(function (response) {
+            $scope.users = response.data;
+        });
+
         $http.get(API + 'voucher').then(function (response) {
             $scope.vouchers = response.data;
         });
     };
     $scope.loadVoucher();
-    $interval($scope.loadVoucher, 3000);
+    $interval($scope.loadVoucher, 5000);
 
     /**
      * CRUD phiếu thu, chi

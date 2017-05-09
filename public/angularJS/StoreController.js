@@ -3,17 +3,12 @@
  */
 app.controller('StoreController', function($scope, $http, API, $interval) {
 
-    /**
-     * Xem danh sách các kho/cửa hàng
-     */
-    $http.get(API + 'storage').then(function (response) {
-        $scope.storages = response.data;
-    });
-
-    /**
-     * Load danh sách kho, cửa hàng
-     */
+    // DANH SÁCH KHO
     $scope.loadStore = function () {
+        $http.get(API + 'storage').then(function (response) {
+            $scope.storages = response.data;
+        });
+
         $http.get(API + 'store').then(function (response) {
             $scope.stores = response.data;
         });
@@ -21,9 +16,7 @@ app.controller('StoreController', function($scope, $http, API, $interval) {
     $scope.loadStore();
     $interval($scope.loadStore, 3000);
 
-    /**
-     * CRUD nhóm sản phẩm
-     */
+    // TẠO KHO MỚI
     $scope.createStore = function () {
         $http({
             method : 'POST',
@@ -42,12 +35,14 @@ app.controller('StoreController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM THÔNG TIN KHO
     $scope.readStore = function (store) {
         $http.get(API + 'store/' + store.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA THÔNG TIN KHO
     $scope.updateStore = function () {
         $http({
             method : 'PUT',
@@ -66,6 +61,7 @@ app.controller('StoreController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA KHO
     $scope.deleteStore = function () {
         $http({
             method : 'DELETE',

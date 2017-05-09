@@ -3,37 +3,32 @@
  */
 app.controller('CustomerController', function($scope, $http, API, $interval) {
 
-    // Danh sách huyện, thành phố
-    $http.get(API + 'district').then(function (response) {
-        $scope.districts = response.data;
-    });
-
-    // Danh sách tỉnh
-    $http.get(API + 'province').then(function (response) {
-        $scope.provinces = response.data;
-    });
-
-    /**
-     * Load danh sách danh mục khách hàng
-     */
+    // DANH SÁCH KHÁCH HÀNG
     $scope.loadCustomer = function () {
+        // DANH SÁCH NHÓM KHÁCH HÀNG
+        $http.get(API + 'customerGroup').then(function (response) {
+            $scope.customerGroups = response.data;
+        });
+
+        // Danh sách huyện, thành phố
+        $http.get(API + 'district').then(function (response) {
+            $scope.districts = response.data;
+        });
+
+        // Danh sách tỉnh
+        $http.get(API + 'province').then(function (response) {
+            $scope.provinces = response.data;
+        });
+
         $http.get(API + 'customer').then(function (response) {
             $scope.customers = response.data;
         });
     };
     $scope.loadCustomer();
-    $interval($scope.loadCustomer, 3000);
+    $interval($scope.loadCustomer, 5000);
 
-    /**
-     * Lấy danh sách nhóm khách hàng
-     */
-    $http.get(API + 'customerGroup').then(function (response) {
-        $scope.customerGroups = response.data;
-    });
 
-    /**
-     * CRUD khách hàng
-     */
+    // TẠO KHÁCH HÀNG MỚI
     $scope.createCustomer = function () {
         $http({
             method : 'POST',
@@ -52,12 +47,14 @@ app.controller('CustomerController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM KHÁCH HÀNG
     $scope.readCustomer = function (customer) {
         $http.get(API + 'customer/' + customer.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA THÔNG TIN KHÁCH HÀNG
     $scope.updateCustomer = function () {
         $http({
             method : 'PUT',
@@ -76,6 +73,7 @@ app.controller('CustomerController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA KHÁCH HÀNG
     $scope.deleteCustomer = function () {
         $http({
             method : 'DELETE',

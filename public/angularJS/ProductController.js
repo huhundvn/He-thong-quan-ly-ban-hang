@@ -4,38 +4,35 @@
 
 app.controller('ProductController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'category').then(function (response) {
-        $scope.categorys = response.data;
-    }); // Load nhóm sản phẩm
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    }); // Load đơn vị tính
-
-    $http.get(API + 'manufacturer').then(function (response) {
-        $scope.manufacturers = response.data;
-    }); // Load nhà sản xuất
-
-    $http.get(API + 'attribute').then(function (response) {
-        $scope.attributes = response.data;
-    }); // Load thuộc tính sản phẩm
-
     // Load danh sách sản phẩm
     $scope.loadProduct = function () {
+        $http.get(API + 'category').then(function (response) {
+            $scope.categorys = response.data;
+        }); // Load nhóm sản phẩm
+
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        }); // Load đơn vị tính
+
+        $http.get(API + 'manufacturer').then(function (response) {
+            $scope.manufacturers = response.data;
+        }); // Load nhà sản xuất
+
+        $http.get(API + 'attribute').then(function (response) {
+            $scope.attributes = response.data;
+        }); // Load thuộc tính sản phẩm
+
         $http.get(API + 'product').then(function (response) {
             $scope.products = response.data;
         });
     };
     $scope.loadProduct();
-    $interval($scope.loadProduct, 3000);
+    $interval($scope.loadProduct, 5000);
 
-    /**
-     * CRUD sản phẩm
-     */
     $scope.data = []; // Lưu danh sách thuộc tính tạm thời
     $scope.image = []; // Lưu danh sách hình ảnh tạm thời
 
-    // Thêm thuộc tính cho sản phẩm
+    // THÊM THUỘC TÍNH SẢN PHẨM
     $scope.createAttributeForProduct = function (item) {
         $http({
             method : 'POST',
@@ -50,7 +47,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Thêm hình ảnh cho sản phẩm
+    // THÊM HÌNH ẢNH SẢN PHẨM
     $scope.createImageForProduct = function (item) {
         $http({
             method : 'POST',
@@ -65,7 +62,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Up ảnh lên server Flickr
+    // UP ẢNH LÊN FLICKR
     $scope.uploadImage = function () {
         var myDropzone = Dropzone.forElement("#my_dropzone");
         var myDropzone02 = Dropzone.forElement("#my_dropzone02");
@@ -93,7 +90,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Tạo sản phẩm mới
+    // TẠO SẢN PHẨM MỚI
     $scope.createProduct = function () {
         if( CKEDITOR.instances.newDescription.getData() )
             $scope.new.description = CKEDITOR.instances.newDescription.getData();
@@ -129,7 +126,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Xem thông tin sản phẩm
+    // XEM THÔNG TIN SẢN PHẨM
     $scope.readProduct = function (product) {
         $http.get(API + 'product/' + product.id).then(function (response) {
             $scope.selected = response.data;
@@ -138,7 +135,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Thêm thuộc tính vào danh sách
+    // THÊM THUỘC TÍNH VÀO DANH SÁCH
     $scope.addAttribute = function(selected) {
         if($scope.data.indexOf(selected) == -1) {
             $scope.data.push(selected);
@@ -147,14 +144,14 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
             toastr.info('Thuộc tính đã có trong danh sách.');
     };
 
-    // Xóa thuộc tính khỏi danh sách
+    // XÓA THUỘC TÍNH KHỎI DANH SÁCH
     $scope.deleteAttribute = function(selected) {
         $scope.data.splice($scope.data.indexOf(selected), 1);
         toastr.info('Đã xóa 1 thuộc tính khỏi danh sách.');
 
     };
 
-    // Xóa thuộc tính hiện có của sản phẩm
+    // XÓA THUỘC TÍNH SẢN PHẨM
     $scope.deleteProductAttribute = function(selected) {
         $http({
             method : 'DELETE',
@@ -170,7 +167,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Xóa hình ảnh của sản phẩm
+    // XÓA HÌNH ẢNH SẢN PHẨM
     $scope.deleteProductImage = function(selected) {
         $http({
             method : 'DELETE',
@@ -186,7 +183,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Chỉnh sửa thông tin sản phẩm
+    // CHỈNH SỬA THÔNG TIN SẢN PHẨM
     $scope.updateProduct = function () {
         for (var i=0; i<$scope.data.length; i++) {
             $scope.data[i].product_id = $scope.selected.id;
@@ -220,7 +217,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-    // Xóa sản phẩm
+    // XÓA SẢN PHẨM
     $scope.deleteProduct = function () {
         $http({
             method : 'DELETE',

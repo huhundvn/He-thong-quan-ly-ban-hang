@@ -12,13 +12,10 @@ app.controller('PositionController', function($scope, $http, API, $interval) {
     $scope.loadPosition();
     $interval($scope.loadPosition, 3000);
 
-    // CRUD chức vụ
     $scope.new = {};
     $scope.new.role = [];
-    // $scope.selected = {};
-    // $scope.selected.role = [];
 
-    // Thêm quyền
+    // THÊM QUYỀN
     $scope.add = function(role) {
         if($scope.new.role.indexOf(role) != -1) {
             $scope.new.role.splice($scope.new.role.indexOf(role), 1);
@@ -34,6 +31,7 @@ app.controller('PositionController', function($scope, $http, API, $interval) {
         }
     }
 
+    // TẠO CHỨC VỤ MỚI
     $scope.createPosition = function () {
         $http({
             method : 'POST',
@@ -52,12 +50,14 @@ app.controller('PositionController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM THÔNG TIN CHỨC VỤ
     $scope.readPosition = function (position) {
         $http.get(API + 'position/' + position.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA CHỨC VỤ
     $scope.updatePosition = function () {
         $http({
             method : 'PUT',
@@ -76,6 +76,7 @@ app.controller('PositionController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA CHỨC VỤ
     $scope.deletePosition = function () {
         $http({
             method : 'DELETE',

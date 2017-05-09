@@ -3,28 +3,28 @@
  */
 app.controller('StoreOutputController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'storage').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    $http.get(API + 'product').then(function (response) {
-        $scope.products = response.data;
-    });
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    });
-
-    $http.get(API + 'order').then(function (response) {
-        $scope.orders = response.data;
-    });
-
-    $http.get(API + 'product-in-store').then(function (response) {
-        $scope.productInStores = response.data;
-    });
-
     // LẤY THÔNG TIN ĐƠN HÀNG
     $scope.loadOrder = function(id) {
+        $http.get(API + 'storage').then(function (response) {
+            $scope.stores = response.data;
+        });
+
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        });
+
+        $http.get(API + 'order').then(function (response) {
+            $scope.orders = response.data;
+        });
+
+        $http.get(API + 'product-in-store').then(function (response) {
+            $scope.productInStores = response.data;
+        });
+
         $http.get(API + 'order/' + id).then(function (response) {
             $scope.selectedOrder = response.data;
         });
@@ -33,8 +33,9 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
     $scope.loadOrder();
+    $interval($scope.loadOrder, 5000);
 
-    // Thêm sản phẩm vào danh sách
+    // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {
         for(var i=0; i<$scope.data.length; i++) {
             if(($scope.data[i].product_id == selected.product_id) && (selected.store_id==$scope.new.store_id)) {
@@ -46,7 +47,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         };
     };
 
-    // Xóa sản phẩm khỏi danh sách
+    // XÓA SẢN PHẨM KHỎI DANH SÁCH
     $scope.delete = function(selected) {
         console.log(selected);
         console.log($scope.data);
@@ -60,16 +61,16 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         };
     };
 
-    //Load danh sách xuất kho
+    // DANH SÁCH XUẤT KHO
     $scope.loadStoreOutput = function () {
         $http.get(API + 'store-output').then(function (response) {
             $scope.storeOutputs = response.data;
         });
     };
     $scope.loadStoreOutput();
-    $interval($scope.loadStoreOutput, 3000);
+    $interval($scope.loadStoreOutput, 5000);
 
-    // Thêm chi tiết xuất kho
+    // THÊM CHI TIẾT XUẤT KHO
     $scope.createDetailStoreOutput = function (item) {
         $http({
             method : 'POST',
@@ -84,7 +85,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // Tạo mới xuất kho
+    // TẠO XUẤT KHO MỚI
     $scope.createStoreOutput = function () {
         if($scope.data.length <= 0)
             toastr.error('Vui lòng chọn đơn hàng');
@@ -125,7 +126,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         }
     };
 
-    // Xem danh sách xuất kho
+    // XEM XUẤT KHO
     $scope.readStoreOutput = function (storeOutput) {
         $http.get(API + 'store-output/' + storeOutput.id).then(function (response) {
             $scope.selected = response.data;
@@ -135,7 +136,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // Xóa xuất kho
+    // XÓA XUẤT KHO
     $scope.deleteStoreOutput = function () {
         $http({
             method : 'DELETE',
@@ -152,7 +153,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
 
-    // In biểu mẫu
+    // IN
     $scope.print = function () {
         window.print();
     }

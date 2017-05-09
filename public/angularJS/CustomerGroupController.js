@@ -3,9 +3,7 @@
  */
 app.controller('CustomerGroupController', function($scope, $http, API, $interval) {
 
-    /**
-     * Load danh sách danh sách nhóm khách hàng
-     */
+    // DANH SÁCH NHÓM KHÁCH HÀNG
     $scope.loadCustomerGroup = function () {
         $http.get(API + 'customerGroup').then(function (response) {
             $scope.customerGroups = response.data;
@@ -14,9 +12,7 @@ app.controller('CustomerGroupController', function($scope, $http, API, $interval
     $scope.loadCustomerGroup();
     $interval($scope.loadCustomerGroup, 3000);
 
-    /**
-     * CRUD nhóm khách hàng
-     */
+    // TẠO NHÓM KHÁCH HÀNG MỚI
     $scope.createCustomerGroup = function () {
         $http({
             method : 'POST',
@@ -35,12 +31,14 @@ app.controller('CustomerGroupController', function($scope, $http, API, $interval
         });
     };
 
+    // XEM THÔNG TIN NHÓM KHÁCH HÀNG
     $scope.readCustomerGroup = function (customerGroup) {
         $http.get(API + 'customerGroup/' + customerGroup.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // SỬA THÔNG TIN NHÓM KHÁCH HÀNG
     $scope.updateCustomerGroup = function () {
         $http({
             method : 'PUT',
@@ -59,6 +57,7 @@ app.controller('CustomerGroupController', function($scope, $http, API, $interval
         });
     };
 
+    // XÓA NHÓM KHÁCH HÀNG
     $scope.deleteCustomerGroup = function () {
         $http({
             method : 'DELETE',

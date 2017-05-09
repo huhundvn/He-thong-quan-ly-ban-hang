@@ -3,9 +3,7 @@
  */
 app.controller('CategoryController', function($scope, $http, API, $interval) {
 
-    /**
-     * Load danh sách danh mục sản phẩm
-     */
+    // DANH SÁCH NHÓM SẢN PHẨM
     $scope.loadCategory = function () {
         $http.get(API + 'category').then(function (response) {
             $scope.categorys = response.data;
@@ -14,9 +12,7 @@ app.controller('CategoryController', function($scope, $http, API, $interval) {
     $scope.loadCategory();
     $interval($scope.loadCategory, 3000);
 
-    /**
-     * CRUD nhóm sản phẩm
-     */
+    // TẠO NHÓM SẢN PHẨM 
     $scope.createCategory = function () {
         $http({
             method : 'POST',
@@ -35,12 +31,14 @@ app.controller('CategoryController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM NHÓM SẢN PHẨM
     $scope.readCategory = function (category) {
         $http.get(API + 'category/' + category.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA NHÓM SẢN PHẨM
     $scope.updateCategory = function () {
         $http({
             method : 'PUT',
@@ -59,6 +57,7 @@ app.controller('CategoryController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA NHÓM SẢN PHẨM
     $scope.deleteCategory = function () {
         $http({
             method : 'DELETE',

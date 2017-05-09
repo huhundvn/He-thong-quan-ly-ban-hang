@@ -4,44 +4,40 @@
 
 app.controller('ProductInStoreController', function($scope, $http, API, $interval) {
 
-    $http.get(API + 'category').then(function (response) {
-        $scope.categorys = response.data;
-    });
-
-    $http.get(API + 'unit').then(function (response) {
-        $scope.units = response.data;
-    });
-
-    $http.get(API + 'manufacturer').then(function (response) {
-        $scope.manufacturers = response.data;
-    });
-
-    $http.get(API + 'supplier').then(function (response) {
-        $scope.suppliers = response.data;
-    });
-
-    $http.get(API + 'attribute').then(function (response) {
-        $scope.attributes = response.data;
-    });
-
-    $http.get(API + 'storage').then(function (response) {
-        $scope.stores = response.data;
-    });
-
-    /**
-     * Load danh sách sản phẩm trong kho
-     */
+    // DANH SÁCH SẢN PHẨM TRONG KHO
     $scope.loadProductInStore = function () {
+        $http.get(API + 'category').then(function (response) {
+            $scope.categorys = response.data;
+        });
+
+        $http.get(API + 'unit').then(function (response) {
+            $scope.units = response.data;
+        });
+
+        $http.get(API + 'manufacturer').then(function (response) {
+            $scope.manufacturers = response.data;
+        });
+
+        $http.get(API + 'supplier').then(function (response) {
+            $scope.suppliers = response.data;
+        });
+
+        $http.get(API + 'attribute').then(function (response) {
+            $scope.attributes = response.data;
+        });
+
+        $http.get(API + 'storage').then(function (response) {
+            $scope.stores = response.data;
+        });
+
         $http.get(API + 'product-in-store').then(function (response) {
             $scope.productInStores = response.data;
         });
     };
     $scope.loadProductInStore();
-    $interval($scope.loadProductInStore, 3000);
+    $interval($scope.loadProductInStore, 5000);
 
-    /**
-     * CRUD sản phẩm
-     */
+    // XEM SẢN PHẨM
     $scope.readProduct = function (product) {
         $http.get(API + 'product/' + product.id).then(function (response) {
             $scope.selected = response.data;

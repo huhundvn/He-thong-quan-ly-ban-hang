@@ -3,9 +3,7 @@
  */
 app.controller('AttributeController', function($scope, $http, API, $interval) {
 
-    /**
-     * Load danh sách thuộc tính
-     */
+    // DANH SÁCH THUỘC TÍNH
     $scope.loadAttribute = function () {
         $http.get(API + 'attribute').then(function (response) {
             $scope.attributes = response.data;
@@ -14,9 +12,7 @@ app.controller('AttributeController', function($scope, $http, API, $interval) {
     $scope.loadAttribute();
     $interval($scope.loadAttribute, 3000);
 
-    /**
-     * CRUD thuộc tính
-     */
+    // TẠO THUỘC TÍNH MỚI
     $scope.createAttribute = function () {
         $http({
             method : 'POST',
@@ -35,12 +31,14 @@ app.controller('AttributeController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XEM THUỘC TÍNH
     $scope.readAttribute = function (attribute) {
         $http.get(API + 'attribute/' + attribute.id).then(function (response) {
             $scope.selected = response.data;
         });
     };
 
+    // CHỈNH SỬA THUỘC TÍNH
     $scope.updateAttribute = function () {
         $http({
             method : 'PUT',
@@ -59,6 +57,7 @@ app.controller('AttributeController', function($scope, $http, API, $interval) {
         });
     };
 
+    // XÓA THUỘC TÍNH
     $scope.deleteAttribute = function () {
         $http({
             method : 'DELETE',
@@ -100,4 +99,3 @@ $('#readAttribute').on('show.bs.modal', function (event) {
         modal.find('#submit').show();
     });
 });
-
