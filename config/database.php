@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => '43.239.223.142',
-            'port' => '8888',
-            'database' => 'larose-test',
-            'username' => 'root',
-            'password' => '123456',
+            'host' => env('DB_HOST', '43.239.223.142'),
+            'port' => env('DB_PORT', '8888'),
+            'database' => env('DB_DATABASE', 'larose'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', '12345'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
