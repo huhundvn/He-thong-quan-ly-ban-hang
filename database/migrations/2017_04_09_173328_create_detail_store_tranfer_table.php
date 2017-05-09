@@ -20,6 +20,7 @@ class CreateDetailStoreTranferTable extends Migration
 		    $table->string('expried_date') -> nullable();
 		    $table->integer('quantity_tranfer') -> nullable();
 		    $table->integer('price_input') -> nullable();
+		    $table->integer('supplier_id') -> nullable();
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
