@@ -130,7 +130,7 @@ class InputStoreController extends Controller
 	{
 		$selected = InputStore::find($id);
 		// Nhập hàng vao kho, cập nhật số lượng
-		if($status==3 && ($selected -> status) !=3) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
+		if($status==4 && ($selected -> status) !=4) { //Nếu nhập hàng cập nhật số lượng trên toàn hệ thống và các kho hàng
 			$rows = InputStore::join('detail_input_store', 'detail_input_store.input_store_id', '=', 'input_store.id')
 				-> where('input_store.id', '=', $id)
 				-> get(); //Lây chi tiết danh sách các mặt hàng cần nhập

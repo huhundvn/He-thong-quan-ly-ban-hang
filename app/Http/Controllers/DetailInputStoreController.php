@@ -11,12 +11,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DetailInputStoreController extends Controller
 {
-	// API lấy chi tiết đơn hàng
-	public function index()
-	{
-		return DetailInputStore::all();
-	}
-
 	// API tạo chi tiết đơn hàng
 	public function store(Request $request)
 	{
@@ -41,19 +35,6 @@ class DetailInputStoreController extends Controller
 			$new -> save();
 		}
 		return response()->json(['success' => trans('message.create_success')]);
-	}
-
-	// API xem chi tiết đơn hàng
-	public function show($id)
-	{
-		return DetailInputStore::find($id);
-	}
-
-	// API xóa thông tin đơn hàng
-	public function destroy($id)
-	{
-		$deleted = DetailInputStore::find($id) -> delete();
-		return response()->json(['success' => trans('message.delete_success')]);
 	}
 
 	// Xem chi tiết đơn hàng

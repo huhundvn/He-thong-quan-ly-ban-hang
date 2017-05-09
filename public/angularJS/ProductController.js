@@ -65,7 +65,6 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         });
     };
 
-
     // Up ảnh lên server Flickr
     $scope.uploadImage = function () {
         var myDropzone = Dropzone.forElement("#my_dropzone");
@@ -79,6 +78,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
             else {
                 $scope.tmp.image = response;
                 $scope.image.push($scope.tmp);
+                $scope.tmp = {};
             }
         });
         myDropzone02.on("success", function(file, response) {
@@ -88,6 +88,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
             else {
                 $scope.tmp.image = response;
                 $scope.image.push($scope.tmp);
+                $scope.tmp = {};
             }
         });
     };
@@ -121,6 +122,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
                 $scope.loadProduct();
                 $scope.data = [];
                 $scope.image = [];
+                $scope.new = {};
             }
             else
                 toastr.error(response.data[0]);
@@ -192,7 +194,6 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         }
         for (var j=0; j<$scope.image.length; j++) {
             $scope.image[j].product_id = $scope.selected.id;
-            console.log($scope.image[j]);
             $scope.createImageForProduct($scope.image[j]);
         }
         if( CKEDITOR.instances.description.getData() )
@@ -250,6 +251,14 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
 $('#createProduct').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
     var myDropzone = Dropzone.forElement(".dropzone");
+    myDropzone.removeAllFiles();
+    CKEDITOR.instances.newDescription.setData('');
+    CKEDITOR.instances.newUserGuide.setData('');
+});
+
+$('#readProduct').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+    var myDropzone = Dropzone.forElement("#my_dropzone02");
     myDropzone.removeAllFiles();
     CKEDITOR.instances.newDescription.setData('');
     CKEDITOR.instances.newUserGuide.setData('');
