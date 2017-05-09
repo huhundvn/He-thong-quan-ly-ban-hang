@@ -20,21 +20,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.1.1/angular-chart.min.js"></script>
-    <style>
-        .hero-image {
-            /* The image used */
-            background-image: url( '{{asset('bg.jpg')}}' );
-
-            /* Set a specific height */
-            height: 100%;
-
-            /* Position and center the image to scale nicely on all screens */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            position: relative;
-        }
-    </style>
 </head>
 
 <body ng-cloak>
