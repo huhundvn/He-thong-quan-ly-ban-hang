@@ -18,7 +18,6 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
         });
 
     $scope.loadRole = function() {
-
         // QUYỀN NGƯỜI DÙNG
         $http.get(API + 'get-role').then(function (response) {
             $scope.roles = response.data;

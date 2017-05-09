@@ -50,8 +50,8 @@
             <th> Ngày bắt đầu </th>
             <th> Ngày kết thúc </th>
             <th> Trạng thái </th>
-            <th> Duyệt </th>
-            <th> Xóa </th>
+            <th ng-show="roles.indexOf('confirm-price-output') != -1"> Duyệt </th>
+            <th ng-show="roles.indexOf('confirm-price-output') != -1"> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="priceOutputs.length > 0" class="item"
@@ -65,12 +65,12 @@
                     <p ng-show="1==priceOutput.status"> Chờ duyệt </p>
                     <p ng-show="2==priceOutput.status"> Áp dụng </p>
                 </td>
-                <td>
+                <td ng-show="roles.indexOf('confirm-price-output') != -1">
                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changePriceOutput">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
-                <td>
+                <td ng-show="roles.indexOf('confirm-price-output') != -1">
                     <button class="btn btn-sm btn-danger btn-sm" ng-show="0==priceOutput.status"
                             data-toggle="modal" data-target="#deletePriceOutput">
                         <span class="glyphicon glyphicon-trash"></span>

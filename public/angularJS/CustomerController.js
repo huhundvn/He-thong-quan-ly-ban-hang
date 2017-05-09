@@ -11,14 +11,14 @@ app.controller('CustomerController', function($scope, $http, API, $interval) {
         });
 
         // Danh sách huyện, thành phố
-        $http.get(API + 'district').then(function (response) {
-            $scope.districts = response.data;
-        });
+        // $http.get(API + 'district').then(function (response) {
+        //     $scope.districts = response.data;
+        // });
 
         // Danh sách tỉnh
-        $http.get(API + 'province').then(function (response) {
-            $scope.provinces = response.data;
-        });
+        // $http.get(API + 'province').then(function (response) {
+        //     $scope.provinces = response.data;
+        // });
 
         $http.get(API + 'customer').then(function (response) {
             $scope.customers = response.data;

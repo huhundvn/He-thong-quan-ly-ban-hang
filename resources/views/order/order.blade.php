@@ -55,8 +55,8 @@
             <th> Đã thanh toán (VNĐ) </th>
             <th> Còn nợ (VNĐ) </th>
             <th> Trạng thái </th>
-            <th> Duyệt </th>
-            <th> Xóa </th>
+            <th ng-show="roles.indexOf('confirm-order') != -1"> Duyệt </th>
+            <th ng-show="roles.indexOf('confirm-order') != -1"> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="orders.length > 0" class="item"
@@ -75,12 +75,12 @@
                     <p ng-show="3==order.status"> Đã giao hàng </p>
                     <p ng-show="4==order.status"> Đã thanh toán </p>
                 </td>
-                <td>
+                <td ng-show="roles.indexOf('confirm-order') != -1">
                     <button ng-show="4!=order.status" class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
-                <td>
+                <td ng-show="roles.indexOf('confirm-order') != -1">
                     <button ng-show="0==order.status||4==order.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>

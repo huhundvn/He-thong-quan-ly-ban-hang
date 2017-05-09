@@ -26,6 +26,10 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
 
     // DANH SÁCH ĐƠN HÀNG
     $scope.loadOrder = function () {
+        $http.get(API + 'get-role').then(function (response) {
+            $scope.roles = response.data;
+        });
+        
         $http.get(API + 'customer').then(function (response) {
             $scope.customers = response.data;
         });

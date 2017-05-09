@@ -17,6 +17,7 @@ use App\Http\Middleware\CheckAccountRole;
 use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\CheckPositionRole;
 use App\Http\Middleware\CheckCustomerRole;
+use App\Http\Middleware\CheckStoreOutputRole;
 
 // XÁC THỰC NGƯỜI DÙNG
 Auth::routes();
@@ -197,8 +198,8 @@ Route::group(['middleware' => 'auth'], function (){
 	Route::get('/create-store-tranfer', 'StoreTranferController@createStoreTranfer') -> name('createStoreTranfer') -> middleware(CheckStoreTranferRole::class);
 
 	//XUẤT KHO
-	Route::get('/list-store-output', 'StoreOutputController@listStoreOutput') -> name('list-store-output') -> middleware(CheckStoreTranferRole::class);
-	Route::get('/create-store-output', 'StoreOutputController@createStoreOutput') -> name('createStoreOutput') -> middleware(CheckStoreTranferRole::class);
+	Route::get('/list-store-output', 'StoreOutputController@listStoreOutput') -> name('list-store-output') -> middleware(CheckStoreOutputRole::class);
+	Route::get('/create-store-output', 'StoreOutputController@createStoreOutput') -> name('createStoreOutput') -> middleware(CheckStoreOutputRole::class);
 
 	//PHIẾU THU, CHI
 	Route::get('/list-voucher', 'VoucherController@listVoucher') -> name('list-voucher') -> middleware(CheckVoucherRole::class);

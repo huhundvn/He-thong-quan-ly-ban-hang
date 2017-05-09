@@ -5,6 +5,10 @@ app.controller('PriceInputController', function($scope, $http, API, $interval) {
 
     //DANH SÁCH BẢNG GIÁ
     $scope.loadPriceInput = function () {
+        $http.get(API + 'get-role').then(function (response) {
+            $scope.roles = response.data;
+        });
+        
         // Lấy danh sách sản phẩm
         $http.get(API + 'product').then(function (response) {
             $scope.products = response.data;
