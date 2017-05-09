@@ -18,7 +18,7 @@ class CreateProductInStoreTable extends Migration
 		    $table->integer('product_id') -> nullable();
 		    $table->integer('store_id') -> nullable();
 		    $table->integer('supplier_id') -> nullable();
-		    $table->integer('price') -> nullable();
+		    $table->integer('price_input') -> nullable();
 		    $table->integer('quantity') -> nullable();
 		    $table->string('expried_date') -> nullable();
 		    $table->timestamps();

@@ -80,7 +80,7 @@
                     </button>
                 </td>
                 <td>
-                    <button ng-show="0==inputStore.status||4==inputStore.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore"">
+                    <button ng-show="0==inputStore.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore"">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
