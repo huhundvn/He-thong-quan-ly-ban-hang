@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'thai8763@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'LaRose Shop'),
+        'address' => 'thai8763@gmail.com',
+        'name' => 'Quản lý LaRose Shop',
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'thai8763@gmail.com',
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => 'pjxmcrhmqacxryxk',
 
     /*
     |--------------------------------------------------------------------------
