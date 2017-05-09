@@ -17,13 +17,21 @@ class CreateInputStoreTable extends Migration
 		    $table->increments('id');
 		    $table->string('name') -> nullable();
 		    $table->string('input_date') -> nullable();
+
 		    $table->integer('created_by') -> nullable();
 		    $table->integer('store_id') -> nullable();
+
 		    $table->integer('account_id') -> nullable();
 		    $table->integer('supplier_id') -> nullable();
+
 		    $table->integer('total') -> nullable();
 		    $table->integer('total_paid') -> nullable();
+
+		    $table->integer('tax') -> nullable();
+		    $table->integer('discount') -> nullable();
+
 		    $table->tinyInteger('status') -> nullable();
+
 		    $table->timestamps();
 		    $table->softDeletes();
 	    });
