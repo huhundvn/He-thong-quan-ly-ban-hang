@@ -14,10 +14,10 @@
     <div class="col-lg-3">
         <div class="panel panel-default">
             <div class="panel-heading w3-blue-grey">
-                Thu / chi cửa hàng
+                Tổng thu hôm nay
             </div>
             <div class="panel-body">
-                <h3 class="w3-text-blue"> 100.000.000 </h3>
+                <h3 class="w3-text-blue"> @{{ today_voucher[0] | number:0 }} VNĐ </h3>
             </div>
             <div class="panel-footer"> <a href="{{ route('list-voucher') }}"> Xem thêm... </a> </div>
         </div>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 //MODEL CSDL
 use App\PriceOutput;
@@ -19,6 +20,18 @@ class PriceOutputController extends Controller
 		return PriceOutput::with('detailPriceOutputs')
 			-> with('user')
 			-> with('customer_group')
+			-> get();
+	}
+
+	//API DANH SÁCH BẢNG GIÁ ĐANG ÁP DỤNG
+	public function getActivePriceOutput()
+	{
+		return PriceOutput::with('detailPriceOutputs')
+			-> with('user')
+			-> with('customer_group')
+			-> where('start_date', '<=', Carbon::now())
+			-> where('end_date', '>=', Carbon::now())
+			-> where('status', '=', 2)
 			-> get();
 	}
 

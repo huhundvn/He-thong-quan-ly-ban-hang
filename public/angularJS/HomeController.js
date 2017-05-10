@@ -3,6 +3,10 @@
  */
 app.controller('HomeController', function($scope, $http, API, $interval) {
     // SỐ LƯỢNG CÁC ĐƠN HÀNG HÔM NAY
+        $http.get(API + 'get-today-voucher').then(function (response) {
+            $scope.today_voucher = response.data;
+        });
+
         $http.get(API + 'get-today-order').then(function (response) {
             $scope.today_order = response.data;
         });

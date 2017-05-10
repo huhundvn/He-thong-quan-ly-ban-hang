@@ -91,6 +91,7 @@ app.controller('PriceOutputController', function($scope, $http, API, $interval) 
                             $scope.createDetailPriceOutput($scope.data[i]);
                         }
                         toastr.success('Đã thêm thành công.');
+                        $scope.data = [];
                     } else
                         toastr.error(response.data[0]);
                 });

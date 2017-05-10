@@ -41,7 +41,7 @@
         {{--!DANH SÁCH NHÀ CUNG CẤP!--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-                <th> STT </th>
+                <th> Mã </th>
                 <th> Tên </th>
                 <th> Địa chỉ </th>
                 <th> Số điện thoại </th>
@@ -51,7 +51,7 @@
             </thead>
             <tbody>
             <tr ng-show="suppliers.length > 0" class="item" dir-paginate="supplier in suppliers | filter:term | itemsPerPage: 7" ng-click="readSupplier(supplier)">
-                <td data-toggle="modal" data-target="#readSupplier"> @{{ $index+1 }} </td>
+                <td data-toggle="modal" data-target="#readSupplier"> NCC-@{{ supplier.id }} </td>
                 <td data-toggle="modal" data-target="#readSupplier"> @{{ supplier.name }} </td>
                 <td data-toggle="modal" data-target="#readSupplier"> @{{ supplier.address }}</td>
                 <td data-toggle="modal" data-target="#readSupplier"> @{{ supplier.phone }} </td>

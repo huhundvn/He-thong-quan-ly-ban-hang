@@ -38,7 +38,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
             $scope.customerGroups = response.data;
         });
 
-        $http.get(API + 'price-output').then(function (response) {
+        $http.get(API + 'get-active-price-output').then(function (response) {
             $scope.priceOutputs = response.data;
         });
 

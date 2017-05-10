@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 //MODEL CSDL
 use App\PriceInput;
@@ -16,6 +17,15 @@ class PriceInputController extends Controller
 	public function index()
 	{
 		return PriceInput::all();
+	}
+
+	//API DANH SÁCH BẢNG GIÁ ĐANG ÁP DỤNG
+	public function getActivePriceInput()
+	{
+		return PriceInput::where('start_date', '<=', Carbon::now())
+			-> where('end_date', '>=', Carbon::now())
+			-> where('status', '=', 2)
+			-> get();
 	}
 
 	// API tạo bảng giá mua mới

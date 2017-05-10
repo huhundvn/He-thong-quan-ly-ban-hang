@@ -65,7 +65,7 @@
                 <th> Kho hàng </th>
             </thead>
             <tbody>
-            <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 6" ng-click="readProduct(productInStore)">
+            <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
                 <td data-toggle="modal" data-target="#readProduct"> SP-@{{ productInStore.product_id }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.name }} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.code }}</td>
@@ -98,7 +98,7 @@
         </div>
 
         {{-- !PHÂN TRANG! --}}
-        <div style="margin-left: 40%;">
+        <div style="margin-left: 35%; position: fixed; bottom: 0">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 

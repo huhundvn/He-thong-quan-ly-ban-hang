@@ -33,7 +33,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
     $scope.loadOrder();
-    $interval($scope.loadOrder, 5000);
+    // $interval($scope.loadOrder, 5000);
 
     // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {

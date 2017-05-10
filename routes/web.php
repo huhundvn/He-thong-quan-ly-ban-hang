@@ -26,7 +26,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index') -> name('home');
 
-// WEB SERVICE - CÁC API LẤY DỮ LIỆU SERVER TRẢ VỀ KIỂU JSON
+// WEB SERVICE - API LẤY DỮ LIỆU SERVER TRẢ VỀ KIỂU JSON
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
     
     // NHÂN VIÊN
@@ -62,6 +62,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('account', 'AccountController'); //CRUD tài khoản thanh toán
 	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
+	Route::get('/get-today-voucher', 'VoucherController@getTodayVoucher');
 
 	// NHẬP KHO
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho
@@ -75,12 +76,14 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/confirm-price-output/{price_output_id}/{status}', 'PriceOutputController@confirm'); //duyệt bảng giá
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
+	Route::get('/get-active-price-output', 'PriceOutputController@getActivePriceOutput');
 
 	// BẢNG GIÁ MUA
 	Route::resource('price-input', 'PriceInputController'); //CRUD bảng giá bán nhà cung cấp
 	Route::get('/confirm-price-input/{price_input_id}/{status}', 'PriceInputController@confirm'); //duyệt bảng giá
 	Route::resource('detail-price-input', 'DetailPriceInputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-input/{price_input_id}', 'DetailPriceInputController@getDetail');
+	Route::get('/get-active-price-input', 'PriceInputController@getActivePriceInput');
 
 	// XUẤT KHO
 	Route::resource('store-output', 'StoreOutputController'); //CRUD xuất kho

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 //MODEL CSDL
 use App\Voucher;
@@ -16,6 +18,18 @@ class VoucherController extends Controller
 	public function index()
 	{
 		return Voucher::all();
+	}
+
+	// API lấy tổng thu, chi hôm nay
+	public function getTodayVoucher() {
+		$num = DB::table('voucher')
+			-> where('created_at', '>=', Carbon::yesterday())
+			-> where('created_at', '<=', Carbon::now())
+			-> where('type', 0)
+			-> selectRaw('type, sum(total) as sum')
+			-> groupBy('type')
+			-> pluck('sum');
+		return $num;
 	}
 
 	// API tạo phiếu mới

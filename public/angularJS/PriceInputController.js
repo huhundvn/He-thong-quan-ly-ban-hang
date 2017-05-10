@@ -29,7 +29,7 @@ app.controller('PriceInputController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadPriceInput();
-    $interval($scope.loadPriceInput, 3000);
+    $interval($scope.loadPriceInput, 5000);
 
     $scope.data = [];
 
@@ -90,6 +90,7 @@ app.controller('PriceInputController', function($scope, $http, API, $interval) {
                             $scope.createDetailPriceInput($scope.data[i]);
                         }
                         toastr.success('Đã thêm thành công.');
+                        $scope.data = [];
                     } else
                         toastr.error(response.data[0]);
                 });

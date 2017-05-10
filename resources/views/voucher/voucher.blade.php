@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-4 col-xs-4">
                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createVoucher">
                     Phiếu thu mới </button>
                 <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createPaymentVoucher">
@@ -42,7 +42,7 @@
         @endif
 
         {{-- DANH SÁCH PHIẾU THU/CHI--}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <table class="w3-table table-hover table-bordered w3-centered" >
             <thead class="w3-blue-grey">
             <th> Mã </th>
             <th> Ngày lập </th>
@@ -55,7 +55,7 @@
             </thead>
             <tbody>
             <tr ng-show="vouchers.length > 0" class="item"
-                dir-paginate="voucher in vouchers | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readVoucher(voucher)">
+                dir-paginate="voucher in vouchers | filter:term | filter:term2 | itemsPerPage: 8" ng-click="readVoucher(voucher)">
                 <td data-toggle="modal" data-target="#readVoucher">
                     <p ng-show="0==voucher.type">PT-@{{ voucher.id }}</p>
                     <p ng-show="1==voucher.type">PC-@{{ voucher.id }}</p>
@@ -87,7 +87,7 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 45%">
+        <div style="margin-left: 35%; position: fixed; bottom: 0">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 

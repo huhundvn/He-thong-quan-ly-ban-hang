@@ -55,7 +55,7 @@
             </thead>
             <tbody>
             <tr ng-show="priceOutputs.length > 0" class="item"
-                dir-paginate="priceOutput in priceOutputs | filter:term | filter:term2 | itemsPerPage: 7" ng-click="readPriceOutput(priceOutput)">
+                dir-paginate="priceOutput in priceOutputs | filter:term | filter:term2 | itemsPerPage: 8" ng-click="readPriceOutput(priceOutput)">
                 <td data-toggle="modal" data-target="#readPriceOutput"> BGBH-@{{ priceOutput.id }} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.name }} </td>
                 <td data-toggle="modal" data-target="#readPriceOutput"> @{{ priceOutput.start_date | date: "dd/MM/yyyy"}} </td>
@@ -84,7 +84,7 @@
         </table>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 45%">
+        <div style="margin-left: 35%; position: fixed; bottom: 0">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 

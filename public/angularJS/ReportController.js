@@ -33,7 +33,7 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.data.push(0);
     });
 
-    $scope.labels02 = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', '2010', '2011', '2012'];
+    $scope.labels02 = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
 
     $scope.data02 = [
         [65, 59, 80, 81, 56, 55, 40],

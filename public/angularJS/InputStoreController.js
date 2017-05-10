@@ -25,7 +25,7 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
             $scope.products = response.data;
         });
 
-        $http.get(API + 'price-input').then(function (response) {
+        $http.get(API + 'get-active-price-input').then(function (response) {
             $scope.priceInputs = response.data;
         });
 

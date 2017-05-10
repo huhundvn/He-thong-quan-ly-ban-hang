@@ -41,14 +41,14 @@
         {{--!DANH SÁCH ĐƠN VỊ TÍNH!--}}
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
-                <th> STT </th>
+                <th> Mã </th>
                 <th> Tên </th>
                 <th> Mô tả </th>
                 <th> Xóa </th>
             </thead>
             <tbody>
             <tr ng-show="units.length > 0" class="item" dir-paginate="unit in units | filter:term | itemsPerPage: 7" ng-click="readUnit(unit)">
-                <td> @{{$index + 1}} </td>
+                <td> DVT-@{{unit.id}} </td>
                 <td data-toggle="modal" data-target="#readUnit"> @{{ unit.name }} </td>
                 <td data-toggle="modal" data-target="#readUnit"> @{{ unit.description }}</td>
                 <td>

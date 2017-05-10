@@ -63,8 +63,10 @@
             </tbody>
         </table>
 
-        {{-- PHÂN TRANG --}}
-        <dir-pagination-controls max-size="4"></dir-pagination-controls>
+        {{-- !PHÂN TRANG! --}}
+        <div style="margin-left: 35%; position: fixed; bottom: 0">
+            <dir-pagination-controls max-size="4"> </dir-pagination-controls>
+        </div>
 
         {{-- Xem biểu mẫu --}}
         <div class="modal fade" id="readStoreTranfer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

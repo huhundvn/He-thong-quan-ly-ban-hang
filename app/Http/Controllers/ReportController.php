@@ -30,6 +30,7 @@ class ReportController extends Controller
 		$sum01 = DB::table('voucher')
 			-> selectRaw('type, total, created_at')
 			-> where('type', '=', 0)
+			-> where('created_at', '<=', Carbon::now())
 			-> limit(10)
 			-> get();
 		$sum02 = DB::table('voucher')

@@ -45,10 +45,15 @@ class DetailStoreOutputController extends Controller
 								-> where('expried_date', '=', Input::get('expried_date'))
 								-> first();
 			$productInStore -> quantity -= Input::get('quantity');
-			$productInStore -> save();
+			if($productInStore -> quantity <=0 )
+				$productInStore -> delete();
+			else
+				$productInStore -> save();
 
 			$product = Product::find(Input::get('product_id'));
 			$product -> total_quantity -= Input::get('quantity');
+			if($product -> total_quantity <=0 )
+				$product -> status = 0;
 			$product -> save();
 
 			$new -> save();
