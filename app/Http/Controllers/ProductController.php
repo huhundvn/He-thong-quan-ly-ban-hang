@@ -37,8 +37,6 @@ class ProductController extends Controller
 			'manufacturer_id' => 'required',
 			'unit_id' => 'required',
 			'web_price' => 'required',
-			'min_inventory' => 'required',
-			'max_inventory' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -86,12 +84,9 @@ class ProductController extends Controller
 		// kiểm tra điều kiện
 		$rules = [
 			'name' => 'required|distinct',
-			'code' => 'required|distinct',
 			'category_id' => 'required',
 			'manufacturer_id' => 'required',
 			'unit_id' => 'required',
-			'min_inventory' => 'required',
-			'max_inventory' => 'required',
 		];
 		$validation = Validator::make(Input::all(), $rules);
 
@@ -144,7 +139,6 @@ class ProductController extends Controller
 		// kiểm tra điều kiện nhập
 		$rules = [
 			'ten_san_pham' => 'required|unique:product,name',
-			'ma_vach' => 'unique:product,code',
 			'nha_san_xuat' => 'required',
 			'don_vi_tinh' => 'required',
 		];
