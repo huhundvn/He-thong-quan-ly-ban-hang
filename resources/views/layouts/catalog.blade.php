@@ -99,6 +99,7 @@
             <div id="collapse6" class="panel-collapse collapse">
                 <div class="list-group">
                     <a href="{{ route('top-product') }}" class="list-group-item"> Sản phẩm bán chạy </a>
+                    <a href="{{ route('top-user') }}" class="list-group-item"> Nhân viên bán chạy </a>
                     <a href="{{ route('report-revenue') }}" class="list-group-item"> Doanh thu bán hàng </a>
                     <a href="{{ route('report-input-store') }}" class="list-group-item"> Bảng kê nhập kho </a>
                     <a href="{{ route('report-product-in-store') }}" class="list-group-item"> Bảng kê tồn kho </a>
@@ -118,6 +119,7 @@
                 <div class="list-group">
                     <a ng-show="roles.indexOf('customer') != -1" href="{{route('list-customer')}}" class="list-group-item"> Danh sách khách hàng </a>
                     <a ng-show="roles.indexOf('customer') != -1" href="{{route('list-customer-group')}}" class="list-group-item"> Nhóm khách hàng </a>
+                    <a ng-show="roles.indexOf('customer') != -1" onclick="window.open('https://dashboard.tawk.to/#/dashboard')" class="list-group-item"> Tư vấn khách hàng </a>
                 </div>
             </div>
         </div>

@@ -26,6 +26,17 @@ class ReportController extends Controller
 		return $topProducts;
 	}
 
+	public function getTopUser() {
+		$topUsers = DB::table('order')
+			// -> where('status', '=', 4)
+			-> selectRaw('created_by, sum(total_paid) as sum')
+			-> groupBy('created_by')
+			-> orderBy('sum', 'desc')
+			-> limit(10)
+			-> get();
+		return $topUsers;
+	}
+
 	public function getReportRevenue() {
 		$sum01 = DB::table('voucher')
 			-> selectRaw('type, total, created_at')
@@ -92,6 +103,10 @@ class ReportController extends Controller
 
     public function productReport() {
     	return view('report.product');
+    }
+
+    public function userReport() {
+    	return view('report.report-user');
     }
 
 	public function revenueReport() {

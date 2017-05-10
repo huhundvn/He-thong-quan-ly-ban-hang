@@ -33,6 +33,20 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.data.push(0);
     });
 
+    // LẤY DANH SÁCH 10 nhân viên BÁN CHẠY
+    $http.get(API + 'top-user').then(function (response) {
+        $scope.labels03 = [];
+        $scope.data03 = [];
+        $scope.series03 = ['Tổng tiền hóa đơn'];
+        for (var i = 0; i < response.data.length; i++) {
+            $http.get(API + 'user/' + response.data[i].created_by).then(function (response02) {
+                $scope.labels03.push(response02.data.name);
+            });
+            $scope.data03.push(response.data[i].sum);
+        }
+        $scope.data03.push(0);
+    });
+
     $scope.labels02 = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
 
     $scope.data02 = [

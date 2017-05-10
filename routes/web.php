@@ -112,6 +112,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 
 	// API BÁO CÁO
 	Route::get('/top-product', 'ReportController@getTopProduct');
+	Route::get('/top-user', 'ReportController@getTopUser');
 	Route::get('/report-revenue', 'ReportController@getReportRevenue');
 	Route::post('/report-input-store', 'ReportController@getReportInputStore');
 	Route::post('/report-product-in-store', 'ReportController@getReportProductInStore');
@@ -223,6 +224,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 	// BÁO CÁO
 	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');
+	Route::get('/top-user', 'ReportController@userReport') -> name('top-user');
 	Route::get('/report-revenue', 'ReportController@revenueReport') -> name('report-revenue');
 	Route::get('/report-input-store', 'ReportController@inputStoreReport') -> name('report-input-store');
 	Route::get('/report-product-in-store', 'ReportController@productInStoreReport') -> name('report-product-in-store');

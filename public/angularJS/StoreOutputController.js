@@ -49,8 +49,6 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
 
     // XÓA SẢN PHẨM KHỎI DANH SÁCH
     $scope.delete = function(selected) {
-        console.log(selected);
-        console.log($scope.data);
         for(var i=0; i<$scope.data.length; i++) {
             if($scope.data[i].product_id == selected.product_id) {
                 $scope.data[i].quantity_in_store = 0;
@@ -68,7 +66,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
         });
     };
     $scope.loadStoreOutput();
-    $interval($scope.loadStoreOutput, 5000);
+    // $interval($scope.loadStoreOutput, 5000);
 
     // THÊM CHI TIẾT XUẤT KHO
     $scope.createDetailStoreOutput = function (item) {
