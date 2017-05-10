@@ -2,6 +2,12 @@
  * Created by Good on 4/29/2017.
  */
 app.controller('HomeController', function($scope, $http, API, $interval) {
+
+    $scope.today_voucher = 0;
+    $scope.today_order = 0;
+    $scope.sum_customer = 0;
+    $scope.sum_user = 0;
+     
     // SỐ LƯỢNG CÁC ĐƠN HÀNG HÔM NAY
         $http.get(API + 'get-today-voucher').then(function (response) {
             $scope.today_voucher = response.data;
