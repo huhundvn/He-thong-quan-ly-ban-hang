@@ -51,7 +51,7 @@
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> Mã đơn  </th>
-            <th> Ngày tạo </th>
+            <th> Ngày chuyển </th>
             <th> Tạo bởi </th>
             <th> Kho chuyển </th>
             <th> Kho nhận </th>
@@ -65,7 +65,7 @@
                 dir-paginate="storeTranfer in storeTranfers | filter:term | filter:term2 | filter:term3 | itemsPerPage: 8"
                 ng-click="readStoreTranfer(storeTranfer)">
                 <td data-toggle="modal" data-target="#readStoreTranfer"> CK-@{{ storeTranfer.id }} </td>
-                <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.created_at }} </td>
+                <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.updated_at }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeTranfer.user.name }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer" ng-repeat="store in stores" ng-show="store.id==storeTranfer.from_store_id">
                     @{{ store.name }} </td>
@@ -84,7 +84,7 @@
                     </button>
                 </td>
                 <td>
-                    <button ng-show="0==storeTranfer.status || 3==storeTranfer.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
+                    <button ng-show="0==storeTranfer.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
                     <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
@@ -162,6 +162,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h1></h1>
+                                    Ngày chuyển: @{{ selected.updated_at }} <br/>
                                     Lý do chuyển: @{{ selected.reason }}
                                     <h1></h1>
                                 </div>

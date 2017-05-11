@@ -29,7 +29,7 @@
             </div>
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="info.order_id" class="form-control input-sm" ng-change="loadOrder(info.order_id)">
-                    <option value="" selected> -- Đơn hàng -- </option>
+                    <option value="" selected> -- Đơn hàng cần xuất -- </option>
                     <option ng-repeat="order in orders" value="@{{order.id}}"> DH-@{{order.id}} </option>
                 </select>
             </div>

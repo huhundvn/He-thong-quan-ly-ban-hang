@@ -70,7 +70,7 @@
                 <th> Tên </th>
                 <th> Mã vạch </th>
                 <th> Đơn vị tính </th>
-                <th> Số lượng </th>
+                <th> Tổng số lượng </th>
                 <th> Tình trạng </th>
                 <th> Xóa </th>
             </thead>
@@ -167,35 +167,47 @@
                                     <h3> </h3>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Nhóm sản phẩm </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select ng-model="new.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory"> Thêm </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Nhà sản xuất </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select ng-model="new.manufacturer_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="manufacturer in manufacturers" value="@{{manufacturer.id}}"> @{{manufacturer.name}} </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createManufacturer"> Thêm </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Đơn vị tính </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select ng-model="new.unit_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="unit in units" value="@{{unit.id}}"> @{{unit.name}} </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createUnit"> Thêm </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Giá Web </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <input cleave="options.numeral" ng-model="new.web_price" type="text" class="form-control input-sm" placeholder="Nhập giá...">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label> VNĐ </label>
                                         </div>
                                     </div>
                                 </div>
@@ -360,29 +372,38 @@
                                     <h3> </h3>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Nhóm sản phẩm </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select id="category" ng-model="selected.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" ng-selected="category.id==selected.category_id" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory"> Thêm </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Nhà sản xuất </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select id="manufacturer" ng-model="selected.manufacturer_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="manufacturer in manufacturers" ng-selected="manufacturer.id==selected.manufacturer_id" value="@{{manufacturer.id}}"> @{{manufacturer.name}} </option>
                                             </select>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createManufacturer"> Thêm </button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3"> Đơn vị tính </label>
-                                        <div class="col-sm-9">
+                                        <div class="col-sm-7">
                                             <select id="unit" ng-model="selected.unit_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="unit in units" ng-selected="unit.id==selected.unit_id" value="@{{unit.id}}"> @{{unit.name}} </option>
                                             </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createUnit"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -391,7 +412,7 @@
                                             <input id="web_price" cleave="options.numeral" ng-model="selected.web_price" type="text" class="form-control input-sm" placeholder="Nhập giá...">
                                         </div>
                                         <div class="col-sm-2">
-                                            <input type="text" class="form-control input-sm" value="VNĐ" readonly>
+                                            <label> VNĐ </label>
                                         </div>
                                     </div>
                                 </div>
@@ -531,6 +552,117 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+                {{-- !TẠO ĐƠN VỊ TÍNH MỚI! --}}
+        <div class="modal fade" id="createUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm đơn vị tính mới </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3"> Tên </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="newUnit.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Mô tả </label>
+                                <div class="col-sm-9">
+                                    <textarea ng-model="newUnit.description" class="form-control"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="createUnit()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Đóng </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- !TẠO NHÀ CUNG CẤP MỚI! --}}
+        <div class="modal fade" id="createManufacturer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm nhà sản xuất mới </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-3"> Thương hiệu </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="newManufacturer.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Quốc gia </label>
+                                <div class="col-sm-9">
+                                    <input ng-model="newManufacturer.country" type="text" class="form-control input-sm" placeholder="Nhập quốc gia...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3"> Mô tả </label>
+                                <div class="col-sm-9">
+                                    <textarea ng-model="newManufacturer.description" class="form-control"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="createManufacturer()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Đóng </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- !TẠO DANH MỤC SẢN PHẨM MỚI! --}}
+        <div class="modal fade" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <form class="form-horizontal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm danh mục mới </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-sm-4"> Tên </label>
+                                <div class="col-sm-8">
+                                    <input ng-model="newCategory.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4"> Danh mục cha </label>
+                                <div class="col-sm-8">
+                                    <select ng-model="newCategory.parent_id" class="form-control input-sm">
+                                        <option value="" selected> --Không chọn-- </option>
+                                        <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4"> Mô tả </label>
+                                <div class="col-sm-8">
+                                    <textarea ng-model="newCategory.description" class="form-control"> </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="createCategory()" type="button" class="btn btn-sm btn-info"> Xác nhận </button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal"> Đóng </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 

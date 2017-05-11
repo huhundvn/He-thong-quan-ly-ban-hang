@@ -72,8 +72,9 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
                 }
             };
             if (!check)
-                toastr.info('Vui lòng điền số lượng chuyển, số lượng phải nhỏ hơn hoặc bằng trong kho chuyển');
+                toastr.error('Vui lòng điền số lượng chuyển. Số lượng phải nhỏ hơn hoặc bằng trong kho chuyển');
             else {
+                $scope.info.to_store_id = $scope.new.to_store_id;
                 $http({
                     method : 'POST',
                     url : API + 'store-tranfer',

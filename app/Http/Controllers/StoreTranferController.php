@@ -81,7 +81,10 @@ class StoreTranferController extends Controller
 					-> where('expried_date', '=' , $row -> expried_date)
 					-> first();
 				$update -> quantity -= $row -> quantity_tranfer;
-				$update -> save();
+				if ($update -> quantity <= 0)
+					$update -> delete();
+				else
+					$update -> save();
 
 				$update03 = new ProductInStore();
 				$update03 -> product_id = $row -> product_id;

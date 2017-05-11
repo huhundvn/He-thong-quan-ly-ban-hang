@@ -25,7 +25,7 @@
                 <div class="list-group">
                     <a ng-show="roles.indexOf('order') != -1" href="list-order" class="list-group-item"> Đơn hàng </a>
                     <a ng-show="roles.indexOf('price-output') != -1" href="{{ route('list-price-output') }}" class="list-group-item"> Bảng giá bán </a>
-                    {{--<a ng-show="roles.indexOf('return') != -1" href="{{ route('list-return-product') }}" class="list-group-item"> Trả về </a>--}}
+                    <a ng-show="roles.indexOf('return') != -1" href="{{ route('list-return-product') }}" class="list-group-item"> Trả về </a>
                 </div>
             </div>
         </div>
@@ -61,11 +61,11 @@
             <div id="collapse4" class="panel-collapse collapse">
                 <div class="list-group">
                     <a ng-show="roles.indexOf('store') != -1" href="{{route('list-store')}}" class="list-group-item"> Danh sách kho </a>
+                    <a ng-show="roles.indexOf('product-in-store') != -1" href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
+                    <a ng-show="roles.indexOf('price-input') != -1" href="{{route('list-price-input')}}" class="list-group-item"> Bảng giá mua </a>
                     <a ng-show="roles.indexOf('input-store') != -1" href="{{route('list-input-store')}}" class="list-group-item"> Nhập kho </a>
                     <a ng-show="roles.indexOf('store-output') != -1" href="{{route('list-store-output')}}" class="list-group-item"> Xuất kho </a>
                     <a ng-show="roles.indexOf('store-tranfer') != -1" href="{{route('list-store-tranfer')}}" class="list-group-item"> Chuyển kho </a>
-                    <a ng-show="roles.indexOf('product-in-store') != -1" href="{{route('list-product-in-store')}}" class="list-group-item"> Sản phẩm trong kho </a>
-                    <a ng-show="roles.indexOf('price-input') != -1" href="{{route('list-price-input')}}" class="list-group-item"> Bảng giá mua </a>
                 </div>
             </div>
         </div>

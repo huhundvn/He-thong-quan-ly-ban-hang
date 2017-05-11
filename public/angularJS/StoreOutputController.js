@@ -5,6 +5,10 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
 
     // LẤY THÔNG TIN ĐƠN HÀNG
     $scope.loadOrder = function(id) {
+        $http.get(API + 'user').then(function (response) {
+            $scope.users = response.data;
+        });
+
         $http.get(API + 'storage').then(function (response) {
             $scope.stores = response.data;
         });
@@ -17,7 +21,7 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
             $scope.units = response.data;
         });
 
-        $http.get(API + 'order').then(function (response) {
+        $http.get(API + 'get-ship-order').then(function (response) {
             $scope.orders = response.data;
         });
 

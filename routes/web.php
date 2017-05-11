@@ -18,6 +18,7 @@ use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\CheckPositionRole;
 use App\Http\Middleware\CheckCustomerRole;
 use App\Http\Middleware\CheckStoreOutputRole;
+use App\Http\Middleware\CheckReturnRole;
 
 // XÁC THỰC NGƯỜI DÙNG
 Auth::routes();
@@ -101,8 +102,12 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/confirm-order/{order_id}/{status}', 'OrderController@confirm'); //duyệt đơn hàng
 	Route::resource('order-detail', 'OrderDetailController'); //CRUD chi tiết đơn hàng
 	Route::get('/get-order-detail/{order_id}', 'OrderDetailController@getDetail');
+	Route::get('/get-ship-order', 'OrderController@getShipOrder'); // Lấy đơn hàng đã thanh toán
 	Route::get('/get-paid-order', 'OrderController@getPaidOrder'); // Lấy đơn hàng đã thanh toán
 	Route::get('/get-today-order', 'OrderController@getTodayOrder'); // Lấy số lượng đơn hàng hôm nay
+
+	// TRẢ VỀ
+	Route::resource('return', 'ReturnController'); //CRUD trả về 
 
 	// THANH TOÁN KHÁCH HÀNG
 	Route::resource('customer-invoice', 'CustomerInvoiceController'); //CRUD hóa đơn khách hàng
@@ -214,13 +219,13 @@ Route::group(['middleware' => 'auth'], function (){
 
 	//HÓA ĐƠN KHÁCH HÀNG
 	Route::get('/list-customer-invoice', 'CustomerInvoiceController@listCustomerInvoice') -> name('list-customer-invoice') -> middleware(CheckCustomerInvoiceRole::class);
-//	Route::get('/create-customer-invoice', 'CustomerInvoiceController@createCustomerInvoice') -> name('createCustomerInvoice');
 
 	// HÓA ĐƠN NHÀ CUNG CẤP
 	Route::get('/list-input-store-invoice', 'InputStoreController@listInputStoreInvoice') -> name('list-input-store-invoice') -> middleware(CheckSupplierInvoiceRole::class);
 
 	//TRẢ VỀ
-	Route::get('/list-return-product', 'ReturnProductController@listReturnProduct') -> name('list-return-product');
+	Route::get('/list-return-product', 'ReturnProductController@listReturnProduct') -> name('list-return-product') -> middleware(CheckReturnRole::class);
+	Route::get('/create-return-product', 'ReturnProductController@createReturnProduct') -> name('createReturnProduct') -> middleware(CheckReturnRole::class);
 
 	// BÁO CÁO
 	Route::get('/top-product', 'ReportController@productReport') -> name('top-product');

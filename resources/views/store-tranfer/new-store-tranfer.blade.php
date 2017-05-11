@@ -41,7 +41,7 @@
             </div>
             <div class="col-xs-3">
                 <label> Kho nhận </label>
-                <select ng-model="info.to_store_id" class="form-control input-sm">
+                <select ng-model="new.to_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhận -- </option>
                     <option ng-repeat="store in stores" ng-show="store.id != info.store_id" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
@@ -212,6 +212,7 @@
                         </div>
                         <div class="col-sm-4">
                             <select ng-model="info.store_id" class="form-control input-sm">
+                                <option value=""> -- Kho chuyển -- </option>
                                 <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                             </select>
                         </div>
@@ -221,25 +222,25 @@
                         <table class="w3-table table-hover table-bordered w3-centered">
                             <thead>
                             <tr class="w3-blue-grey">
-                                <th> Mã SP </th>
                                 <th> Tên </th>
                                 <th> Mã vạch </th>
                                 <th> Đơn vị tính </th>
                                 <th> Số lượng hiện có </th>
                                 <th> Giá mua </th>
                                 <th> Hạn sử dụng </th>
+                                <th> Kho </th>
                             </thead>
                             <tbody>
                             <tr class="item"
                                 ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | filter:info | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
-                                <td> @{{$index+1}} </td>
                                 <td> @{{ product.name}} </td>
                                 <td> @{{ product.code }}</td>
                                 <td> @{{ product.unit.name }} </td>
                                 <td> @{{ product.quantity | number: 0 }} </td>
                                 <td> @{{ product.price_input | number: 0 }} </td>
                                 <td> @{{ product.expried_date | date: "dd/MM/yyyy" }} </td>
+                                <td> @{{ product.store.name }}
                             </tr>
                             <tr class="item" ng-show="products.length==0">
                                 <td colspan="7"> Không có dữ liệu </td>

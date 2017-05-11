@@ -37,6 +37,17 @@ class OrderController extends Controller
 			);
 	}
 
+	// API lấy danh sách đơn hàng cần xuất giao
+	public function getShipOrder()
+	{
+		return Order::with('orderDetails')
+			-> with('user')
+			-> with('customer')
+			-> with('priceOutput')
+			-> where('status', '=', 2)
+			-> get();
+	}
+
 	// API lấy danh sách đơn hàng đã thanh toán
 	public function getPaidOrder()
 	{
@@ -44,7 +55,6 @@ class OrderController extends Controller
 			-> with('user')
 			-> with('customer')
 			-> with('priceOutput')
-			-> where('status', '=', 2)
 			-> orWhere('status', '=', 3)
 			-> orWhere('status', '=', 4)
 			-> get();

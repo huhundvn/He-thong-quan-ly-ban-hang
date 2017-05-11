@@ -15,12 +15,24 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-8 col-xs-8">
+            <div class="col-lg-2 col-xs-2">
                 <a href="{{route('createStoreOutput')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Xuất kho </a>
             </div>
             <div class="col-lg-2 col-xs-2">
-                <select ng-model="term.store_id" class="form-control input-sm">
+                <select ng-model="term1.created_by" class="form-control input-sm">
+                    <option value="" selected> -- Người tạo -- </option>
+                    <option ng-repeat="user in users" value="@{{user.id}}"> @{{user.name}} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term2.order_id" class="form-control input-sm">
+                    <option value="" selected> -- Đơn hàng -- </option>
+                    <option ng-repeat="order in orders" value="@{{order.id}}"> DH-@{{order.id}} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <select ng-model="term3.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho xuất -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
@@ -36,7 +48,7 @@
         <table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> Mã đơn  </th>
-            <th> Ngày xuất </th>
+            <th> Ngày xuất kho </th>
             <th> Tạo bởi </th>
             <th> Kho xuất </th>
             <th> Mã đơn hàng </th>
@@ -44,7 +56,7 @@
             </thead>
             <tbody>
             <tr ng-show="storeOutputs.length > 0" class="item"
-                dir-paginate="storeOutput in storeOutputs | filter:term | itemsPerPage: 6"
+                dir-paginate="storeOutput in storeOutputs | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8"
                 ng-click="readStoreOutput(storeOutput)">
                 <td data-toggle="modal" data-target="#readStoreTranfer"> XK-@{{ storeOutput.id }} </td>
                 <td data-toggle="modal" data-target="#readStoreTranfer"> @{{ storeOutput.created_at }} </td>

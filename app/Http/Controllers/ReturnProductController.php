@@ -77,8 +77,8 @@ class ReturnProductController extends Controller
 	}
 
 	// Tạo đơn nhập hàng mới
-	public function createOrder()
+	public function createReturnProduct()
 	{
-		return view('order.new-order');
+		return view('product.new-return');
 	}
 }

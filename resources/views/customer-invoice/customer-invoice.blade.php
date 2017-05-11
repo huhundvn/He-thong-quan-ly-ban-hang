@@ -58,7 +58,7 @@
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total_paid | number:0 }} </td>
                 <td data-toggle="modal" data-target="#readInputStore"> @{{ order.total - order.total_paid | number:0 }} </td>
                 <td>
-                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
+                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore" ng-show="order.total - order.total_paid != 0">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>

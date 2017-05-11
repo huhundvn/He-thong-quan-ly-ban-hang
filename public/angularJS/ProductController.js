@@ -29,6 +29,63 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
     $scope.loadProduct();
     $interval($scope.loadProduct, 5000);
 
+    // THÊM ĐƠN VỊ TÍNH
+    $scope.createUnit = function () {
+        $http({
+            method : 'POST',
+            url : API + 'unit',
+            data : $scope.newUnit,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $scope.loadProduct();
+                $scope.newUnit = {};
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    //TẠO NHÀ SẢN XUẤT MỚI
+    $scope.createManufacturer = function () {
+        $http({
+            method : 'POST',
+            url : API + 'manufacturer',
+            data : $scope.newManufacturer,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $scope.loadProduct();
+                $scope.newManufacturer = {};
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
+    // TẠO NHÓM SẢN PHẨM 
+    $scope.createCategory = function () {
+        $http({
+            method : 'POST',
+            url : API + 'category',
+            data : $scope.newCategory,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                toastr.success(response.data.success);
+                $scope.loadProduct();
+                $scope.newCategory = {};
+            }
+            else
+                toastr.error(response.data[0]);
+        });
+    };
+
     $scope.data = []; // Lưu danh sách thuộc tính tạm thời
     $scope.image = []; // Lưu danh sách hình ảnh tạm thời
 
