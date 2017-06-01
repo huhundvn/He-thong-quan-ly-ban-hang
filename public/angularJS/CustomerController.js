@@ -25,7 +25,7 @@ app.controller('CustomerController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadCustomer();
-    $interval($scope.loadCustomer, 5000);
+    // $interval($scope.loadCustomer, 5000);
 
 
     // TẠO KHÁCH HÀNG MỚI

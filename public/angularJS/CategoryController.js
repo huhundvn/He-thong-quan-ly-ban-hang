@@ -10,7 +10,7 @@ app.controller('CategoryController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadCategory();
-    $interval($scope.loadCategory, 3000);
+    // $interval($scope.loadCategory, 5000);
 
     // TẠO NHÓM SẢN PHẨM 
     $scope.createCategory = function () {

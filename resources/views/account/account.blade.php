@@ -147,27 +147,27 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên </label>
                                 <div class="col-sm-9">
-                                    <input id="name" ng-model="selected.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
+                                    <input id="name" ng-model="selected.name" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Số tài khoản </label>
                                 <div class="col-sm-9">
-                                    <input id="bank_account" ng-model="seleced.bank_account" type="text" class="input-numeral form-control input-sm" placeholder="Số tài khoản...">
+                                    <input id="bank_account" ng-model="seleced.bank_account" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3"> Ngân hàng </label>
                                 <div class="col-sm-9">
-                                    <input id="bank" ng-model="selected.bank" type="text" class="form-control input-sm" placeholder="Ngân hành...">
+                                    <input id="bank" ng-model="selected.bank" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
                                 <label class="col-sm-3"> Tổng tiền </label>
                                 <div class="col-sm-7">
-                                    <input cleave="options.numeral" id="total" ng-model="selected.total" type="text" class="form-control input-sm" placeholder="Tổng tiền...">
+                                    <input cleave="options.numeral" id="total" ng-model="selected.total" type="text" class="form-control input-sm">
                                 </div>
                                 <div class="col-sm-2">
                                     <select disabled class="form-control input-sm">
