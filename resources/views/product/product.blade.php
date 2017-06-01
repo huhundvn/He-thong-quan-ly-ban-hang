@@ -14,13 +14,13 @@
 
         {{-- TÌM KIẾM SẢN PHẨM--}}
         <div class="row">
-            <div class="col-lg-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4 col-sm-5 col-xs-5">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
                     <span class="glyphicon glyphicon-plus w3-hide-medium"></span> Thêm SP </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Từ File </button>
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
-                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu Nhập </a>
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-2 col-sm-2 col-xs-2">
                 <input ng-model="term1.name" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
@@ -41,7 +41,7 @@
             <!-- <div class="col-lg-1 col-md-1">
                 <button class="btn btn-sm btn-info"> @{{ products.length }} mục </button>
             </div> -->
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2 col-sm-1 col-xs-1">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
@@ -76,7 +76,7 @@
             </thead>
             <tbody>
             <tr class="item" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(product)">
-                <td> SP-@{{product.id}} </td>
+                <td> SP-@{{("000"+product.id).slice(-4)}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.name}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.code }}</td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.unit.name }} </td>
@@ -111,7 +111,7 @@
         </div>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%;bottom:0; position: fixed;">
+        <div style="margin-left: 35%">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 
