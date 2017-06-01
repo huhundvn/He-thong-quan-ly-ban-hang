@@ -2,7 +2,7 @@
  * Created by Good on 3/28/2017.
  */
 
-app.controller('ProductController', function($scope, $http, API, $interval) {
+app.controller('ProductController', function($scope, $http, API, $timeout) {
     // Load danh sách sản phẩm
     $scope.loadProduct = function () {
         $http.get(API + 'category').then(function (response) {
@@ -26,7 +26,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         }); // Load thuộc tính sản phẩm
     };
     $scope.loadProduct();
-    // $interval($scope.loadProduct, 5000);
+    $timeout($scope.loadProduct, 5000);
 
     // THÊM ĐƠN VỊ TÍNH
     $scope.createUnit = function () {
