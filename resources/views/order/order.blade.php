@@ -19,13 +19,16 @@
                 <a href="{{ route('createOrder') }}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Tạo đơn hàng </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
+            <div class="col-lg-2 col-xs-2">
+                <input ng-model="start_date" type="date" class="form-control input-sm">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <input ng-model="end_date" type="date" class="form-control input-sm">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term2.created_by" class="form-control input-sm">
-                    <option value="" selected> -- Nhân viên -- </option>
-                    <option ng-repeat="user in users" value="@{{user.id}}"> NV@{{user.id}} - @{{user.name}} </option>
+                    <option value="" selected> -- Khách hàng -- </option>
+                    <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
