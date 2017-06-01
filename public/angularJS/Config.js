@@ -10,7 +10,7 @@ $(document).ready(function () {
 });
 
 var app = angular.module('LaRose', ['angucomplete-alt', 'angularUtils.directives.dirPagination', 'cleave.js', 'chart.js'])
-	.constant('API', 'http://larose-admin.herokuapp.com/api/');
+	.constant('API', 'http://larose-admin.herokuapp.com/api/')
     .config(['ChartJsProvider', function (ChartJsProvider) {
         // Configure all charts
         ChartJsProvider.setOptions({
