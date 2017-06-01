@@ -15,20 +15,27 @@
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
             <div class="col-lg-4 col-xs-4">
+                <h3></h3>
                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createVoucher">
                     Phiếu thu mới </button>
                 <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createPaymentVoucher">
                     Phiếu chi mới </button>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Từ ngày </label>
+                <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchVoucher()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Đến ngày </label>
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchVoucher()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Loại phiếu </label>
                 <select ng-model="term2.type" class="form-control input-sm">
                     <option value="" selected> -- Loại -- </option>
                     <option value="0"> Phiếu thu </option>
                     <option value="1"> Phiếu chi </option>
                 </select>
-            </div>
-            <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{vouchers.length}} mục </button>
             </div>
         </div>
 

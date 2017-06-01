@@ -64,6 +64,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('voucher', 'VoucherController'); //CRUD phiếu chi, phiếu thu
 	Route::get('/get-detail-voucher/{voucher_id}', 'VoucherController@getDetail');
 	Route::get('/get-today-voucher', 'VoucherController@getTodayVoucher');
+	Route::post('/search-voucher', 'VoucherController@search'); //Tìm kiếm phiếu thu/chi
 
 	// NHẬP KHO
 	Route::resource('input-store', 'InputStoreController'); //CRUD nhập kho

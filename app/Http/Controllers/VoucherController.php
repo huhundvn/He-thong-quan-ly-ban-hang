@@ -20,6 +20,14 @@ class VoucherController extends Controller
 		return Voucher::all();
 	}
 
+	//API tìm kiếm phiếu thu/chi theo khoảng thời gian
+	public function search(Request $request)
+	{
+		return Voucher::where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+			-> get();
+	}
+
 	// API lấy tổng thu, chi hôm nay
 	public function getTodayVoucher() {
 		$num = DB::table('voucher')

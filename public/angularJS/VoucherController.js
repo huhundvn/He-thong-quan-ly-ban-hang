@@ -18,7 +18,26 @@ app.controller('VoucherController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadVoucher();
-    $interval($scope.loadVoucher, 5000);
+    // $interval($scope.loadVoucher, 5000);
+
+    // Tìm kiếm phiếu thu/chi theo khoảng thời gian
+    $scope.searchVoucher = function() {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-voucher',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                $scope.vouchers = response.data;
+            });
+        } else {
+            $http.get(API + 'voucher').then(function (response) {
+                $scope.vouchers = response.data;
+            });
+        }
+    };
 
     /**
      * CRUD phiếu thu, chi
