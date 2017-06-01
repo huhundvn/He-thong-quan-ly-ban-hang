@@ -14,16 +14,16 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
     $http.get(API + 'manufacturer').then(function (response) {
         $scope.manufacturers = response.data;
     }); // Load nhà sản xuất
+    
+    $http.get(API + 'product').then(function (response) {
+        $scope.products = response.data;
+    });
 
     // Load danh sách sản phẩm
     $scope.loadProduct = function () {
         $http.get(API + 'attribute').then(function (response) {
             $scope.attributes = response.data;
         }); // Load thuộc tính sản phẩm
-
-        $http.get(API + 'product').then(function (response) {
-            $scope.products = response.data;
-        });
     };
     $scope.loadProduct();
     $interval($scope.loadProduct, 5000);
