@@ -355,6 +355,7 @@
                                 <li> <a data-toggle="tab" href="#selectMenu5"> Chính sách bán hàng </a></li>
                                 <li> <a data-toggle="tab" href="#selectMenu6"> Thuộc tính </a></li>
                                 <li> <a data-toggle="tab" href="#selectMenu7"> Hình ảnh </a></li>
+                                <li> <a data-toggle="tab" href="#selectMenu8"> Đánh giá SP </a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -542,6 +543,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                {{-- Đánh giá sản phẩm --}}
+                                <div id="selectMenu8" class="tab-pane fade">
+                                    <h3> </h3>
+                                    <div class="fb-comments" data-href="{{ the_permalink() }}" data-numposts="20" width="100%" data-colorscheme="light" data-version="v2.3"></div>
                                 </div>
                             </div>
                         </div>
