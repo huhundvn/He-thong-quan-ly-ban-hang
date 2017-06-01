@@ -12,7 +12,7 @@
 @section('content')
     <div ng-controller="ReportController">
         <div class="container-fluid">
-            <canvas class="chart chart-bar" chart-series="series" chart-data="data02" chart-labels="labels02"></canvas>
+            <canvas class="chart chart-bar" chart-series="labels02" chart-data="data02" chart-labels="labels02"></canvas>
         </div>
     </div>
 @endsection
