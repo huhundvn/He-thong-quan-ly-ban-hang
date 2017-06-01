@@ -4,6 +4,10 @@
 
 app.controller('ProductController', function($scope, $http, API, $timeout) {
     // Load danh sách sản phẩm
+    $http.get(API + 'product').then(function (response) {
+        $scope.products = response.data;
+    });
+
     $scope.loadProduct = function () {
         $http.get(API + 'category').then(function (response) {
             $scope.categorys = response.data;
@@ -16,17 +20,13 @@ app.controller('ProductController', function($scope, $http, API, $timeout) {
         $http.get(API + 'manufacturer').then(function (response) {
             $scope.manufacturers = response.data;
         }); // Load nhà sản xuất
-    
-        $http.get(API + 'product').then(function (response) {
-            $scope.products = response.data;
-        });
 
         $http.get(API + 'attribute').then(function (response) {
             $scope.attributes = response.data;
         }); // Load thuộc tính sản phẩm
     };
     $scope.loadProduct();
-    // $timeout($scope.loadProduct, 5000);
+    $timeout($scope.loadProduct, 5000);
 
     // THÊM ĐƠN VỊ TÍNH
     $scope.createUnit = function () {

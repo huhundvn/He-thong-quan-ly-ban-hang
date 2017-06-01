@@ -548,7 +548,7 @@
                                 {{-- Đánh giá sản phẩm --}}
                                 <div id="selectMenu8" class="tab-pane fade">
                                     <h3> </h3>
-                                    <div class="fb-comments" data-href="http://larose-admin.herokuapp.com/list-product" data-width="760" data-num-posts="20"></div>
+                                    <div class="fb-comments" data-href="http://larose-admin.herokuapp.com/list-product" data-width="800" data-num-posts="5"></div>
                                 </div>
                             </div>
                         </div>
