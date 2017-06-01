@@ -332,7 +332,6 @@
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm sản phẩm mới </h4>
                         </div>
                         <div class="modal-body">
-                            @{{selected}}
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên </label>
                                 <div class="col-sm-9">
