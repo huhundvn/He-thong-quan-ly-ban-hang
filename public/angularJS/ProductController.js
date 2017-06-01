@@ -26,7 +26,7 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         }); // Load thuộc tính sản phẩm
     };
     $scope.loadProduct();
-    $interval($scope.loadProduct, 5000);
+    // $interval($scope.loadProduct, 5000);
 
     // THÊM ĐƠN VỊ TÍNH
     $scope.createUnit = function () {
