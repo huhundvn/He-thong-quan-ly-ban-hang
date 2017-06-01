@@ -16,19 +16,34 @@
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
             <div class="col-lg-2 col-xs-2">
+                <h3></h3>
                 <a href="{{route('createInputStore')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Nhập hàng </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input ng-model="term.id" class="form-control input-sm" placeholder="Nhập tên nhà cung cấp...">
+            <div class="col-lg-2 col-xs-2">
+                <label> Từ ngày </label>
+                <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchInputStore()">
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Đến ngày </label>
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchInputStore()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Nhà cung cấp </label>
+                <select ng-model="term.supplier_id" class="form-control input-sm">
+                    <option value="" selected> -- Nhà cung cấp -- </option>
+                    <option ng-repeat="supplier in suppliers" value="@{{ supplier.id }}"> @{{ supplier.name }} </option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Kho nhập </label>
                 <select ng-model="term2.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhập -- </option>
                     <option ng-repeat="store in stores" value="@{{ store.id }}"> @{{ store.name }} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>
@@ -37,9 +52,6 @@
                     <option value="3"> Đang lấy hàng </option>
                     <option value="4"> Đã nhập kho </option>
                 </select>
-            </div>
-            <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{inputStores.length}} mục </button>
             </div>
         </div>
 

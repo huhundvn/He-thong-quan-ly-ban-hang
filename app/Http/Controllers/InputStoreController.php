@@ -28,6 +28,19 @@ class InputStoreController extends Controller
 			-> get();
 	}
 
+	//API tìm kiếm lịch sử nhập kho theo khoảng thời gian
+	public function search(Request $request)
+	{
+		return InputStore::with('store')
+			-> with('detailInputStores')
+			-> with('user')
+			-> with('supplier')
+			-> with('account')
+			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+			-> get();
+	}
+
 	// API lấy danh sách đơn hàng đã thanh toán
 	public function getPaidInputStore()
 	{

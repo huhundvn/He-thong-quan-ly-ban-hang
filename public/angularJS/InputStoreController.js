@@ -38,7 +38,26 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadInputStore();
-    $interval($scope.loadInputStore, 3000);
+    // $interval($scope.loadInputStore, 3000);
+
+    // Tìm kiếm lịch sử nhập kho theo khoảng thời gian
+    $scope.searchInputStore = function() {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-input-store',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                $scope.inputStores = response.data;
+            });
+        } else {
+            $http.get(API + 'input-store').then(function (response) {
+                $scope.inputStores = response.data;
+            });
+        }
+    };
 
     $scope.data = [];
     $scope.info = {};

@@ -72,6 +72,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/get-paid-input-store', 'InputStoreController@getPaidInputStore'); // Lấy hóa đơn nhập kho đã thanh toán
 	Route::resource('detail-input-store', 'DetailInputStoreController'); //CRUD chi tiết nhập kho
 	Route::get('/get-detail-input-store/{input_store_id}', 'DetailInputStoreController@getDetail');
+	Route::post('/search-input-store', 'InputStoreController@search'); //Tìm kiếm lịch sử nhập kho
 
 	// BẢNG GIÁ BÁN
 	Route::resource('price-output', 'PriceOutputController'); //CRUD bảng giá bán
