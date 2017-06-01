@@ -19,14 +19,16 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
         $scope.products = response.data;
     });
 
+    $http.get(API + 'attribute').then(function (response) {
+        $scope.attributes = response.data;
+    }); // Load thuộc tính sản phẩm
+
     // Load danh sách sản phẩm
-    $scope.loadProduct = function () {
-        $http.get(API + 'attribute').then(function (response) {
-            $scope.attributes = response.data;
-        }); // Load thuộc tính sản phẩm
-    };
-    $scope.loadProduct();
-    $interval($scope.loadProduct, 5000);
+    // $scope.loadProduct = function () {
+        
+    // };
+    // $scope.loadProduct();
+    // $interval($scope.loadProduct, 5000);
 
     // THÊM ĐƠN VỊ TÍNH
     $scope.createUnit = function () {
