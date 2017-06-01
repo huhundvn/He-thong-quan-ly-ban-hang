@@ -17,9 +17,9 @@ app.controller('ProductController', function($scope, $http, API, $interval) {
             $scope.manufacturers = response.data;
         }); // Load nhà sản xuất
     
-        // $http.get(API + 'product').then(function (response) {
-            // $scope.products = response.data;
-        // });
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
 
         $http.get(API + 'attribute').then(function (response) {
             $scope.attributes = response.data;
