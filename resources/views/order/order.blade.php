@@ -23,10 +23,10 @@
                 <input ng-model="start_date" type="date" class="form-control input-sm">
             </div>
             <div class="col-lg-2 col-xs-2">
-                <input ng-model="end_date" type="date" class="form-control input-sm">
+                <input ng-model="end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
             <div class="col-lg-2 col-xs-2">
-                <select ng-model="term2.created_by" class="form-control input-sm">
+                <select ng-model="term2.customer_id" class="form-control input-sm">
                     <option value="" selected> -- Khách hàng -- </option>
                     <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} </option>
                 </select>
@@ -41,9 +41,9 @@
                     <option value="4"> Đã thanh toán </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <!-- <div class="col-lg-2 col-xs-2">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{orders.length}} mục </button>
-            </div>
+            </div> -->
         </div>
         <hr/>
 

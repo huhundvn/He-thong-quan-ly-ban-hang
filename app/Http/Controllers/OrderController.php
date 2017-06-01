@@ -27,6 +27,19 @@ class OrderController extends Controller
 			-> get();
 	}
 
+	//API tìm kiếm đơn hàng theo khoảng thời gian
+	public function search($start_date, $end_date)
+	{
+		return Order::with('orderDetails')
+			-> with('user')
+			-> with('customer')
+			-> with('priceOutput')
+			-> where('created_at', '>=', Carbon::parse($start_date))
+			-> where('created_at', '<=', Carbon::parse($end_date))
+			-> get();
+	}
+
+
 	// API lấy danh sách đơn hàng hôm nay
 	public function getTodayOrder() {
 		return count(
@@ -183,44 +196,4 @@ class OrderController extends Controller
 	{
 		return view('order.new-order');
 	}
-
-	// Xem đơn hàng theo khách hàng
-//	public function orderByCustomerId($customerId)
-//    {
-//        $order = Order::Where('customer_id', '=', $customerId)->with('orderDetails')->orderBy('created_at', 'desc');
-//        return $order->get();
-//    }
-
-    // Xác nhận đơn hàng
-//    public function update($id)
-//    {
-//        $order = Order::find($id);
-//        $order->status = Input::get('status');
-//        $order->save();
-//        return Order::find($id);
-//    }
-//
-//     Update đơn hàng theo id customer
-//    public function updateStatus($id, $customerId)
-//    {
-//        $order = Order::Where('id', '=', $id, 'AND', 'customer_id', '=', $customerId)->firstOrFail();
-//        $order->status = Input::get('status');
-//        $order->save();
-//        return response()->json(['success' => trans('message.update_success')]);
-//        return Order::find($id);
-//    }
-//
-//     xem danh sách đơn hàng cho admin
-//    public function listOrderByStatus($status)
-//    {
-//        $order = Order::Where('status', $status)->with('orderDetails')->orderBy('created_at', 'desc');
-//        return $order->get();
-//    }
-//
-//     xem danh sách đơn hàng theo khách hàng
-//    public function listOrderByStatusAndCustomerId($status, $customerId)
-//    {
-//        $order = Order::Where('status', $status)->where('customer_id', $customerId)->with('orderDetails')->orderBy('created_at', 'desc');
-//        return $order->get();
-//    }
 }

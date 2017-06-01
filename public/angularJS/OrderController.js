@@ -24,6 +24,18 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
+    $scope.searchOrder = function() {
+        if($scope.start_date != null && $scope.end_date != null) {
+            $http.get(API + 'search-order/' + $scope.start_date + '/' + $scope.end_date).then(function (response) {
+                $scope.orders = response.data;
+            });
+        } else {
+            $http.get(API + 'order').then(function (response) {
+                $scope.orders = response.data;
+            });
+        }
+    };
+
     // DANH SÁCH ĐƠN HÀNG
     $scope.loadOrder = function () {
         $http.get(API + 'get-role').then(function (response) {
@@ -71,7 +83,7 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadOrder();
-    $interval($scope.loadOrder, 3000);
+    // $interval($scope.loadOrder, 5000);
 
     // TẠO ĐƠN HÀNG MỚI
     $scope.data = [];

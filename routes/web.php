@@ -105,6 +105,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/get-ship-order', 'OrderController@getShipOrder'); // Lấy đơn hàng đã thanh toán
 	Route::get('/get-paid-order', 'OrderController@getPaidOrder'); // Lấy đơn hàng đã thanh toán
 	Route::get('/get-today-order', 'OrderController@getTodayOrder'); // Lấy số lượng đơn hàng hôm nay
+	Route::get('/search-order/{start_date}/{end_date}', 'OrderController@search'); //Tìm kiếm đơn hàng
 
 	// TRẢ VỀ
 	Route::resource('return', 'ReturnController'); //CRUD trả về 
