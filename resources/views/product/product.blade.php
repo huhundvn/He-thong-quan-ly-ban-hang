@@ -332,6 +332,7 @@
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm sản phẩm mới </h4>
                         </div>
                         <div class="modal-body">
+                            @{{selected}}
                             <div class="form-group">
                                 <label class="col-sm-3"> Tên </label>
                                 <div class="col-sm-9">
@@ -377,7 +378,6 @@
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" ng-selected="selected.category_id===category.id" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
-                                            @{{selected.category_id}}
                                         </div>
                                         <div class="col-sm-2">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory"> Thêm </button>
