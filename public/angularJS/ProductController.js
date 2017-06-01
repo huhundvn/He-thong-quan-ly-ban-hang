@@ -26,7 +26,7 @@ app.controller('ProductController', function($scope, $http, API, $timeout) {
         }); // Load thuộc tính sản phẩm
     };
     $scope.loadProduct();
-    $timeout($scope.loadProduct, 5000);
+    // $timeout($scope.loadProduct, 5000);
 
     // THÊM ĐƠN VỊ TÍNH
     $scope.createUnit = function () {

@@ -355,7 +355,7 @@
                                 <li> <a data-toggle="tab" href="#selectMenu5"> Chính sách bán hàng </a></li>
                                 <li> <a data-toggle="tab" href="#selectMenu6"> Thuộc tính </a></li>
                                 <li> <a data-toggle="tab" href="#selectMenu7"> Hình ảnh </a></li>
-                                <li> <a data-toggle="tab" href="#selectMenu8"> Đánh giá SP </a></li>
+                                <li> <a data-toggle="tab" href="#selectMenu8"> Đánh giá </a></li>
                             </ul>
 
                             <div class="tab-content">
