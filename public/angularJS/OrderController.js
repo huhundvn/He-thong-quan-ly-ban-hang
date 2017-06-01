@@ -24,9 +24,16 @@ app.controller('OrderController', function($scope, $http, API, $interval) {
         });
     };
 
+    // Tìm kiếm đơn hàng theo khoảng thời gian
     $scope.searchOrder = function() {
-        if($scope.start_date != null && $scope.end_date != null) {
-            $http.get(API + 'search-order/' + $scope.start_date + '/' + $scope.end_date).then(function (response) {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-order',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
                 $scope.orders = response.data;
             });
         } else {

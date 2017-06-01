@@ -20,10 +20,10 @@
                     <span class="glyphicon glyphicon-plus"></span> Tạo đơn hàng </a>
             </div>
             <div class="col-lg-2 col-xs-2">
-                <input ng-model="start_date" type="date" class="form-control input-sm">
+                <input ng-model="search.start_date" type="date" class="form-control input-sm">
             </div>
             <div class="col-lg-2 col-xs-2">
-                <input ng-model="end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
             <div class="col-lg-2 col-xs-2">
                 <select ng-model="term2.customer_id" class="form-control input-sm">

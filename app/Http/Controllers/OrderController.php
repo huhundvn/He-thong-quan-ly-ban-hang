@@ -28,14 +28,14 @@ class OrderController extends Controller
 	}
 
 	//API tìm kiếm đơn hàng theo khoảng thời gian
-	public function search($start_date, $end_date)
+	public function search(Request $request)
 	{
 		return Order::with('orderDetails')
 			-> with('user')
 			-> with('customer')
 			-> with('priceOutput')
-			-> where('created_at', '>=', Carbon::parse($start_date))
-			-> where('created_at', '<=', Carbon::parse($end_date))
+			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
 			-> get();
 	}
 
