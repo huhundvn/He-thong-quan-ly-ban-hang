@@ -548,7 +548,7 @@
                                 {{-- Đánh giá sản phẩm --}}
                                 <div id="selectMenu8" class="tab-pane fade">
                                     <h3> </h3>
-                                    <div class="fb-comments" data-href="{{ the_permalink() }}" data-numposts="20" width="100%" data-colorscheme="light" data-version="v2.3"></div>
+                                    <div class="fb-comments" data-href="<?php the_permalink(); ?>" data-numposts="20" width="100%" data-colorscheme="light" data-version="v2.3"></div>
                                 </div>
                             </div>
                         </div>
