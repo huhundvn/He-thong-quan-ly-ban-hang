@@ -375,7 +375,7 @@
                                         <div class="col-sm-7">
                                             <select id="category" ng-model="selected.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
-                                                <option ng-repeat="category in categorys" ng-selected="category.id==selected.category_id" value="@{{category.id}}"> @{{category.name}} </option>
+                                                <option ng-repeat="category in categorys" ng-selected="selected.category_id==category.id" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
