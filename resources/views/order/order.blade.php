@@ -34,7 +34,7 @@
                     <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-4 col-xs-4">
                 <label> Trạng thái đơn hàng </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>

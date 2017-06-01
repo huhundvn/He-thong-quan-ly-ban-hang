@@ -30,7 +30,6 @@
             <div id="selectMenu1" class="tab-pane fade in active">
                 <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Khách hàng </label>
                     <div class="col-sm-9">
                         <div angucomplete-alt
                              placeholder="Khách hàng..."
