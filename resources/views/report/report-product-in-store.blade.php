@@ -88,7 +88,6 @@
                                     <table class="w3-table w3-center table-bordered">
                                         <thead>
                                         <th> STT </th>
-                                        <th> Mã SP </th>
                                         <th> Tên sản phẩm </th>
                                         <th> Đơn vị tính </th>
                                         <th> Số lượng <th>
@@ -98,7 +97,6 @@
                                         <tbody>
                                         <tr ng-show="productInStores.length > 0" ng-repeat="item in productInStores">
                                             <td> @{{ $index+1 }}</td>
-                                            <td> SP-@{{item.id}} </td>
                                             <td> @{{ item.name }} </td>
                                             <td> @{{ item.unit.name }} </td>
                                             <td> @{{item.quanity | number: 0}} </td>
