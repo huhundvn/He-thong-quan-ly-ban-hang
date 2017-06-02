@@ -107,7 +107,7 @@
                                             <td> @{{ item.created_at }} </td>
                                             <td> @{{item.expried_date | date: "dd/MM/yyyy" }}</td>
                                         </tr>
-                                        <tr class="item" ng-show="productInStores.length == 0">
+                                        <tr class="item" ng-show="storeOutputs.length == 0">
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
                                         </tr>
                                         </tbody>
