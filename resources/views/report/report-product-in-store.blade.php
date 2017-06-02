@@ -99,7 +99,7 @@
                                             <td> @{{ $index+1 }}</td>
                                             <td> @{{ item.name }} </td>
                                             <td> @{{ item.unit.name }} </td>
-                                            <td> @{{item.quanity | number: 0}} </td>
+                                            <td> @{{item.quantity | number: 0}} </td>
                                             <td> @{{ item.created_at }} </td>
                                             <td> @{{item.expried_date | date: "dd/MM/yyyy" }}</td>
                                         </tr>
