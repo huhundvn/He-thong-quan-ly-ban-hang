@@ -27,15 +27,15 @@
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-4 col-xs-4">
                 <label> Khách hàng </label>
                 <select ng-model="term2.customer_id" class="form-control input-sm">
                     <option value="" selected> -- Khách hàng -- </option>
-                    <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} </option>
+                    <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}}-@{{customer.address}} </option>
                 </select>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <label> Trạng thái đơn hàng </label>
+            <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>

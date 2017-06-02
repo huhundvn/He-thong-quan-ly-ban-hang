@@ -78,7 +78,7 @@
                     </button>
                 </td>
             </tr>
-            <tr class="item" ng-show="storeTranfers.length==0">
+            <tr class="item" ng-show="storeOutputs.length==0">
                 <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
