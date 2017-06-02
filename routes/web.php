@@ -124,7 +124,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	// API BÁO CÁO
 	Route::get('/top-product', 'ReportController@getTopProduct');
 	Route::get('/top-user', 'ReportController@getTopUser');
-	Route::get('/report-revenue', 'ReportController@getReportRevenue');
+	Route::post('/report-revenue', 'ReportController@getReportRevenue');
 	Route::post('/report-input-store', 'ReportController@getReportInputStore');
 	Route::post('/report-product-in-store', 'ReportController@getReportProductInStore');
 });

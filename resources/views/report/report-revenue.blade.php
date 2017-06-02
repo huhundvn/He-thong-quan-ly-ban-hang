@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="loadProductInStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> Tạo báo cáo </button>
+                    <button ng-click="loadStoreOutput()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> Tạo báo cáo </button>
                 </div>
             </div>
         </form>
@@ -94,11 +94,12 @@
                                         <th> Giá bán </th>
                                         <th> Giá mua </th>
                                         <th> Tiền vốn </th>
+                                        <th> Tiền bán ra </th>
                                         <th> Lãi </th>
                                         <th> Tỷ suất lợi nhuận </th>
                                         </thead>
                                         <tbody>
-                                        <tr ng-show="productInStores.length > 0" ng-repeat="item in productInStores">
+                                        <tr ng-show="storeOutputs.length > 0" ng-repeat="item in storeOutputs">
                                             <td> @{{ $index+1 }}</td>
                                             <td> @{{ item.name }} </td>
                                             <td> @{{ item.unit.name }} </td>
@@ -121,7 +122,7 @@
                                         <b> Kế toán </b> <br/> (Ký tên)
                                     </div>
                                     <div class="col-xs-4" align="center">
-                                        <b> Người lập phiếu </b> <br/> (Ký tên)
+                                        <b> Người lập báo cáo </b> <br/> (Ký tên)
                                     </div>
                                 </div>
                             </div>

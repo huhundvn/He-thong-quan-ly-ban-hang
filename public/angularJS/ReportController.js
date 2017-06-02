@@ -54,6 +54,22 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         [28, 48, 40, 19, 86, 27, 90]
     ];
 
+    // LẤY DANH SÁCH XUẤT KHO
+    $scope.loadStoreOutput = function () {
+        $http({
+            method : 'POST',
+            url : API + 'report-revenue',
+            data : $scope.info,
+            cache : false,
+            header : {'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(function (response) {
+            if(response.data.success) {
+                $scope.storeOutputs = response.data.success;
+            } else
+                toastr.error(response.data[0]);
+        });
+    };
+
     // LẤY DANH SÁCH NHẬP KHO
     $scope.loadInputStore = function () {
         $http({
