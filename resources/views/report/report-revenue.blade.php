@@ -109,7 +109,7 @@
                 							<td> @{{item.price_input * item.quantity | number: 0}} </td>
                 							<td> @{{item.price_output * item.quantity | number: 0}} </td>
                 							<td> @{{(item.price_output * item.quantity) - (item.price_input * item.quantity) | number: 0}} </td>
-                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) / (item.price_input * item.quantity) * 100 }} % </td>
+                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) / (item.price_input * item.quantity) * 100 | number: 2}} % </td>
                                         </tr>
                                         <tr class="item" ng-show="storeOutputs.length == 0">
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
