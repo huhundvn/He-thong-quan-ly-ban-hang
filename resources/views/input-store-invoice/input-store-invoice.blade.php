@@ -38,6 +38,7 @@
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchInputStore()">
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value=""> -- Trạng thái -- </option>
                     <option value="2" selected> Đã xác nhận </option>
