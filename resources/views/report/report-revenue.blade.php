@@ -101,11 +101,14 @@
                                         <tbody>
                                         <tr ng-show="storeOutputs.length > 0" ng-repeat="item in storeOutputs">
                                             <td> @{{ $index+1 }}</td>
-                                            <td> @{{ item.name }} </td>
-                                            <td> @{{ item.unit.name }} </td>
+                                            <td> @{{ item.product.name }} </td>
+                                            <td> @{{ item.product.unit_id }} </td>
                                             <td> @{{item.quantity | number: 0}} </td>
-                                            <td> @{{ item.created_at }} </td>
-                                            <td> @{{item.expried_date | date: "dd/MM/yyyy" }}</td>
+                                            <td> @{{item.price_input | number: 0}} </td>
+                                            <td> @{{item.price_output | number: 0}} </td>
+                							<td> @{{item.price_input * item.quantity | number: 0}} </td>
+                							<td> @{{item.price_output * item.quantity | number: 0}} </td>
+                							<td> @{{(item.price_output * item.quantity) - (item.price_input * item.quantity) | number: 0}} </td>
                                         </tr>
                                         <tr class="item" ng-show="storeOutputs.length == 0">
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
