@@ -6,7 +6,7 @@
 
 @section('location')
     <li> Kế toán </li>
-    <li> Thanh toán nhà cung cấp </li>
+    <li> Thanh toán nhập hàng nhà cung cấp </li>
 @endsection
 
 @section('content')
