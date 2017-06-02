@@ -16,21 +16,35 @@
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
             <div class="col-lg-2 col-xs-2">
+                <label> Khách hàng </label>
+                <select ng-model="term.customer_id" class="form-control input-sm">
+                    <option value="" selected> -- Khách hàng  -- </option>
+                    <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} - @{{customer.address}}</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Người tạo </label>
                 <select ng-model="term2.created_by" class="form-control input-sm">
                     <option value="" selected> -- Nhân viên -- </option>
                     <option ng-repeat="user in users" value="@{{user.id}}"> NV@{{user.id}} - @{{user.name}} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Từ ngày </label>
+                <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Đến ngày </label>
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="2"> Đã xác nhận </option>
                     <option value="3"> Đang giao  </option>
                     <option value="4"> Đã thanh toán </option>s
                 </select>
-            </div>
-            <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{paidOrders.length}} mục </button>
             </div>
         </div>
         <hr/>
