@@ -90,7 +90,7 @@
                                         <th> STT </th>
                                         <th> Tên sản phẩm </th>
                                         <th> Đơn vị tính </th>
-                                        <th> Số lượng <th>
+                                        <th> Số lượng </th>
                                         <th> Ngày nhập </th>
                                         <th> Hạn sử dụng </th>
                                         </thead>
