@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="loadProductInStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> In báo cáo </button>
+                    <button ng-click="loadProductInStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> Tạo báo cáo </button>
                 </div>
             </div>
         </form>

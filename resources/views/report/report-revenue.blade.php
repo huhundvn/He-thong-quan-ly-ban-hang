@@ -6,7 +6,7 @@
 
 @section('location')
     <li> Báo cáo </li>
-    <li> Doanh thu cửa hàng </li>
+    <li> Thống kê doanh thu bán hàng </li>
 @endsection
 
 @section('content')
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h2 align="center"> <b> Doanh thu cửa hàng </b> </h2>
+                                    <h2 align="center"> <b> Doanh thu bán hàng </b> </h2>
                                     <p align="center"> Từ ngày @{{ info.start_date | date: "dd/MM/yyyy" }} đến ngày @{{ info.end_date | date: "dd/MM/yyyy"}} </p>
                                     <p align="center" ng-repeat="store in stores" ng-show="store.id==info.store_id"> Thống kê tại @{{store.name}} </p>
                                 </div>
@@ -91,11 +91,11 @@
                                         <th> Tên sản phẩm </th>
                                         <th> Đơn vị tính </th>
                                         <th> Số lượng </th>
-                                        <th> Giá mua </th>
-                                        <th> Giá bán </th>
-                                        <th> Tổng tiền mua vào </th>
-                                        <th> Tổng tiền bán ra </th>
-                                        <th> Lợi nhuận </th>
+                                        <th> Giá mua (VNĐ) </th>
+                                        <th> Giá bán (VNĐ) </th>
+                                        <th> Tổng tiền mua vào (VNĐ) </th>
+                                        <th> Tổng tiền bán ra (VNĐ) </th>
+                                        <th> Lợi nhuận (VNĐ) </th>
                                         <th> Tỷ suất lợi nhuận </th>
                                         </thead>
                                         <tbody>
@@ -105,7 +105,7 @@
                                             <td ng-repeat="unit in units" ng-if="unit.id==item.product.unit_id"> @{{ unit.name }} </td>
                                             <td> @{{item.quantity | number: 0}} </td>
                                             <td> @{{item.price_input | number: 0}} </td>
-                                            <td> @{{item.price_output | number: 0}} </td>
+                                            <td> @{{item.price_output | number: 0}}  </td>
                 							<td> @{{item.price_input * item.quantity | number: 0}} </td>
                 							<td> @{{item.price_output * item.quantity | number: 0}} </td>
                 							<td> @{{(item.price_output * item.quantity) - (item.price_input * item.quantity) | number: 0}} </td>
