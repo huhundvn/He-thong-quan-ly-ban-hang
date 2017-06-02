@@ -12,7 +12,7 @@
 @section('content')
     <div ng-controller="ReportController">
         <div class="container-fluid">
-            <canvas class="chart-bar" chart-series="series" chart-data="data" chart-labels="labels" ng-show="data.length>0"></canvas>
+            <canvas class="chart-bar" chart-series="series" chart-data="data" ng-show="data.length>0"></canvas>
            	<h1 ng-show="data.length==0"> Không có dữ liệu </h1>
         </div>
     </div>
