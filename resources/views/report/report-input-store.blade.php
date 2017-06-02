@@ -92,9 +92,11 @@
                                             <th>
                                                 <table style="width:100%">
                                                     <tr>
-                                                        <td style="width:30%;"> Tên </td>
-                                                        <td style="width:30%;"> Đơn vị tính </td>
-                                                        <td style="width:30%;"> Số lượng </td>
+                                                        <td style="width:20%;"> Tên </td>
+                                                        <td style="width:20%;"> Đơn vị tính </td>
+                                                        <td style="width:20%;"> Số lượng </td>
+                                                        <td style="width:20%;"> Giá nhập </td>
+                                                        <td style="width:20%;"> Hạn sử dụng </td>
                                                     </tr>
                                                 </table>
                                             </th>
@@ -105,10 +107,12 @@
                                             <td> YCNH-@{{item.id}} </td>
                                             <td>
                                                 <table style="width:100%">
-                                                    <tr  ng-repeat="data in item.detail_input_stores">
-                                                        <td style="width:30%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
-                                                        <td style="width:30%;"> @{{ data.unit_id }} </td>
-                                                        <td style="width:30%;"> @{{ data.quantity }} </td>
+                                                    <tr ng-repeat="data in item.detail_input_stores">
+                                                        <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
+                                                        <td style="width:20%;"> @{{ data.unit_id }} </td>
+                                                        <td style="width:20%;"> @{{ data.quantity }} </td>
+                                                        <td style="width:20%;"> @{{item.price_input | numbder:0 }} </td>
+                                                        <td style="width:20%;"> @{{item.expried_date | date: "dd/MM/yyyy" }} </td>
                                                     </tr>
                                                 </table>
                                             </td>

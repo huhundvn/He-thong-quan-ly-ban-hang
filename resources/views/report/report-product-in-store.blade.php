@@ -91,6 +91,7 @@
                                         <th> Mã SP </th>
                                         <th> Tên sản phẩm </th>
                                         <th> Đơn vị tính </th>
+                                        <th> Số lượng <th>
                                         <th> Ngày nhập </th>
                                         <th> Hạn sử dụng </th>
                                         </thead>
@@ -100,6 +101,7 @@
                                             <td> SP-@{{item.id}} </td>
                                             <td> @{{ item.name }} </td>
                                             <td> @{{ item.unit.name }} </td>
+                                            <td> @{{item.quanity | number: 0}} </td>
                                             <td> @{{ item.created_at }} </td>
                                             <td> @{{item.expried_date | date: "dd/MM/yyyy" }}</td>
                                         </tr>
