@@ -27,7 +27,7 @@
                 <label> Nhà cung cấp </label>
                 <select ng-model="term2.supplier_id" class="form-control input-sm">
                     <option value="" selected> -- Nhà cung cấp -- </option>
-                    <option value="@{{supplier.id}}"> @{{supplier.name}} </option>
+                    <option ng-repeat="supplier in suppliers" value="@{{supplier.id}}"> @{{supplier.name}} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
