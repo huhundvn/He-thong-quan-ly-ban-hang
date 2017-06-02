@@ -19,6 +19,7 @@
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Tên BG </label>
                 <input type="text" ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
             </div>
             <div class="col-lg-2 col-xs-2">
