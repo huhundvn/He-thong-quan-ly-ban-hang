@@ -51,7 +51,6 @@ class ReportController extends Controller
 		else {
 			$data = DetailStoreOutput::with('product')
 				-> where('store_id', '=', Input::get('store_id'))
-				-> where('status', '=', 4)
 				-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
 				-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
 				-> get();
