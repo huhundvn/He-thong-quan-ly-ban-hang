@@ -93,9 +93,9 @@
                                         <th> Số lượng </th>
                                         <th> Giá mua </th>
                                         <th> Giá bán </th>
-                                        <th> Tổng tiền gốc </th>
+                                        <th> Tổng tiền mua vào </th>
                                         <th> Tổng tiền bán ra </th>
-                                        <th> Lãi </th>
+                                        <th> Lợi nhuận </th>
                                         <th> Tỷ suất lợi nhuận </th>
                                         </thead>
                                         <tbody>
@@ -109,7 +109,7 @@
                 							<td> @{{item.price_input * item.quantity | number: 0}} </td>
                 							<td> @{{item.price_output * item.quantity | number: 0}} </td>
                 							<td> @{{(item.price_output * item.quantity) - (item.price_input * item.quantity) | number: 0}} </td>
-                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) % (item.price_input * item.quantity) }} % </td>
+                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) / (item.price_input * item.quantity) }} % </td>
                                         </tr>
                                         <tr class="item" ng-show="storeOutputs.length == 0">
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
