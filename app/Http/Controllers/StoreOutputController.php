@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 //MODEL CSDL
 use App\StoreOutput;
@@ -19,6 +20,16 @@ class StoreOutputController extends Controller
 	{
 		return StoreOutput::with('user')
 			-> with('store')
+			-> get();
+	}
+
+	//API tìm kiếm lịch sử nhập kho theo khoảng thời gian
+	public function search(Request $request)
+	{
+		return StoreOutput::with('user')
+			-> with('store')
+			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
 			-> get();
 	}
 

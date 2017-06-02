@@ -39,6 +39,25 @@ app.controller('StoreOutputController', function($scope, $http, API, $interval) 
     $scope.loadOrder();
     // $interval($scope.loadOrder, 5000);
 
+    // Tìm kiếm lịch sử nhập kho theo khoảng thời gian
+    $scope.searchStoreOutput = function() {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-store-output',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                $scope.storeOutputs = response.data;
+            });
+        } else {
+            $http.get(API + 'store-output').then(function (response) {
+                $scope.storeOutputs = response.data;
+            });
+        }
+    };
+
     // THÊM SẢN PHẨM VÀO DANH SÁCH
     $scope.add = function(selected) {
         for(var i=0; i<$scope.data.length; i++) {

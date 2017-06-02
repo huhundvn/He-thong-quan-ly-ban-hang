@@ -94,6 +94,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('store-output', 'StoreOutputController'); //CRUD xuất kho
 	Route::resource('detail-store-output', 'DetailStoreOutputController'); //CRUD chi tiết chuyển kho
 	Route::get('/get-detail-store-output/{store_output_id}', 'DetailStoreOutputController@getDetail');
+	Route::post('/search-store-output', 'StoreOutputController@search'); //Tìm kiếm lịch sử xuất kho
 
 	// CHUYỂN KHO
 	Route::resource('store-tranfer', 'StoreTranferController'); //CRUD chuyển kho

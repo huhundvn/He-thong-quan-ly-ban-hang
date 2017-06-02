@@ -165,15 +165,6 @@
                                     Ngày giao hàng: @{{selected.input_date | date: "dd/MM/yyyy"}}<br/>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <hr/>
-                                    Chiết khấu: @{{ selected.discount | number:0 }} (VNĐ) <br/>
-                                    Thuế VAT: @{{ selected.tax }} % <br/>
-                                    Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
-                                    Ghi chú: @{{ selected.note }}
-                                </div>
-                            </div>
                             <h1></h1>
                             <div class="row">
                                 <table class="w3-table table-bordered w3-centered">
@@ -208,6 +199,15 @@
                                     </tbody>
                                 </table>
                                 <h1></h1>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <hr/>
+                                    Chiết khấu: @{{ selected.discount | number:0 }} (VNĐ) <br/>
+                                    Thuế VAT: @{{ selected.tax }} % <br/>
+                                    Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
+                                    Ghi chú: @{{ selected.note }}
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4" align="center">
