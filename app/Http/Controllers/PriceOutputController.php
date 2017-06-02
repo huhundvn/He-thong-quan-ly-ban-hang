@@ -23,6 +23,17 @@ class PriceOutputController extends Controller
 			-> get();
 	}
 
+	//API tìm kiếm bảng giá theo khoảng thời gian
+	public function search(Request $request)
+	{
+		return PriceOutput::with('detailPriceOutputs')
+			-> with('user')
+			-> with('customer_group')
+			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+			-> get();
+	}
+
 	//API DANH SÁCH BẢNG GIÁ ĐANG ÁP DỤNG
 	public function getActivePriceOutput()
 	{

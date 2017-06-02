@@ -80,6 +80,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('detail-price-output', 'DetailPriceOutputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-output/{price_output_id}', 'DetailPriceOutputController@getDetail');
 	Route::get('/get-active-price-output', 'PriceOutputController@getActivePriceOutput');
+	Route::post('/search-price-output', 'PriceOutputController@search'); //Tìm kiếm bảng giá bán
 
 	// BẢNG GIÁ MUA
 	Route::resource('price-input', 'PriceInputController'); //CRUD bảng giá bán nhà cung cấp
