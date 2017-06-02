@@ -102,14 +102,14 @@
                                         <tr ng-show="storeOutputs.length > 0" ng-repeat="item in storeOutputs">
                                             <td> @{{ $index+1 }}</td>
                                             <td> @{{ item.product.name }} </td>
-                                            <td> @{{ item.product.unit_id }} </td>
+                                            <td ng-repeat="unit in units" ng-if="unit.id==item.product.unit_id"> @{{ unit.name }} </td>
                                             <td> @{{item.quantity | number: 0}} </td>
                                             <td> @{{item.price_input | number: 0}} </td>
                                             <td> @{{item.price_output | number: 0}} </td>
                 							<td> @{{item.price_input * item.quantity | number: 0}} </td>
                 							<td> @{{item.price_output * item.quantity | number: 0}} </td>
                 							<td> @{{(item.price_output * item.quantity) - (item.price_input * item.quantity) | number: 0}} </td>
-                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) / (item.price_input * item.quantity) }} % </td>
+                							<td> @{{(item.price_output * item.quantity - item.price_input * item.quantity) / (item.price_input * item.quantity) * 100 }} % </td>
                                         </tr>
                                         <tr class="item" ng-show="storeOutputs.length == 0">
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
