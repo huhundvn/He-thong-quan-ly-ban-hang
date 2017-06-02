@@ -18,19 +18,26 @@
                 <a href="{{route('createPriceInput')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
-                <input type="text" ng-model="term" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
+            <div class="col-lg-2 col-xs-2">
+                <label> Tên BG </label>
+                <input type="text" ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Từ ngày </label>
+                <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchPriceInput()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Đến ngày </label>
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchPriceInput()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term2.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>
                     <option value="0"> Đã từ chối </option>
                     <option value="2"> Áp dụng </option>
                 </select>
-            </div>
-            <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{priceOutputs.length}} mục </button>
             </div>
         </div>
 

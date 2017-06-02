@@ -29,7 +29,26 @@ app.controller('PriceInputController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadPriceInput();
-    $interval($scope.loadPriceInput, 5000);
+    // $interval($scope.loadPriceInput, 5000);
+
+    // Tìm kiếm bảng giá theo khoảng thời gian
+    $scope.searchPriceInput = function() {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-price-input',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                $scope.priceInputs = response.data;
+            });
+        } else {
+            $http.get(API + 'price-input').then(function (response) {
+                $scope.priceInputs = response.data;
+            });
+        }
+    };
 
     $scope.data = [];
 

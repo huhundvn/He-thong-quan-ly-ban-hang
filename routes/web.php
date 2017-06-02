@@ -88,6 +88,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::resource('detail-price-input', 'DetailPriceInputController'); //CRUD chi tiết bảng giá
 	Route::get('/get-detail-price-input/{price_input_id}', 'DetailPriceInputController@getDetail');
 	Route::get('/get-active-price-input', 'PriceInputController@getActivePriceInput');
+	Route::post('/search-price-input', 'PriceInputController@search'); //Tìm kiếm bảng giá bán
 
 	// XUẤT KHO
 	Route::resource('store-output', 'StoreOutputController'); //CRUD xuất kho
