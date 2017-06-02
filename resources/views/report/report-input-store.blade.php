@@ -110,9 +110,9 @@
                                                     <tr ng-repeat="data in item.detail_input_stores">
                                                         <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
                                                         <td style="width:20%;"> @{{ data.unit_id }} </td>
-                                                        <td style="width:20%;"> @{{ data.quantity }} </td>
-                                                        <td style="width:20%;"> @{{item.price_input | numbder:0 }} </td>
-                                                        <td style="width:20%;"> @{{item.expried_date | date: "dd/MM/yyyy" }} </td>
+                                                        <td style="width:20%;"> @{{ data.quantity | number: 0}} </td>
+                                                        <td style="width:20%;"> @{{data.price_input | numbder:0 }} </td>
+                                                        <td style="width:20%;"> @{{data.expried_date | date: "dd/MM/yyyy" }} </td>
                                                     </tr>
                                                 </table>
                                             </td>
