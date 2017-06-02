@@ -154,6 +154,8 @@
                                         Chiết khấu: @{{ selected.discount | number:0 }} (VNĐ) <br/>
                                         Thuế VAT: @{{ selected.tax }} % <br/>
                                         Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
+                                        Số tiền đã thanh toán: @{{ selected.total_paid | number:0 }} (VNĐ) <br/>
+                                        Còn lại: @{{ selected.total - selected.total_paid | number:0 }} (VNĐ) <br/>
                                         Ghi chú: @{{ selected.note }}
                                     </div>
                                 </div>
