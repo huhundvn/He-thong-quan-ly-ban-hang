@@ -136,6 +136,8 @@ return [
         'payment_method' => 'phương thức thanh toán',
         'start_date' => 'ngày bắt đầu',
         'end_date' => 'ngày kết thúc'
+        'old_pass' => 'mật khẩu cũ',
+        'new_pass' => 'mật khẩu mới'
     ],
 
 ];
