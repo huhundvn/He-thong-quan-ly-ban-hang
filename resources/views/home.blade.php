@@ -18,7 +18,7 @@
             </div>
             <div class="panel-body">
                 <h3 class="w3-text-blue" ng-if="today_voucher[0] > 0"> @{{ today_voucher[0] | number:0 }} VNĐ </h3>
-                <h3 class="w3-text-blue" ng-if="today_voucher[0] != null"> 0 VNĐ </h3>
+                <h3 class="w3-text-blue" ng-if="today_voucher[0] == null"> 0 VNĐ </h3>
             </div>
             <div class="panel-footer"> <a href="{{ route('list-voucher') }}"> Xem thêm... </a> </div>
         </div>
