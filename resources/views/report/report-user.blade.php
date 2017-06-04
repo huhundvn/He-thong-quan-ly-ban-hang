@@ -40,7 +40,7 @@
         </table>    
 
         <div id="grid" class="container-fluid" hidden>
-            <canvas class="chart-bar" chart-series="series03" chart-data="data03" chart-labels="labels03"></canvas>
+            <canvas class="chart-horizontal-bar" chart-series="series03" chart-data="data03" chart-labels="labels03"></canvas>
         </div>
     </div>
 @endsection
