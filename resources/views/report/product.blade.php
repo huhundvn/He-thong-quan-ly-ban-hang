@@ -27,7 +27,7 @@
         <hr> </hr>
 
         {{-- DANH SÁCH SẢN PHẨM --}}
-        <h4 align="center"> Bảng thống kê 10 sản phẩm bán chạy </h4>
+        <h4 id="list" align="center"> Bảng thống kê 10 sản phẩm bán chạy </h4>
         <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
