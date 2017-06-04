@@ -34,6 +34,15 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.data.push(0);
     });
 
+    // XEM THÔNG TIN SẢN PHẨM
+    $scope.readProduct = function (product) {
+        $http.get(API + 'product/' + product.product_id).then(function (response) {
+            $scope.selected = response.data;
+            CKEDITOR.instances.description.setData($scope.selected.description);
+            CKEDITOR.instances.user_guide.setData($scope.selected.user_guide);
+        });
+    };
+
     // LẤY DANH SÁCH 10 nhân viên BÁN CHẠY
     $http.get(API + 'top-user').then(function (response) {
         $scope.labels03 = [];
