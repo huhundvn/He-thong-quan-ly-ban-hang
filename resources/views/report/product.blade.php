@@ -37,7 +37,7 @@
                 <th> Số lượng bán ra </th>
             </thead>
             <tbody>
-                <tr class="item" ng-if="top-products.length > 0" dir-paginate="product in topProducts | itemsPerPage: 8" ng-click="readProduct(product)">
+                <tr class="item" ng-if="topProducts.length > 0" dir-paginate="product in topProducts | itemsPerPage: 8" ng-click="readProduct(product)">
                 <td> SP@{{("000"+product.product_id).slice(-4)}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> <p class="entry-text"> @{{ product.name}} </p> </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ product.code }}</td>
