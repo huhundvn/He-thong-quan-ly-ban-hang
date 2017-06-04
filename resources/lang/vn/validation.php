@@ -132,12 +132,12 @@ return [
 	    'warranty_period' => 'thời hạn bảo hành',
 	    'return_period' => 'thời gian đổi trả',
 	    'category_id' => 'nhóm sản phẩm',
-        // 'store_id' => 'kho',
-        // 'payment_method' => 'phương thức thanh toán',
-        // 'start_date' => 'ngày bắt đầu',
-        // 'end_date' => 'ngày kết thúc'
-        // 'old_pass' => 'mật khẩu cũ',
-        // 'new_pass' => 'mật khẩu mới',
+        'store_id' => 'kho',
+        'payment_method' => 'phương thức thanh toán',
+        'start_date' => 'ngày bắt đầu',
+        'end_date' => 'ngày kết thúc',
+        'old_pass' => 'mật khẩu cũ',
+        'new_pass' => 'mật khẩu mới',
     ],
 
 ];
