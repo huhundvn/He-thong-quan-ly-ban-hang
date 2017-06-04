@@ -106,7 +106,6 @@
                                             <td> @{{item.created_at | date: "dd/MM/yyyy" }}</td>
                                             <td> YCNH-@{{item.id}} </td>
                                             <td>
-                                                @{{ item.detail_input_stores }}
                                                 <table style="width:100%;">
                                                     <tr ng-repeat="data in item.detail_input_stores">
                                                         <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
