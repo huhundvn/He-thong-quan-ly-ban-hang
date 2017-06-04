@@ -18,7 +18,7 @@
                         <span class="glyphicon glyphicon-align-justify"></span>
                     </button>
                     <button id="viewGrid" type="button" class="btn btn-sm btn-default">
-                        <span class="glyphicon glyphicon-th"></span>
+                        <span class="glyphicon glyphicon-signal"></span>
                     </button>
                 </div>
             </div>
@@ -26,7 +26,7 @@
 
     	<hr> </hr>
 
-    	{{-- DANH SÁCH SẢN PHẨM --}}
+    	{{-- DANH SÁCH NHÂN VIÊN --}}
         <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
