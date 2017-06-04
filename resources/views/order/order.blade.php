@@ -16,6 +16,7 @@
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
             <div class="col-lg-2 col-xs-2">
+                <h3> </h3>
                 <a href="{{ route('createOrder') }}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Tạo đơn hàng </a>
             </div>

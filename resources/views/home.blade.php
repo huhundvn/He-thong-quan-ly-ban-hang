@@ -27,7 +27,7 @@
         <div class="panel panel-success">
             <div class="panel-heading w3-blue-grey"> Đơn đặt hàng hôm nay </div>
             <div class="panel-body">
-                <h3 class="w3-text-blue"> @{{ today_order }} đơn hàng mới </h3>
+                <h3 class="w3-text-blue"> @{{ today_order }} đơn hàng </h3>
             </div>
             <div class="panel-footer"> <a href="{{ route('list-order') }}"> Xem thêm... </a> </div>
         </div>
