@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 //MODEL CSDL
 use App\StoreTranfer;
@@ -18,6 +19,16 @@ class StoreTranferController extends Controller
 	{
 		return StoreTranfer::with('detailStoreTranfers')
 			-> with('user')
+			-> get();
+	}
+
+	//API tìm kiếm lịch sử chuyển kho theo khoảng thời gian
+	public function search(Request $request)
+	{
+		return StoreTranfer::with('detailStoreTranfers')
+			-> with('user')
+			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
 			-> get();
 	}
 

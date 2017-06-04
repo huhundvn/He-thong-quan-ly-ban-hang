@@ -16,22 +16,34 @@
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
             <div class="col-lg-2 col-xs-2">
+                <h3></h3>
                 <a href="{{route('createStoreTranfer')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Chuyển kho </a>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Từ ngày </label>
+                <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchStoreTranfer()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Đến ngày </label>
+                <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchStoreTranfer()">
+            </div>
+            <div class="col-lg-2 col-xs-2">
+                <label> Kho chuyển </label>
                 <select ng-model="term.from_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho chuyển -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Kho nhận </label>
                 <select ng-model="term2.to_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhận -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
             <div class="col-lg-2 col-xs-2">
+                <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>
@@ -39,9 +51,6 @@
                     <option value="2"> Đã xác nhận </option>
                     <option value="3"> Đã chuyển kho </option>s
                 </select>
-            </div>
-            <div class="col-lg-2 col-xs-2">
-                <button class="btn btn-sm btn-info"> Tổng số: @{{storeTranfers.length}} mục </button>
             </div>
         </div>
 

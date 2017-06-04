@@ -26,7 +26,26 @@ app.controller('StoreTranferController', function($scope, $http, API, $interval)
         });
     };
     $scope.loadStoreTranfer();
-    $interval($scope.loadStoreTranfer, 5000);
+    // $interval($scope.loadStoreTranfer, 5000);
+
+    // Tìm kiếm lịch sử chuyển kho theo khoảng thời gian
+    $scope.searchStoreTranfer = function() {
+        if($scope.search.start_date != null && $scope.search.end_date != null) {
+            $http({
+                method : 'POST',
+                url : API + 'search-store-tranfer',
+                data : $scope.search,
+                cache : false,
+                header : {'Content-Type':'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                $scope.storeTranfers = response.data;
+            });
+        } else {
+            $http.get(API + 'store-tranfer').then(function (response) {
+                $scope.storeTranfers = response.data;
+            });
+        }
+    };
 
     $scope.data = [];
 

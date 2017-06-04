@@ -101,6 +101,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function() {
 	Route::get('/confirm-store-tranfer/{store_tranfer_id}/{status}', 'StoreTranferController@confirm'); //duyệt chuyển kho
 	Route::resource('detail-store-tranfer', 'DetailStoreTranferController'); //CRUD chi tiết chuyển kho
 	Route::get('/get-detail-store-tranfer/{store_tranfer_id}', 'DetailStoreTranferController@getDetail');
+	Route::post('/search-store-tranfer', 'StoreOutputController@search'); //Tìm kiếm lịch sử chuyển kho
 
 	// ĐƠN HÀNG
 	Route::resource('order', 'OrderController'); //CRUD đơn đặt hàng
