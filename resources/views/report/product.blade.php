@@ -25,7 +25,8 @@
         </div>
 
         <hr> </hr>
-
+        <h4 align="center"> Biểu đồ thống kê 10 sản phẩm bán chạy </h4>
+        
         {{-- DANH SÁCH SẢN PHẨM --}}
         <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
@@ -51,7 +52,6 @@
         </table>
 
         <div id="grid" class="container-fluid" hidden>
-            <h4 align="center"> Biểu đồ thống kê 10 sản phẩm bán chạy </h4>
             <canvas class="chart-horizontal-bar" chart-series="series" chart-data="data" chart-labels="labels" ng-show="data.length>0"></canvas>
            	<h1 ng-show="data.length==0"> Không có dữ liệu </h1>
         </div>
