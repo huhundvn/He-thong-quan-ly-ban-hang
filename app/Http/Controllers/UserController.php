@@ -18,7 +18,9 @@ class UserController extends Controller
     // API lấy danh sách nhân viên
     public function index()
     {
-        return User::with('position') -> get();
+        return User::with('position') 
+            -> with('store')
+            -> get();
     }
 
 	// API lấy số lượng nhân viên

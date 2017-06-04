@@ -31,6 +31,10 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.attributes = response.data;
     }); // Load thuộc tính sản phẩm
 
+    $http.get(API + 'user').then(function (response) {
+        $scope.users = response.data;
+    });
+
     // LẤY DANH SÁCH 10 SẢN PHẨM BÁN CHẠY
     $http.get(API + 'top-product').then(function (response) {
         $scope.labels = [];
@@ -60,6 +64,7 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.labels03 = [];
         $scope.data03 = [];
         $scope.series03 = ['Tổng tiền hóa đơn'];
+        $scope.topUsers = response.data;
         for (var i = 0; i < response.data.length; i++) {
             $http.get(API + 'user/' + response.data[i].created_by).then(function (response02) {
                 $scope.labels03.push(response02.data.name);

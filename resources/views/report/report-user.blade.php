@@ -26,16 +26,32 @@
 
     	<hr> </hr>
 
+        <h4 align="center"> Biểu đồ thống kê 10 nhân viên bán nhiều hàng nhất </h4>
+
     	{{-- DANH SÁCH NHÂN VIÊN --}}
         <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã NV </th>
                 <th> Tên </th>
+                <th> Email </th>
+                <th> Số điện thoại </th>
                 <th> Nơi làm việc </th>
-                <th> Số tiền bán ra </th>
+                <th> Tổng tiền đã bán ra (VNĐ) </th>
             </thead>
             <tbody>
+                <tr ng-show="topUsers.length > 0" class="item" ng-repeat="user in topUsers" ng-click="readUser(user)">
+                <td data-toggle="modal" data-target="#readUser"> NV-@{{ user.created_by}} </td>
+                <td data-toggle="modal" data-target="#readUser" ng-repeat="item in users" ng-if="item.id==user.created_by"> @{{ item.name}} </td>
+                <td data-toggle="modal" data-target="#readUser" ng-repeat="item in users" ng-if="item.id==user.created_by"> @{{ item.email}}</td>
+                <td data-toggle="modal" data-target="#readUser" ng-repeat="item in users" ng-if="item.id==user.created_by"> @{{ item.phone}} </td>
+                <td data-toggle="modal" data-target="#readUser" ng-repeat="item in users" ng-if="item.id==user.created_by"> @{{ item.store.name}} </td>
+                <td data-toggle="modal" data-target="#readUser"> @{{ user.sum | number: 0}} 
+                </td>
+            </tr>
+            <tr class="item" ng-if="users.length==0">
+                <td colspan="7"> Không có dữ liệu </td>
+            </tr>
             </tbody>
         </table>    
 
