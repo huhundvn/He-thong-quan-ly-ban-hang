@@ -107,15 +107,15 @@
                                             <td> YCNH-@{{item.id}} </td>
                                             <td>
                                                 @{{ item.detail_input_stores }}
-                                                <!-- <table style="width:100%">
+                                                <table style="width:100%;">
                                                     <tr ng-repeat="data in item.detail_input_stores">
                                                         <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
-                                                        <td style="width:20%;"> @{{ data.unit_id }} </td>
+                                                        <!-- <td style="width:20%;"> @{{ data.unit_id }} </td> -->
                                                         <td style="width:20%;"> @{{ data.quantity | number: 0}} </td>
-                                                        <td style="width:20%;"> @{{data.price_input | numbder:0 }} </td>
+                                                        <td style="width:20%;"> @{{data.price_input | number:0 }} </td>
                                                         <td style="width:20%;"> @{{data.expried_date | date: "dd/MM/yyyy" }} </td>
                                                     </tr>
-                                                </table> -->
+                                                </table>
                                             </td>
                                         </tr>
                                         <tr class="item" ng-show="inputStores.length == 0">
