@@ -107,3 +107,17 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         window.print();
     }
 });
+
+$("#viewList").click(function () {
+    $("#viewList").addClass('w3-blue-grey');
+    $("#viewGrid").removeClass('w3-blue-grey');
+    $("#grid").attr('hidden', true);
+    $("#list").removeAttr('hidden');
+});
+
+$("#viewGrid").click(function () {
+    $("#viewList").removeClass('w3-blue-grey');
+    $("#viewGrid").addClass('w3-blue-grey');
+    $("#list").attr('hidden', true);
+    $("#grid").removeAttr('hidden');
+});

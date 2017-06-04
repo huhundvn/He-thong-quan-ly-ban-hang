@@ -24,17 +24,16 @@
             </div>
     	</div>
 
+    	<hr> </hr>
+
     	{{-- DANH SÁCH SẢN PHẨM --}}
         <table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
-                <th> Mã SP </th>
+                <th> Mã NV </th>
                 <th> Tên </th>
-                <th> Mã vạch </th>
-                <th> Đơn vị tính </th>
-                <th> Tổng số lượng </th>
-                <th> Tình trạng </th>
-                <th> Xóa </th>
+                <th> Nơi làm việc </th>
+                <th> Số tiền bán ra </th>
             </thead>
             <tbody>
             </tbody>
