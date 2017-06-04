@@ -24,6 +24,7 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
         $scope.labels = [];
         $scope.data = [];
         $scope.series = ['Thu', 'Chi'];
+        $scope.top-products = response.data;
         for (var i = 0; i < response.data.length; i++) {
             $http.get(API + 'product/' + response.data[i].product_id).then(function (response02) {
                 $scope.labels.push(response02.data.name);
