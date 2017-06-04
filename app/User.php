@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function store()
     {
-        return $this->belongsTo('App\Store');
+        return $this->belongsTo('App\Store', 'work_place_id', 'id');
     }
 }
