@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM SẢN PHẨM--}}
         <div class="row">
-            <div class="col-lg-4 col-sm-5 col-xs-5">
+            <div class="col-lg-4 col-sm-4 col-xs-4">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
                     <span class="glyphicon glyphicon-plus w3-hide-medium"></span> Thêm SP </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -41,7 +41,7 @@
             <!-- <div class="col-lg-1 col-md-1">
                 <button class="btn btn-sm btn-info"> @{{ products.length }} mục </button>
             </div> -->
-            <div class="col-lg-2 col-sm-1 col-xs-1">
+            <div class="col-lg-2 col-sm-2 col-xs-2">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
