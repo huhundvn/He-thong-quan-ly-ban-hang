@@ -64,7 +64,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Thêm sản phẩm mới </h4>
+                            <h4 class="modal-title w3-text-blue" id="myModalLabel"> Xem thông tin sản phẩm </h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
