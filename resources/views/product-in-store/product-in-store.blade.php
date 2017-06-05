@@ -66,8 +66,8 @@
             </thead>
             <tbody>
             <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
-                <td data-toggle="modal" data-target="#readProduct"> SP-@{{ productInStore.product_id }} </td>
-                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.name }} </td>
+                <td data-toggle="modal" data-target="#readProduct"> SP@{{("000"+productInStore.product_id).slice(-4)}} </td>
+                <td data-toggle="modal" data-target="#readProduct"> <p class="entry-text"> @{{ productInStore.name}} </p> </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.code }}</td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="unit in units" ng-show="unit.id==productInStore.unit_id">
                     @{{ unit.name }}
