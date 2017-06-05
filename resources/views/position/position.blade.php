@@ -18,8 +18,8 @@
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
-                <button class="btn btn-sm btn-warning">
-                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </button>
+                <a href="{{route('downloadPositionTemplate')}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-4 col-xs-4">
                 <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
@@ -88,7 +88,7 @@
                                     <label> Bán hàng </label> <br/>
                                     <input ng-model="role01" type="checkbox" ng-true-value="'order'" ng-false-value="'order'" ng-click="add(role01)"> Quản lý đơn hàng <br/>
                                     <input ng-model="role02" type="checkbox" ng-true-value="'price-output'" ng-false-value="'price-output'" ng-click="add(role02)"> Quản lý bảng giá <br/>
-                                    <input ng-model="role03" type="checkbox" ng-true-value="'return'" ng-false-value="'return'" ng-click="add(role03)"> Quản lý trả về <br/>
+                                    <!-- <input ng-model="role03" type="checkbox" ng-true-value="'return'" ng-false-value="'return'" ng-click="add(role03)"> Quản lý trả về <br/> -->
                                     <input ng-model="role04" type="checkbox" ng-true-value="'confirm-order'" ng-false-value="'confirm-order'" ng-click="add(role04)"> Duyệt đơn hàng <br/>
                                     <input ng-model="role05" type="checkbox" ng-true-value="'confirm-price-output'" ng-false-value="'confirm-price-output'" ng-click="add(role05)"> Duyệt bảng giá <br/>
                                 </div>
@@ -126,9 +126,6 @@
                                     <input ng-model="role19" type="checkbox" ng-true-value="'customer'" ng-false-value="'customer'" ng-click="add(role19)"> Quản lý khách hàng <br/>
                                 </div>
                                 <div class="col-xs-3">
-                                    <label> Khuyến mãi </label>
-                                </div>
-                                <div class="col-xs-3">
                                     <label> Nhân viên </label> <br/>
                                     <input ng-model="role20" type="checkbox" ng-true-value="'user'" ng-false-value="'user'" ng-click="add(role20)"> Quản lý nhân viên <br/>
                                     <input ng-model="role21" type="checkbox" ng-true-value="'position'" ng-false-value="'position'" ng-click="add(role21)"> Quản lý chức vụ <br/>
@@ -148,7 +145,7 @@
         <div class="modal fade" id="inputFromFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action="" method="post"> {{csrf_field()}}
+                    <form enctype="multipart/form-data" action="{{route('importPositionFromFile')}}" method="post"> {{csrf_field()}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Nhập từ File </h4>
@@ -192,7 +189,7 @@
                                     <label> Bán hàng </label> <br/>
                                     <input ng-checked="selected.role.indexOf('order') != -1" ng-model="urole01" type="checkbox" ng-true-value="'order'" ng-false-value="'order'" ng-click="add(urole01)"> Quản lý đơn hàng <br/>
                                     <input ng-checked="selected.role.indexOf('price-output') != -1" ng-model="urole02" type="checkbox" ng-true-value="'price-output'" ng-false-value="'price-output'" ng-click="add(urole02)"> Quản lý bảng giá <br/>
-                                    <input ng-checked="selected.role.indexOf('return') != -1" ng-model="urole03" type="checkbox" ng-true-value="'return'" ng-false-value="'return'" ng-click="add(urole03)"> Quản lý trả về <br/>
+                                    <!-- <input ng-checked="selected.role.indexOf('return') != -1" ng-model="urole03" type="checkbox" ng-true-value="'return'" ng-false-value="'return'" ng-click="add(urole03)"> Quản lý trả về <br/> -->
                                     <input ng-checked="selected.role.indexOf('confirm-order') != -1" ng-model="urole04" type="checkbox" ng-true-value="'confirm-order'" ng-false-value="'confirm-order'" ng-click="add(urole04)"> Duyệt đơn hàng <br/>
                                     <input ng-checked="selected.role.indexOf('confirm-price-output') != -1" ng-model="urole05" type="checkbox" ng-true-value="'confirm-price-output'" ng-false-value="'confirm-price-output'" ng-click="add(urole05)"> Duyệt bảng giá <br/>
                                 </div>

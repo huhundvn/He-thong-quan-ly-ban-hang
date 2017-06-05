@@ -87,4 +87,44 @@ class PositionController extends Controller
 	{
 		return view('position.position');
 	}
+
+	/**
+	 * Nhập từ file Excel
+	 */
+	public function importFromFile(Request $request)
+	{
+		$rules = [
+			'ten_chuc_vu' => 'required|unique:position,name',
+		];
+
+		if(Input::hasFile('file')) {
+			$rows =  Excel::load(Input::file('file'), function ($reader){
+			},'UTF-8') -> get();
+			$count = 0;
+			foreach ($rows as $row) {
+				$validation = Validator::make($row->toArray(), $rules);
+				if($validation->fails())
+					continue;
+				else {
+					$new = new Position();
+					$new -> name = $row -> ten_chuc_vu;
+					$new -> description = $row -> mo_ta;
+					$saved = $new -> save();
+					if(!$saved)
+						continue;
+					else
+						$count++;
+				}
+			}
+			return redirect()->route('list-position') -> with('status', 'Đã thêm '.$count.' mục.');
+		}
+	}
+
+	/**
+	 * Download mẫu nhập
+	 */
+	public function downloadTemplate()
+	{
+		return response() -> download(public_path().'/template/chuc vu.xlsx');
+	}
 }

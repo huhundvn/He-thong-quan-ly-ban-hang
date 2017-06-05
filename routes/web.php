@@ -142,6 +142,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     //CHỨC VỤ
     Route::get('/list-position', 'PositionController@listPosition') -> name('list-position') -> middleware(CheckPositionRole::class);
+    Route::post('/position/importFromFile', 'PositionController@importFromFile') -> name('importPositionFromFile') -> middleware(CheckPositionRole::class);
+    Route::get('/download-position-template', 'PositionController@downloadTemplate') -> name('downloadPositionTemplate') -> middleware(CheckPositionRole::class);
 
     //KHÁCH HÀNG
     Route::get('/list-customer', 'CustomerController@listCustomer') -> name('list-customer') -> middleware(CheckCustomerRole::class);

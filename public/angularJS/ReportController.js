@@ -39,7 +39,7 @@ app.controller('ReportController', function($scope, $http, API, $interval) {
     $http.get(API + 'top-product').then(function (response) {
         $scope.labels = [];
         $scope.data = [];
-        $scope.series = ['Thu', 'Chi'];
+        $scope.series = ['Số lượng bán ra'];
         $scope.topProducts = response.data;
         for (var i = 0; i < response.data.length; i++) {
             $http.get(API + 'product/' + response.data[i].product_id).then(function (response02) {
