@@ -117,7 +117,7 @@
         <div class="modal fade" id="inputFromFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" action="" method="post"> {{csrf_field()}}
+                    <form enctype="multipart/form-data" action="{{route('importAccountFromFile')}}" method="post"> {{csrf_field()}}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Nhập từ File </h4>

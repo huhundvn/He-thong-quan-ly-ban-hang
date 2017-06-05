@@ -97,6 +97,41 @@ class AccountController extends Controller
 	}
 
 	/**
+	 * Nhập từ file Excel
+	 */
+	public function importFromFile(Request $request)
+	{
+		$rules = [
+			'ten_tai_khoan' => 'required|unique:account,name',
+			'tong_tien' => 'required'
+		];
+
+		if(Input::hasFile('file')) {
+			$rows =  Excel::load(Input::file('file'), function ($reader){
+			},'UTF-8') -> get();
+			$count = 0;
+			foreach ($rows as $row) {
+				$validation = Validator::make($row->toArray(), $rules);
+				if($validation->fails())
+					continue;
+				else {
+					$new = new Account();
+					$new -> name = $row -> ten_tai_khoan;
+					$new -> bank_account = $row -> so_tai_khoan;
+					$new -> bank = $row -> ngan_hang;
+					$new -> total = $row -> tong_tien;
+					$saved = $new -> save();
+					if(!$saved)
+						continue;
+					else
+						$count++;
+				}
+			}
+			return redirect()->route('list-account') -> with('status', 'Đã thêm '.$count.' mục.');
+		}
+	}
+
+	/**
 	 * Download mẫu nhập
 	 */
 	public function downloadTemplate()

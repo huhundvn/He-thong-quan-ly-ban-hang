@@ -193,6 +193,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 	//TÀI KHOẢN THANH TOÁN
 	Route::get('/list-account', 'AccountController@listAccount') -> name('list-account') -> middleware(CheckAccountRole::class);
+	Route::post('/account/importFromFile', 'AccountController@importFromFile') -> name('importAccountFromFile') -> middleware(CheckAccountRole::class);
 	Route::get('/download-account-template', 'AccountController@downloadTemplate') -> name('downloadAccountTemplate') -> middleware(CheckAccountRole::class);
 
 	//NHẬP KHO
@@ -243,46 +244,3 @@ Route::group(['middleware' => 'auth'], function (){
 
 	Route::get('/no-permission', 'HomeController@checkPermission') -> name('no-permission');
 });
-
-//Route::resource('orders', 'OrderController');
-//Route::get('/orders/{customer_id}/customers', 'OrderController@orderByCustomerId')->name('orderByCustomerId');
-//Route::get('/orders/{status}/status', 'OrderController@listOrderByStatus');
-//Route::get('/orders/{status}/{customer_id}', 'OrderController@listOrderByStatusAndCustomerId');
-//Route::put('/orders/{id}/{customer_id}', 'OrderController@updateStatus')->name('updateStatus');
-//
-///**
-// * CRUD order details
-// */
-//Route::resource('order-details', 'OrderDetailController');
-//Route::get('/order-details/{order_id}/order', 'OrderDetailController@listOrderDetailByOrderId');
-//Route::put('/order-details/{order_id}/{product_id}', 'OrderDetailController@updateOrderDetailByProductId');
-//
-///**
-// * CRUD Price detail output
-// */
-//Route::resource("price-detail-output", 'PriceDetailOutputController');
-//Route::get("price-detail-output/{id}/price-output", "PriceDetailOutputController@listPriceDetailOutputByOutputId");
-//
-///**
-// * CRUD Price output
-// */
-//Route::resource("price-output", 'PriceOutputController');
-//Route::get('price-output/{id}/customer-group', 'PriceOutputController@listPriceDetailOutput');
-//
-///**
-// * CRUD address
-// */
-//Route::resource('address', 'AddressController');
-//Route::get('address/{customer_id}/customer', 'AddressController@listAddressByCustomerId');
-//
-///**
-// * CRUD cart
-// */
-//Route::resource('carts', 'CartController');
-//Route::get('/carts/{customer_id}/customers', 'CartController@listCartByCustomerId')->name('listCartByCustomerId');
-//Route::put('/carts/{customer_id}/{product_id}', 'CartController@updateCartByCustomerId');
-//Route::delete('/carts/{customer_id}/customer', 'CartController@deleteCartByCustomerId');
-//Route::delete('/carts/{customer_id}/{product_id}', 'CartController@deleteProductInCart');
-//
-//
-//
