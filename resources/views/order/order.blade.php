@@ -89,7 +89,7 @@
                     </button>
                 </td>
                 <td ng-show="roles.indexOf('confirm-order') != -1">
-                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
+                    <button ng-show="0==order.status || 4==order.status" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteInputStore">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
