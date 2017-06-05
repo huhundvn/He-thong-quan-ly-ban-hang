@@ -98,7 +98,7 @@
         </div>
 
         {{-- !PHÂN TRANG! --}}
-        <div style="margin-left: 35%; position: fixed; bottom: 0">
+        <div style="margin-left: 40%;">
             <dir-pagination-controls max-size="4"> </dir-pagination-controls>
         </div>
 
