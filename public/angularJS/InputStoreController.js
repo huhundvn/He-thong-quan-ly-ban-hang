@@ -51,10 +51,14 @@ app.controller('InputStoreController', function($scope, $http, API, $interval) {
                 header : {'Content-Type':'application/x-www-form-urlencoded'}
             }).then(function (response) {
                 $scope.inputStores = response.data;
+                $scope.paidInputStores = response.data;
             });
         } else {
             $http.get(API + 'input-store').then(function (response) {
                 $scope.inputStores = response.data;
+            });
+            $http.get(API + 'get-paid-input-store').then(function (response) {
+                $scope.paidInputStores = response.data;
             });
         }
     };
