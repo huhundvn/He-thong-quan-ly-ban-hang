@@ -117,8 +117,8 @@ class UserController extends Controller
     public function importFromFile(Request $request)
     {
         $rules = [
-            'ten_nhan_vien' => 'required|unique:user,name',
-            'email' => 'required|unique:user,email',
+            // 'ten_nhan_vien' => 'required|unique:user,name',
+            // 'email' => 'required|unique:user,email',
         ];
 
         if(Input::hasFile('file')) {
@@ -134,14 +134,14 @@ class UserController extends Controller
                     $new -> name = $row -> ten_nhan_vien;
                     $new -> email = $row -> email;
                     $new -> phone = $row -> so_dien_thoai;
-                    $store = Store::where('name', '=', $row -> noi_lam_viec) ->get();
-                    if (count($store) > 0) {
-                        $new -> work_place_id = Store::where('name', '=', $row -> noi_lam_viec)->pluck('id')->first();
-                    }
-                    $position = Position::where('name', '=', $row -> chuc_vu) ->get();
-                    if (count($position) > 0) {
-                        $new -> position_id = Position::where('name', '=', $row -> chuc_vu)->pluck('id')->first();
-                    }
+                    // $store = Store::where('name', '=', $row -> noi_lam_viec) ->get();
+                    // if (count($store) > 0) {
+                    //     $new -> work_place_id = Store::where('name', '=', $row -> noi_lam_viec)->pluck('id')->first();
+                    // }
+                    // $position = Position::where('name', '=', $row -> chuc_vu) ->get();
+                    // if (count($position) > 0) {
+                    //     $new -> position_id = Position::where('name', '=', $row -> chuc_vu)->pluck('id')->first();
+                    // }
                     $new -> status = 1;
                     $saved = $new -> save();
                     if(!$saved)
