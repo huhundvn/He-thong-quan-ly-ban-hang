@@ -176,7 +176,7 @@
                             <h4 class="modal-title w3-text-blue" id="myModalLabel"> Nhập từ File </h4>
                         </div>
                         <div class="modal-body">
-                            <input type="file" name="fileUser" accept=".xlsx" required>
+                            <input type="file" name="file" accept=".xlsx" required>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-info"> Xác nhận </button>
