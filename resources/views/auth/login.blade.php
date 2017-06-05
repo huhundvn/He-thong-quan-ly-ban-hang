@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="w3-main" style="height: 670px;">
+<div class="w3-main" style="height: 100%;">
     <div class="hero-image w3-animate-opacity">
         <div class="hero-text-left">
             {{--<img src="{{asset('logo.png')}}" height="300">--}}
