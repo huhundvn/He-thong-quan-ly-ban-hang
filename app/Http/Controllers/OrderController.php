@@ -137,6 +137,8 @@ class OrderController extends Controller
 	    	$update = Order::find($id);
 		    $customer = Customer::find($update -> customer_id);
 	    	$update -> total_paid = $update -> total_paid + Input::get('total_paid');
+	    	if ($update -> total == $update -> total_paid)
+	    		$update -> status = 4;
 		    $update -> save();
 
 		    $voucher  = new Voucher();
