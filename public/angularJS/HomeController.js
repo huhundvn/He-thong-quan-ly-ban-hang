@@ -62,4 +62,23 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
         [28, 48, 40, 19, 56, 27, 90],
         [37, 11, 40, 62, 30, 28, -50]
     ];
+    $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+    $scope.options = {
+        scales: {
+        yAxes: [
+            {
+                id: 'y-axis-1',
+                type: 'linear',
+                display: true,
+                position: 'left'
+            },
+            {
+                id: 'y-axis-2',
+                type: 'linear',
+                display: true,
+                position: 'right'
+            }
+        ]
+        }
+    };
 });
