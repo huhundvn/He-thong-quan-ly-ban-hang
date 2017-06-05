@@ -29,8 +29,8 @@ class PriceOutputController extends Controller
 		return PriceOutput::with('detailPriceOutputs')
 			-> with('user')
 			-> with('customer_group')
-			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
-			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+			-> where(Carbon::parse('created_at'), '<=', Carbon::parse(Input::get('end_date')))
+			-> where(Carbon::parse('created_at'), '>=', Carbon::parse(Input::get('start_date')))
 			-> get();
 	}
 
