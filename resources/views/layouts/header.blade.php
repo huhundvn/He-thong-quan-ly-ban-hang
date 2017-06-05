@@ -14,7 +14,7 @@
         </div>
     </div>
     @endif
-    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right" href="http://43.239.223.142:8088/"> Cửa hàng Online </a>
+    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right" onclick="window.open('http://43.239.223.142:8088/')"> Cửa hàng Online </a>
 </div>
 
 {{-- ĐỔI MẬT KHẨU --}}
