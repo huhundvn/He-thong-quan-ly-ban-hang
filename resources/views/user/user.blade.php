@@ -76,7 +76,7 @@
                     <p ng-show="user.status==0"> Dừng hoạt động </p>
                 </td>
                 <td>
-                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUser" ng-show="0==user.status">
+                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUser" >
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
