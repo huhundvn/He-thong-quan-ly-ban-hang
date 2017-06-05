@@ -56,10 +56,10 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
     };
 
     $scope.labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
-
+    $scope.series = ['Tiền thu', 'Tiền chi'];
     $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90],
-        [28, 48, 40, 19, 86, 27, 90]
+        [65, 59, 80, 81, 86, 55, 40],
+        [28, 48, 40, 19, 56, 27, 90],
+        [37, 11, 40, 62, 30, 28, -50]
     ];
 });
