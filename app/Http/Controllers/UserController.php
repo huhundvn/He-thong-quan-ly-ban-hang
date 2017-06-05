@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 //Model CSDL
 use App\User;
+use App\Position;
+use App\Store;
 
 class UserController extends Controller
 {
@@ -109,10 +111,47 @@ class UserController extends Controller
         return view('user.user');
     }
 
-    // Nhập thông tin nhân viên từ file Excel
-    public function importUserFromFile(Request $request)
+    /**
+     * Nhập từ file Excel
+     */
+    public function importFromFile(Request $request)
     {
+        $rules = [
+            'ten_nhan_vien' => 'required|unique:user,name',
+            'email' => 'required|unique:user,email',
+        ];
 
+        if(Input::hasFile('file')) {
+            $rows =  Excel::load(Input::file('file'), function ($reader){
+            },'UTF-8') -> get();
+            $count = 0;
+            foreach ($rows as $row) {
+                $validation = Validator::make($row->toArray(), $rules);
+                if($validation->fails())
+                    continue;
+                else {
+                    $new = new User();
+                    $new -> name = $row -> ten_nhan_vien;
+                    $new -> email = $row -> email;
+                    $new -> phone = $row -> so_dien_thoai;
+                    $store = Store::where('name', '=', $row -> noi_lam_viec) ->get();
+                    if (count($store) > 0) {
+                        $new -> work_place_id = Store::where('name', '=', $row -> noi_lam_viec)->pluck('id')->first();
+                    }
+                    $position = Position::where('name', '=', $row -> chuc_vu) ->get();
+                    if (count($position) > 0) {
+                        $new -> position_id = Position::where('name', '=', $row -> chuc_vu)->pluck('id')->first();
+                    }
+                    $new -> status = 1;
+                    $saved = $new -> save();
+                    if(!$saved)
+                        continue;
+                    else
+                        $count++;
+                }
+            }
+            return redirect()->route('list-user') -> with('status', 'Đã thêm '.$count.' mục.');
+        }
     }
 
 	// Download mẫu nhập

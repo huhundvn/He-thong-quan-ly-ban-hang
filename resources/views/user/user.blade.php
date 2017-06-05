@@ -19,8 +19,8 @@
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
                     <span class="glyphicon glyphicon-file"></span> Nhập từ file </button>
-                <button class="btn btn-sm btn-warning">
-                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </button>
+                <a href="{{route('downloadUserTemplate')}}" class="btn btn-sm btn-warning">
+                    <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
             <div class="col-lg-2 col-xs-2">
                 <input ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên...">

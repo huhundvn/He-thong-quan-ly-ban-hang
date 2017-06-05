@@ -138,6 +138,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile') -> middleware(CheckUserRole::class);
 	Route::get('/download-user-template', 'UserController@downloadTemplate') -> name('downloadUserTemplate') -> middleware(CheckUserRole::class);
 	Route::post('/user/changePassword', 'UserController@changePassword');
+	Route::post('/user/importFromFile', 'UserController@importFromFile') -> name('importUserFromFile') -> middleware(CheckCustomerRole::class);
 
     //CHỨC VỤ
     Route::get('/list-position', 'PositionController@listPosition') -> name('list-position') -> middleware(CheckPositionRole::class);
