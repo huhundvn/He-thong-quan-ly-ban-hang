@@ -9,6 +9,10 @@ app.controller('ProductController', function($scope, $http, API, $timeout) {
     });
 
     $scope.loadProduct = function () {
+        $http.get(API + 'product').then(function (response) {
+            $scope.products = response.data;
+        });
+
         $http.get(API + 'category').then(function (response) {
             $scope.categorys = response.data;
         }); // Load nhóm sản phẩm
@@ -285,6 +289,9 @@ app.controller('ProductController', function($scope, $http, API, $timeout) {
                 toastr.success(response.data.success);
                 $("[data-dismiss=modal]").trigger({ type: "click" });
                 $scope.loadProduct();
+                $http.get(API + 'product').then(function (response) {
+                    $scope.products = response.data;
+                });
             } else
                 toastr.error(response.data[0]);
         });
