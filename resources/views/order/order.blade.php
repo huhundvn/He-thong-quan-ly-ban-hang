@@ -250,8 +250,8 @@
                                         <option value="" selected> -- Trạng thái -- </option>
                                         <option value="2"> Duyệt đơn hàng </option>
                                         <option value="0"> Hủy đơn hàng </option>
-                                        <!-- <option value="3"> Đã giao hàng </option>
-                                        <option value="4"> Đã thanh toán </option> -->
+                                        <option value="3"> Đã giao hàng </option>
+                                        <!-- <option value="4"> Đã thanh toán </option> -->
                                     </select>
                                 </div>
                             </div>
