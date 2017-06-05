@@ -79,7 +79,8 @@
                     @{{ unit.name }}
                 </td>
                 <td>
-                    <input cleave="options.numeral" type="text" ng-model="item.price_output" class="form-control input-sm input-numeral">
+                    <input cleave="options.numeral" type="text" ng-model="item.price_output"
+                    ng-init="item.price_output=item.web_price" class="form-control input-sm input-numeral">
                 </td>
                 <td>
                     <button class="btn btn-sm btn-danger btn-sm" ng-click="delete(item)">
