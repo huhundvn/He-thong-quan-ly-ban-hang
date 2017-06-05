@@ -88,7 +88,7 @@
             <div class="col-lg-3 col-sm-3 col-xs-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
                 <img src="@{{productInStore.default_image}}" class="image">
                 <b> <h5 class="w3-text-blue-gray entry-text"> @{{ productInStore.name}} </h5>
-                Tại kho: @{{ productInStore.store.name }}
+                Tại kho: @{{ productInStore.store.name }} <br/>
                 Giá nhập: @{{productInStore.price_input | number: 0}} VNĐ <br/>
                 Đang có: @{{productInStore.quantity | number: 0}} sản phẩm <br/>
                 Hạn dùng: @{{productInStore.expried_date | date: "dd/MM/yyyy" }}  </b> <br/>
