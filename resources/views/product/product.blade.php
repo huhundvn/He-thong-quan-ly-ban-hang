@@ -101,7 +101,7 @@
         <div id="grid" class="row" align="center" hidden>
             <div class="col-lg-3 col-sm-3 col-xs-3" style="margin-bottom: 20px" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(product)">
                 <img src="@{{product.default_image}}" class="image">
-                <b> <h5 class="w3-text-blue-gray"> <b class="entry-text"> @{{ product.name}} </b> </h5>
+                <b> <h5 class="w3-text-blue-gray entry-text"> @{{ product.name}} </h5>
                 Tổng số: @{{product.total_quantity}} sản phẩm </b>
                 <div class="middle">
                     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#readProduct"> Xem SP </button>
