@@ -14,7 +14,7 @@
         </div>
 
         {{-- BÁN HÀNG--}}
-        <div class="panel w3-blue-grey" ng-show="roles.indexOf('order') != -1 || roles.indexOf('price-output') != -1 || roles.indexOf('return') != -1">
+        <div class="panel w3-blue-grey" ng-if="roles.indexOf('order') != -1 || roles.indexOf('price-output') != -1 || roles.indexOf('return') != -1">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
