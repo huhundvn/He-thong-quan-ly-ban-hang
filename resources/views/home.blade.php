@@ -53,7 +53,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-    <canvas class="chart chart-bar" chart-series="series" chart-data="data" chart-labels="labels" chart-options="options" height="80px"> </canvas>
+    <canvas class="chart chart-line" chart-series="series" chart-data="data" chart-labels="labels" chart-options="options" height="80px"> </canvas>
     <p align="center"> Biểu đồ thu chi trong tuần </p>
     </div>
 </div>

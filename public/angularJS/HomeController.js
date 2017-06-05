@@ -56,11 +56,11 @@ app.controller('HomeController', function($scope, $http, API, $interval) {
     };
 
     $scope.labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
-    $scope.series = ['Tiền thu', 'Tiền chi'];
+    $scope.series = ['Tổng tiền thu', 'Tổng tiền chi'];
     $scope.data = [
-        [65, 59, 80, 81, 86, 55, 40],
-        [28, 48, 40, 19, 56, 27, 90],
-        [37, 11, 40, 62, 30, 28, -50]
+        [650.000, 590.000, 800.000, 810.000, 860.000, 550.000, 400.000],
+        [280.000, 480.000, 400.000, 190.000, 560.000, 270.000, 900.000],
+        // [37, 11, 40, 62, 30, 28, -50]
     ];
     $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
     $scope.options = {
