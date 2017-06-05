@@ -154,7 +154,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3"> Số tài khoản </label>
                                 <div class="col-sm-9">
-                                    <input id="bank_account" ng-model="seleced.bank_account" type="text" class="form-control input-sm">
+                                    <input id="bank_account" ng-model="selected.bank_account" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
