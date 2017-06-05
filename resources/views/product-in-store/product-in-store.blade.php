@@ -67,7 +67,7 @@
             <tbody>
             <tr class="item" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
                 <td data-toggle="modal" data-target="#readProduct"> SP@{{("000"+productInStore.product_id).slice(-4)}} </td>
-                <td data-toggle="modal" data-target="#readProduct"> <p class="entry-text"> @{{ productInStore.name}} </p> </td>
+                <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.name}} </td>
                 <td data-toggle="modal" data-target="#readProduct"> @{{ productInStore.code }}</td>
                 <td data-toggle="modal" data-target="#readProduct" ng-repeat="unit in units" ng-show="unit.id==productInStore.unit_id">
                     @{{ unit.name }}
@@ -85,9 +85,10 @@
         </table>
 
         <div id="grid" class="row" align="center" hidden>
-            <div class="col-lg-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
+            <div class="col-lg-3 col-sm-3 col-xs-3" ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">
                 <img src="@{{productInStore.default_image}}" class="image">
                 <b> <h5 class="w3-text-blue-gray entry-text"> @{{ productInStore.name}} </h5>
+                Tại kho: @{{ productInStore.store.name }}
                 Giá nhập: @{{productInStore.price_input | number: 0}} VNĐ <br/>
                 Đang có: @{{productInStore.quantity | number: 0}} sản phẩm <br/>
                 Hạn dùng: @{{productInStore.expried_date | date: "dd/MM/yyyy" }}  </b> <br/>
