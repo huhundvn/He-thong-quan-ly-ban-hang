@@ -20,7 +20,7 @@ app.controller('UserController', function($scope, $http, API, $interval) {
         });
     };
     $scope.loadUser();
-    $interval($scope.loadUser, 5000);
+    // $interval($scope.loadUser, 5000);
 
     /**
      * CRUD nhân viên
