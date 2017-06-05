@@ -22,8 +22,8 @@ class PriceInputController extends Controller
 	//API tìm kiếm bảng giá theo khoảng thời gian
 	public function search(Request $request)
 	{
-		return PriceInput::where('created_at', '<=', Carbon::parse(Input::get('end_date')))
-			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+		return PriceInput::where('end_date', '>=', Carbon::parse(Input::get('start_date')))
+			-> where('start_date', '<=', Carbon::parse(Input::get('end_date')))
 			-> get();
 	}
 
