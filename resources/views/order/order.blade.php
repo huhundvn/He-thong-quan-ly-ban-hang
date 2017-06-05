@@ -84,7 +84,7 @@
                     <p ng-show="4==order.status"> Đã thanh toán </p>
                 </td>
                 <td ng-show="roles.indexOf('confirm-order') != -1">
-                    <button ng-show="3!=order.status || 4!=order.status" class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
+                    <button ng-show="0==order.status || 1==order.status || 2==order.status" class="btn btn-sm btn-success" data-toggle="modal" data-target="#changeInputStore">
                         <span class="glyphicon glyphicon-hand-up"></span>
                     </button>
                 </td>
