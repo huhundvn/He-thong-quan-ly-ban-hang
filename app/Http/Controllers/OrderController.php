@@ -34,8 +34,8 @@ class OrderController extends Controller
 			-> with('user')
 			-> with('customer')
 			-> with('priceOutput')
-			-> where('created_at', '<=', Carbon::parse(Input::get('end_date')))
-			-> where('created_at', '>=', Carbon::parse(Input::get('start_date')))
+			-> where('end_date', '<=', Carbon::parse(Input::get('end_date')))
+			-> where('start_date', '>=', Carbon::parse(Input::get('start_date')))
 			-> get();
 	}
 
