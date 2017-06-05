@@ -41,8 +41,8 @@
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Chờ duyệt </option>
                     <option value="0"> Đã từ chối </option>
-                    <option value="2"> Đã xác nhận </option>
-                    <option value="3"> Đang giao </option>
+                    <option value="2"> Đang giao hàng </option>
+                    <option value="3"> Đã giao hàng </option>
                     <option value="4"> Đã thanh toán </option>
                 </select>
             </div>
