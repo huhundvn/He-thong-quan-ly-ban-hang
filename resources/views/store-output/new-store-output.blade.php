@@ -118,13 +118,13 @@
                                 ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | filter:new | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
                                 <td> @{{$index+1}} </td>
-                                <td> @{{ product.name}} </td>
-                                <td> @{{ product.code }}</td>
-                                <td> @{{ product.unit.name }} </td>
-                                <td> @{{ product.quantity | number: 0 }} </td>
-                                <td> @{{ product.price_input | number: 0 }} </td>
-                                <td> @{{ product.expried_date | date: "dd/MM/yyyy" }} </td>
-                                <td> @{{ product.store.name }} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.name}} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.code }}</td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.unit.name }} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.quantity | number: 0 }} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.price_input | number: 0 }} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.expried_date | date: "dd/MM/yyyy" }} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.store.name }} </td>
                             </tr>
                             <tr class="item" ng-show="products.length==0">
                                 <td colspan="7"> Không có dữ liệu </td>
