@@ -117,7 +117,7 @@
                             <tr class="item"
                                 ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | filter:new | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
-                                <td> @{{$index+1}} </td>
+                                <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{$index+1}} </td>
                                 <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.name}} </td>
                                 <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.code }}</td>
                                 <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.unit.name }} </td>
