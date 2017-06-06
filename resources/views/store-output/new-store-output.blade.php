@@ -115,7 +115,7 @@
                             </thead>
                             <tbody>
                             <tr class="item"
-                                ng-show="productInStores.length > 0" dir-paginate="product in productInStores | filter:term | filter:new | itemsPerPage: 5"
+                                ng-show="productInStores.length > 0" ng-repeat="product in productInStores | filter:term | filter:new | itemsPerPage: 5"
                                 ng-click="add(product)" pagination-id="product">
                                 <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{$index+1}} </td>
                                 <td ng-repeat="item in data" ng-if="item.product_id==product.product_id"> @{{ product.name}} </td>
@@ -131,9 +131,9 @@
                             </tr>
                             </tbody>
                         </table>
-                        <div style="margin-left: 35%;">
+                        <!-- <div style="margin-left: 35%;">
                             <dir-pagination-controls pagination-id="product" max-size="4"> </dir-pagination-controls>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
