@@ -14,15 +14,15 @@
 
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <button type="submit" class="btn btn-success btn-sm" ng-click="createStoreTranfer()"> Xác nhận </button>
                 <a href="{{route('list-store-tranfer')}}" class="btn btn-default btn-sm"> Quay lại </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
             </div>
 
@@ -32,14 +32,14 @@
 
         {{-- Thông tin nhập--}}
         <div class="row">
-            <div class="col-xs-3">
+            <div class="">
                 <label> Kho chuyển </label>
                 <select ng-model="info.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho chuyển -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-xs-3">
+            <div class="">
                 <label> Kho nhận </label>
                 <select ng-model="new.to_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhận -- </option>
@@ -109,12 +109,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
@@ -124,14 +124,14 @@
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="">
                                     <div ng-repeat="store in stores" ng-show="store.id==info.store_id">
                                         Kho chuyển: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
                                         Số điện thoại: @{{ store.phone }}
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="">
                                     <div ng-repeat="store in stores" ng-show="store.id==info.to_store_id">
                                         Kho nhận: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="">
                                     <h1></h1>
                                     Lý do chuyển: @{{ info.reason }}
                                     <h1></h1>
@@ -175,16 +175,16 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3" align="center">
+                                <div class="" align="center">
                                     <b> Quản lý kho chuyển </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-3" align="center">
+                                <div class="" align="center">
                                     <b> Quản lý kho nhận </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-3" align="center">
+                                <div class="" align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-3" align="center">
+                                <div class="" align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>
@@ -207,10 +207,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                        <div class="col-sm-8">
+                        <div class="">
                             <input ng-model="term.name" type="text" class="form-control input-sm">
                         </div>
-                        <div class="col-sm-4">
+                        <div class="">
                             <select ng-model="info.store_id" class="form-control input-sm">
                                 <option value=""> -- Kho chuyển -- </option>
                                 <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>

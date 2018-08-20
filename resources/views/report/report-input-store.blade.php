@@ -13,8 +13,8 @@
     <div ng-controller="ReportController">
         <form class="form-horizontal">
             <div class="form-group">
-                <label class="control-label col-sm-2" for="email"> Kho hàng </label>
-                <div class="col-sm-8">
+                <label class="control-label " for="email"> Kho hàng </label>
+                <div class="">
                     <select ng-model="info.store_id" class="form-control">
                         <option value=""> -- Kho hàng -- </option>
                         <option ng-repeat="store in stores" value="@{{store.id}}"> @{{ store.name }} </option>
@@ -22,19 +22,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="email"> Ngày bắt đầu </label>
-                <div class="col-sm-8">
+                <label class="control-label " for="email"> Ngày bắt đầu </label>
+                <div class="">
                     <input ng-model="info.start_date" type="date" class="form-control" id="email" placeholder="Enter email">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="pwd"> Ngày kết thúc </label>
-                <div class="col-sm-8">
+                <label class="control-label " for="pwd"> Ngày kết thúc </label>
+                <div class="">
                     <input ng-model="info.end_date" type="date" class="form-control" id="pwd" placeholder="Enter password">
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 ">
                     <button ng-click="loadInputStore()" data-toggle="modal" data-target="#reportInputStore" class="btn btn-success"> In báo cáo </button>
                 </div>
             </div>
@@ -69,12 +69,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -125,13 +125,13 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Giám đốc </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Kế toán </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>

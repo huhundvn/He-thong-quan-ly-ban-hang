@@ -15,34 +15,34 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <h3></h3>
                 <a href="{{route('createStoreTranfer')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Chuyển kho </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchStoreTranfer()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchStoreTranfer()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Kho chuyển </label>
                 <select ng-model="term.from_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho chuyển -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Kho nhận </label>
                 <select ng-model="term2.to_store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhận -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
@@ -138,12 +138,12 @@
                             </style>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-8 col-xs-8">
+                                <div class=" ">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-sm-4 col-xs-4">
+                                <div class=" ">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
@@ -153,14 +153,14 @@
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 col-xs-6">
+                                <div class=" ">
                                     <div ng-repeat="store in stores" ng-show="store.id==selected.from_store_id">
                                         Kho chuyển: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
                                         Số điện thoại: @{{ store.phone }}
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-xs-6">
+                                <div class=" ">
                                     <div ng-repeat="store in stores" ng-show="store.id==selected.to_store_id">
                                         Kho nhận: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="">
                                     <h1></h1>
                                     Ngày chuyển: @{{ selected.updated_at }} <br/>
                                     Lý do chuyển: @{{ selected.reason }}
@@ -205,16 +205,16 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-lg-3 col-xs-3" align="center">
+                                <div class="col-lg-3 " align="center">
                                     <b> Quản lý kho chuyển </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-3 col-xs-3" align="center">
+                                <div class="col-lg-3 " align="center">
                                     <b> Quản lý kho nhận </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-3 col-xs-3" align="center">
+                                <div class="col-lg-3 " align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-3 col-xs-3" align="center">
+                                <div class="col-lg-3 " align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>
@@ -243,8 +243,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Trạng thái </label>
-                                <div class="col-sm-9">
+                                <label class=""> Trạng thái </label>
+                                <div class="">
                                     <select ng-model="newStatus" class="form-control input-sm" required>
                                         <option value="" selected> -- Trạng thái -- </option>
                                         <option value="2"> Xác nhận yêu cầu </option>

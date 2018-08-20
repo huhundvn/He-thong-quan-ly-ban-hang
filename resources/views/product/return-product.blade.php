@@ -15,29 +15,29 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <a href="{{route('createReturnProduct')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Thêm đơn trả hàng </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="term1.created_by" class="form-control input-sm">
                     <option value="" selected> -- Người tạo -- </option>
                     <option ng-repeat="user in users" value="@{{user.id}}"> @{{user.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="term2.order_id" class="form-control input-sm">
                     <option value="" selected> -- Đơn hàng -- </option>
                     <option ng-repeat="order in orders" value="@{{order.id}}"> DH-@{{order.id}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="term3.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho xuất -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{storeOutputs.length}} mục </button>
             </div>
         </div>
@@ -109,12 +109,12 @@
                             </style>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-8 col-xs-8">
+                                <div class=" ">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-sm-4 col-xs-4">
+                                <div class=" ">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
@@ -124,7 +124,7 @@
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 col-xs-6">
+                                <div class=" ">
                                     Tạo bởi: @{{ selected.user.name }} <br/>
                                     Kho xuất: @{{ selected.store.name }} <br/>
                                     Địa chỉ: @{{ selected.store.address }} <br/>
@@ -163,13 +163,13 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Quản lý kho </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>

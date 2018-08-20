@@ -30,8 +30,8 @@
             <div id="selectMenu1" class="tab-pane fade in active">
                 <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Khách hàng </label>
-                    <div class="col-sm-9">
+                    <label class=""> Khách hàng </label>
+                    <div class="">
                         <div angucomplete-alt
                              placeholder="Khách hàng..."
                              pause="100"
@@ -46,8 +46,8 @@
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Bảng giá </label>
-                    <div class="col-sm-9">
+                    <label class=""> Bảng giá </label>
+                    <div class="">
                         <select ng-model="new.price_output_id" class="form-control input-sm">
                             <option value="" selected> --Không chọn-- </option>
                             <option ng-repeat="priceOutput in priceOutputs"
@@ -57,14 +57,14 @@
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Tên khách hàng </label>
-                    <div class="col-sm-9">
+                    <label class=""> Tên khách hàng </label>
+                    <div class="">
                         <input value="@{{ selectedCustomer.originalObject.name }}" class="form-control input-sm" readonly>
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Nhóm khách hàng </label>
-                    <div class="col-sm-9">
+                    <label class=""> Nhóm khách hàng </label>
+                    <div class="">
                         <select class="form-control input-sm" disabled>
                             <option value=""> -- Nhóm khách hàng -- </option>
                             <option ng-repeat="customerGroup in customerGroups" ng-selected="customerGroup.id == selectedCustomer.originalObject.customer_group_id">
@@ -73,26 +73,26 @@
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Địa chỉ </label>
-                    <div class="col-sm-9">
+                    <label class=""> Địa chỉ </label>
+                    <div class="">
                         <input value="@{{ selectedCustomer.originalObject.address }}" class="form-control input-sm" readonly>
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Số điện thoại </label>
-                    <div class="col-sm-9">
+                    <label class=""> Số điện thoại </label>
+                    <div class="">
                         <input value="@{{ selectedCustomer.originalObject.phone }}"class="form-control input-sm" readonly>
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Email </label>
-                    <div class="col-sm-9">
+                    <label class=""> Email </label>
+                    <div class="">
                         <input value="@{{ selectedCustomer.originalObject.email }}"class="form-control input-sm" readonly>
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> </label>
-                    <div class="col-sm-9">
+                    <label class=""> </label>
+                    <div class="">
                         <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCustomer">
                             <span class="glyphicon glyphicon-plus"></span> Thêm khách hàng mới </button>
                     </div>
@@ -102,11 +102,11 @@
                 <h3> </h3>
                 {{-- NHẬP SẢN PHẨM --}}
                 <div class="row">
-                    <div class="col-lg-3 col-xs-3">
+                    <div class="col-lg-3 ">
                         <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#chooseProduct"> Chọn SP </button>
                         <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readReport"> Xem trước </button>
                     </div>
-                    <div class="col-lg-3 col-xs-3">
+                    <div class="col-lg-3 ">
                         <button class="btn btn-sm w3-blue-grey"> Danh sách: @{{ data.length }} mục </button>
                     </div>
                 </div>
@@ -157,26 +157,26 @@
                 <p></p>
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label"> Số tiền ban đầu:  </label>
-                        <label class="col-xs-2 control-label"> @{{ getTotal() | number:0 }} (VNĐ) </label>
+                        <label class=" control-label"> Số tiền ban đầu:  </label>
+                        <label class=" control-label"> @{{ getTotal() | number:0 }} (VNĐ) </label>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label"> Thuế VAT (%) </label>
-                        <div class="col-xs-2">
+                        <label class=" control-label"> Thuế VAT (%) </label>
+                        <div class="">
                             <input ng-model="new.tax" type="text" class="form-control input-sm">
                         </div>
-                        <label class="col-xs-2 control-label"> = @{{ getTotal() * (new.tax/100) | number:0 }} (VNĐ) </label>
+                        <label class=" control-label"> = @{{ getTotal() * (new.tax/100) | number:0 }} (VNĐ) </label>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label"> Giảm giá (VNĐ) </label>
-                        <div class="col-xs-2">
+                        <label class=" control-label"> Giảm giá (VNĐ) </label>
+                        <div class="">
                             <input cleave="options.numeral" ng-model="new.discount" type="text" class="form-control input-sm">
                         </div>
                     </div>
                     <hr/>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label"> Tổng tiền:  </label>
-                        <label class="col-xs-2 control-label"> @{{ getTotal() -- (getTotal() * (new.tax/100)) - new.discount | number:0 }} (VNĐ) </label>
+                        <label class=" control-label"> Tổng tiền:  </label>
+                        <label class=" control-label"> @{{ getTotal() -- (getTotal() * (new.tax/100)) - new.discount | number:0 }} (VNĐ) </label>
                     </div>
                 </div>
 
@@ -184,8 +184,8 @@
             <div id="selectMenu3" class="tab-pane fade">
                 <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Hình thức thanh toán </label>
-                    <div class="col-sm-9">
+                    <label class=""> Hình thức thanh toán </label>
+                    <div class="">
                         <select ng-model="new.payment_method" class="form-control input-sm">
                             <option value="" selected> --Không chọn-- </option>
                             <option value="Tiền mặt"> Tiền mặt </option>
@@ -195,20 +195,20 @@
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Tài khoản ngân hàng </label>
-                    <div class="col-sm-9">
+                    <label class=""> Tài khoản ngân hàng </label>
+                    <div class="">
                         <input ng-model="new.bank_account" type="text" class="form-control input-sm" placeholder="Số tài khoản...">
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Ngân hàng </label>
-                    <div class="col-sm-9">
+                    <label class=""> Ngân hàng </label>
+                    <div class="">
                         <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Ngân hàng...">
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Tài khoản nhận tiền </label>
-                    <div class="col-sm-9">
+                    <label class=""> Tài khoản nhận tiền </label>
+                    <div class="">
                         <select ng-model="new.account_id" class="form-control input-sm">
                             <option value=""> -- Chọn tài khoản -- </option>
                             <option ng-repeat="account in accounts" value="@{{account.id}}"> @{{account.name}} </option>
@@ -216,20 +216,20 @@
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Số tiền cần thanh toán </label>
-                    <div class="col-sm-9">
+                    <label class=""> Số tiền cần thanh toán </label>
+                    <div class="">
                         <input type="text" class="form-control input-sm" value="@{{ getTotal() -- (getTotal() * (new.tax/100)) - new.discount | number:0 }}" readonly>
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Số tiền đã thanh toán </label>
-                    <div class="col-sm-9">
+                    <label class=""> Số tiền đã thanh toán </label>
+                    <div class="">
                         <input cleave="options.numeral" ng-model="new.total_paid" type="text" class="form-control input-sm" placeholder="Nhập số...">
                     </div>
                 </div> <h3> </h3>
                 <div class="row">
-                    <label class="col-sm-3"> Còn lại </label>
-                    <div class="col-sm-9">
+                    <label class=""> Còn lại </label>
+                    <div class="">
                         <input type="text" class="form-control input-sm" value="@{{getTotal() -- (getTotal() * (new.tax/100)) - new.discount - new.total_paid | number:0}}" readonly>
                     </div>
                 </div>
@@ -237,20 +237,20 @@
             <div id="selectMenu4" class="tab-pane fade">
                 <h3></h3>
                 <div class=row>
-                    <label class="col-sm-3"> Địa chỉ </label>
-                    <div class="col-sm-9">
+                    <label class=""> Địa chỉ </label>
+                    <div class="">
                         <input ng-model="new.contact_address" type="text" class="form-control input-sm" placeholder="Địa chỉ giao hàng...">
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Người liên hệ </label>
-                    <div class="col-sm-9">
+                    <label class=""> Người liên hệ </label>
+                    <div class="">
                         <input ng-model="new.contact_name" type="text" class="form-control input-sm" placeholder="Liên hệ...">
                     </div>
                 </div> <h3></h3>
                 <div class="row">
-                    <label class="col-sm-3"> Số diện thoại </label>
-                    <div class="col-sm-9">
+                    <label class=""> Số diện thoại </label>
+                    <div class="">
                         <input ng-model="new.contact_phone" type="text" class="form-control input-sm" placeholder="Số điện thoại...">
                     </div>
                 </div>
@@ -268,12 +268,12 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-xs-8">
+                                <div class="">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
@@ -283,7 +283,7 @@
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="">
                                     <div ng-repeat="supplier in suppliers" ng-show="supplier.id==info.supplier_id">
                                         Nhà cung cấp: @{{ supplier.name }} <br/>
                                         Địa chỉ: @{{ supplier.address }} <br/>
@@ -294,7 +294,7 @@
                                     </div>
                                     Tổng tiền: <br/>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="">
                                     <div ng-repeat="store in stores" ng-show="store.id==info.store_id">
                                         Nhập về kho: @{{ store.name }} <br/>
                                         Địa chỉ: @{{ store.address }} <br/>
@@ -304,7 +304,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12"> Ghi chú: </div>
+                                <div class=""> Ghi chú: </div>
                             </div>
                             <div class="row">
                                 <table class="w3-table table-bordered w3-centered">
@@ -337,13 +337,13 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4" align="center">
+                                <div class="" align="center">
                                     <b> Giám đốc </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-4" align="center">
+                                <div class="" align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-sm-4" align="center">
+                                <div class="" align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>
@@ -413,54 +413,54 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên đầy đủ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên đầy đủ </label>
+                                <div class="">
                                     <input ng-model="newCustomer.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Email </label>
-                                <div class="col-sm-9">
+                                <label class=""> Email </label>
+                                <div class="">
                                     <input ng-model="newCustomer.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số điện thoại </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số điện thoại </label>
+                                <div class="">
                                     <input ng-model="newCustomer.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Địa chỉ </label>
+                                <div class="">
                                     <input ng-model="newCustomer.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tài khoản ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tài khoản ngân hàng </label>
+                                <div class="">
                                     <input ng-model="newCustomer.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ngân hàng </label>
+                                <div class="">
                                     <input ng-model="newCustomer.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Nhóm khách hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Nhóm khách hàng </label>
+                                <div class="">
                                     <select ng-model="newCustomer.customer_group_id" class="form-control input-sm">
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"> @{{x.name}} </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ghi chú </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ghi chú </label>
+                                <div class="">
                                     <textarea ng-model="newCustomer.note" class="form-control"> </textarea>
                                 </div>
                             </div>

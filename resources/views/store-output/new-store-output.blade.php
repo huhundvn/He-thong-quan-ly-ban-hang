@@ -14,26 +14,26 @@
 
         {{-- NHẬP SẢN PHẨM --}}
         <div class="row">
-            <div class="col-lg-3 col-xs-4">
+            <div class="col-lg-3 ">
                 <button type="submit" class="btn btn-success btn-sm" ng-click="createStoreOutput()"> Xác nhận </button>
                 <a href="{{route('list-store-output')}}" class="btn btn-default btn-sm"> Quay lại </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#chooseProduct"> Chọn SP xuất kho</button>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="new.store_id" class="form-control input-sm" ng-change="loadOrder(info.order_id)">
                     <option value="" selected> -- Kho xuất -- </option>
                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="info.order_id" class="form-control input-sm" ng-change="loadOrder(info.order_id)">
                     <option value="" selected> -- Đơn hàng cần xuất -- </option>
                     <option ng-repeat="order in orders" value="@{{order.id}}"> DH-@{{order.id}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm w3-blue-grey" data-toggle="modal" data-target="#readInputStore"> Xem đơn hàng </button>
             </div>
         </div>
@@ -90,10 +90,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="">
                                 <input ng-model="term.name" type="text" class="form-control input-sm">
                             </div>
-                            <div class="col-sm-4">
+                            <div class="">
                                 <select ng-model="new.store_id" class="form-control input-sm">
                                     <option ng-repeat="store in stores" value="@{{store.id}}"> @{{store.name}} </option>
                                 </select>
@@ -151,12 +151,12 @@
                         <div id="print-content">
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -166,12 +166,12 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Khách hàng: @{{ selectedOrder.customer.name }} <br/>
                                         Địa chỉ: @{{ selectedOrder.customer.address }} <br/>
                                         Số điện thoại: @{{ selectedOrder.customer.phone }}
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người nhận hàng: @{{ selectedOrder.contact_name }} <br/>
                                         Địa chỉ giao hàng: @{{ selectedOrder.contact_address }} <br/>
                                         Số điện thoại: @{{ selectedOrder.contact_phone }}
@@ -179,13 +179,13 @@
                                 </div>
                                 <hr/>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người tạo: @{{ selectedOrder.user.name }} <br/>
                                         Bảng giá áp dụng: @{{ selectedOrder.price_output.name }} <br/>
                                         Phương thức thanh toán: @{{ selectedOrder.payment_method }} <br/>
                                         Ghi chú: @{{ selectedOrder.note }}
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Thuế VAT: @{{ selectedOrder.tax }}% <br/>
                                         Giảm giá: @{{ selectedOrder.discount }} (VNĐ) <br/>
                                         Tổng tiền: @{{ selectedOrder.total | number:0 }} (VNĐ) <br/>
@@ -222,16 +222,16 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Nhân viên bán hàng </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Khách hàng </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Quản lý kho </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>

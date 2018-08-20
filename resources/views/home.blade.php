@@ -11,7 +11,7 @@
 @section('content')
 <div ng-controller="HomeController">
 <div class="row">
-    <div class="col-lg-3 col-sm-3 col-xs-3">
+    <div class="col-lg-3  ">
         <div class="panel panel-default">
             <div class="panel-heading w3-blue-grey">
                 Tổng thu hôm nay
@@ -23,7 +23,7 @@
             <div class="panel-footer"> <a href="{{ route('list-voucher') }}"> Xem thêm... </a> </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-xs-3">
+    <div class="col-lg-3  ">
         <div class="panel panel-success">
             <div class="panel-heading w3-blue-grey"> Đơn đặt hàng hôm nay </div>
             <div class="panel-body">
@@ -32,7 +32,7 @@
             <div class="panel-footer"> <a href="{{ route('list-order') }}"> Xem thêm... </a> </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-xs-3">
+    <div class="col-lg-3  ">
         <div class="panel panel-success">
             <div class="panel-heading w3-blue-grey"> Khách hàng </div>
             <div class="panel-body">
@@ -41,7 +41,7 @@
             <div class="panel-footer"> <a href="{{ route('list-customer') }}"> Xem thêm... </a> </div>
         </div>
     </div>
-    <div class="col-lg-3 col-sm-3 col-xs-3">
+    <div class="col-lg-3  ">
         <div class="panel panel-success">
             <div class="panel-heading w3-blue-grey"> Nhân viên </div>
             <div class="panel-body">

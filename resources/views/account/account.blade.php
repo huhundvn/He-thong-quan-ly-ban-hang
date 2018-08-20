@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM TÀI KHOẢN--}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-6 ">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createAccount">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -22,10 +22,10 @@
                 <a href="{{route('downloadAccountTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{accounts.length}} mục </button>
             </div>
         </div>
@@ -80,31 +80,31 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số tài khoản </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số tài khoản </label>
+                                <div class="">
                                     <input ng-model="new.bank_account" type="text" class="form-control input-sm" placeholder="Số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ngân hàng </label>
+                                <div class="">
                                     <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Ngân hành...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tổng tiền </label>
-                                <div class="col-sm-7">
+                                <label class=""> Tổng tiền </label>
+                                <div class="">
                                     <input cleave="options.numeral" ng-model="new.total" type="text" class="form-control input-sm input-numeral" placeholder="Tổng tiền...">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="">
                                     <select disabled class="form-control input-sm">
                                         <option> VNĐ </option>
                                     </select>
@@ -152,31 +152,31 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số tài khoản </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số tài khoản </label>
+                                <div class="">
                                     <input id="bank_account" ng-model="selected.bank_account" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ngân hàng </label>
+                                <div class="">
                                     <input id="bank" ng-model="selected.bank" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tổng tiền </label>
-                                <div class="col-sm-7">
+                                <label class=""> Tổng tiền </label>
+                                <div class="">
                                     <input cleave="options.numeral" id="total" ng-model="selected.total" type="text" class="form-control input-sm">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="">
                                     <select disabled class="form-control input-sm">
                                         <option> VNĐ </option>
                                     </select>

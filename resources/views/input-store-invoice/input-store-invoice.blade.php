@@ -15,25 +15,25 @@
 
         {{-- !TÌM KIẾM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Kho nhập </label>
                 <select ng-model="term2.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho nhập -- </option>
                     <option ng-repeat="store in stores" value="@{{ store.id }}"> @{{ store.name }} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Nhà cung cấp </label>
                 <select ng-model="term.supplier_id" class="form-control input-sm">
                     <option value="" selected> -- Nhà cung cấp -- </option>
                     <option ng-repeat="supplier in suppliers" value="@{{ supplier.id }}"> @{{ supplier.name }} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchInputStore()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchInputStore()">
             </div>
@@ -111,12 +111,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -126,13 +126,13 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Nhà cung cấp: @{{ selected.supplier.name }} <br/>
                                         Địa chỉ: @{{ selected.supplier.address }} <br/>
                                         Số điện thoại: @{{ selected.supplier.phone }} <br/>
                                         Hình thức thanh toán: @{{ selected.account.name }}
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Nhập về kho: @{{ selected.store.name }} <br/>
                                         Địa chỉ: @{{ selected.store.address }} <br/>
                                         Số điện thoại: @{{ selected.store.phone }} <br/>
@@ -140,7 +140,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="">
                                         <hr/>
                                         Chiết khấu: @{{ selected.discount | number:0 }} (VNĐ) <br/>
                                         Thuế VAT: @{{ selected.tax }} % <br/>
@@ -186,13 +186,13 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Giám đốc </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Kế toán </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-4" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>
@@ -220,26 +220,26 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tổng tiền </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tổng tiền </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.total" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Đã thanh toán </label>
-                                <div class="col-sm-9">
+                                <label class=""> Đã thanh toán </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.total_paid" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Thanh toán thêm </label>
-                                <div class="col-sm-9">
+                                <label class=""> Thanh toán thêm </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.more_paid" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Còn lại </label>
-                                <div class="col-sm-9">
+                                <label class=""> Còn lại </label>
+                                <div class="">
                                     <input type="text" value="@{{selected.total - selected.total_paid - selected.more_paid | number:0}}" class="form-control input-sm" readonly>
                                 </div>
                             </div>

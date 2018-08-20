@@ -13,7 +13,7 @@
 
         {{-- !TÌM KIẾM NHÓM KHÁCH HÀNG!--}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-6 ">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCustomerGroup">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -21,10 +21,10 @@
                 <a href="{{route('downloadCustomerGroupTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên nhóm...">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{customerGroups.length}} mục </button>
             </div>
         </div>
@@ -79,14 +79,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên nhóm </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên nhóm </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ghi chú </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ghi chú </label>
+                                <div class="">
                                     <textarea ng-model="new.description" class="form-control"> </textarea>
                                 </div>
                             </div>
@@ -132,14 +132,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên nhóm </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên nhóm </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mô tả </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea id="description" ng-model="selected.description" class="form-control"> </textarea>
                                 </div>
                             </div>

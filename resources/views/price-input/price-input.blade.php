@@ -14,31 +14,31 @@
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <h3></h3>
                 <a href="{{route('createPriceInput')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Tên BG </label>
                 <input type="text" ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên bảng giá...">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Nhà cung cấp </label>
                 <select ng-model="term2.supplier_id" class="form-control input-sm">
                     <option value="" selected> -- Nhà cung cấp -- </option>
                     <option ng-repeat="supplier in suppliers" value="@{{supplier.id}}"> @{{supplier.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchPriceInput()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchPriceInput()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
@@ -136,12 +136,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -151,11 +151,11 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="">
                                         Ngày bắt đầu: @{{ selected.start_date | date: "dd/MM/yyyy"}} <br/>
                                         Ngày kết thúc : @{{ selected.end_date | date: "dd/MM/yyyy" }} <br/>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="">
                                         Tên bảng giá: @{{ selected.name }}<br/>
                                         <div ng-repeat="supplier in suppliers" ng-show="supplier.id==selected.supplier_id">
                                             Nhà cung cấp: @{{supplier.name}}
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12"> Ghi chú: </div>
+                                    <div class=""> Ghi chú: </div>
                                 </div>
                                 <h1></h1>
                                 <div class="row">
@@ -191,13 +191,13 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4" align="center">
+                                    <div class="" align="center">
                                         <b> Chủ cửa hàng </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-sm-4" align="center">
+                                    <div class="" align="center">
                                         <b> Kế toán </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-sm-4" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>
@@ -225,8 +225,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="col-sm-3"> Trạng thái </label>
-                            <div class="col-sm-9">
+                            <label class=""> Trạng thái </label>
+                            <div class="">
                                 <select ng-model="newStatus" class="form-control input-sm" required>
                                     <option value="" selected> -- Trạng thái -- </option>
                                     <option value="0"> Không duyệt bảng giá </option>

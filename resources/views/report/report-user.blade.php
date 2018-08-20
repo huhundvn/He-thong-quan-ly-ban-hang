@@ -12,7 +12,7 @@
 @section('content')
     <div ng-controller="ReportController">
     	<div class="row">
-    		<div class="col-lg-2 col-sm-2 col-xs-2">
+    		<div class="col-lg-2  ">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>

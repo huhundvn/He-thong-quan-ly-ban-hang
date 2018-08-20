@@ -15,27 +15,27 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <h3> </h3>
                 <a href="{{ route('createOrder') }}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Tạo đơn hàng </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <label> Khách hàng </label>
                 <select ng-model="term2.customer_id" class="form-control input-sm">
                     <option value="" selected> -- Khách hàng -- </option>
                     <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}}-@{{customer.address}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
@@ -46,7 +46,7 @@
                     <option value="4"> Đã thanh toán </option>
                 </select>
             </div>
-            <!-- <div class="col-lg-2 col-xs-2">
+            <!-- <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{orders.length}} mục </button>
             </div> -->
         </div>
@@ -134,12 +134,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -149,14 +149,14 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         <div ng-repeat="customer in customers" ng-show="customer.id==selected.customer_id">
                                             Khách hàng: @{{ customer.name }} <br/>
                                             Địa chỉ: @{{ customer.address }} <br/>
                                             Số điện thoại: @{{ customer.phone }}
                                         </div>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người nhận hàng: @{{ selected.contact_name }} <br/>
                                         Địa chỉ giao hàng: @{{ selected.contact_address }} <br/>
                                         Số điện thoại: @{{ selected.contact_phone }}
@@ -164,13 +164,13 @@
                                 </div>
                                 <hr/>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người tạo: @{{ selected.user.name }} <br/>
                                         Bảng giá áp dụng: @{{ selected.price_output.name }} <br/>
                                         Phương thức thanh toán: @{{ selected.payment_method }} <br/>
                                         Ghi chú: @{{ selected.note }}
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Thuế VAT: @{{ selected.tax }}% <br/>
                                         Giảm giá: @{{ selected.discount }} (VNĐ) <br/>
                                         Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
@@ -207,16 +207,16 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Nhân viên bán hàng </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Khách hàng </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Quản lý kho </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>
@@ -244,8 +244,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Trạng thái </label>
-                                <div class="col-sm-9">
+                                <label class=""> Trạng thái </label>
+                                <div class="">
                                     <select ng-model="newStatus" class="form-control input-sm" required>
                                         <option value="" selected> -- Trạng thái -- </option>
                                         <option value="2"> Duyệt đơn hàng </option>

@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM SẢN PHẨM--}}
         <div class="row">
-            <div class="col-lg-4 col-sm-4 col-xs-4">
+            <div class="col-lg-4  ">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createProduct">
                     <span class="glyphicon glyphicon-plus w3-hide-medium"></span> Thêm SP </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -22,16 +22,16 @@
                 <a href="{{route('downloadProductTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2  ">
                 <input ng-model="term1.name" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
             </div>
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2  ">
                 <select ng-model="term2.category_id" class="form-control input-sm">
                     <option value="" selected> -- Nhóm SP -- </option>
                     <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2  ">
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
                     <option value="1"> Còn hàng </option>
@@ -41,7 +41,7 @@
             <!-- <div class="col-lg-1 col-md-1">
                 <button class="btn btn-sm btn-info"> @{{ products.length }} mục </button>
             </div> -->
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2  ">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
@@ -99,7 +99,7 @@
 
         {{-- Xem dạng hình ảnh--}}
         <div id="grid" class="row" align="center" hidden>
-            <div class="col-lg-3 col-sm-3 col-xs-3" style="margin-bottom: 20px" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(product)">
+            <div class="col-lg-3  " style="margin-bottom: 20px" ng-show="products.length > 0" dir-paginate="product in products | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(product)">
                 <img src="@{{product.default_image}}" class="image">
                 <b> <h5 class="w3-text-blue-gray entry-text"> @{{ product.name}} </h5>
                 Tổng số: @{{product.total_quantity}} sản phẩm </b>
@@ -127,15 +127,15 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm"
                                            placeholder="Nhập tên..." required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mã vạch </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mã vạch </label>
+                                <div class="">
                                     <input cleave="options.code" ng-model="new.code" type="text" class="form-control input-sm"
                                            placeholder="Nhập mã vạch..." required>
                                 </div>
@@ -166,47 +166,47 @@
                                 <div id="menu3" class="tab-pane fade">
                                     <h3> </h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhóm sản phẩm </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Nhóm sản phẩm </label>
+                                        <div class="">
                                             <select ng-model="new.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhà sản xuất </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Nhà sản xuất </label>
+                                        <div class="">
                                             <select ng-model="new.manufacturer_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="manufacturer in manufacturers" value="@{{manufacturer.id}}"> @{{manufacturer.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createManufacturer"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đơn vị tính </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Đơn vị tính </label>
+                                        <div class="">
                                             <select ng-model="new.unit_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="unit in units" value="@{{unit.id}}"> @{{unit.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createUnit"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Giá Web </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Giá Web </label>
+                                        <div class="">
                                             <input cleave="options.numeral" ng-model="new.web_price" type="text" class="form-control input-sm" placeholder="Nhập giá...">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <label> VNĐ </label>
                                         </div>
                                     </div>
@@ -214,15 +214,15 @@
                                 <div id="menu4" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối thiểu </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối thiểu </label>
+                                        <div class="">
                                             <input cleave="options.numeral" ng-model="new.min_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Nhập số lượng...">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối đa </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối đa </label>
+                                        <div class="">
                                             <input cleave="options.numeral" ng-model="new.max_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Nhập số lượng...">
                                         </div>
@@ -231,22 +231,22 @@
                                 <div id="menu5" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Bảo hành </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Bảo hành </label>
+                                        <div class="">
                                             <input ng-model="new.warranty_period" type="number" class="form-control input-sm"
                                                    placeholder="Nhập thời gian bảo hành...">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             tháng
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đổi hàng </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Đổi hàng </label>
+                                        <div class="">
                                             <input ng-model="new.return_period" type="number" class="form-control input-sm"
                                                    placeholder="Nhập thời gian đổi trả...">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             ngày
                                         </div>
                                     </div>
@@ -254,38 +254,38 @@
                                 <div id="menu6" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Khối lượng </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Khối lượng </label>
+                                        <div class="">
                                             <input ng-model="new.weight" type="text" class="form-control input-sm" placeholder="Nhập khối lượng...">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Kích thước </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Kích thước </label>
+                                        <div class="">
                                             <input ng-model="new.size" type="text" class="form-control input-sm"
                                                    placeholder="Nhập kích thước...">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Thể tích </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Thể tích </label>
+                                        <div class="">
                                             <input ng-model="new.volume" type="text" class="form-control input-sm"
                                                    placeholder="Nhập thể tích...">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-3">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#chooseAttribute"> Thêm thuộc tính </button>
                                         </div>
                                     </div>
                                     {{-- THÊM THUỘC TÍNH SẢN PHẨM --}}
                                     <div class="form-group" ng-show="data.length > 0" ng-repeat="item in data">
-                                        <label class="col-sm-3"> @{{item.name}} </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> @{{item.name}} </label>
+                                        <div class="">
                                             <input ng-model="item.description" type="text" class="form-control input-sm"
                                                    placeholder="Nhập mô tả...">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             <button class="btn btn-sm btn-danger" ng-click="deleteAttribute(item)">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
@@ -295,7 +295,7 @@
                                 <div id="menu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <div class="col-sm-10">
+                                        <div class="">
                                             <form id="my_dropzone" method="post" action="{{route('uploadImage')}}" class="dropzone"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
@@ -306,7 +306,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button ng-click="uploadImage()" class="btn btn-sm btn-success"> Upload ảnh </button>
                                         </div>
                                     </div>
@@ -333,14 +333,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mã vạch </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mã vạch </label>
+                                <div class="">
                                     <input id="code" cleave="options.code" ng-model="selected.code" type="text" class="form-control input-sm"
                                            placeholder="Không có">
                                 </div>
@@ -372,47 +372,47 @@
                                 <div id="selectMenu3" class="tab-pane fade">
                                     <h3> </h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhóm sản phẩm </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Nhóm sản phẩm </label>
+                                        <div class="">
                                             <select id="category" ng-model="selected.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" ng-selected="selected.category_id===category.id" value="@{{category.id}}"> @{{category.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhà sản xuất </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Nhà sản xuất </label>
+                                        <div class="">
                                             <select id="manufacturer" ng-model="selected.manufacturer_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="manufacturer in manufacturers" ng-selected="manufacturer.id==selected.manufacturer_id" value="@{{manufacturer.id}}"> @{{manufacturer.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createManufacturer"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đơn vị tính </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Đơn vị tính </label>
+                                        <div class="">
                                             <select id="unit" ng-model="selected.unit_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="unit in units" ng-selected="unit.id==selected.unit_id" value="@{{unit.id}}"> @{{unit.name}} </option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createUnit"> Thêm </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Giá Web </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Giá Web </label>
+                                        <div class="">
                                             <input id="web_price" cleave="options.numeral" ng-model="selected.web_price" type="text" class="form-control input-sm" placeholder="Nhập giá...">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <label> VNĐ </label>
                                         </div>
                                     </div>
@@ -420,15 +420,15 @@
                                 <div id="selectMenu4" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối thiểu </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối thiểu </label>
+                                        <div class="">
                                             <input id="min_inventory" cleave="options.numeral" ng-model="selected.min_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Không có">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối đa </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối đa </label>
+                                        <div class="">
                                             <input id="max_inventory" cleave="options.numeral" ng-model="selected.max_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Không có">
                                         </div>
@@ -437,22 +437,22 @@
                                 <div id="selectMenu5" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Bảo hành </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Bảo hành </label>
+                                        <div class="">
                                             <input id="warranty_period" ng-model="selected.warranty_period" type="number" class="form-control input-sm"
                                                    placeholder="Không có">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             tháng
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đổi hàng </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Đổi hàng </label>
+                                        <div class="">
                                             <input id="return_period" ng-model="selected.return_period" type="number" class="form-control input-sm"
                                                    placeholder="Không có">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             ngày
                                         </div>
                                     </div>
@@ -460,52 +460,52 @@
                                 <div id="selectMenu6" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Khối lượng </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Khối lượng </label>
+                                        <div class="">
                                             <input id="weight" ng-model="selected.weight" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Kích thước </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Kích thước </label>
+                                        <div class="">
                                             <input id="size" ng-model="selected.size" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Thể tích </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Thể tích </label>
+                                        <div class="">
                                             <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
 
                                     {{-- Danh sách thuộc tính hiện có sản phẩm --}}
                                     <div class="form-group" ng-show="selected.attributes.length > 0" ng-repeat="item in selected.attributes">
-                                        <label class="col-sm-3" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
+                                        <label class="" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
                                             @{{attribute.name}}
                                         </label>
-                                        <div class="col-sm-8">
+                                        <div class="">
                                             <input id="volume" ng-model="item.description" type="text" class="form-control input-sm">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             <button class="btn btn-sm btn-danger" ng-click="deleteProductAttribute(item)">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-3">
+                                        <div class="">
                                             <button id="addAttribute" class="btn btn-sm btn-success" data-toggle="modal" data-target="#chooseAttribute"> Thêm thuộc tính </button>
                                         </div>
                                     </div>
 
                                     {{-- THÊM THUỘC TÍNH SẢN PHẨM --}}
                                     <div class="form-group" ng-show="data.length > 0" ng-repeat="item in data">
-                                        <label class="col-sm-3"> @{{item.name}} </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> @{{item.name}} </label>
+                                        <div class="">
                                             <input ng-model="item.description" type="text" class="form-control input-sm"
                                                    placeholder="Nhập mô tả...">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             <button class="btn btn-sm btn-danger" ng-click="deleteAttribute(item)">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
@@ -517,7 +517,7 @@
                                 <div id="selectMenu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <div class="col-xs-4">
+                                        <div class="">
                                             <form id="my_dropzone02" method="post" action="{{route('uploadImage')}}" class="dropzone" enctype="multipart/form-data"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
@@ -530,12 +530,12 @@
                                             <h3></h3>
                                             <button id="addImage" ng-click="uploadImage()" class="btn btn-success"> Upload ảnh </button>
                                         </div>
-                                        <div class="col-xs-4" align="center">
+                                        <div class="" align="center">
                                             <img src="@{{selected.default_image}}" class="image"> <br/>
                                             <a href="" ng-click="selected.default_image=null"> Xóa </a>
                                         </div>
-                                        <div class="col-xs-4" align="center">
-                                            <div class="thumbnail col-xs-4" ng-repeat="item in selected.images" align="center">
+                                        <div class="" align="center">
+                                            <div class="thumbnail " ng-repeat="item in selected.images" align="center">
                                                 <img src="@{{item.image}}" align="center">
                                                 <div class="caption" align="center">
                                                     <a href="" ng-click="deleteProductImage(item)"> Xóa </a>
@@ -573,14 +573,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input ng-model="newUnit.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mô tả </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea ng-model="newUnit.description" class="form-control"> </textarea>
                                 </div>
                             </div>
@@ -605,20 +605,20 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Thương hiệu </label>
-                                <div class="col-sm-9">
+                                <label class=""> Thương hiệu </label>
+                                <div class="">
                                     <input ng-model="newManufacturer.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Quốc gia </label>
-                                <div class="col-sm-9">
+                                <label class=""> Quốc gia </label>
+                                <div class="">
                                     <input ng-model="newManufacturer.country" type="text" class="form-control input-sm" placeholder="Nhập quốc gia...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mô tả </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea ng-model="newManufacturer.description" class="form-control"> </textarea>
                                 </div>
                             </div>
@@ -643,14 +643,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-4"> Tên </label>
-                                <div class="col-sm-8">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input ng-model="newCategory.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4"> Danh mục cha </label>
-                                <div class="col-sm-8">
+                                <label class=""> Danh mục cha </label>
+                                <div class="">
                                     <select ng-model="newCategory.parent_id" class="form-control input-sm">
                                         <option value="" selected> --Không chọn-- </option>
                                         <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
@@ -658,8 +658,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4"> Mô tả </label>
-                                <div class="col-sm-8">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea ng-model="newCategory.description" class="form-control"> </textarea>
                                 </div>
                             </div>

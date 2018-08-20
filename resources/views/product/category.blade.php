@@ -14,7 +14,7 @@
 
         {{-- TÌM KIẾM DANH MỤC SẢN PHẨM --}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-6 ">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCategory">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -22,10 +22,10 @@
                 <a href="{{route('downloadCategoryTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <input ng-model="term" class="form-control input-sm" placeholder="Nhập tên...">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{categorys.length}} mục </button>
             </div>
         </div>
@@ -80,14 +80,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-4"> Tên </label>
-                                <div class="col-sm-8">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4"> Danh mục cha </label>
-                                <div class="col-sm-8">
+                                <label class=""> Danh mục cha </label>
+                                <div class="">
                                     <select ng-model="new.parent_id" class="form-control input-sm">
                                         <option value="" selected> --Không chọn-- </option>
                                         <option ng-repeat="category in categorys" value="@{{category.id}}"> @{{category.name}} </option>
@@ -95,8 +95,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4"> Mô tả </label>
-                                <div class="col-sm-8">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea ng-model="new.description" class="form-control"> </textarea>
                                 </div>
                             </div>
@@ -142,14 +142,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Danh mục cha </label>
-                                <div class="col-sm-9">
+                                <label class=""> Danh mục cha </label>
+                                <div class="">
                                     <select id="parent" ng-model="selected.parent_id" class="form-control input-sm">
                                         <option value="" selected> --Không chọn-- </option>
                                         <option ng-repeat="category in categorys" ng-selected="category.id===selected.parent_id" value="@{{category.id}}"> @{{category.name}} </option>
@@ -157,8 +157,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mô tả </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mô tả </label>
+                                <div class="">
                                     <textarea id="description" ng-model="selected.description" class="form-control"> </textarea>
                                 </div>
                             </div>

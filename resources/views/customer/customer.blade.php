@@ -14,7 +14,7 @@
 
         {{-- !TÌM KIẾM KHÁCH HÀNG!--}}
         <div class="row">
-            <div class="col-lg-6 col-xs-6">
+            <div class="col-lg-6 ">
                 <button class="btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#createCustomer">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới </button>
                 <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#inputFromFile">
@@ -22,10 +22,10 @@
                 <a href="{{route('downloadCustomerTemplate')}}" class="btn btn-sm btn-warning">
                     <span class="glyphicon glyphicon-download-alt"></span> Mẫu nhập </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <input ng-model="term.name" class="form-control input-sm" placeholder="Nhập tên khách hàng...">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <select ng-model="term2.customer_group_id" class="form-control input-sm">
                     <option value=""> -- Nhóm khách hàng -- </option>
                     <option ng-repeat="customerGroup in customerGroups" value="@{{customerGroup.id}}">
@@ -33,7 +33,7 @@
                     </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <button class="btn btn-sm btn-info"> Tổng số: @{{customers.length}} mục </button>
             </div>
         </div>
@@ -92,35 +92,35 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên đầy đủ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên đầy đủ </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Email </label>
-                                <div class="col-sm-9">
+                                <label class=""> Email </label>
+                                <div class="">
                                     <input ng-model="new.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số điện thoại </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số điện thoại </label>
+                                <div class="">
                                     <input ng-model="new.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại..." value="{{old('phoneUser')}}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Địa chỉ </label>
+                                <div class="">
                                     <input ng-model="new.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ..." value="{{old('addressUser')}}">
                                 </div>
-                                {{--<div class="col-sm-3">--}}
+                                {{--<div class="">--}}
                                     {{--<select ng-model="new.district_id" class="form-control input-sm">--}}
                                         {{--<option value=""> -- Huyện-- </option>--}}
                                         {{--<option ng-repeat="district in districts" ng-show="district.province_id == new.province" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>--}}
                                     {{--</select>--}}
                                 {{--</div>--}}
-                                {{--<div class="col-sm-3">--}}
+                                {{--<div class="">--}}
                                     {{--<select ng-model="new.province_id" class="form-control input-sm">--}}
                                         {{--<option value=""> -- Tỉnh -- </option>--}}
                                         {{--<option ng-repeat="province in provinces" value="@{{province.id}}"> @{{province.type}} @{{province.name}} </option>--}}
@@ -129,21 +129,21 @@
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tài khoản ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tài khoản ngân hàng </label>
+                                <div class="">
                                     <input ng-model="new.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ngân hàng </label>
+                                <div class="">
                                     <input ng-model="new.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Nhóm khách hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Nhóm khách hàng </label>
+                                <div class="">
                                     <select ng-model="new.customer_group_id" class="form-control input-sm">
                                         <option value=""> -- Nhóm khách hàng -- </option>
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"> @{{x.name}} </option>
@@ -151,8 +151,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ghi chú </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ghi chú </label>
+                                <div class="">
                                     <textarea ng-model="new.note" class="form-control"> </textarea>
                                 </div>
                             </div>
@@ -198,35 +198,35 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên đầy đủ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên đầy đủ </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm" placeholder="Nhập tên...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Email </label>
-                                <div class="col-sm-9">
+                                <label class=""> Email </label>
+                                <div class="">
                                     <input id="email" ng-model="selected.email" type="email" class="form-control input-sm" placeholder="Nhập email...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số điện thoại </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số điện thoại </label>
+                                <div class="">
                                     <input id="phone" ng-model="selected.phone" type="text" class="form-control input-sm" placeholder="Nhập số điện thoại...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Địa chỉ </label>
+                                <div class="">
                                     <input id="address" ng-model="selected.address" type="text" class="form-control input-sm" placeholder="Nhập địa chỉ...">
                                 </div>
-                                {{--<div class="col-sm-3">--}}
+                                {{--<div class="">--}}
                                     {{--<select id="district" ng-model="selected.district_id" class="form-control input-sm">--}}
                                         {{--<option value=""> -- Huyện-- </option>--}}
                                         {{--<option ng-repeat="district in districts" ng-selected="district.id==selected.district_id" ng-show="district.province_id == selected.province_id" value="@{{district.id}}"> @{{district.type}} @{{district.name}} </option>--}}
                                     {{--</select>--}}
                                 {{--</div>--}}
-                                {{--<div class="col-sm-3">--}}
+                                {{--<div class="">--}}
                                     {{--<select id="province" ng-model="selected.province_id" class="form-control input-sm">--}}
                                         {{--<option value=""> -- Tỉnh -- </option>--}}
                                         {{--<option ng-repeat="province in provinces" ng-selected="province.id==selected.province_id" value="@{{province.id}}"> @{{province.type}} @{{province.name}} </option>--}}
@@ -235,21 +235,21 @@
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tài khoản ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tài khoản ngân hàng </label>
+                                <div class="">
                                     <input id="bank_account" ng-model="selected.bank_account" type="text" class="form-control input-sm" placeholder="Nhập số tài khoản...">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ngân hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ngân hàng </label>
+                                <div class="">
                                     <input id="bank" ng-model="selected.bank" type="text" class="form-control input-sm" placeholder="Nhập ngân hàng...">
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Nhóm khách hàng </label>
-                                <div class="col-sm-9">
+                                <label class=""> Nhóm khách hàng </label>
+                                <div class="">
                                     <select id="customer_group" ng-model="selected.customer_group_id" class="form-control">
                                         <option ng-repeat="x in customerGroups" value="@{{x.id}}"
                                                 ng-selected="x.id === selected.customer_group_id"> @{{x.name}} </option>
@@ -257,8 +257,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Ghi chú </label>
-                                <div class="col-sm-9">
+                                <label class=""> Ghi chú </label>
+                                <div class="">
                                     <textarea id="note" ng-model="selected.note" class="form-control"> </textarea>
                                 </div>
                             </div>

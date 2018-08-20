@@ -14,22 +14,22 @@
 
         {{-- TÌM KIẾM BẢNG GIÁ --}}
         <div class="row">
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 ">
                 <h3></h3>
                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#createVoucher">
                     Phiếu thu mới </button>
                 <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#createPaymentVoucher">
                     Phiếu chi mới </button>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchVoucher()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchVoucher()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Loại phiếu </label>
                 <select ng-model="term2.type" class="form-control input-sm">
                     <option value="" selected> -- Loại -- </option>
@@ -109,37 +109,37 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Người tạo </label>
-                                <div class="col-sm-9">
+                                <label class=""> Người tạo </label>
+                                <div class="">
                                     <input type="text" value="{{Auth::user()->name}}"
                                            class="form-control input-sm" ng-init="new.created_by={{Auth::user()->id}}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Người nộp tiền </label>
-                                <div class="col-sm-9">
+                                <label class=""> Người nộp tiền </label>
+                                <div class="">
                                     <input ng-model="new.name" type="text" class="form-control input-sm"
                                            placeholder="Nhập tên người nộp tiền..." required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3">Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <label class="">Địa chỉ </label>
+                                <div class="">
                                     <input ng-model="new.address" type="text" class="form-control input-sm"
                                            placeholder="Nhập địa chỉ..." required>
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số tiền </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số tiền </label>
+                                <div class="">
                                     <input cleave="options.numeral" ng-model="new.total" type="text" class="form-control input-sm"
                                            placeholder="Nhập số tiền..." required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Lý do thu </label>
-                                <div class="col-sm-9">
+                                <label class=""> Lý do thu </label>
+                                <div class="">
                                     <textarea ng-model="new.description" class="form-control input-sm"> </textarea>
                                 </div>
                             </div>
@@ -165,15 +165,15 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Người chi </label>
-                                <div class="col-sm-9">
+                                <label class=""> Người chi </label>
+                                <div class="">
                                     <input ng-init="newPayment.created_by={{Auth::user()->id}}" type="text" class="form-control input-sm"
                                            value="{{Auth::user()->name}}" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Tài khoản </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tài khoản </label>
+                                <div class="">
                                     <select ng-model="newPayment.account_id" class="form-control input-sm" required>
                                         <option value=""> -- Chọn tài khoản thanh toán -- </option>
                                         <option ng-repeat="account in accounts"> @{{account.name}} </option>
@@ -181,30 +181,30 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Người nhận </label>
-                                <div class="col-sm-9">
+                                <label class=""> Người nhận </label>
+                                <div class="">
                                     <input ng-model="newPayment.name" type="text" class="form-control input-sm"
                                            placeholder="Nhập tên người nhận..." required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Địa chỉ </label>
-                                <div class="col-sm-9">
+                                <label class=""> Địa chỉ </label>
+                                <div class="">
                                     <input ng-model="newPayment.address" type="text" class="form-control input-sm"
                                            placeholder="Nhập địa chỉ..." required>
                                 </div>
                             </div>
                             <hr/>
                             <div class="form-group">
-                                <label class="col-sm-3"> Số tiền </label>
-                                <div class="col-sm-9">
+                                <label class=""> Số tiền </label>
+                                <div class="">
                                     <input ng-model="newPayment.total" type="text" class="form-control input-sm"
                                            placeholder="Nhập địa chỉ..." required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Lý do chi </label>
-                                <div class="col-sm-9">
+                                <label class=""> Lý do chi </label>
+                                <div class="">
                                     <textarea ng-model="newPayment.description" class="form-control input-sm"> </textarea>
                                 </div>
                             </div>
@@ -247,12 +247,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -265,7 +265,7 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-12">
+                                    <div class=" ">
                                         Ngày tạo: @{{ selected.created_at | date: "dd/MM/yyyy"}} <br/>
                                         Họ tên người nộp: @{{ selected.name }} <br/>
                                         Địa chỉ: @{{ selected.address }} <br/>
@@ -276,16 +276,16 @@
                                 </div>
                                 <h1></h1>
                                 <div class="row">
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Giám đốc </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Người nộp tiền </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Kế toán </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>

@@ -15,34 +15,34 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <h3></h3>
                 <a href="{{route('createStoreOutput')}}" class="btn btn-sm btn-success">
                     <span class="glyphicon glyphicon-plus"></span> Xuất kho </a>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Người tạo </label>
                 <select ng-model="term1.created_by" class="form-control input-sm">
                     <option value="" selected> -- Người tạo -- </option>
                     <option ng-repeat="user in users" value="@{{user.id}}"> @{{user.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Khách hàng </label>
                 <select ng-model="term2.customer_id" class="form-control input-sm">
                     <option value="" selected> -- Khách hàng -- </option>
                     <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}}-@{{customer.address}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchStoreOutput()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchStoreOutput()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Kho xuất </label>
                 <select ng-model="term3.store_id" class="form-control input-sm">
                     <option value="" selected> -- Kho xuất -- </option>
@@ -118,12 +118,12 @@
                             </style>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-sm-8 col-xs-8">
+                                <div class=" ">
                                     Công ty TNHH Larose <br/>
                                     142 Võ Văn Tân, TP.HCM <br/>
                                     ĐT: 0979369407
                                 </div>
-                                <div class="col-sm-4 col-xs-4">
+                                <div class=" ">
                                     Số: <br/>
                                     Ngày...tháng...năm...
                                 </div>
@@ -133,7 +133,7 @@
                                 <hr/>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6 col-xs-6">
+                                <div class=" ">
                                     Tạo bởi: @{{ selected.user.name }} <br/>
                                     Kho xuất: @{{ selected.store.name }} <br/>
                                     Địa chỉ: @{{ selected.store.address }} <br/>
@@ -172,13 +172,13 @@
                                 <h1></h1>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Quản lý kho </b><br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Kế toán </b> <br/> (Ký tên)
                                 </div>
-                                <div class="col-lg-4 col-xs-4" align="center">
+                                <div class="col-lg-4 " align="center">
                                     <b> Người lập phiếu </b> <br/> (Ký tên)
                                 </div>
                             </div>

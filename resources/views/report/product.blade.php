@@ -12,7 +12,7 @@
 @section('content')
     <div ng-controller="ReportController">
         <div class="row">
-            <div class="col-lg-2 col-sm-2 col-xs-2">
+            <div class="col-lg-2  ">
                 <div class="btn-group">
                     <button id="viewList" type="button" class="btn btn-sm btn-default w3-blue-grey">
                         <span class="glyphicon glyphicon-align-justify"></span>
@@ -68,14 +68,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tên </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tên </label>
+                                <div class="">
                                     <input id="name" ng-model="selected.name" type="text" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Mã vạch </label>
-                                <div class="col-sm-9">
+                                <label class=""> Mã vạch </label>
+                                <div class="">
                                     <input id="code" cleave="options.code" ng-model="selected.code" type="text" class="form-control input-sm"
                                            placeholder="Không có">
                                 </div>
@@ -107,8 +107,8 @@
                                 <div id="selectMenu3" class="tab-pane fade">
                                     <h3> </h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhóm sản phẩm </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Nhóm sản phẩm </label>
+                                        <div class="">
                                             <select id="category" ng-model="selected.category_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="category in categorys" ng-selected="selected.category_id===category.id" value="@{{category.id}}"> @{{category.name}} </option>
@@ -116,8 +116,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Nhà sản xuất </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Nhà sản xuất </label>
+                                        <div class="">
                                             <select id="manufacturer" ng-model="selected.manufacturer_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="manufacturer in manufacturers" ng-selected="manufacturer.id==selected.manufacturer_id" value="@{{manufacturer.id}}"> @{{manufacturer.name}} </option>
@@ -125,8 +125,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đơn vị tính </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Đơn vị tính </label>
+                                        <div class="">
                                             <select id="unit" ng-model="selected.unit_id" class="form-control input-sm">
                                                 <option value="" selected> --Không chọn-- </option>
                                                 <option ng-repeat="unit in units" ng-selected="unit.id==selected.unit_id" value="@{{unit.id}}"> @{{unit.name}} </option>
@@ -134,11 +134,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Giá Web </label>
-                                        <div class="col-sm-7">
+                                        <label class=""> Giá Web </label>
+                                        <div class="">
                                             <input id="web_price" cleave="options.numeral" ng-model="selected.web_price" type="text" class="form-control input-sm" placeholder="Nhập giá...">
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="">
                                             <label> VNĐ </label>
                                         </div>
                                     </div>
@@ -146,15 +146,15 @@
                                 <div id="selectMenu4" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối thiểu </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối thiểu </label>
+                                        <div class="">
                                             <input id="min_inventory" cleave="options.numeral" ng-model="selected.min_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Không có">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Tồn kho tối đa </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Tồn kho tối đa </label>
+                                        <div class="">
                                             <input id="max_inventory" cleave="options.numeral" ng-model="selected.max_inventory" type="text" class="form-control input-sm input-numeral"
                                                    placeholder="Không có">
                                         </div>
@@ -163,22 +163,22 @@
                                 <div id="selectMenu5" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Bảo hành </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Bảo hành </label>
+                                        <div class="">
                                             <input id="warranty_period" ng-model="selected.warranty_period" type="number" class="form-control input-sm"
                                                    placeholder="Không có">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             tháng
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Đổi hàng </label>
-                                        <div class="col-sm-8">
+                                        <label class=""> Đổi hàng </label>
+                                        <div class="">
                                             <input id="return_period" ng-model="selected.return_period" type="number" class="form-control input-sm"
                                                    placeholder="Không có">
                                         </div>
-                                        <div class="col-sm-1">
+                                        <div class="">
                                             ngày
                                         </div>
                                     </div>
@@ -186,30 +186,30 @@
                                 <div id="selectMenu6" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Khối lượng </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Khối lượng </label>
+                                        <div class="">
                                             <input id="weight" ng-model="selected.weight" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Kích thước </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Kích thước </label>
+                                        <div class="">
                                             <input id="size" ng-model="selected.size" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3"> Thể tích </label>
-                                        <div class="col-sm-9">
+                                        <label class=""> Thể tích </label>
+                                        <div class="">
                                             <input id="volume" ng-model="selected.volume" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
 
                                     {{-- Danh sách thuộc tính hiện có sản phẩm --}}
                                     <div class="form-group" ng-show="selected.attributes.length > 0" ng-repeat="item in selected.attributes">
-                                        <label class="col-sm-3" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
+                                        <label class="" ng-repeat="attribute in attributes" ng-show="attribute.id==item.attribute_id">
                                             @{{attribute.name}}
                                         </label>
-                                        <div class="col-sm-9">
+                                        <div class="">
                                             <input id="volume" ng-model="item.description" type="text" class="form-control input-sm">
                                         </div>
                                     </div>
@@ -219,7 +219,7 @@
                                 <div id="selectMenu7" class="tab-pane fade">
                                     <h3></h3>
                                     <div class="form-group">
-                                        <div class="col-xs-4">
+                                        <div class="">
                                             <form id="my_dropzone02" method="post" action="{{route('uploadImage')}}" class="dropzone" enctype="multipart/form-data"> {{csrf_field()}}
                                                 <div class="dz-message needsclick">
                                                     <h3> Kéo thả ở đây </h3> hoặc
@@ -230,11 +230,11 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="col-xs-4" align="center">
+                                        <div class="" align="center">
                                             <img src="@{{selected.default_image}}" class="image"> <br/>
                                         </div>
-                                        <div class="col-xs-4" align="center">
-                                            <div class="thumbnail col-xs-4" ng-repeat="item in selected.images" align="center">
+                                        <div class="" align="center">
+                                            <div class="thumbnail " ng-repeat="item in selected.images" align="center">
                                                 <img src="@{{item.image}}" align="center">
                                             </div>
                                         </div>

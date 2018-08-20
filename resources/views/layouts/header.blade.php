@@ -29,21 +29,21 @@
             <form class="form-horizontal"> {{ csrf_field() }}
             <div class="modal-body">
                     <div class="form-group">
-                        <label class="col-sm-4"> Mật khẩu cũ </label>
-                        <div class="col-sm-8">
+                        <label class=""> Mật khẩu cũ </label>
+                        <div class="">
                             <input ng-model="password.old_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu cũ...">
                         </div>
                     </div>
                     <hr/>
                     <div class="form-group">
-                        <label class="col-sm-4"> Mật khẩu mới </label>
-                        <div class="col-sm-8">
+                        <label class=""> Mật khẩu mới </label>
+                        <div class="">
                             <input ng-model="password.new_pass" type="password" class="form-control input-sm" placeholder="Nhập mật khẩu mới...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4"> Xác nhận mật khẩu </label>
-                        <div class="col-sm-8">
+                        <label class=""> Xác nhận mật khẩu </label>
+                        <div class="">
                             <input ng-model="password.confirm_pass" type="password" class="form-control input-sm" placeholder="Xác nhận mật khẩu...">
                         </div>
                     </div>

@@ -15,29 +15,29 @@
 
         {{-- !TÌM KIẾM SẢN PHẨM!--}}
         <div class="row">
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Khách hàng </label>
                 <select ng-model="term.customer_id" class="form-control input-sm">
                     <option value="" selected> -- Khách hàng  -- </option>
                     <option ng-repeat="customer in customers" value="@{{customer.id}}"> @{{customer.name}} - @{{customer.address}}</option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Người tạo </label>
                 <select ng-model="term2.created_by" class="form-control input-sm">
                     <option value="" selected> -- Nhân viên -- </option>
                     <option ng-repeat="user in users" value="@{{user.id}}"> NV@{{user.id}} - @{{user.name}} </option>
                 </select>
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Từ ngày </label>
                 <input ng-model="search.start_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Đến ngày </label>
                 <input ng-model="search.end_date" type="date" class="form-control input-sm" ng-change="searchOrder()">
             </div>
-            <div class="col-lg-2 col-xs-2">
+            <div class="col-lg-2 ">
                 <label> Trạng thái </label>
                 <select ng-model="term3.status" class="form-control input-sm">
                     <option value="" selected> -- Trạng thái -- </option>
@@ -116,12 +116,12 @@
                             </style>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-xs-8">
+                                    <div class="">
                                         Công ty TNHH Larose <br/>
                                         142 Võ Văn Tân, TP.HCM <br/>
                                         ĐT: 0979369407
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="">
                                         Số: <br/>
                                         Ngày...tháng...năm...
                                     </div>
@@ -131,14 +131,14 @@
                                     <hr/>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         <div ng-repeat="customer in customers" ng-show="customer.id==selected.customer_id">
                                             Khách hàng: @{{ customer.name }} <br/>
                                             Địa chỉ: @{{ customer.address }} <br/>
                                             Số điện thoại: @{{ customer.phone }}
                                         </div>
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người nhận hàng: @{{ selected.contact_name }} <br/>
                                         Địa chỉ giao hàng: @{{ selected.contact_address }} <br/>
                                         Số điện thoại: @{{ selected.contact_phone }}
@@ -146,13 +146,13 @@
                                 </div>
                                 <hr/>
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Người tạo: @{{ selected.user.name }} <br/>
                                         Bảng giá áp dụng: @{{ selected.price_output.name }} <br/>
                                         Phương thức thanh toán: @{{ selected.payment_method }} <br/>
                                         Ghi chú: @{{ selected.note }}
                                     </div>
-                                    <div class="col-xs-6">
+                                    <div class="">
                                         Thuế VAT: @{{ selected.tax }}% <br/>
                                         Giảm giá: @{{ selected.discount }} (VNĐ) <br/>
                                         Tổng tiền: @{{ selected.total | number:0 }} (VNĐ) <br/>
@@ -189,16 +189,16 @@
                                     <h1></h1>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Nhân viên bán hàng </b><br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Khách hàng </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Quản lý kho </b> <br/> (Ký tên)
                                     </div>
-                                    <div class="col-xs-3" align="center">
+                                    <div class="" align="center">
                                         <b> Người lập phiếu </b> <br/> (Ký tên)
                                     </div>
                                 </div>
@@ -226,26 +226,26 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label class="col-sm-3"> Tổng tiền </label>
-                                <div class="col-sm-9">
+                                <label class=""> Tổng tiền </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.total" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Đã thanh toán </label>
-                                <div class="col-sm-9">
+                                <label class=""> Đã thanh toán </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.total_paid" class="form-control input-sm" readonly>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Thanh toán thêm </label>
-                                <div class="col-sm-9">
+                                <label class=""> Thanh toán thêm </label>
+                                <div class="">
                                     <input type="text" cleave="options.numeral" ng-model="selected.more_paid" class="form-control input-sm">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3"> Còn lại </label>
-                                <div class="col-sm-9">
+                                <label class=""> Còn lại </label>
+                                <div class="">
                                     <input type="text" value="@{{selected.total - selected.total_paid - selected.more_paid | number:0}}" class="form-control input-sm" readonly>
                                 </div>
                             </div>
