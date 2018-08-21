@@ -70,7 +70,7 @@
         </table></div>
 
         {{-- PHÂN TRANG --}}
-        <div style="margin-left: 35%; bottom:0; position: fixed;">
+        <div class="text-center">
             <dir-pagination-controls></dir-pagination-controls>
         </div>
 
