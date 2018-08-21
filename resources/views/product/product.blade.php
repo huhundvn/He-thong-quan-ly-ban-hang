@@ -63,7 +63,7 @@
         @endif
 
         {{-- DANH SÁCH SẢN PHẨM --}}
-        <table id="list" class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
@@ -95,7 +95,7 @@
                 <td colspan="7"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- Xem dạng hình ảnh--}}
         <div id="grid" class="row" align="center" hidden>
@@ -685,7 +685,7 @@
                         <input ng-model="termAttribute" class="form-control input-sm" placeholder="Nhập tên sản phẩm...">
                         <h1></h1>
                         {{--DANH SÁCH THUỘC TÍNH--}}
-                        <table class="w3-table table-hover table-bordered w3-centered">
+                        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
                             <thead class="w3-blue-grey">
                             <th> Tên </th>
                             <th> Mô tả </th>
@@ -701,7 +701,7 @@
                                 <td colspan="4"> Không có dữ liệu </td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table></div>
                         <div style="margin-left: 35%;">
                             <dir-pagination-controls pagination-id="chooseAttribute" max-size="4"> </dir-pagination-controls>
                         </div>

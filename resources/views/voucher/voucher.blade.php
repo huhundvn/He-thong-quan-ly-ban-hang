@@ -49,7 +49,7 @@
         @endif
 
         {{-- DANH SÁCH PHIẾU THU/CHI--}}
-        <table class="w3-table table-hover table-bordered w3-centered" >
+        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered" >
             <thead class="w3-blue-grey">
             <th> Mã </th>
             <th> Ngày lập </th>
@@ -91,7 +91,7 @@
                 <td colspan="8"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%; position: fixed; bottom: 0">

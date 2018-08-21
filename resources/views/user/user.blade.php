@@ -47,7 +47,7 @@
         @endif
 
         {{-- DANH SÁCH NHÂN VIÊN --}}
-        <table id="listUser" class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table id="listUser" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã </th>
@@ -85,7 +85,7 @@
                 <td colspan="7"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%; bottom:0; position: fixed;">

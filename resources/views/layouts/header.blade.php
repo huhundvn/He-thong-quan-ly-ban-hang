@@ -1,4 +1,4 @@
-<div class="w3-bar w3-small w3-blue-grey">
+<div class="w3-bar w3-blue-grey">
     <button class="w3-bar-item w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open()">
         <span class="glyphicon glyphicon-align-justify"></span>
     </button>
@@ -14,7 +14,7 @@
         </div>
     </div>
     @endif
-    <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right" onclick="window.open('http://43.239.223.142:8088/')"> Cửa hàng Online </a>
+    {{-- <a class="w3-button w3-hover-none w3-hover-text-light-grey w3-right" onclick="window.open('http://43.239.223.142:8088/')"> Cửa hàng Online </a> --}}
 </div>
 
 {{-- ĐỔI MẬT KHẨU --}}

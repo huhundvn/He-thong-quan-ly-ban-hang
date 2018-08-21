@@ -54,7 +54,7 @@
         @endif
 
         {{--!DANH SÁCH KHO CỬA HÀNG!--}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
                 <th> STT </th>
                 <th> Tên kho </th>
@@ -88,7 +88,7 @@
                 <td colspan="7"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 40%">

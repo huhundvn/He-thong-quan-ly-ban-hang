@@ -1,3 +1,8 @@
+body {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .bg {
     /* The image used */
     background-image: url( '/larose/public/bg.jpg' );
@@ -81,6 +86,14 @@ a:hover {
 }
 
 table {
+    font-size: 1.3rem;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* .col-lg-2 {
+    margin-top: 15px;
+} */
+[class *='col-lg-'] {
+    margin-bottom: 15px;
 }

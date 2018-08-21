@@ -54,7 +54,7 @@
         <hr/>
 
         {{-- Danh sách mặt hàng --}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> STT </th>
             <th> Tên </th>
@@ -91,7 +91,7 @@
                 <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%;">
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <table class="w3-table table-bordered w3-centered">
+                                <div class="table-responsive"><table class="w3-table table-bordered w3-centered">
                                     <thead>
                                     <th> Mã SP </th>
                                     <th> Tên </th>
@@ -171,7 +171,7 @@
                                         <td colspan="9"> Không có dữ liệu </td>
                                     </tr>
                                     </tbody>
-                                </table>
+                                </table></div>
                                 <h1></h1>
                             </div>
                             <div class="row">
@@ -219,7 +219,7 @@
                         </div>
                         <h1></h1>
                         {{-- !DANH SÁCH SẢN PHẨM! --}}
-                        <table class="w3-table table-hover table-bordered w3-centered">
+                        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
                             <thead>
                             <tr class="w3-blue-grey">
                                 <th> Tên </th>
@@ -246,7 +246,7 @@
                                 <td colspan="7"> Không có dữ liệu </td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table></div>
                         <div style="margin-left: 35%;">
                             <dir-pagination-controls pagination-id="product" max-size="4"> </dir-pagination-controls>
                         </div>

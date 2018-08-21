@@ -51,7 +51,7 @@
         <hr/>
 
         {{-- !DANH SÁCH SẢN PHẨM! --}}
-        <table id="list" class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
@@ -82,7 +82,7 @@
                 <td colspan="9"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         <div id="grid" class="row" align="center" hidden>
             <div class="col-lg-3  " ng-show="productInStores.length > 0" dir-paginate="productInStore in productInStores | filter:term1 | filter:term2 | filter:term3 | itemsPerPage: 8" ng-click="readProduct(productInStore)">

@@ -39,7 +39,7 @@
         @endif
 
         {{--DANH SÁCH THUỘC TÍNH--}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> STT </th>
             <th> Tên </th>
@@ -62,7 +62,7 @@
                 <td colspan="4"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%; bottom:0; position: fixed;">

@@ -85,7 +85,7 @@
                                     <p align="center" ng-repeat="store in stores" ng-show="store.id==info.store_id"> Thống kê tại @{{store.name}} </p>
                                 </div>
                                 <div class="row">
-                                    <table class="w3-table w3-center table-bordered">
+                                    <div class="table-responsive"><table class="w3-table w3-center table-bordered">
                                         <thead>
                                         <th> STT </th>
                                         <th> Tên sản phẩm </th>
@@ -115,7 +115,7 @@
                                             <td colspan="6" align="center"> Không có dữ liệu </td>
                                         </tr>
                                         </tbody>
-                                    </table>
+                                    </table></div>
                                     <h1></h1>
                                 </div>
                                 <div class="row">

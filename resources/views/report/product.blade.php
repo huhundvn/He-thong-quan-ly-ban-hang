@@ -29,7 +29,7 @@
         <h4 align="center"> Biểu đồ thống kê 10 sản phẩm bán chạy </h4>
 
         {{-- DANH SÁCH SẢN PHẨM --}}
-        <table id="list" class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã SP </th>
@@ -50,7 +50,7 @@
                 <td colspan="7"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         <div id="grid" class="container-fluid" hidden>
             <canvas class="chart-horizontal-bar" chart-series="series" chart-data="data" chart-labels="labels" ng-show="data.length>0"></canvas>

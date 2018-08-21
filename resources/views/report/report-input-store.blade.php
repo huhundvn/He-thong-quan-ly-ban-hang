@@ -85,12 +85,12 @@
                                     <p align="center" ng-repeat="store in stores" ng-show="store.id==info.store_id"> Thống kê @{{store.name}} </p>
                                 </div>
                                 <div class="row">
-                                    <table class="w3-table w3-center table-bordered">
+                                    <div class="table-responsive"><table class="w3-table w3-center table-bordered">
                                         <thead>
                                             <th> Ngày nhập </th>
                                             <th> Số Phiếu </th>
                                             <th>
-                                                <table style="width:100%">
+                                                <div class="table-responsive"><table style="width:100%">
                                                     <tr>
                                                         <td style="width:20%;"> Tên </td>
                                                         <td style="width:20%;"> Đơn vị tính </td>
@@ -98,7 +98,7 @@
                                                         <td style="width:20%;"> Giá nhập </td>
                                                         <td style="width:20%;"> Hạn sử dụng </td>
                                                     </tr>
-                                                </table>
+                                                </table></div>
                                             </th>
                                         </thead>
                                         <tbody>
@@ -106,7 +106,7 @@
                                             <td> @{{item.created_at | date: "dd/MM/yyyy" }}</td>
                                             <td> YCNH-@{{item.id}} </td>
                                             <td>
-                                                <table class="table table-bordered" style="width:100%;">
+                                                <div class="table-responsive"><table class="table table-bordered" style="width:100%;">
                                                     <tr ng-repeat="data in item.detail_input_stores">
                                                         <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.name }} </td>
                                                         <td style="width:20%;" ng-repeat="product in products" ng-show="product.id==data.product_id"> @{{ product.unit.name }} </td>
@@ -114,14 +114,14 @@
                                                         <td style="width:20%;"> @{{data.price_input | number:0 }} </td>
                                                         <td style="width:20%;"> @{{data.expried_date | date: "dd/MM/yyyy" }} </td>
                                                     </tr>
-                                                </table>
+                                                </table></div>
                                             </td>
                                         </tr>
                                         <tr class="item" ng-show="inputStores.length == 0">
                                             <td colspan="3" align="center"> Không có dữ liệu </td>
                                         </tr>
                                         </tbody>
-                                    </table>
+                                    </table></div>
                                     <h1></h1>
                                 </div>
                                 <div class="row">

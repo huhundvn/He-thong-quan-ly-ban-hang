@@ -51,7 +51,7 @@
         @endif
 
         {{-- DANH SÁCH BẢNG GIÁ --}}
-        <table class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table class="w3-table table-hover table-bordered w3-centered">
             <thead class="w3-blue-grey">
             <th> Mã </th>
             <th> Tên bảng giá </th>
@@ -89,7 +89,7 @@
                 <td colspan="6"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>
+        </table></div>
 
         {{-- PHÂN TRANG --}}
         <div style="margin-left: 35%; position: fixed; bottom: 0">
@@ -155,7 +155,7 @@
                             </div>
                             <h1></h1>
                             <div class="row">
-                                <table class="w3-table table-bordered w3-centered">
+                                <div class="table-responsive"><table class="w3-table table-bordered w3-centered">
                                     <thead>
                                     <th> STT </th>
                                     <th> Mã vạch </th>
@@ -175,7 +175,7 @@
                                         <td colspan="9"> Không có dữ liệu </td>
                                     </tr>
                                     </tbody>
-                                </table>
+                                </table></div>
                                 <h1></h1>
                             </div>
                             <div class="row">

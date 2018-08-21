@@ -29,7 +29,7 @@
         <h4 align="center"> Biểu đồ thống kê 10 nhân viên bán nhiều hàng nhất </h4>
 
     	{{-- DANH SÁCH NHÂN VIÊN --}}
-        <table id="list" class="w3-table table-hover table-bordered w3-centered">
+        <div class="table-responsive"><table id="list" class="w3-table table-hover table-bordered w3-centered">
             <thead>
             <tr class="w3-blue-grey">
                 <th> Mã NV </th>
@@ -53,7 +53,7 @@
                 <td colspan="7"> Không có dữ liệu </td>
             </tr>
             </tbody>
-        </table>    
+        </table></div>    
 
         <div id="grid" class="container-fluid" hidden>
             <canvas class="chart-horizontal-bar" chart-series="series03" chart-data="data03" chart-labels="labels03"></canvas>
