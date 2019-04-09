@@ -97,3 +97,14 @@ table {
 [class *='col-lg-'] {
     margin-bottom: 15px;
 }
+
+#form-login {
+    position: fixed;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    min-width: 40%;
+    transform: translate(-50%, -50%);
+}
